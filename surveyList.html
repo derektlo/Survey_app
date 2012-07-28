@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <title>First jQuery Mobile Example</title>
+
+  <!-- the three things that jQuery Mobile needs to work-->
+ <link rel="stylesheet" href="./signup.css">
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" />
+<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script>
+
+</head>
+
+<body>
+  <!-- Page starts here -->
+<div data-role="page" data-theme="c" id="surveyList">
+
+<script>
+
+$(document).bind('mobileinit', function () {
+    $.mobile.page.prototype.options.theme  = "c";
+});
+
+function createNewSurvey() {
+    // change the page to the surveyCreator.html
+
+   $.mobile.changePage( "surveyCreator.html", { transition: "slide"} );
+}
+
+function goToSurveyResults(surveyID, onOrOff) {
+    // change to a particular survey's results
+
+    // set the currently selected survey's ID and whether it's on or off
+    surveyId = surveyID;
+    surveyOnorOff = onOrOff;
+
+    // get the particular survey's analytics
+    $.getJSON("http://iwaiter-app.com/iWaiter_scripts/getSurveyAnalytics.php?surveyID=" + surveyId, function(json) {
+          console.log(json);
+
+         $.mobile.changePage( "surveyResults.html", { transition: "slide"} );
+    });
+
+}
+
+function deleteSurvey(surveyID) {
+      // delete a particular survey
+
+      // show dialog box to confirm that the user does indeed
+      // want to delete this survey
+
+
+}
+
+
+//$(document).ready(function(){
+$('#surveyList').bind('pageinit', function() {
+
+  var currentTime = new Date()
+  var month = currentTime.getMonth() + 1
+  var day = currentTime.getDate()
+  var year = currentTime.getFullYear()
+  var fullDate = month + "-" + day + "-" + year;
+
+  $('#footer').append('<p>  Today: ' + fullDate + '</p>');
+
+
+// get the JSON data from server
+    $.getJSON("http://iwaiter-app.com/iWaiter_scripts/get_surveyList.php?email=" + emailVar.val(), function(data) {
+
+      // Define some local instance variables
+      var listOfSurveys = data.Results;
+      var currentDate;
+      var numbersOrLetters;
+      var onOff;
+      var surveyDescription;
+      var dataTheme;
+
+       $('ul#surveyList').append('<li><a href="javascript:void(createNewSurvey());">Create New Survey</a></li>');
+
+        for (i = 0; i < listOfSurveys.length; i++){
+
+            // set whether the survey uses numbers or letters
+            if (listOfSurveys[i].Numbers_or_letters > 0) 
+                 {numbersOrLetters = 'Letters';}
+            else {numbersOrLetters = 'Numbers';}
+
+            // set whether survey is on or off
+            if (listOfSurveys[i].On_off > 0) {onOff = 'Off'; dataTheme = 'data-theme="c"';}
+            else {onOff = 'On'; dataTheme = 'data-theme="b"';}
+
+            // Set description
+            if (listOfSurveys[i].Survey_description != '')
+              surveyDescription = ', ' + listOfSurveys[i].Survey_description;
+            else
+              surveyDescription = listOfSurveys[i].Survey_description;
+
+            // set surveyAuthKey
+            var authKey = listOfSurveys[i].Survey_authKey;
+            console.log("authkey: ",authKey);
+
+          if (listOfSurveys[i].Date == currentDate) {
+              // create row in same section
+
+                 $('ul#surveyList').append('<li class="ui-btn ui-btn-icon-right"' + dataTheme + '><a href="javascript:void(goToSurveyResults(' + listOfSurveys[i].Survey_id + ',' + listOfSurveys[i].On_off + '));"><h1>' + listOfSurveys[i].Survey_authKey + '</h1><p>' + listOfSurveys[i].Number_of_options + ' Options, ' + numbersOrLetters + ', ' + onOff + surveyDescription + '</p></a><a href="#" onclick="deleteSurvey(' + listOfSurveys[i].Survey_id + ')" data-icon="delete" class="ui-li-link-alt ui-btn "' + dataTheme + ' ></a></li>');
+
+
+          }
+          else {
+              // otherwise create a new section
+              currentDate = listOfSurveys[i].Date;
+
+               $('ul#surveyList').append('<li data-role="list-divider">' + currentDate + '</li>');
+
+                $('ul#surveyList').append('<li class="ui-btn ui-btn-icon-right"' + dataTheme + '><a href="javascript:void(goToSurveyResults(' + listOfSurveys[i].Survey_id + ',' + listOfSurveys[i].On_off + '));"><h1>' + listOfSurveys[i].Survey_authKey + '</h1><p>' + listOfSurveys[i].Number_of_options + ' Options, ' + numbersOrLetters + ', ' + onOff +surveyDescription + '</p></a><a href="#" onclick="deleteSurvey(' + listOfSurveys[i].Survey_id + ')" data-icon="delete" class="ui-li-link-alt ui-btn "' + dataTheme + '></a></li>');
+            }
+          }
+
+          // refresh listview to re-style it
+        $('ul#surveyList').listview('refresh');
+
+    }); // End JSON callback function
+
+}); // End pageinit function
+
+</script>
+
+
+    <header data-role="header">
+    <a href="Master_Survey.html" data-direction="reverse" rel="external" data-icon="" data-transition="slide" class="ui-btn-right">Logout</a>
+    <h1>My Surveys</h1>
+
+  </header>
+
+  <div data-role="myContent">
+
+    <div id="surveysContainer">
+
+      <ul id="surveyList" data-role="listview" data-split-icon="delete">
+      </ul>
+
+    </div>
+
+  </div>  
+
+
+
+
+<footer data-role="footer" id="footer"></footer>
+
+</div>
+
+  </body>
+
+</head>
+</html>

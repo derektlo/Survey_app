@@ -1,0 +1,18 @@
+label.missing  {
+	color:#FF0000;
+	font-weight:bold;
+}
+
+.containing-element .ui-slider-switch { width: 9em }
+
+.ui-header .ui-title, .ui-footer .ui-title {
+text-align: center;
+font-size: 16px;
+display: block;
+margin: .6em 90px .8em;
+padding: 0;
+text-overflow: ellipsis;
+overflow: hidden;
+white-space: nowrap;
+outline: 0 !important;
+}

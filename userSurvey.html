@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<title>First jQuery Mobile Example</title>
+
+	<!-- the three things that jQuery Mobile needs to work-->
+ <link rel="stylesheet" href="./signup.css">
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" />
+<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script>
+
+</head>
+
+<body>
+	
+	<section id="userSurvey" data-role="page" data-theme="b">
+ <link rel="stylesheet" href="./userSurveyCSS.css">
+<script>
+
+function incrementOptionValue(optionName) {
+
+	// if optionName is a letter, convert it from ascii to character
+		if (optionName > 1000){
+			optionName = optionName - 5000;
+			optionName = String.fromCharCode(optionName);
+		}
+
+		console.log(optionName);
+
+	  $.post("http://iwaiter-app.com/iWaiter_scripts/post_option.php?surveyAuthKey=alo-1&optionName=" + optionName,function(result){
+    			console.log("called back, ",result);
+  });
+}
+
+function convertASCIItoCharacter(asciiNum) {
+		return String.fromCharCode(asciiNum);
+}
+
+
+
+$(document).ready(function(){
+	
+	var surveyAuthKey;	
+
+	console.log("reached");
+
+	$('#userSurvey').live('pageshow', function(){
+	
+	console.log("num_options: ",num_options);
+
+	console.log("live");
+
+			var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l']
+
+
+			if (numbersOrLetters == 0)
+					{
+
+				for (i = 0; i < num_options; i++){
+	
+					//$('ul#optionsList').append('<li><a href="javascript:void(incrementOptionValue(' + (i+1) + '));">' + (i+ 1) + ' .</a></li>');
+					$('#optionsList').append('<input type="radio" name="options" id="' + (i+1) + '" value="' + (i+1) + '" />');
+				      $('#optionsList').append('<label for="' + (i+1) + '" >' + (i+1) + '</label>');
+					}
+				}
+				else {
+					for (i = 0; i < num_options; i++){
+	
+					$('#optionsList').append('<input type="radio" name="options" id="' +alphabet[i] + '" value="' + alphabet[i] + '" />');
+				      $('#optionsList').append('<label for="' + alphabet[i] + '" >' + alphabet[i] + '</label>');
+					}
+				}
+
+				// Append header with survey token
+				$('#header').append('<h1>' + surveyTokenVar.val() + ' Survey</h1>');
+
+
+				// Get Today's Date
+				var currentTime = new Date()
+				var month = currentTime.getMonth() + 1
+				var day = currentTime.getDate()
+				var year = currentTime.getFullYear()
+				var fullDate = month + "-" + day + "-" + year;
+
+				// Append todays date to footer
+				$('#footer').append('<p>  Today: ' + fullDate + '</p>');
+
+				// Reload jQuery Mobile styling
+				//$('#optionsList').listview('refresh');
+				
+				//$('#header').trigger("create");
+				//$('#footer').footer('refresh');
+
+				$('#userSurvey').trigger("create");
+
+				$("input[type='radio']").prop("checked",false).checkboxradio("refresh");
+	})
+});
+
+</script>
+
+		<header data-role="header" id="header">
+	</header>
+
+	<div data-role="content">
+
+		<div id="optionsContainer">
+
+			  <fieldset data-role="controlgroup" id="optionsList">
+  					<legend>Survey Options</legend>
+
+			</fieldset>
+
+		</div>
+
+    </div>
+ <form id="form2">
+        <div id="submitUserSurvey" data-role="fieldcontain">    
+     	<a id="submitSurvey" name="submitSurvey" data-role="button" data-inline="true">Submit</a>
+    	</div>
+</form>
+
+
+<footer data-role="footer" id="footer"></footer>
+
+
+<script>
+
+ $('#submitSurvey').click(function() {
+
+ 	// Present dialog to confirm that the user actually wants
+ 	// to submit their survey
+
+        var err = false;
+        var surveyValue;
+            $('input[name=options]').each(function() { 
+            surveyValue = $('input[name=options]:checked').val();
+        })        
+        
+
+
+        console.log(surveyValue);
+
+            if (surveyValue == ''){
+            	err = true;
+            }
+
+        // If validation fails, show Dialog content
+        if(err == true){  
+
+        console.log("we've got an issue");
+          showContentDialog();
+
+          return false;
+        }        
+
+        // If validation passes, show Transition content
+       // showContentTransition();
+
+
+        // Submit the form
+        $.post("http://iwaiter-app.com/iWaiter_scripts/post_option.php?surveyAuthKey=alo-1&optionName=" + surveyValue, form1Var.serialize(), function(data){
+          
+          console.log(data);
+
+        });        
+        return false;      
+    });   
+    
+
+</script>
+
+
+</section>
+
+	</body>
+
+</head>
+</html>
