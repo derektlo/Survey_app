@@ -7,9 +7,9 @@
    // Database name
    $db = 'survey_app_db'; 
    // MySQL username
-   $uid = 'root';
+   $uid = 'external_user';
    // MySQL password
-   $pwd = '[G0f1shn0w]';
+   $pwd = 'jTJW7xTn8MrjDyRd';
  
 	// get the email and password for a user
    $email   = isset($_GET['email']) ? $_GET['email']  : "";
