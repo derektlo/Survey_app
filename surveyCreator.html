@@ -132,7 +132,7 @@
            }
 
         // Submit the form
-        $.post("http://iwaiter-app.com/iWaiter_scripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&numberOfOptions=" + sliderValue.val() + " &numbersOrLetters=" + numbersOrLetters + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar, surveyCreatorFormVar.serialize(), function(data){
+        $.post("http://classtempo.org/Survey_app/survey_phpScripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&numberOfOptions=" + sliderValue.val() + " &numbersOrLetters=" + numbersOrLetters + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar, surveyCreatorFormVar.serialize(), function(data){
           
           console.log(data);
           if (data == 'Successful') {

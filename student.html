@@ -175,7 +175,7 @@ $('#studentPage').bind('pageinit', function() {
         // Submit the form
 
 
-        $.getJSON("http://iwaiter-app.com/iWaiter_scripts/get_survey.php?surveyAuthKey=" + surveyTokenVar.val(), studentSubmitFormVar.serialize(), function(data){
+        $.getJSON("http://classtempo.org/Survey_app/survey_phpScripts/get_survey.php?surveyAuthKey=" + surveyTokenVar.val(), studentSubmitFormVar.serialize(), function(data){
           
           console.log(data);
           console.log(data.Results.length);

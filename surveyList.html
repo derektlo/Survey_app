@@ -72,7 +72,7 @@ console.log(surveyID);
       'Delete': {
         click: function () {
 
-              $.post("http://iwaiter-app.com/iWaiter_scripts/delete_survey.php?surveyID=" + surveyID, function(json) {
+              $.post("http://classtempo.org/Survey_app/survey_phpScripts/delete_survey.php?surveyID=" + surveyID, function(json) {
                  location.reload(true);
           });
         },icon: "delete"
@@ -105,10 +105,10 @@ $(document).ready(function(){
   $('#footer').append('<p>  Today: ' + fullDate + '</p>');
   var getSurveyListURL;
   if (Modernizr.sessionstorage) {
-      getSurveyListURL = "http://iwaiter-app.com/iWaiter_scripts/get_surveyList.php?email=" + sessionStorage.emailVar;
+      getSurveyListURL = "http://classtempo.org/Survey_app/survey_phpScripts/get_surveyList.php?email=" + sessionStorage.emailVar;
     } 
     else {
-      getSurveyListURL = "http://iwaiter-app.com/iWaiter_scripts/get_surveyList.php?email=" + $.cookie("emailVar");
+      getSurveyListURL = "http://classtempo.org/Survey_app/survey_phpScripts/get_surveyList.php?email=" + $.cookie("emailVar");
     }
 
 // get the JSON data from server

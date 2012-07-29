@@ -28,7 +28,7 @@ function incrementOptionValue(optionName) {
 
 		console.log(optionName);
 
-	  $.post("http://iwaiter-app.com/iWaiter_scripts/post_option.php?surveyAuthKey=alo-1&optionName=" + optionName,function(result){
+	  $.post("http://classtempo.org/Survey_app/survey_phpScripts/post_option.php?surveyAuthKey=alo-1&optionName=" + optionName,function(result){
     			console.log("called back, ",result);
   });
 }
@@ -148,8 +148,6 @@ $(document).ready(function(){
 
         // If validation fails, show Dialog content
         if(err == true){  
-
-        console.log("we've got an issue");
           showContentDialog();
 
           return false;
@@ -160,7 +158,7 @@ $(document).ready(function(){
 
 
         // Submit the form
-        $.post("http://iwaiter-app.com/iWaiter_scripts/post_option.php?surveyAuthKey=alo-1&optionName=" + surveyValue, form1Var.serialize(), function(data){
+        $.post("http://classtempo.org/Survey_app/survey_phpScripts/post_option.php?surveyAuthKey=alo-1&optionName=" + surveyValue, form1Var.serialize(), function(data){
           
           console.log(data);
 
