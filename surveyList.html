@@ -50,7 +50,7 @@ function goToSurveyResults(surveyID, onOrOff) {
       onOffValue = 'Off';
 
     // get the particular survey's analytics
-    $.getJSON("http://iwaiter-app.com/iWaiter_scripts/getSurveyAnalytics.php?surveyID=" + surveyId, function(json) {
+    $.getJSON("http://classtempo.org/Survey_app/survey_phpScripts/getSurveyAnalytics.php?surveyID=" + surveyId, function(json) {
           console.log(json);
 
          $.mobile.changePage( "surveyResults.html", { transition: "slide"} );
