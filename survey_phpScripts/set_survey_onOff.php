@@ -27,12 +27,12 @@
    //Execute the query to turn survey on or off
    if ($onOff > 0) {
       // create query to turn survey OFF
-      $rs = mysql_query("UPDATE Surveys SET Survey_onOff = 1
+      $rs = mysql_query("UPDATE Surveys SET On_off = 1
       WHERE Survey_id = '$surveyID'");
    }
    else {
       // create query to turn survey ON
-      $rs = mysql_query("UPDATE Surveys SET Survey_onOff = 0
+      $rs = mysql_query("UPDATE Surveys SET On_off = 0
       WHERE Survey_id = '$surveyID'");
    }
    

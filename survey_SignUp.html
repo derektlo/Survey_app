@@ -17,13 +17,14 @@
     var contentTransitionVar = null;
 
     var emailVar = null;
-    var surveyTagVar = null;
+    var userTagVar = null;
     var  passwordVar = null;
     var passwordAgainVar = null;
 
-    var form1var = null;
+    var signUpFormVar = null;
     var confirmationVar = null;
     var passwordMisMatchVar = null;
+    var userTagTakenVar = null;
 
     var contentDialogVar = null;
     var hdrConfirmationVar = null; 
@@ -41,15 +42,16 @@
 <body> 
 
 <!-- Page starts here -->
-<div data-role="page" data-theme="b" id="page1">
+<div data-role="page" data-theme="b" id="signUp" data-add-back-btn="true">
 
-  <div data-role="header" id="hdrMain" name="hdrMain" data-nobackbtn="true">
-    <h1>Classroom Tempo</h1>
+  <div data-role="header" id="hdrMain" name="hdrMain">
+    <a href="student.html" data-transition="flip">Student</a>
+    <h1>Class Tempo</h1>
   </div>
 
     <div data-role="navbar" id="navbar">
       <ul>
-        <li><a href="Master_Survey.html" rel="external" data-icon="" data-transition="fade">Sign-In</a></li>
+        <li><a href="teacher.html" rel="external" data-icon="" data-transition="fade">Sign-In</a></li>
         <li><a href="" data-icon="" data-transition="fade" class="ui-btn-active ui-state-persist">Sign-Up</a></li>
       </ul>
     </div>
@@ -57,7 +59,7 @@
 
   <div data-role="content" id="contentMain" name="contentMain"> 
 
-  <form id="form1">
+  <form id="signUpForm">
   
   <div id="emailDiv" data-role="fieldcontain">
     <label for="email">Email*</label>   
@@ -65,8 +67,8 @@
   </div>
 
   <div id="surveyTagDiv" data-role="fieldcontain">
-    <label for="surveyTag">Survey Tag* (Visible to Users, should ID you in some way...)</label>   
-    <input id="surveyTag" name="surveyTag_r" type="text" />
+    <label for="userTag">Survey Tag* (Visible to Users, should ID you in some way...)</label>   
+    <input id="userTag" name="userTag_r" type="text" />
   </div>
 
   <div id="passwordDiv" data-role="fieldcontain">
@@ -89,14 +91,19 @@
   
   <div align="CENTER" data-role="content" id="contentDialog" name="contentDialog">  
    <div>Please fill in all fields before submitting the form.</div>
-   <a id="buttonOK" name="buttonOK" href="#page1" data-role="button" data-inline="true">OK</a>
+   <a id="buttonOK" name="buttonOK" href="#signUp" data-role="button" data-inline="true">OK</a>
   </div>  <!-- contentDialog -->
   
 
   <div align="CENTER" data-role="content" id="passwordMisMatch" name="passwordMisMatch">  
    <div>Passwords must match.</div>
-   <a id="buttonOKPassword" name="buttonOKPassword" href="#page1" data-role="button" data-inline="true">OK</a>
-  </div>  <!-- contentDialog -->
+   <a id="buttonOKPassword" name="buttonOKPassword" href="#signUp" data-role="button" data-inline="true">OK</a>
+  </div>  <!-- passwordMisMatch -->
+
+  <div align="CENTER" data-role="content" id="userTagTaken" name="userTagTaken">  
+   <div>The "user tag" you entered is already in use. Please choose a different tag. Thanks!</div>
+   <a id="buttonOKUserTag" name="buttonOKUserTag" href="#signUp" data-role="button" data-inline="true">OK</a>
+  </div>  <!-- passwordMisMatch -->
 
   <!-- contentTransition is displayed after the form is submitted until a response is received back. -->
   <div data-role="content" id="contentTransition" name="contentTransition"> 
@@ -110,7 +117,7 @@
   
   <div data-role="content" id="contentConfirmation" name="contentConfirmation" align="center">
     <p>Your Account has been successfully created.</p> 
-    <a id="accountCreatedButton" name="accountCreatedButton" href="#page1" data-role="button" data-inline="true">OK</a>
+    <a id="accountCreatedButton" name="accountCreatedButton" href="#signUp" data-role="button" data-inline="true">OK</a>
   </div><!-- contentConfirmation -->  
     
   <div data-role="footer" id="ftrConfirmation" name="ftrConfirmation"></div> 
@@ -127,14 +134,14 @@
       contentTransitionVar = $('#contentTransition');
 
       emailVar = $('#email');
-      surveyTagVar = $('#surveyTag');
+      userTagVar = $('#userTag');
       passwordVar = $('#password');
       passwordAgainVar = $('#passwordAgain');
-
+      userTagTakenVar = $('#userTagTaken');
 
       stateVar = $('#state');
       whatVar = $('#what');
-      form1Var = $('#form1');
+      signUpFormVar = $('#signUpForm');
       confirmationVar = $('#confirmation');
       contentDialogVar = $('#contentDialog');
       passwordMisMatchVar = $('#passwordMisMatch');
@@ -146,13 +153,13 @@
       
       hideContentDialog();
       hidePasswordMisMatch();
+      hideUserTagTaken();
       hideContentTransition();
       hideConfirmation();
     }); 
   
     $('#buttonOK').click(function() {
       
-  console.log("c click");
       hideContentDialog();
       hidePasswordMisMatch();
       showMain();
@@ -160,8 +167,15 @@
     });
 
     $('#buttonOKPassword').click(function() {
-      console.log("p click");
+
       hidePasswordMisMatch();
+      showMain();
+      return false;      
+    });
+
+     $('#buttonOKUserTag').click(function() {
+
+      hideUserTagTaken();
       showMain();
       return false;      
     });
@@ -173,7 +187,7 @@
     });
    
     
-    $('#form1').submit(function() {
+    $('#signUpForm').submit(function() {
         var err = false;
         var passwordError = false;
         
@@ -194,8 +208,7 @@
         });
           console.log(passwordVar.val());
           console.log(passwordAgainVar.val());
-          console.log(emailVar.val());
-          console.log(surveyTagVar.val());
+          console.log(userTagVar.val());
 
 
         if(passwordVar.val() != passwordAgainVar.val()){
@@ -222,11 +235,8 @@
           return false;
         }        
         
-        // If validation passes, show Transition content
-        showContentTransition();
-        
-        $email = emailVar.val();
-        $surveyTag = surveyTagVar.val();
+        $emailVar = emailVar.val();
+        $userTag = userTagVar.val();
         $password = passwordVar.val();
 
         console.log("EMAILLLLL: ",email);
@@ -234,20 +244,26 @@
 
 
         // Submit the form
-        $.post("http://iwaiter-app.com/iWaiter_scripts/create_survey_account.php?email=" + emailVar.val() + "&surveyTag=" + surveyTagVar.val() + "&password=" + passwordVar.val(), form1Var.serialize(), function(data){
+        $.post("http://iwaiter-app.com/iWaiter_scripts/create_survey_account.php?email=" + emailVar + "&userTag=" + userTagVar.val() + "&password=" + passwordVar.val(), signUpFormVar.serialize(), function(data){
           
           console.log(data);
             if (data == 'Successful'){
+
+              sessionStorage.mySessionEmail = emailVar;
+              $.mobile.changePage("surveyList.html",{transition:"slide"});
+
                           hideContentTransition();
-                          showConfirmation();
-                          console.log("sucessfully signed up");
             }
-            else{
-              console.log("sign up failed");
+            else if (data == 'Email already exists.') {
+             
               showContentDialog();
              hideConfirmation();
             }
+            else if (data == 'User tag already exists.')
 
+                showUserTagTaken();
+                hideContentTransition();
+                hideConfirmation();
         });        
         return false;      
     });   
@@ -287,6 +303,14 @@
      function hidePasswordMisMatch(){
     passwordMisMatchVar.hide();
    }   
+      function showUserTagTaken(){
+    userTagTakenVar.show();
+   }
+
+     function hideUserTagTaken(){
+     userTagTakenVar.hide();
+   }   
+   
    
    
    function hideConfirmation(){
@@ -303,7 +327,7 @@
 
     
   </script>
-</div> <!-- page1 -->
+</div> <!-- signUp -->
 
 
 <!-- Page ends here -->

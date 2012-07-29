@@ -24,8 +24,7 @@
    $arr = array();
    
    //Execute the query to delete survey
-     $rs = mysql_query("UPDATE Options SET Option_value = Option_value+1 
-      WHERE Survey_authKey = '$surveyAuthKey' AND Option_name = '$optionName'");
+     $rs = mysql_query("DELETE FROM Surveys WHERE Survey_id = '$surveyID'");
    
    if ($rs) {
       echo 'Successful';

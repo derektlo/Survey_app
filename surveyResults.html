@@ -2,16 +2,10 @@
 <html> 
   <head> 
   <title>Sign up</title> 
-<!--
-  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a2/jquery.mobile-1.0a2.min.css" />
-  <link rel="stylesheet" href="./signup.css">
-  <script src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
-  <script src="http://code.jquery.com/mobile/1.0a2/jquery.mobile-1.0a2.min.js"></script>
-  -->
 
   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" />
-<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-<script src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script>
+  <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script>
 
 </head> 
 
@@ -22,9 +16,9 @@
 <div data-role="page" data-theme="b" id="surveyResultsPage" data-add-back-btn="true">
 
   <div data-role="header" id="hdrMain" name="hdrMain">
-    <a href="Master_Survey.html" data-direction="reverse" rel="external" data-icon="" data-transition="slide" class="ui-btn-right">Logout</a>
-
+     <a href="surveyList.html" data-direction="reverse" rel="external" data-icon="back" data-transition="slide" class="ui-btn-left">Back</a>
     <h1>Class Tempo</h1>
+    <a href="Master_Survey.html" data-direction="reverse" rel="external" data-icon="" data-transition="slide" class="ui-btn-right">Logout</a>
   </div>
 
   <div data-role="content" id="surveyCreatorContent" name="surveyCreatorContent"> 
@@ -54,7 +48,8 @@
           $('ul#resultsList').listview();
           $('ul#resultsList').listview('refresh');
 
-          if (surveyOnorOff == 0)
+console.log("onOffValue: ",onOffValue);
+          if (onOffValue == 'On')
             $('#surveyOnOff').val('on').slider("refresh");
           else
             $('#surveyOnOff').val('off').slider("refresh");
@@ -63,13 +58,19 @@
 
     $('#surveyOnOff').change(function() {
 
-     console.log($('#surveyOnOff').val());
+      console.log($('#surveyOnOff').val());
 
-      console.log("toggled ");
-    }
+      var currentOnOffValue;
+      if ($('#surveyOnOff').val() == 'on')
+        currentOnOffValue = 0;
+      else
+        currentOnOffValue = 1;
+      console.log(currentOnOffValue);
+      console.log(surveyId);
+     $.post("http://iwaiter-app.com/iWaiter_scripts/set_survey_onOff.php?surveyID=" + surveyId + "&onOff=" + currentOnOffValue,function(response){
 
-
-      )
+     });
+    })
 
   </script>
 </div> <!-- page1 -->

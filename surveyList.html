@@ -4,15 +4,25 @@
 
   <title>First jQuery Mobile Example</title>
 
-  <!-- the three things that jQuery Mobile needs to work-->
- <link rel="stylesheet" href="./signup.css">
+  <!-- CSS -->
+  <link rel="stylesheet" href="./signup.css">
   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" />
-<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-<script src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://dev.jtsage.com/cdn/simpledialog/latest/jquery.mobile.simpledialog.min.css" /> 
+
+  <!-- Modernizer -->
+  <script type="text/javascript" src="./modernizr.custom.56582.js"></script>
+  <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script>
+
+   <!-- simpleDiaglo2 -->
+  <script src="http://dev.jtsage.com/cdn/simpledialog/latest/jquery.mobile.simpledialog2.js"></script>
+  <script type="text/javascript" src="http://dev.jtsage.com/cdn/simpledialog/latest/jquery.mobile.simpledialog2.min.js"></script>
 
 </head>
 
+
 <body>
+
   <!-- Page starts here -->
 <div data-role="page" data-theme="c" id="surveyList">
 
@@ -33,7 +43,11 @@ function goToSurveyResults(surveyID, onOrOff) {
 
     // set the currently selected survey's ID and whether it's on or off
     surveyId = surveyID;
-    surveyOnorOff = onOrOff;
+
+    if (onOrOff == 0)
+      onOffValue = 'On';
+    else
+      onOffValue = 'Off';
 
     // get the particular survey's analytics
     $.getJSON("http://iwaiter-app.com/iWaiter_scripts/getSurveyAnalytics.php?surveyID=" + surveyId, function(json) {
@@ -49,25 +63,56 @@ function deleteSurvey(surveyID) {
 
       // show dialog box to confirm that the user does indeed
       // want to delete this survey
+console.log(surveyID);
+  $('<div>').simpledialog2({
+    mode: 'button',
+    headerText: 'Are you sure?',
+    headerClose: true,
+    buttons : {
+      'Delete': {
+        click: function () {
 
-
+              $.post("http://iwaiter-app.com/iWaiter_scripts/delete_survey.php?surveyID=" + surveyID, function(json) {
+                 location.reload(true);
+          });
+        },icon: "delete"
+      },
+      'Cancel': {
+        click: function () { 
+          // cancel the dialogue
+        },
+        theme: "c"
+      }
+    }
+  })
 }
 
 
 //$(document).ready(function(){
 $('#surveyList').bind('pageinit', function() {
 
-  var currentTime = new Date()
+}); // End pageinit function
+
+$(document).ready(function(){
+
+
+    var currentTime = new Date()
   var month = currentTime.getMonth() + 1
   var day = currentTime.getDate()
   var year = currentTime.getFullYear()
   var fullDate = month + "-" + day + "-" + year;
 
   $('#footer').append('<p>  Today: ' + fullDate + '</p>');
-
+  var getSurveyListURL;
+  if (Modernizr.sessionstorage) {
+      getSurveyListURL = "http://iwaiter-app.com/iWaiter_scripts/get_surveyList.php?email=" + sessionStorage.emailVar;
+    } 
+    else {
+      getSurveyListURL = "http://iwaiter-app.com/iWaiter_scripts/get_surveyList.php?email=" + $.cookie("emailVar");
+    }
 
 // get the JSON data from server
-    $.getJSON("http://iwaiter-app.com/iWaiter_scripts/get_surveyList.php?email=" + emailVar.val(), function(data) {
+    $.getJSON(getSurveyListURL, function(data) {
 
       // Define some local instance variables
       var listOfSurveys = data.Results;
@@ -122,13 +167,13 @@ $('#surveyList').bind('pageinit', function() {
 
     }); // End JSON callback function
 
-}); // End pageinit function
+});
 
 </script>
 
 
     <header data-role="header">
-    <a href="Master_Survey.html" data-direction="reverse" rel="external" data-icon="" data-transition="slide" class="ui-btn-right">Logout</a>
+    <a href="teacher.html" data-direction="reverse" rel="external" data-icon="" data-transition="slide" class="ui-btn-right">Logout</a>
     <h1>My Surveys</h1>
 
   </header>

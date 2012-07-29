@@ -45,16 +45,15 @@
             $arr[] = $obj;
           }
    
+
    // return the json result.
       echo '{"Results":'.json_encode($arr).'}';
-
-
       }
-      else echo "Invalid Password";
+      else echo '{"Results":' .json_encode("Invalid Password or Email.").'}';
 
    }
    else{ // email does not exist
-         echo "Email does not exist.";
+         echo '{"Results":' .json_encode("Invalid Password or Email.").'}';
    }
 
    // close connection 

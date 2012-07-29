@@ -2,23 +2,26 @@
 <html> 
   <head> 
   <title>Sign up</title> 
-<!--
-  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a2/jquery.mobile-1.0a2.min.css" />
-  <link rel="stylesheet" href="./signup.css">
-  <script src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
-  <script src="http://code.jquery.com/mobile/1.0a2/jquery.mobile-1.0a2.min.js"></script>
-  -->
 
+    <!-- CSS -->
+  <link rel="stylesheet" href="./signup.css">
   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" />
-<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-<script src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://dev.jtsage.com/cdn/simpledialog/latest/jquery.mobile.simpledialog.min.css" /> 
+
+  <!-- Modernizer -->
+  <script type="text/javascript" src="./modernizr.custom.56582.js"></script>
+  <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script>
+
+   <!-- simpleDiaglo2 -->
+  <script src="http://dev.jtsage.com/cdn/simpledialog/latest/jquery.mobile.simpledialog2.js"></script>
+  <script type="text/javascript" src="http://dev.jtsage.com/cdn/simpledialog/latest/jquery.mobile.simpledialog2.min.js"></script>
 
   <script>   
    // Global declarations - assignments made in $(document).ready() below
     var hdrMainvar = null;
     var surveyCreatorContentVar = null;
     var ftrMainVar = null;
-    var contentTransitionVar = null;
 
     var sliderValue = null;
     var numbersOrLetters = null;
@@ -26,14 +29,6 @@
     var surveyDescriptionVar = null;
 
     var surveyCreatorFormVar = null;
-    var confirmationVar = null;
-
-    var contentDialogVar = null;
-    var hdrConfirmationVar = null; 
-    var contentConfirmationVar = null;
-    var ftrConfirmationVar = null;
-    var inputMapVar = null;
-
 
     var MISSING = "missing";
     var EMPTY = "";
@@ -46,17 +41,15 @@
 <!-- Page starts here -->
 <div data-role="page" data-theme="b" id="surveyCreatorPage" data-add-back-btn="true">
 
-  <div data-role="header" id="hdrMain" name="hdrMain" data-nobackbtn="true">
-    <a href="Master_Survey.html" data-direction="reverse" rel="external" data-icon="" data-transition="slide" class="ui-btn-right">Logout</a>
+  <div data-role="header" id="hdrMain" name="hdrMain">
+    <a href="teacher.html" data-direction="reverse" rel="external" data-icon="" data-transition="slide" class="ui-btn-right">Logout</a>
 
-    <h1>Classroom Tempo</h1>
+    <h1>Class Tempo</h1>
   </div>
 
   <div data-role="content" id="surveyCreatorContent" name="surveyCreatorContent"> 
 
   <form id="surveyCreatorForm">
-  
-
 
   <div id="optionSliderDiv" data-role="fieldcontain">
     <label for="optionSlider">How Many Options?</label>
@@ -70,7 +63,7 @@
 
       <input type="radio" name="numbersOrLetters" id="Letters" value="Letters"  />
       <label for="Letters">Letters</label>
-</fieldset>
+  </fieldset>
 
   <fieldset data-role="controlgroup">
   <legend>Survey On/Off</legend>
@@ -79,7 +72,7 @@
 
       <input type="radio" name="OnOff" id="Off" value="Off"  />
       <label for="Off">Survey Off</label>
-</fieldset>
+  </fieldset>
 
   <div data-role="fieldcontain">
     <label for="SurveyDescription">Survey Description:</label>
@@ -94,30 +87,6 @@
   
   <div data-role="footer" id="ftrMain" name="ftrMain"></div>
   
-  <!--
-  <div align="CENTER" data-role="content" id="contentDialog" name="contentDialog">  
-   <div>Please fill in all fields before submitting the form.</div>
-   <a id="buttonOK" name="buttonOK" href="#page1" data-role="button" data-inline="true">OK</a>
-  </div>   contentDialog -->
-
-  <!-- contentTransition is displayed after the form is submitted until a response is received back. -->
-  <!--
-  <div data-role="content" id="contentTransition" name="contentTransition"> 
-   <div align="CENTER"><h4>Success!</h4></div>
-  </div>   contentTransition -->
-  
-  <!-- Although stored within page1 div tag, hdrConfirmation, contentConfirmation and ftrConfirmation represent a self contained 'confirmation page'
-  <div data-role="header"  id="hdrConfirmation" name="hdrConfirmation" data-nobackbtn="true">
-    <h1>Success</h1>
-  </div> -->
-  
-  <div data-role="content" id="contentConfirmation" name="contentConfirmation" align="center">  
-    <p>Your survey has been successfully created.</p> 
-  </div><!-- contentConfirmation -->  
-    
-  <div data-role="footer" id="ftrConfirmation" name="ftrConfirmation"></div> 
-  
-  
   <script>
    
     $(document).ready(function() {
@@ -125,45 +94,23 @@
        hdrMainVar = $('#hdrMain');
       surveyCreatorContentVar = $('#surveyCreatorContent');
       ftrMainVar = $('#ftrMain');
-      contentTransitionVar = $('#contentTransition');
 
-      sliderValue = $('#optionSlider');
       surveyDescriptionVar = $('#SurveyDescription')
 
       surveyCreatorFormVar = $('#surveyCreatorForm');
-      confirmationVar = $('#confirmation');
-      contentDialogVar = $('#contentDialog');
-
-      hdrConfirmationVar = $('#hdrConfirmation');
-      contentConfirmationVar = $('#contentConfirmation');
-      ftrConfirmationVar = $('#ftrConfirmation'); 
-      inputMapVar = $('input[name*="_r"]');
-      
-      hideContentDialog();
-      hideContentTransition();
-      hideConfirmation();
+      sliderValue = $('#optionSlider');
     }); 
+
+    $('#optionSlider').live('change', function() {
+        sliderValue = $(this).slider();
+    // do whatever you want with that value...
+});
    
     
-    $('#createSurveyButton').click(function() {
-        var err = false;
-        var passwordError = false;
-        
-        // Hide the Main content
-        hideMain();
+    $('#createSurveyButton').click(function() { 
         
         console.log(sliderValue.val());
 
-
-        // If validation fails, show Dialog content
-        if(err == true){  
-
-        console.log("we've got an issue");
-          showContentDialog();
-
-          return false;
-        }        
-        
         $('input[name=OnOff]').each(function() { 
             onOffValue = $('input[name=OnOff]:checked').val();
         })
@@ -171,73 +118,37 @@
         $('input[name=numbersOrLetters]').each(function() { 
             numbersOrLetters = $('input[name=numbersOrLetters]:checked').val();
         })
-        
-        console.log(onOffValue);
-        console.log(numbersOrLetters);
-        console.log(userTagVar);
-        // If validation passes, show Transition content
-        showContentTransition();
+
+        var currentEmailVar;
+        var currentUserTagVar;
+
+          if (Modernizr.sessionstorage) {
+              currentEmailVar = sessionStorage.emailVar;
+              currentUserTagVar = sessionStorage.userTagVar;
+          } 
+         else {
+               currentEmailVar = $.cookie("emailVar");
+              currentUserTagVar = $.cookie("userTagVar");
+           }
 
         // Submit the form
-        $.post("http://iwaiter-app.com/iWaiter_scripts/createSurvey.php?userAuthKey=" + userTagVar + "&numberOfOptions=" + sliderValue.val() + " &numbersOrLetters=" + numbersOrLetters + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + emailVar.val(), surveyCreatorFormVar.serialize(), function(data){
+        $.post("http://iwaiter-app.com/iWaiter_scripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&numberOfOptions=" + sliderValue.val() + " &numbersOrLetters=" + numbersOrLetters + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar, surveyCreatorFormVar.serialize(), function(data){
           
           console.log(data);
           if (data == 'Successful') {
+
+            console.log("onOffValue ",onOffValue);
+
             // If we have created a survey successfully go to it's analytics page
             $.mobile.changePage( "surveyResults.html", { transition : "slide"});
           }
           else {
             // show some kind of error message to inform user that there was a problem
-            // in creating survey
-
-            
+            // in creating survey    
           }
-
-          hideContentTransition();
-          showConfirmation();
         });        
         return false;      
     });   
-    
-  function hideMain(){
-    hdrMainVar.hide();
-    surveyCreatorContentVar.hide();
-    ftrMainVar.hide();   
-   }
-   
-  function showMain(){
-    hdrMainVar.show();
-    surveyCreatorContentVar.show();
-    ftrMainVar.show();
-   }
-   
-   function hideContentTransition(){
-    contentTransitionVar.hide();
-   }      
-   
-   function showContentTransition(){
-    contentTransitionVar.show();
-   }  
-   
-  function hideContentDialog(){
-    contentDialogVar.hide();
-   }   
-   
-   function showContentDialog(){
-    contentDialogVar.show();
-   }
-   
-   function hideConfirmation(){
-    hdrConfirmationVar.hide();
-    contentConfirmationVar.hide();
-    ftrConfirmationVar.hide();
-   }  
-   
-   function showConfirmation(){
-    hdrConfirmationVar.show();
-    contentConfirmationVar.show();
-    ftrConfirmationVar.show();
-   } 
 
     
   </script>

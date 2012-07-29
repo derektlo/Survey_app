@@ -13,7 +13,7 @@
  
    // set restaurantID to get categories for selected restaurant
    $email   = isset($_GET['email']) ? $_GET['email']  : "";
-   $surveyTag   = isset($_GET['surveyTag']) ? $_GET['surveyTag']  : "";
+   $userTag   = isset($_GET['userTag']) ? $_GET['userTag']  : "";
    $password = isset($_GET['password']) ? $_GET['password']  : "";
    $hashed_password = sha1($password);
 
@@ -28,6 +28,7 @@
  //Execute the query to create the account
    // Insert data into mysql
    $checkEmail = mysql_query("SELECT Email FROM Survey_Accounts WHERE Email = '$email'");
+   $checkTag = mysql_query("SELECT User_tag FROM Survey_Accounts WHERE User_tag = '$userTag'");
 
    if (!$checkEmail) {
       die('Query failed');
@@ -38,8 +39,14 @@
    }
    else{
 
+         if (mysql_num_rows($checkTag) > 0) {
+      echo "User tag already exists.";
+   }
+   else {
+   
+
    $sql = "INSERT INTO $tbl_name (Email, User_tag, Password) 
-   VALUES ('$email', '$surveyTag' , '$hashed_password')";
+   VALUES ('$email', '$userTag' , '$hashed_password')";
 
    $result = mysql_query($sql);
 
@@ -49,6 +56,7 @@
    }
    else {
       echo "Error";
+      }
    }
 }
 
