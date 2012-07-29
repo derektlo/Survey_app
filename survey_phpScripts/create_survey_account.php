@@ -3,13 +3,13 @@
    // Set Database information
    
    // Database host
-   $host = '205.178.146.112'; 
+   $host = '50.112.249.251'; 
    // Database name
    $db = 'survey_app_db'; 
    // MySQL username
-   $uid = 'derek_survey';
+   $uid = 'root';
    // MySQL password
-   $pwd = 'G0f1shn0w';
+   $pwd = '[G0f1shn0w]';
  
    // set restaurantID to get categories for selected restaurant
    $email   = isset($_GET['email']) ? $_GET['email']  : "";
