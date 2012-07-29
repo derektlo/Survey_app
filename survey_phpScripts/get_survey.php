@@ -7,9 +7,9 @@
    // Database name
    $db = 'survey_app_db'; 
    // MySQL username
-   $uid = 'root';
+   $uid = 'external_user';
    // MySQL password
-   $pwd = '[G0f1shn0w]';
+   $pwd = 'jTJW7xTn8MrjDyRd';
  
 	// set restaurantID to get categories for selected restaurant
  	$surveyAuthKey   = isset($_GET['surveyAuthKey']) ? $_GET['surveyAuthKey']  : "";
