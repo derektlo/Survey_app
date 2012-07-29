@@ -1,0 +1,262 @@
+<!DOCTYPE html> 
+<html> 
+  <head> 
+  <meta name="viewport" content="height=device-height,width=device-width,initial-scale=1.0,maximum-scale=1.0" >
+  <title>Sign up</title> 
+<!--
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a2/jquery.mobile-1.0a2.min.css" />
+  <link rel="stylesheet" href="./signup.css">
+  <script src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.0a2/jquery.mobile-1.0a2.min.js"></script>
+  -->
+ <link rel="stylesheet" href="./signup.css">
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" />
+<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script>
+   <!-- For simpleDiaglo2 -->
+ <script src="http://dev.jtsage.com/cdn/simpledialog/latest/jquery.mobile.simpledialog2.js"></script>
+  <script src="http://dev.jtsage.com/cdn/simpledialog/latest/jquery.mobile.simpledialog.css"></script>
+  <script type="text/javascript" src="http://dev.jtsage.com/cdn/simpledialog/latest/jquery.mobile.simpledialog2.min.js"></script>
+  
+<!-- Page starts here -->
+<div data-role="page" data-theme="b" id="studentPage">
+  
+  <script>   
+
+   // Global declarations - assignments made in $(document).ready() below
+    var hdrMainvar = null;
+    var balbhalbhlabhlabhlabhalbhla = null;
+    var contentMainVar = null;
+    var ftrMainVar = null;
+    var contentTransitionVar = null;
+
+    var surveyTokenVar = null;
+    var studentSubmitFormVar = null;
+
+    var enterTokenMessageVar = null;
+    var hdrConfirmationVar = null; 
+    var contentConfirmationVar = null;
+    var ftrConfirmationVar = null;
+    var inputMapVar = null;
+
+    var num_options = null;
+    var numbersOrLetters = null;
+    var surveyID = null;
+
+
+    var MISSING = "missing";
+    var EMPTY = "";
+
+  </script>
+
+</head> 
+<body> 
+
+  <div data-role="header" id="hdrMain" name="hdrMain" data-nobackbtn="true">
+    <a href="teacher.html" data-transition="flip">Teacher</a>
+    <h1>Class Tempo</h1>
+  </div>
+
+  <div data-role="content" id="contentMain" name="contentMain"> 
+
+  <form id="studentSubmitForm">
+  
+  <div id="surveyTokenDiv" data-role="fieldcontain">
+    <label for="surveyToken">Survey Token</label>   
+    <input id="surveyToken" name="surveyToken" type="text" />
+  </div>
+
+    <div id="submitDiv" data-role="fieldcontain">    
+     <input type="submit" value="Submit" data-inline="true"/>
+    </div>
+    </form>
+  </div> <!-- contentMain -->
+  
+  <div data-role="footer" id="ftrMain" name="ftrMain"></div>
+  
+  <div align="CENTER" data-role="content" id="enterTokenMessage" name="enterTokenMessage">  
+   <div>Please enter a token.</div>
+   <a id="buttonOK" name="buttonOK" href="#page1" data-role="button" data-inline="true">OK</a>
+  </div>  <!-- enterTokenMessage -->
+    
+  <div data-role="footer" id="ftrConfirmation" name="ftrConfirmation"></div> 
+  
+  
+  <script>
+   
+$('#studentPage').bind('pageinit', function() {
+      console.log("readd");
+});
+
+    $(document).ready(function() {
+
+      console.log("read");
+
+  //check the navigator.userAgent string to detect if the user is using an iPhone
+    if (navigator.userAgent.match(/iPhone/i)) {
+
+        //cache the viewport tag if the user is using an iPhone
+        var $viewport = $('head').children('meta[name="viewport"]');
+
+        //bind an event handler to the window object for the orientationchange event
+        $(window).bind('orientationchange', function() {
+            if (window.orientation == 90 || window.orientation == -90 || window.orientation == 270) {
+
+                //landscape
+                $viewport.attr('content', 'height=device-width,width=device-height,initial-scale=1.0,maximum-scale=1.0');
+            } else {
+
+                //portrait
+                $viewport.attr('content', 'height=device-height,width=device-width,initial-scale=1.0,maximum-scale=1.0');
+            }
+
+        //trigger an orientationchange event on the window object to initialize this code (basically in-case the user opens the page in landscape mode)
+        }).trigger('orientationchange');
+    }
+    
+
+
+    // Assign global variables
+       hdrMainVar = $('#hdrMain');
+      contentMainVar = $('#contentMain');
+      ftrMainVar = $('#ftrMain');
+      contentTransitionVar = $('#contentTransition');
+
+      surveyTokenVar = $('#surveyToken');
+
+      studentSubmitFormVar = $('#studentSubmitForm');
+      confirmationVar = $('#confirmation');
+      enterTokenMessageVar = $('#enterTokenMessage');
+
+      hdrConfirmationVar = $('#hdrConfirmation');
+      contentConfirmationVar = $('#contentConfirmation');
+      ftrConfirmationVar = $('#ftrConfirmation'); 
+      inputMapVar = $('input[name*="_r"]');
+      
+      hideEnterTokenMessage();
+      hideContentTransition();
+      hideConfirmation();
+    }); 
+  
+    $('#buttonOK').click(function() {
+      console.log("hmmm");
+      hideEnterTokenMessage();
+      showMain();
+      return false;      
+    });
+    
+    $('#studentSubmitForm').submit(function() {
+        var err = false;
+        var passwordError = false;
+        
+        // Hide the Main content
+       // hideMain();
+      
+      console.log(surveyTokenVar.val());
+
+        if (surveyTokenVar.val() == EMPTY){
+          err = true;
+        }
+
+        // If validation fails, show Dialog content
+        if(err == true){  
+
+        console.log("we've got an issue");
+
+          showEnterTokenMessage();
+
+          return false;
+        }        
+        
+        
+        // If validation passes, show Transition content
+        showContentTransition();
+
+        // Submit the form
+
+
+        $.getJSON("http://iwaiter-app.com/iWaiter_scripts/get_survey.php?surveyAuthKey=" + surveyTokenVar.val(), studentSubmitFormVar.serialize(), function(data){
+          
+          console.log(data);
+          console.log(data.Results.length);
+
+          var resultLength = data.Results.length;
+
+         	 if (resultLength > 0){
+            
+            num_options = data.Results[0].Number_of_options;
+            numbersOrLetters = data.Results[0].Numbers_or_letters;
+            surveyID = data.Results[0].Survey_id;
+
+         		$.mobile.changePage( "userSurvey.html", {transition: "slide"} );
+    		 }
+    		 else{
+    		 	// show error message
+          console.log("invalid token");
+         // showPasswordMisMatch();
+    		   }
+
+        });    
+
+
+        return false;      
+    });   
+    
+  function hideMain(){
+    hdrMainVar.hide();
+    contentMainVar.hide();
+    ftrMainVar.hide();   
+   }
+   
+  function showMain(){
+    hdrMainVar.show();
+    contentMainVar.show();
+    ftrMainVar.show();
+   }
+   
+   function hideContentTransition(){
+    contentTransitionVar.hide();
+   }      
+   
+   function showContentTransition(){
+    contentTransitionVar.show();
+   }  
+   
+  function hideEnterTokenMessage(){
+    enterTokenMessageVar.hide();
+   }   
+   
+   function showEnterTokenMessage(){
+    enterTokenMessageVar.show();
+   }
+
+     function showPasswordMisMatch(){
+    incorrectPasswordVar.show();
+   }
+
+     function hidePasswordMisMatch(){
+    incorrectPasswordVar.hide();
+   }   
+   
+   
+   function hideConfirmation(){
+    hdrConfirmationVar.hide();
+    contentConfirmationVar.hide();
+    ftrConfirmationVar.hide();
+   }  
+   
+   function showConfirmation(){
+   // hdrConfirmationVar.show();
+   // contentConfirmationVar.show();
+   // ftrConfirmationVar.show();
+   	
+   } 
+
+    
+  </script>
+</div> <!-- page1 -->
+
+
+<!-- Page ends here -->
+</body>
+</html>
