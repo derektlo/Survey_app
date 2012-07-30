@@ -24,15 +24,10 @@
   <script>   
 
    // Global declarations - assignments made in $(document).ready() below
-    var hdrMainvar = null;
-    var contentMainVar = null;
-    var ftrMainVar = null;
-    var contentTransitionVar = null;
-
+    
     // Used for teacher.html to log in
     var emailVar = null;
     var  passwordVar = null;
-
     var userTagVar = null;
 
     // Global vars used in surveyCreator.html
@@ -48,21 +43,9 @@
     // used in surveyList.html to pass to surveyResults.html
     // to determine flip toggle in surveyResults.html
     var surveyOnorOff = null;
-
     var teacherFormVar = null;
-    var confirmationVar = null;
-    var incorrectPasswordVar = null;
-
-    var missingPasswordEmailVar = null;
-    var hdrConfirmationVar = null; 
-    var contentConfirmationVar = null;
-    var ftrConfirmationVar = null;
-    var inputMapVar = null;
-
-
     var MISSING = "missing";
     var EMPTY = "";
-
   </script>
 
 </head> 
@@ -76,7 +59,7 @@
       <div data-role="navbar">
       <ul>
         <li><a href="" data-icon="" data-transition="fade" class="ui-btn-active ui-state-persist">Sign-In</a></li>
-        <li><a href="survey_SignUp.html" rel="external" data-icon="" data-transition="fade">Sign-Up</a></li>
+        <li><a href="signUp.html" rel="external" data-icon="" data-transition="fade">Sign-Up</a></li>
       </ul>
     </div>
 
@@ -102,20 +85,6 @@
   </div><!-- contentMain -->
   
   <div data-role="footer" id="ftrMain" name="ftrMain"></div>
-  
-  <div align="CENTER" data-role="content" id="missingPasswordEmail" name="missingPasswordEmail">  
-   <div>Please fill in an email and password.</div>
-   <a id="buttonOK" name="buttonOK" href="#page1" data-role="button" data-inline="true">OK</a>
-  </div>  <!-- contentDialog -->
-  
-
-  <div align="CENTER" data-role="content" id="incorrectPassword" name="incorrectPassword">  
-   <div>Incorrect password or email.</div>
-   <a id="buttonOKPassword" name="buttonOKPassword" href="#page1" data-role="button" data-inline="true">OK</a>
-  </div>  <!-- contentDialog -->
-    
-  <div data-role="footer" id="ftrConfirmation" name="ftrConfirmation"></div> 
-  
   
   <script>
    
@@ -143,83 +112,45 @@
         }).trigger('orientationchange');
     }
     
-
-
     // Assign global variables
-       hdrMainVar = $('#hdrMain');
-      contentMainVar = $('#contentMain');
-      ftrMainVar = $('#ftrMain');
-      contentTransitionVar = $('#contentTransition');
-
       emailVar = $('#email');
       passwordVar = $('#password');
-
       teacherFormVar = $('#teacherForm');
-      confirmationVar = $('#confirmation');
-      missingPasswordEmailVar = $('#missingPasswordEmail');
-      incorrectPasswordVar = $('#incorrectPassword');
-
-      hdrConfirmationVar = $('#hdrConfirmation');
-      contentConfirmationVar = $('#contentConfirmation');
-      ftrConfirmationVar = $('#ftrConfirmation'); 
-      inputMapVar = $('input[name*="_r"]');
-      
-      hideMissingPasswordEmailVar();
-      hidePasswordMisMatch();
-      hideContentTransition();
-      hideConfirmation();
     }); 
-  
-    $('#buttonOK').click(function() {
-      console.log("hmmm");
-      hideMissingPasswordEmailVar();
-      showMain();
-
-      console.log("emailvar: ",emailVar)
-
-      return false;      
-    });
-
-    $('#buttonOKPassword').click(function() {
-
-      console.log("hmmm");
-      hidePasswordMisMatch();
-      showMain();
-      return false;      
-    });
-   
     
     $('#teacherForm').submit(function() {
 
         var emtpyError = false;
-//        var emailPasswordError = false;
- //       var passwordError = false;
-
 
         if ((emailVar.val() == EMPTY) || (passwordVar.val() == EMPTY)){
-          console.log("empty email or password");
+
         	emtpyError = true;
         }
 
-        // If validation fails, show Dialog content
+        // If validation fails, show error message
         if(emtpyError == true){  
+         // missing password or email
 
-        console.log("we've got an issue");
-
-          showMissingPasswordEmailVar();
+            $('<div>').simpledialog2({
+                    mode: 'button',
+                    headerText: 'Whoops!',
+                    buttonPrompt: 'Please enter a valid password and email.',
+                    headerClose: false,
+                    buttons : {
+                      'OK': {
+                        click: function () { 
+                        }
+                      }
+                    }
+             })
 
           return false;
         }        
-        console.log("here?");
 
         // Submit the form
         $.getJSON("http://classtempo.org/Survey_app/survey_phpScripts/survey_login.php?email=" + emailVar.val() + "&password=" + passwordVar.val(), teacherFormVar.serialize(), function(data){
-          console.log("anything?");
 
           userTagVar = data.Results[0].User_tag;
-
-          console.log("usertag: ",userTagVar);
-          console.log("emailVar: ",emailVar);
 
          	 if (userTagVar != null){
                  
@@ -227,74 +158,33 @@
                       // browser supports local storage
                       sessionStorage.emailVar = emailVar.val();
                       sessionStorage.userTagVar = userTagVar;
-                      console.log("sessionstorage: ",sessionStorage.emailVar);
-                      console.log("emailVar: ",emailVar);
                   }
                   else {
                       $.cookie("emailVar",emailVar.val());
                       $.cookie("userTagVar",userTagVar);
-                      console.log($.cookie("emailVar"));
                   }
          		     
                 $.mobile.changePage( "surveyList.html", { transition: "slide"} );
     		 }  
     		 else{
     		 	// show error message
-          showPasswordMisMatch();
+          // wrong password or email
+              $('<div>').simpledialog2({
+                    mode: 'button',
+                    headerText: 'Whoops!',
+                    buttonPrompt: 'Invalid password or email.',
+                    headerClose: false,
+                    buttons : {
+                      'OK': {
+                        click: function () { 
+                        }
+                      }
+                    }
+             })
     		 }
         });        
         return false;      
     });   
-    
-  function hideMain(){
-    hdrMainVar.hide();
-    contentMainVar.hide();
-    ftrMainVar.hide();   
-   }
-   
-  function showMain(){
-    hdrMainVar.show();
-    contentMainVar.show();
-    ftrMainVar.show();
-   }
-   
-   function hideContentTransition(){
-    contentTransitionVar.hide();
-   }      
-   
-   function showContentTransition(){
-    contentTransitionVar.show();
-   }  
-   
-  function hideMissingPasswordEmailVar(){
-    missingPasswordEmailVar.hide();
-   }   
-   
-   function showMissingPasswordEmailVar(){
-    missingPasswordEmailVar.show();
-   }
-
-     function showPasswordMisMatch(){
-    incorrectPasswordVar.show();
-   }
-
-     function hidePasswordMisMatch(){
-    incorrectPasswordVar.hide();
-   }   
-   
-   
-   function hideConfirmation(){
-    hdrConfirmationVar.hide();
-    contentConfirmationVar.hide();
-    ftrConfirmationVar.hide();
-   }  
-   
-   function showConfirmation(){
-   // hdrConfirmationVar.show();
-   // contentConfirmationVar.show();
-   // ftrConfirmationVar.show();
-   	
-   } 
 
     
   </script>

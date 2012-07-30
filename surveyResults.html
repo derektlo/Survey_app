@@ -3,9 +3,19 @@
   <head> 
       <meta name="viewport" content="height=device-height,width=device-width,initial-scale=1.0,maximum-scale=1.0" >
   <title>Sign up</title> 
+    <!-- CSS -->
+  <link rel="stylesheet" href="./signup.css">
   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" />
+  <link rel="stylesheet" type="text/css" href="http://dev.jtsage.com/cdn/simpledialog/latest/jquery.mobile.simpledialog.min.css" /> 
+
+  <!-- Modernizer -->
+  <script type="text/javascript" src="./modernizr.custom.56582.js"></script>
   <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
   <script src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script>
+
+   <!-- simpleDiaglo2 -->
+  <script src="http://dev.jtsage.com/cdn/simpledialog/latest/jquery.mobile.simpledialog2.js"></script>
+  <script type="text/javascript" src="http://dev.jtsage.com/cdn/simpledialog/latest/jquery.mobile.simpledialog2.min.js"></script>
 
 </head> 
 
@@ -26,10 +36,10 @@
       </ul>
 
       <label for="surveyOnOff" >Survey ON/OFF:</label>
-<select name="surveyOnOff" id="surveyOnOff" data-role="slider" data-theme="c" data-track-theme="a">
-  <option value="off">Off</option>
-  <option value="on">On</option>
-</select> 
+      <select name="surveyOnOff" id="surveyOnOff" data-role="slider" data-theme="c" data-track-theme="a">
+        <option value="off">Off</option>
+        <option value="on">On</option>
+      </select> 
 
   
   </div><!-- contentMain -->
@@ -48,7 +58,6 @@
           $('ul#resultsList').listview();
           $('ul#resultsList').listview('refresh');
 
-console.log("onOffValue: ",onOffValue);
           if (onOffValue == 'On')
             $('#surveyOnOff').val('on').slider("refresh");
           else
@@ -65,8 +74,7 @@ console.log("onOffValue: ",onOffValue);
         currentOnOffValue = 0;
       else
         currentOnOffValue = 1;
-      console.log(currentOnOffValue);
-      console.log(surveyId);
+
      $.post("http://classtempo.org/Survey_app/survey_phpScripts/set_survey_onOff.php?surveyID=" + surveyId + "&onOff=" + currentOnOffValue,function(response){
 
      });

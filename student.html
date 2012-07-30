@@ -3,19 +3,19 @@
   <head> 
   <meta name="viewport" content="height=device-height,width=device-width,initial-scale=1.0,maximum-scale=1.0" >
   <title>Sign up</title> 
-<!--
-  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a2/jquery.mobile-1.0a2.min.css" />
+
+  <!-- CSS -->
   <link rel="stylesheet" href="./signup.css">
-  <script src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
-  <script src="http://code.jquery.com/mobile/1.0a2/jquery.mobile-1.0a2.min.js"></script>
-  -->
- <link rel="stylesheet" href="./signup.css">
   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" />
-<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-<script src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script>
-   <!-- For simpleDiaglo2 -->
- <script src="http://dev.jtsage.com/cdn/simpledialog/latest/jquery.mobile.simpledialog2.js"></script>
-  <script src="http://dev.jtsage.com/cdn/simpledialog/latest/jquery.mobile.simpledialog.css"></script>
+  <link rel="stylesheet" type="text/css" href="http://dev.jtsage.com/cdn/simpledialog/latest/jquery.mobile.simpledialog.min.css" /> 
+
+  <!-- Modernizer -->
+  <script type="text/javascript" src="./modernizr.custom.56582.js"></script>
+  <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script>
+
+   <!-- simpleDiaglo2 -->
+  <script src="http://dev.jtsage.com/cdn/simpledialog/latest/jquery.mobile.simpledialog2.js"></script>
   <script type="text/javascript" src="http://dev.jtsage.com/cdn/simpledialog/latest/jquery.mobile.simpledialog2.min.js"></script>
   
 <!-- Page starts here -->
@@ -24,20 +24,8 @@
   <script>   
 
    // Global declarations - assignments made in $(document).ready() below
-    var hdrMainvar = null;
-    var balbhalbhlabhlabhlabhalbhla = null;
-    var contentMainVar = null;
-    var ftrMainVar = null;
-    var contentTransitionVar = null;
-
     var surveyTokenVar = null;
     var studentSubmitFormVar = null;
-
-    var enterTokenMessageVar = null;
-    var hdrConfirmationVar = null; 
-    var contentConfirmationVar = null;
-    var ftrConfirmationVar = null;
-    var inputMapVar = null;
 
     var num_options = null;
     var numbersOrLetters = null;
@@ -46,6 +34,22 @@
 
     var MISSING = "missing";
     var EMPTY = "";
+
+ function showSimpleDialogue(alertHeader, alertMessage) {
+    
+    $('<div>').simpledialog2({
+                    mode: 'button',
+                    headerText: alertHeader,
+                    buttonPrompt: alertMessage,
+                    headerClose: false,
+                    buttons : {
+                      'OK': {
+                        click: function () { 
+                        }
+                      }
+                    }
+             })
+ }
 
   </script>
 
@@ -74,26 +78,12 @@
   
   <div data-role="footer" id="ftrMain" name="ftrMain"></div>
   
-  <div align="CENTER" data-role="content" id="enterTokenMessage" name="enterTokenMessage">  
-   <div>Please enter a token.</div>
-   <a id="buttonOK" name="buttonOK" href="#page1" data-role="button" data-inline="true">OK</a>
-  </div>  <!-- enterTokenMessage -->
-    
-  <div data-role="footer" id="ftrConfirmation" name="ftrConfirmation"></div> 
-  
-  
   <script>
-   
-$('#studentPage').bind('pageinit', function() {
-      console.log("readd");
-});
 
     $(document).ready(function() {
 
-      console.log("read");
-
-  //check the navigator.userAgent string to detect if the user is using an iPhone
-    if (navigator.userAgent.match(/iPhone/i)) {
+        //check the navigator.userAgent string to detect if the user is using an iPhone
+        if (navigator.userAgent.match(/iPhone/i)) {
 
         //cache the viewport tag if the user is using an iPhone
         var $viewport = $('head').children('meta[name="viewport"]');
@@ -114,46 +104,16 @@ $('#studentPage').bind('pageinit', function() {
         }).trigger('orientationchange');
     }
     
-
-
-    // Assign global variables
-       hdrMainVar = $('#hdrMain');
-      contentMainVar = $('#contentMain');
-      ftrMainVar = $('#ftrMain');
-      contentTransitionVar = $('#contentTransition');
-
+      // Assign global variables
       surveyTokenVar = $('#surveyToken');
-
       studentSubmitFormVar = $('#studentSubmitForm');
-      confirmationVar = $('#confirmation');
-      enterTokenMessageVar = $('#enterTokenMessage');
-
-      hdrConfirmationVar = $('#hdrConfirmation');
-      contentConfirmationVar = $('#contentConfirmation');
-      ftrConfirmationVar = $('#ftrConfirmation'); 
-      inputMapVar = $('input[name*="_r"]');
-      
-      hideEnterTokenMessage();
-      hideContentTransition();
-      hideConfirmation();
     }); 
-  
-    $('#buttonOK').click(function() {
-      console.log("hmmm");
-      hideEnterTokenMessage();
-      showMain();
-      return false;      
-    });
     
     $('#studentSubmitForm').submit(function() {
         var err = false;
         var passwordError = false;
-        
-        // Hide the Main content
-       // hideMain();
+        var alreadySubmitted = false;
       
-      console.log(surveyTokenVar.val());
-
         if (surveyTokenVar.val() == EMPTY){
           err = true;
         }
@@ -161,24 +121,34 @@ $('#studentPage').bind('pageinit', function() {
         // If validation fails, show Dialog content
         if(err == true){  
 
-        console.log("we've got an issue");
-
-          showEnterTokenMessage();
-
+           showSimpleDialogue("Whoops!","Please enter a token...");
           return false;
-        }        
-        
-        
-        // If validation passes, show Transition content
-        showContentTransition();
+        }
 
-        // Submit the form
+        if (Modernizr.sessionstorage) {
+           if (sessionStorage(surveyTokenVar.val()) != null) {
+              // show alert that this user has already submitted
+              // for this survey
 
+              showSimpleDialogue('Whoops','It looks like you have already submitted a response to this survey.');
+
+              alreadySubmitted = true;
+           }
+        }
+        else {
+          // check if a session cookie has been set
+             if ($.cookie(surveyTokenVar.val()) != null){
+
+                showSimpleDialogue('Whoops','It looks like you\'ve already submitted a response to this survey.');
+
+                alreadySubmitted = true;
+             }
+        }
+        
+
+      if (alreadySubmitted == false) {
 
         $.getJSON("http://classtempo.org/Survey_app/survey_phpScripts/get_survey.php?surveyAuthKey=" + surveyTokenVar.val(), studentSubmitFormVar.serialize(), function(data){
-          
-          console.log(data);
-          console.log(data.Results.length);
 
           var resultLength = data.Results.length;
 
@@ -193,64 +163,26 @@ $('#studentPage').bind('pageinit', function() {
     		 else{
     		 	// show error message
           console.log("invalid token");
-         // showPasswordMisMatch();
-    		   }
-
-        });    
-
-
+          
+             $('<div>').simpledialog2({
+                    mode: 'button',
+                    headerText: 'Invalid Token.',
+                    headerClose: false,
+                    buttonPrompt: 'Please make sure you have the correct token. Tokens are case sensitive.',
+                    buttons : {
+                      'OK': {
+                        click: function () { 
+                        }
+                      }
+                    }
+                  })
+        }
+        
+        });  // END JSON Callback to validate survey token
+      }
+  
         return false;      
     });   
-    
-  function hideMain(){
-    hdrMainVar.hide();
-    contentMainVar.hide();
-    ftrMainVar.hide();   
-   }
-   
-  function showMain(){
-    hdrMainVar.show();
-    contentMainVar.show();
-    ftrMainVar.show();
-   }
-   
-   function hideContentTransition(){
-    contentTransitionVar.hide();
-   }      
-   
-   function showContentTransition(){
-    contentTransitionVar.show();
-   }  
-   
-  function hideEnterTokenMessage(){
-    enterTokenMessageVar.hide();
-   }   
-   
-   function showEnterTokenMessage(){
-    enterTokenMessageVar.show();
-   }
-
-     function showPasswordMisMatch(){
-    incorrectPasswordVar.show();
-   }
-
-     function hidePasswordMisMatch(){
-    incorrectPasswordVar.hide();
-   }   
-   
-   
-   function hideConfirmation(){
-    hdrConfirmationVar.hide();
-    contentConfirmationVar.hide();
-    ftrConfirmationVar.hide();
-   }  
-   
-   function showConfirmation(){
-   // hdrConfirmationVar.show();
-   // contentConfirmationVar.show();
-   // ftrConfirmationVar.show();
-   	
-   } 
 
     
   </script>

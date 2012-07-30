@@ -23,7 +23,7 @@
 <body>
 	
 	<section id="userSurvey" data-role="page" data-theme="b">
- <link rel="stylesheet" href="./userSurveyCSS.css">
+ 	<link rel="stylesheet" href="./userSurveyCSS.css">
 <script>
 
 function incrementOptionValue(optionName) {
@@ -51,15 +51,9 @@ $(document).ready(function(){
 	
 	var surveyAuthKey;	
 
-	console.log("reached");
-
 	$('#userSurvey').live('pageshow', function(){
-	
-	console.log("num_options: ",num_options);
 
-	console.log("live");
-
-			var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l']
+			var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
 
 
 			if (numbersOrLetters == 0)
@@ -93,15 +87,9 @@ $(document).ready(function(){
 
 				// Append todays date to footer
 				$('#footer').append('<p>  Today: ' + fullDate + '</p>');
-
-				// Reload jQuery Mobile styling
-				//$('#optionsList').listview('refresh');
 				
-				//$('#header').trigger("create");
-				//$('#footer').footer('refresh');
-
+				// refresh styles
 				$('#userSurvey').trigger("create");
-
 				$("input[type='radio']").prop("checked",false).checkboxradio("refresh");
 	})
 });
@@ -109,25 +97,24 @@ $(document).ready(function(){
 </script>
 
 		<header data-role="header" id="header">
-	</header>
+		</header>
 
-	<div data-role="content">
+		<div data-role="content">
 
 		<div id="optionsContainer">
 
-			  <fieldset data-role="controlgroup" id="optionsList">
+			  	<fieldset data-role="controlgroup" id="optionsList">
   					<legend>Survey Options</legend>
-
-			</fieldset>
+				</fieldset>
 
 		</div>
-
-    </div>
- <form id="form2">
-        <div id="submitUserSurvey" data-role="fieldcontain">    
-     	<a id="submitSurvey" name="submitSurvey" data-role="button" data-inline="true">Submit</a>
     	</div>
-</form>
+
+			 <form id="form2">
+			        <div id="submitUserSurvey" data-role="fieldcontain">    
+			     	<a id="submitSurvey" name="submitSurvey" data-role="button" data-inline="true">Submit</a>
+			    	</div>
+			</form>
 
 
 <footer data-role="footer" id="footer"></footer>
@@ -145,10 +132,6 @@ $(document).ready(function(){
             $('input[name=options]').each(function() { 
             surveyValue = $('input[name=options]:checked').val();
         })        
-        
-
-
-        console.log(surveyValue);
 
             if (surveyValue == ''){
             	err = true;
@@ -156,20 +139,26 @@ $(document).ready(function(){
 
         // If validation fails, show Dialog content
         if(err == true){  
-          showContentDialog();
+
+        	$('<div>').simpledialog2({
+                    mode: 'button',
+                    headerText: 'Whoops!',
+                    buttonPrompt: 'Please select an option for this survey.',
+                    headerClose: false,
+                    buttons : {
+                      'OK': {
+                        click: function () { 
+                        }
+                      }
+                    }
+             })
 
           return false;
         }        
 
-        // If validation passes, show Transition content
-       // showContentTransition();
-
-
         // Submit the form
         $.post("http://classtempo.org/Survey_app/survey_phpScripts/post_option.php?surveyAuthKey=alo-1&optionName=" + surveyValue, form1Var.serialize(), function(data){
           
-          console.log(data);
-
         });        
         return false;      
     });   
