@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+    <meta name="viewport" content="height=device-height,width=device-width,initial-scale=1.0,maximum-scale=1.0" >
   <title>First jQuery Mobile Example</title>
 
   <!-- CSS -->
@@ -149,10 +149,12 @@ $(document).ready(function(){
               // create row in same section
 
                  $('ul#surveyList').append('<li class="ui-btn ui-btn-icon-right"' + dataTheme + '><a href="javascript:void(goToSurveyResults(' + listOfSurveys[i].Survey_id + ',' + listOfSurveys[i].On_off + '));"><h1>' + listOfSurveys[i].Survey_authKey + '</h1><p>' + listOfSurveys[i].Number_of_options + ' Options, ' + numbersOrLetters + ', ' + onOff + surveyDescription + '</p></a><a href="#" onclick="deleteSurvey(' + listOfSurveys[i].Survey_id + ')" data-icon="delete" class="ui-li-link-alt ui-btn "' + dataTheme + ' ></a></li>');
-
-
+                 console.log("if: current date==currentDate ListDate", listOfSurveys[i].Date);
+                  console.log("if: current date==currentDate", currentDate);
           }
           else {
+            console.log("else: listDate", listOfSurveys[i].Date);
+            console.log("else: current date", currentDate);
               // otherwise create a new section
               currentDate = listOfSurveys[i].Date;
 
