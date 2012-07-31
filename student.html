@@ -126,7 +126,7 @@
         }
 
         if (Modernizr.sessionstorage) {
-           if (sessionStorage(surveyTokenVar.val()) != null) {
+           if (sessionStorage.surveySubmitted != null) {
               // show alert that this user has already submitted
               // for this survey
 
@@ -137,7 +137,7 @@
         }
         else {
           // check if a session cookie has been set
-             if ($.cookie(surveyTokenVar.val()) != null){
+             if ($.cookie(surveySubmitted) != null){
 
                 showSimpleDialogue('Whoops','It looks like you\'ve already submitted a response to this survey.');
 
@@ -153,12 +153,22 @@
           var resultLength = data.Results.length;
 
          	 if (resultLength > 0){
-            
-            num_options = data.Results[0].Number_of_options;
-            numbersOrLetters = data.Results[0].Numbers_or_letters;
-            surveyID = data.Results[0].Survey_id;
 
-         		$.mobile.changePage( "userSurvey.html", {transition: "slide"} );
+            if (Modernizr.sessionstorage) {
+
+            sessionStorage.num_options = data.Results[0].Number_of_options;
+            sessionStorage.numbersOrLetters = data.Results[0].Number_of_options;
+            sessionStoage.surveyID = data.Results[0].Survey_id;
+            sessionStorage.surveyToken = surveyTokenVar.val();
+            }
+            else {
+               $.cookie("num_options",data.Results[0].Number_of_options);
+               $.cookie("numbersOrLetters",data.Results[0].Number_of_options);
+               $.cookie("surveyID",data.Results[0].Survey_id);
+               $.cookie("surveyToken",surveyTokenVar.val());
+            }
+
+         		$.mobile.changePage( "studentSurvey.html", {transition: "slide"} );
     		 }
     		 else{
     		 	// show error message
