@@ -114,18 +114,15 @@ $(document).ready(function(){
 // get the JSON data from server
     $.getJSON(getSurveyListURL, function(data) {
         console.log(data);
-        var array = data.Results;
-      
+        var listOfSurveys = data.Results;
 
-var testArray = [{id: 1, date:'2012-07-30'},{id: 2, date:'2012-07-25'}, {id: 2, date:'2012-02-25'}];
-
-    testArray.sort(function(a,b){
-      var c = new Date(a.date);
-      var d = new Date(b.date);
+    listOfSurveys.sort(function(a,b){
+      var c = new Date(a.Date);
+      var d = new Date(b.Date);
       return c-d;
       });
 
-console.log(testArray);
+console.log(listOfSurveys);
       // Define some local instance variables
       var listOfSurveys = data.Results;
       var currentDate;
