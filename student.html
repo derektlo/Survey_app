@@ -7,7 +7,7 @@
   <!-- CSS -->
   <link rel="stylesheet" href="./signup.css">
   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" />
-  <link rel="stylesheet" type="text/css" href="http://dev.jtsage.com/cdn/simpledialog/latest/jquery.mobile.simpledialog.min.css" /> 
+  <link rel="stylesheet" type="text/css" href="simpleDialog2/jquery.mobile.simpledialog.min.css" /> 
 
   <!-- Modernizer -->
   <script type="text/javascript" src="./modernizr.custom.56582.js"></script>
@@ -15,8 +15,7 @@
   <script src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script>
 
    <!-- simpleDiaglo2 -->
-  <script src="http://dev.jtsage.com/cdn/simpledialog/latest/jquery.mobile.simpledialog2.js"></script>
-  <script type="text/javascript" src="http://dev.jtsage.com/cdn/simpledialog/latest/jquery.mobile.simpledialog2.min.js"></script>
+  <script src="simpleDialog2/jquery.mobile.simpledialog2.min.js"></script>
   
 <!-- Page starts here -->
 <div data-role="page" data-theme="b" id="studentPage">
@@ -24,12 +23,12 @@
   <script>   
 
    // Global declarations - assignments made in $(document).ready() below
-    var surveyTokenVar = null;
     var studentSubmitFormVar = null;
 
     var num_options = null;
     var numbersOrLetters = null;
     var surveyID = null;
+    var surveyTokenVar = null;
 
 
     var MISSING = "missing";
@@ -70,7 +69,7 @@
     <input id="surveyToken" name="surveyToken" type="text" />
   </div>
 
-    <div id="submitDiv" data-role="fieldcontain">    
+    <div id="submitTokenDiv" data-role="fieldcontain">    
      <input type="submit" value="Submit" data-inline="true"/>
     </div>
     </form>
@@ -80,7 +79,8 @@
   
   <script>
 
-    $(document).ready(function() {
+    $('#studentPage').live('pageshow', function(){
+      $('#surveyToken').val('')
 
         //check the navigator.userAgent string to detect if the user is using an iPhone
         if (navigator.userAgent.match(/iPhone/i)) {
@@ -103,7 +103,7 @@
         //trigger an orientationchange event on the window object to initialize this code (basically in-case the user opens the page in landscape mode)
         }).trigger('orientationchange');
     }
-    
+    console.log("called")
       // Assign global variables
       surveyTokenVar = $('#surveyToken');
       studentSubmitFormVar = $('#studentSubmitForm');
@@ -149,7 +149,7 @@
       if (alreadySubmitted == false) {
 
         $.getJSON("http://classtempo.org/Survey_app/survey_phpScripts/get_survey.php?surveyAuthKey=" + surveyTokenVar.val(), studentSubmitFormVar.serialize(), function(data){
-
+console.log(data);
           var resultLength = data.Results.length;
 
          	 if (resultLength > 0){
@@ -157,8 +157,8 @@
             if (Modernizr.sessionstorage) {
 
             sessionStorage.num_options = data.Results[0].Number_of_options;
-            sessionStorage.numbersOrLetters = data.Results[0].Number_of_options;
-            sessionStoage.surveyID = data.Results[0].Survey_id;
+            sessionStorage.numbersOrLetters = data.Results[0].Numbers_or_letters;
+            sessionStorage.surveyID = data.Results[0].Survey_id;
             sessionStorage.surveyToken = surveyTokenVar.val();
             }
             else {
@@ -168,7 +168,7 @@
                $.cookie("surveyToken",surveyTokenVar.val());
             }
 
-         		$.mobile.changePage( "studentSurvey.html", {transition: "slide"} );
+         		$.mobile.changePage( "studentSurvey.html", {transition: "slideup"} );
     		 }
     		 else{
     		 	// show error message
@@ -185,7 +185,7 @@
                         }
                       }
                     }
-                  })
+                  });
         }
         
         });  // END JSON Callback to validate survey token

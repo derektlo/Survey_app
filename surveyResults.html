@@ -6,16 +6,20 @@
     <!-- CSS -->
   <link rel="stylesheet" href="./signup.css">
   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" />
+  <link rel="stylesheet" type="text/css" src="js/jquery.jqplot.css" />
   <link rel="stylesheet" type="text/css" href="http://dev.jtsage.com/cdn/simpledialog/latest/jquery.mobile.simpledialog.min.css" /> 
-
   <!-- Modernizer -->
   <script type="text/javascript" src="./modernizr.custom.56582.js"></script>
+  <!-- jquery -->
   <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
   <script src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script>
 
    <!-- simpleDiaglo2 -->
-  <script src="http://dev.jtsage.com/cdn/simpledialog/latest/jquery.mobile.simpledialog2.js"></script>
-  <script type="text/javascript" src="http://dev.jtsage.com/cdn/simpledialog/latest/jquery.mobile.simpledialog2.min.js"></script>
+  <script src="simpleDialog2/jquery.mobile.simpledialog2.min.js"></script>
+  <!-- Bar Chart -->
+  <script class="include" language="javascript" type="text/javascript" 
+        src="js/jquery.jqplot.js"></script>
+ <script class="include" language="javascript" type="text/javascript" src="js/plugins/jqplot.barRenderer.min.js"></script>
 
 </head> 
 
@@ -34,6 +38,9 @@
   <div data-role="content" id="surveyCreatorContent" name="surveyCreatorContent"> 
       <ul id="resultsList" data-role="listview" data-inset="true">
       </ul>
+
+      <div id="chart1">
+      </div>
 
       <label for="surveyOnOff" >Survey ON/OFF:</label>
       <select name="surveyOnOff" id="surveyOnOff" data-role="slider" data-theme="c" data-track-theme="a">
@@ -63,6 +70,28 @@
           else
             $('#surveyOnOff').val('off').slider("refresh");
 
+    });
+
+    $(document).ready( function () { 
+
+                  var line1 = [['a', 7], ['b', 9], ['c', 15]];
+ 
+            var plot1 = $.jqplot('chart1', [line1], {
+              title: 'Results',
+              series:[{renderer:$.jqplot.BarRenderer}],
+              axesDefaults: {
+                  tickRenderer: $.jqplot.CanvasAxisTickRenderer ,
+                  tickOptions: {
+                    angle: 0,
+                    fontSize: '10pt'
+                  }
+              },
+              axes: {
+                xaxis: {
+                  renderer: $.jqplot.CategoryAxisRenderer
+                }
+              }
+            });
     });
 
     $('#surveyOnOff').change(function() {
