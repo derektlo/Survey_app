@@ -25,7 +25,7 @@
    $hi = "march";
    //Execute the query
   // $rs = mysql_query("SELECT email FROM customer_information");
-   $rs = mysql_query("SELECT Survey_id,Survey_authKey,Number_of_options,Numbers_or_letters,On_off, Survey_description, DATE_FORMAT(Date,\"DateName( month , DateAdd( month , @%m , 0 ) - 1 ) %d %Y\") AS Date FROM Surveys WHERE Email = '$email'");
+   $rs = mysql_query("SELECT Survey_id,Survey_authKey,Number_of_options,Numbers_or_letters,On_off, Survey_description, DATE_FORMAT(Date,\"%b %e %Y\") AS Date FROM Surveys WHERE Email = '$email'");
    
    // Add the rows to the array 
    while($obj = mysql_fetch_object($rs)) {
