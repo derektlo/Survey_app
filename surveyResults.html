@@ -3,23 +3,29 @@
   <head> 
       <meta name="viewport" content="height=device-height,width=device-width,initial-scale=1.0,maximum-scale=1.0" >
   <title>Sign up</title> 
-    <!-- CSS -->
+  
+  <!-- CSS -->
   <link rel="stylesheet" href="./signup.css">
   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" />
-  <link rel="stylesheet" type="text/css" src="js/jquery.jqplot.css" />
-  <link rel="stylesheet" type="text/css" href="http://dev.jtsage.com/cdn/simpledialog/latest/jquery.mobile.simpledialog.min.css" /> 
+    <link rel="stylesheet" type="text/css" href="simpleDialog2/jquery.mobile.simpledialog.min.css" />  
+  
   <!-- Modernizer -->
   <script type="text/javascript" src="./modernizr.custom.56582.js"></script>
-  <!-- jquery -->
+  
+  <!-- jQuery/jQuery Mobile -->
   <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
   <script src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script>
+  
+  <!-- jqPlot -->
+  <!--[if lt IE 9]><script language="javascript" type="text/javascript" src="js/excanvas.js"></script><![endif]-->
+  <script language="javascript" type="text/javascript" src="js/jquery.jqplot.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="js/jquery.jqplot.css" />
 
-   <!-- simpleDiaglo2 -->
-  <script src="simpleDialog2/jquery.mobile.simpledialog2.min.js"></script>
-  <!-- Bar Chart -->
-  <script class="include" language="javascript" type="text/javascript" 
-        src="js/jquery.jqplot.js"></script>
- <script class="include" language="javascript" type="text/javascript" src="js/plugins/jqplot.barRenderer.min.js"></script>
+  <script language="javascript" type="text/javascript" src="js/plugins/jqplot.barRenderer.js"></script>
+  <script language="javascript" type="text/javascript" src="js/plugins/jqplot.barRenderer.min.js"></script>
+  <script language="javascript" type="text/javascript" src="js/plugins/jqplot.categoryAxisRenderer.js"></script>
+  <script language="javascript" type="text/javascript" src="js/plugins/jqplot.pointLabels.js"></script>
+  <script language="javascript" type="text/javascript" src="js/plugins/jqplot.pointLabels.min.js"></script>
 
 </head> 
 
@@ -28,6 +34,16 @@
 
 <!-- Page starts here -->
 <div data-role="page" data-theme="b" id="surveyResultsPage" data-add-back-btn="true">
+
+<style>
+  #chart1 {
+    width:98%;
+  }
+  #onOffSection {
+    margin-top:10px;
+  }
+
+</style>
 
   <div data-role="header" id="hdrMain" name="hdrMain">
      <a href="surveyList.html" data-direction="reverse" rel="external" data-icon="back" data-transition="slide" class="ui-btn-left">Back</a>
@@ -39,14 +55,16 @@
       <ul id="resultsList" data-role="listview" data-inset="true">
       </ul>
 
-      <div id="chart1">
+      <div id="chart1" style="height:400px;">
       </div>
 
+      <div id="onOffSection">
       <label for="surveyOnOff" >Survey ON/OFF:</label>
       <select name="surveyOnOff" id="surveyOnOff" data-role="slider" data-theme="c" data-track-theme="a">
         <option value="off">Off</option>
         <option value="on">On</option>
-      </select> 
+      </select>
+    </div>
 
   
   </div><!-- contentMain -->
@@ -56,6 +74,13 @@
   <script>
    
     $( '#surveyResultsPage' ).live( 'pageinit',function(event){
+
+        if (Modernizr.sessionstorage) {
+            var onOffValue = sessionStorage.onOffValue;
+        }
+        else {
+          var onOffValue = $.cookie("onOffValue");
+        }
 
           $('#resultsList').children().remove('li');
 
@@ -70,28 +95,48 @@
           else
             $('#surveyOnOff').val('off').slider("refresh");
 
+
+
+    });
+
+    $( '#surveyResultsPage' ).live('pageshow', function() {
+            
+        $.jqplot.config.enablePlugins = true;
+        var s1 = [40, 30, 100];
+        var ticks = ['a', 'b', 'c'];
+
+         console.log("sessionStorage stuff: ",sessionStorage.surveyTokenVar);
+        plot1 = $.jqplot('chart1', [s1], {
+            // Only animate if we're not using excanvas (not in IE 7 or IE 8)..
+            animate: !$.jqplot.use_excanvas,
+            title: 'Results',
+            seriesDefaults:{
+                renderer:$.jqplot.BarRenderer,
+                rendererOptions:{ varyBarColor : true },
+                pointLabels: {show: true}
+            },
+            series:[
+              {pointLabels:{
+                            show: true,
+                            labels:['40, 14%', '30, 26%', '100, 60%'],
+                            ypadding: 12,
+                          }}],
+            axes: {
+                xaxis: {
+                    renderer: $.jqplot.CategoryAxisRenderer,
+                    ticks: ticks
+                }
+            },
+            highlighter: { show: false },
+            seriesColors: $.merge([ "#55A9D3", "#D4EDE2", "#EA2E49"], $.jqplot.config.defaultColors)
+        });
+     
+
     });
 
     $(document).ready( function () { 
 
-                  var line1 = [['a', 7], ['b', 9], ['c', 15]];
- 
-            var plot1 = $.jqplot('chart1', [line1], {
-              title: 'Results',
-              series:[{renderer:$.jqplot.BarRenderer}],
-              axesDefaults: {
-                  tickRenderer: $.jqplot.CanvasAxisTickRenderer ,
-                  tickOptions: {
-                    angle: 0,
-                    fontSize: '10pt'
-                  }
-              },
-              axes: {
-                xaxis: {
-                  renderer: $.jqplot.CategoryAxisRenderer
-                }
-              }
-            });
+
     });
 
     $('#surveyOnOff').change(function() {

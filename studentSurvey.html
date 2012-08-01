@@ -39,12 +39,15 @@ function incrementOptionValue(optionName) {
   });
 }
 
+$('body').delegate('div.ui-page', 'pagehide', function () { $(this).remove(); });
+
+
 function convertASCIItoCharacter(asciiNum) {
 		return String.fromCharCode(asciiNum);
 }
 
-	$('#userSurvey').live('pageshow', function(){
-
+	$('#userSurvey').bind('pageshow', function(){
+		console.log("hello");
 	var surveyAuthKey;
 
 	if (Modernizr.sessionstorage) {
@@ -64,8 +67,7 @@ function convertASCIItoCharacter(asciiNum) {
 			if (numbersOrLetters === 0)
 				{
 				for (i = 0; i < num_options; i++){
-	
-					//$('ul#optionsList').append('<li><a href="javascript:void(incrementOptionValue(' + (i+1) + '));">' + (i+ 1) + ' .</a></li>');
+
 					$('#optionsList').append('<input type="radio" name="options" id="' + (i+1) + '" value="' + (i+1) + '" />');
 				      $('#optionsList').append('<label for="' + (i+1) + '" >' + (i+1) + '</label>');
 					}
@@ -166,10 +168,29 @@ function convertASCIItoCharacter(asciiNum) {
         $.post("http://classtempo.org/Survey_app/survey_phpScripts/post_option.php?surveyAuthKey=alo-1&optionName=" + surveyValue, function(data){
 
         	if (Modernizr.sessionstorage) {
-        			sessionStorage.checkStringAlreadySubmitted = sessionStorage.surveyToken + "entered";
+
+        			console.log(sessionStorage.checkStringAlreadySubmitted);
+        			if (sessionStorage.checkStringAlreadySubmitted == null) {
+
+        				var arrayOfSubmits = [];
+        				var newTokenString = sessionStorage.surveyToken + "entered";
+        				arrayOfSubmits.push(newTokenString);
+        					console.log("arrayOfSubmits: ",arrayOfSubmits);
+        				sessionStorage.checkStringAlreadySubmitted = JSON.stringify(arrayOfSubmits);
+        			}
+        			else{
+        				console.log(JSON.parse(sessionStorage.checkStringAlreadySubmitted));
+        				var arrayOfSubmits = JSON.parse(sessionStorage.checkStringAlreadySubmitted.slice());
+        				console.log("arrayOfSubmits: ",arrayOfSubmits);
+        				var newTokenString = sessionStorage.surveyToken + "entered";
+        				arrayOfSubmits.push(newTokenString)
+        				sessionStorage.checkStringAlreadySubmitted = JSON.stringify(arrayOfSubmits);
+        			}
         	}
         	else {
-        			$.cookie("checkStringAlreadySubmitted",$.cookie("surveyToken") + "entered");
+        			var arrayOfSubmits = $.cookie("checkStringAlreadySubmitted");
+        			arrayOfSubmits.push($.cookie("surveyToken") + "entered");
+        			$.cookie("checkStringAlreadySubmitted",arrayOfSubmits);
         	}
 
         	$.mobile.changePage("student.html", {transition : "slideup", reverse : "true"});

@@ -11,11 +11,25 @@
 
   <!-- Modernizer -->
   <script type="text/javascript" src="./modernizr.custom.56582.js"></script>
+
+  <!-- jQuery/jQuery Mobile -->
   <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
   <script src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script>
 
    <!-- simpleDiaglo2 -->
   <script src="simpleDialog2/jquery.mobile.simpledialog2.min.js"></script>
+
+  <!-- jqPlot -->
+  <!--[if lt IE 9]><script language="javascript" type="text/javascript" src="js/excanvas.js"></script><![endif]-->
+  <script language="javascript" type="text/javascript" src="js/jquery.jqplot.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="js/jquery.jqplot.css" />
+
+  <!-- Dependencies required for surveyResults.html Graphing -->
+  <script language="javascript" type="text/javascript" src="js/plugins/jqplot.barRenderer.js"></script>
+  <script language="javascript" type="text/javascript" src="js/plugins/jqplot.barRenderer.min.js"></script>
+  <script language="javascript" type="text/javascript" src="js/plugins/jqplot.categoryAxisRenderer.js"></script>
+  <script language="javascript" type="text/javascript" src="js/plugins/jqplot.pointLabels.js"></script>
+  <script language="javascript" type="text/javascript" src="js/plugins/jqplot.pointLabels.min.js"></script>
 
 </head>
 
@@ -37,9 +51,11 @@ function createNewSurvey() {
    $.mobile.changePage( "surveyCreator.html", { transition: "slide"} );
 }
 
-function goToSurveyResults(surveyID, onOrOff) {
+//function goToSurveyResults(surveyID, onOrOff, surveyTag) {
+  window.goToSurveyResults = function(surveyID, onOrOff, surveyTag) {
     // change to a particular survey's results
-
+//    console.log("LISTOFSURVEYS ",listOfSurveys);
+console.log("SURVEYTAG: ",surveyTag);
     // set the currently selected survey's ID and whether it's on or off
     surveyId = surveyID;
 
@@ -51,6 +67,14 @@ function goToSurveyResults(surveyID, onOrOff) {
     // get the particular survey's analytics
     $.getJSON("http://classtempo.org/Survey_app/survey_phpScripts/getSurveyAnalytics.php?surveyID=" + surveyId, function(json) {
           console.log(json);
+          if (Modernizr.sessionstorage) {
+          sessionStorage.onOffValue = onOffValue;
+          sessionStorage.surveyTag = surveyTag;
+          }
+          else {
+            $.cookie("onOffValue",onOffValue);
+            $.cookie("surveyTag",surveyTag);
+          }
 
          $.mobile.changePage( "surveyResults.html", { transition: "slide"} );
     });
@@ -66,7 +90,7 @@ function deleteSurvey(surveyID) {
   $('<div>').simpledialog2({
     mode: 'button',
     headerText: 'Are you sure?',
-    headerClose: true,
+    headerClose: false,
     buttons : {
       'Delete': {
         click: function () {
@@ -83,17 +107,12 @@ function deleteSurvey(surveyID) {
         theme: "c"
       }
     }
-  })
+  });
 }
 
 
 //$(document).ready(function(){
 $('#surveyList').bind('pageinit', function() {
-
-}); // End pageinit function
-
-$(document).ready(function(){
-
 
     var currentTime = new Date()
   var month = currentTime.getMonth() + 1
@@ -113,7 +132,7 @@ $(document).ready(function(){
 // get the JSON data from server
     $.getJSON(getSurveyListURL, function(data) {
         console.log(data);
-        var listOfSurveys = data.Results;
+       var listOfSurveys = data.Results;
 
     listOfSurveys.sort(function(a,b){
       var c = new Date(a.Date);
@@ -123,7 +142,6 @@ $(document).ready(function(){
 
 console.log(listOfSurveys);
       // Define some local instance variables
-      var listOfSurveys = data.Results;
       var currentDate;
       var numbersOrLetters;
       var onOff;
@@ -151,12 +169,11 @@ console.log(listOfSurveys);
 
             // set surveyAuthKey
             var authKey = listOfSurveys[i].Survey_authKey;
-            console.log("authkey: ",authKey);
 
           if (listOfSurveys[i].Date == currentDate) {
               // create row in same section
 
-                 $('ul#surveyList').append('<li class="ui-btn ui-btn-icon-right"' + dataTheme + '><a href="javascript:void(goToSurveyResults(' + listOfSurveys[i].Survey_id + ',' + listOfSurveys[i].On_off + '));"><h1>' + listOfSurveys[i].Survey_authKey + '</h1><p>' + listOfSurveys[i].Number_of_options + ' Options, ' + numbersOrLetters + ', ' + onOff + surveyDescription + '</p></a><a href="#" onclick="deleteSurvey(' + listOfSurveys[i].Survey_id + ')" data-icon="delete" class="ui-li-link-alt ui-btn "' + dataTheme + ' ></a></li>');
+                 $('ul#surveyList').append('<li class="ui-btn ui-btn-icon-right"' + dataTheme + '><a href="javascript:void(goToSurveyResults(' + listOfSurveys[i].Survey_id + ',' + listOfSurveys[i].On_off + ',' + listOfSurveys[i].Survey_authKey + '));"><h1>' + listOfSurveys[i].Survey_authKey + '</h1><p>' + listOfSurveys[i].Number_of_options + ' Options, ' + numbersOrLetters + ', ' + onOff + surveyDescription + '</p></a><a href="#" onclick="deleteSurvey(' + listOfSurveys[i].Survey_id + ')" data-icon="delete" class="ui-li-link-alt ui-btn "' + dataTheme + ' ></a></li>');
                  console.log("if: current date==currentDate ListDate", listOfSurveys[i].Date);
                   console.log("if: current date==currentDate", currentDate);
           }
@@ -168,7 +185,7 @@ console.log(listOfSurveys);
 
                $('ul#surveyList').append('<li data-role="list-divider">' + currentDate + '</li>');
 
-                $('ul#surveyList').append('<li class="ui-btn ui-btn-icon-right"' + dataTheme + '><a href="javascript:void(goToSurveyResults(' + listOfSurveys[i].Survey_id + ',' + listOfSurveys[i].On_off + '));"><h1>' + listOfSurveys[i].Survey_authKey + '</h1><p>' + listOfSurveys[i].Number_of_options + ' Options, ' + numbersOrLetters + ', ' + onOff +surveyDescription + '</p></a><a href="#" onclick="deleteSurvey(' + listOfSurveys[i].Survey_id + ')" data-icon="delete" class="ui-li-link-alt ui-btn "' + dataTheme + '></a></li>');
+                $('ul#surveyList').append('<li class="ui-btn ui-btn-icon-right"' + dataTheme + '><a href="javascript:void(goToSurveyResults(' + listOfSurveys[i].Survey_id + ',' + listOfSurveys[i].On_off + ',\'' + listOfSurveys[i].Survey_authKey + '\'));"><h1>' + listOfSurveys[i].Survey_authKey + '</h1><p>' + listOfSurveys[i].Number_of_options + ' Options, ' + numbersOrLetters + ', ' + onOff +surveyDescription + '</p></a><a href="#" onclick="deleteSurvey(' + listOfSurveys[i].Survey_id + ')" data-icon="delete" class="ui-li-link-alt ui-btn "' + dataTheme + '></a></li>');
             }
           }
 
@@ -176,6 +193,11 @@ console.log(listOfSurveys);
         $('ul#surveyList').listview('refresh');
 
     }); // End JSON callback function
+}); // End pageinit function
+
+$(document).ready(function(){
+
+
 
 });
 

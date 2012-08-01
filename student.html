@@ -113,7 +113,7 @@
         var err = false;
         var passwordError = false;
         var alreadySubmitted = false;
-        var checkStringAlreadySubmitted = surveyTokenVar.val() + "entered";
+        var checkCurrentToken = surveyTokenVar.val() + "entered";
       
         if (surveyTokenVar.val() == EMPTY){
           err = true;
@@ -126,21 +126,25 @@
           return false;
         }
 
+       // console.log("the array ",JSON.parse(sessionStorage.checkStringAlreadySubmitted));
+
         if (Modernizr.sessionstorage) {
-           if (sessionStorage.checkStringAlreadySubmitted === checkStringAlreadySubmitted) {
+          if (sessionStorage.checkStringAlreadySubmitted != null) {
+           if ((JSON.parse(sessionStorage.checkStringAlreadySubmitted).indexOf(checkCurrentToken)) > -1) {
               // show alert that this user has already submitted
               // for this survey
 
-              showSimpleDialogue('Whoops','It looks like you have already submitted a response to this survey.');
+              showSimpleDialogue('Whoops!','It looks like you have already submitted a response to this survey.');
 
               alreadySubmitted = true;
            }
+         }
         }
         else {
           // check if a session cookie has been set
-             if ($.cookie(checkStringAlreadySubmitted) === checkStringAlreadySubmitted){
+             if ($.inArray(checkCurrentToken, $.cookie("checkStringAlreadySubmitted")) != -1){
 
-                showSimpleDialogue('Whoops','It looks like you\'ve already submitted a response to this survey.');
+                showSimpleDialogue('Whoops!','It looks like you\'ve already submitted a response to this survey.');
 
                 alreadySubmitted = true;
              }
@@ -150,7 +154,7 @@
       if (alreadySubmitted == false) {
 
         $.getJSON("http://classtempo.org/Survey_app/survey_phpScripts/get_survey.php?surveyAuthKey=" + surveyTokenVar.val(), studentSubmitFormVar.serialize(), function(data){
-console.log(data);
+          console.log(data);
           var resultLength = data.Results.length;
 
          	 if (resultLength > 0){
