@@ -65,6 +65,7 @@
    if($result){
       
       $letters = range('a','z');
+      $varZero = 0;
 
     for ($i = 0; $i < $numberOfOptions; $i++) {
       var $insertOptions;
@@ -73,12 +74,13 @@
 
                $optionNumber = $i + 1;
                $insertOptions = "INSERT INTO Survey_results (Survey_authKey, Option_name, Option_value) 
-                           VALUES ('$userAuthKey','$optionNumber','0')";
+                           VALUES ('$userAuthKey','$optionNumber','$varZero')";
          }
       else {
+               $currentValue = $letter[$i];
 
                $insertOptions = "INSERT INTO Survey_results (Survey_authKey, Option_name, Option_value) 
-                           VALUES ('$userAuthKey','letters[$i]','0')";
+                           VALUES ('$userAuthKey','$currentValue','$varZero')";
          }
 
                   mysql_query($insertOptions);
