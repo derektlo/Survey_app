@@ -53,11 +53,11 @@
     $findMaxSQL = mysql_query("SELECT MAX(Survey_id) FROM Surveys");
     $row = mysql_fetch_array($findMaxSQL);
     $maxValue = $row[0] + 1;
-    $userAuthKey = $userAuthKey . '-' . $maxValue;
+    $surveyAuthKey = $userAuthKey . '-' . $maxValue;
 
 
    $sql = "INSERT INTO $tbl_name (Survey_authKey, Number_of_options, Numbers_or_letters, On_Off, Survey_description, email) 
-   VALUES ('$userAuthKey', '$numberOfOptions' , '$numbersOrLetters', '$onOff', '$surveyDescription', '$email')";
+   VALUES ('$surveyAuthKey', '$numberOfOptions' , '$numbersOrLetters', '$onOff', '$surveyDescription', '$email')";
 
    $result = mysql_query($sql);
 
@@ -74,13 +74,13 @@
 
                $optionNumber = $i + 1;
                $insertOptions = "INSERT INTO Survey_Results (Survey_authKey, Option_name, Option_value) 
-                           VALUES ('$userAuthKey','$optionNumber','$varZero')";
+                           VALUES ('$surveyAuthKey','$optionNumber','$varZero')";
          }
       else {
                $currentValue = $letters[$i];
 
                $insertOptions = "INSERT INTO Survey_Results (Survey_authKey, Option_name, Option_value) 
-                           VALUES ('$userAuthKey','$currentValue','$varZero')";
+                           VALUES ('$surveyAuthKey','$currentValue','$varZero')";
          }
 
                   mysql_query($insertOptions);
@@ -88,7 +88,7 @@
       
       
          
-      echo "Successful";
+      echo "$surveyAuthKey";
    }
    else {
       echo "Error";

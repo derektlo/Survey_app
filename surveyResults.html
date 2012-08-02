@@ -75,33 +75,15 @@
   <script>
    
     $( '#surveyResultsPage' ).live( 'pageinit',function(event){
-
-        if (Modernizr.sessionstorage) {
-            var onOffValue = sessionStorage.onOffValue;
-        }
-        else {
-          var onOffValue = $.cookie("onOffValue");
-        }
-
-          $('#resultsList').children().remove('li');
-
-          $('ul#resultsList').append('<li>Mean: </li>');
-          $('ul#resultsList').append('<li>Standard Deviation: </li>');
-
-          $('ul#resultsList').listview();
-          $('ul#resultsList').listview('refresh');
-
-          if (onOffValue == 'On')
-            $('#surveyOnOff').val('on').slider("refresh");
-          else
-            $('#surveyOnOff').val('off').slider("refresh");
-
-
-
     });
 
     $( '#surveyResultsPage' ).bind('pageshow', function() {
-            
+          console.log(sessionStorage.surveyTag);
+
+    $.getJSON("http://classtempo.org/Survey_app/survey_phpScripts/getSurveyAnalytics.php?surveyAuthKey="sessionStorage.surveyTag, function(json) {
+      console.log(json);
+
+        // Load Graph    
         $.jqplot.config.enablePlugins = true;
         var s1 = [40, 30, 100];
         var ticks = ['a', 'b', 'c'];
@@ -110,7 +92,7 @@
         plot1 = $.jqplot('chart1', [s1], {
             // Only animate if we're not using excanvas (not in IE 7 or IE 8)..
             animate: !$.jqplot.use_excanvas,
-            title: 'Results',
+            title: sessionStorage.surveyTag + ' Results',
             seriesDefaults:{
                 renderer:$.jqplot.BarRenderer,
                 rendererOptions:{ varyBarColor : true },
@@ -131,9 +113,30 @@
             highlighter: { show: false },
             seriesColors: $.merge([ "#55A9D3", "#D4EDE2", "#EA2E49"], $.jqplot.config.defaultColors)
         });
-     
 
-    });
+        // Load other analytics
+        if (Modernizr.sessionstorage) {
+            var onOffValue = sessionStorage.onOffValue;
+        }
+        else {
+          var onOffValue = $.cookie("onOffValue");
+        }
+
+          $('#resultsList').children().remove('li');
+
+          $('ul#resultsList').append('<li>Mean: </li>');
+          $('ul#resultsList').append('<li>Standard Deviation: </li>');
+
+          $('ul#resultsList').listview();
+          $('ul#resultsList').listview('refresh');
+
+          if (onOffValue == 'On')
+            $('#surveyOnOff').val('on').slider("refresh");
+          else
+            $('#surveyOnOff').val('off').slider("refresh");
+       
+       }); // END JSON CALLBACK
+  });
 
     $(document).ready( function () { 
 

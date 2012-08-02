@@ -134,9 +134,15 @@
         $.post("http://classtempo.org/Survey_app/survey_phpScripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&numberOfOptions=" + sliderValue.val() + " &numbersOrLetters=" + numbersOrLetters + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar, surveyCreatorFormVar.serialize(), function(data){
           
           console.log(data);
-          if (data == 'Successful') {
+          if (data != 'Error') {
 
             console.log("onOffValue ",onOffValue);
+            if (Modernizr.sessionstorage) {
+              sessionStorage.surveyTag = data;
+            }
+            else {
+              $.cookie("surveyTag",data);
+            }
 
             // If we have created a survey successfully go to it's analytics page
             $.mobile.changePage( "surveyResults.html", { transition : "slide"});

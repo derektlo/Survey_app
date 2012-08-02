@@ -12,7 +12,7 @@
    $pwd = 'jTJW7xTn8MrjDyRd';
  
 	// set restaurantID to get categories for selected restaurant
- 	$surveyID   = isset($_GET['surveyID']) ? $_GET['surveyID']  : "";
+ 	$surveyAuthKey   = isset($_GET['surveyAuthKey']) ? $_GET['surveyAuthKey']  : "";
 	
 	// Connect to the Database server   
     $link = mysql_connect($host, $uid, $pwd) or die("Could not connect");
@@ -21,19 +21,26 @@
    mysql_select_db($db) or die("Could not select database");
    
    // Create an array to hold our results
-   $arr = array();
+   $arrayOfOptionsValues = array();
    
-   //Execute the query
-  // $rs = mysql_query("SELECT email FROM customer_information");
-   $rs = mysql_query("SELECT Average,Standard_deviation FROM Surveys_Analytics WHERE Survey_id = '$surveyID'");
-   
+   $result = mysql_query("SELECT Options_value FROM Survey_Results WHERE Survey_authKey = '$surveyAuthKey'");
+
    // Add the rows to the array 
-   while($obj = mysql_fetch_object($rs)) {
-   $arr[] = $obj;
+   while($holdObj = mysql_fetch_object($result)) {
+   $arrayOfOptionsValues[] = $holdObj;
    }
+
+   $total = array_sum($arrayOfOptionsValues);
+
+   $array2 = array_map(function($a) use($total){
+    return round(($a*100) / $total, 1) . '%';
+   }, $array1);
+
+   $container = array();
+   array_push($container,$array1,$array2);
    
    // return the json result.
-   echo '{"Results":'.json_encode($arr).'}';
+   echo '{"Results":'.json_encode($container).'}';
 
 
    // close connection 
