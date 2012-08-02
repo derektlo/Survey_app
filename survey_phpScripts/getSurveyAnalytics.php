@@ -29,10 +29,9 @@
    // Add the rows to the array 
    while($holdObj = mysql_fetch_object($result)) {
    $arrayOfOptionsValues[] = $holdObj;
-   $arrayTest[] = $holdObj['Option_value'];
    }
 
-   $total = array_sum($arrayOfOptionsValues);
+   $total = array_sum($arrayOfOptionsValues['Option_value']);
 
    $arrayOfPercents = array_map(function($a) use($total){
     return round(($a*100) / $total, 1) . '%';
