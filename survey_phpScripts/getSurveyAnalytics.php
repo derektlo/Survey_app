@@ -32,12 +32,12 @@
 
    $total = array_sum($arrayOfOptionsValues);
 
-   $array2 = array_map(function($a) use($total){
+   $arrayOfPercents = array_map(function($a) use($total){
     return round(($a*100) / $total, 1) . '%';
-   }, $array1);
+   }, $arrayOfOptionsValues);
 
    $container = array();
-   array_push($container,$array1,$array2);
+   array_push($container,$arrayOfOptionsValues,$arrayOfPercents);
    
    // return the json result.
    echo '{"Results":'.json_encode($container).'}';

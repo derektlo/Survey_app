@@ -65,8 +65,8 @@ console.log("SURVEYTAG: ",surveyTag);
       onOffValue = 'Off';
 
     // get the particular survey's analytics
-    $.getJSON("http://classtempo.org/Survey_app/survey_phpScripts/getSurveyAnalytics.php?surveyID=" + surveyId, function(json) {
-          console.log(json);
+    //$.getJSON("http://classtempo.org/Survey_app/survey_phpScripts/getSurveyAnalytics.php?surveyID=" + surveyId, function(json) {
+        //  console.log(json);
           if (Modernizr.sessionstorage) {
           sessionStorage.onOffValue = onOffValue;
           sessionStorage.surveyTag = surveyTag;
@@ -77,7 +77,7 @@ console.log("SURVEYTAG: ",surveyTag);
           }
 
          $.mobile.changePage( "surveyResults.html", { transition: "slide"} );
-    });
+    //});
 
 }
 
