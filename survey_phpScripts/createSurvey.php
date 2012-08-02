@@ -19,13 +19,13 @@
    $surveyDescription = isset($_GET['surveyDescription']) ? $_GET['surveyDescription']  : "";
    $email = isset($_GET['email']) ? $_GET['email']  : "";
 
-   
+   /*
    echo $userAuthKey;
    echo $numberOfOptions;
    echo $numbersOrLetters;
    echo $onOff;
    echo $surveyDescription;
-   
+   */
 
    if ($numbersOrLetters == 'Numbers') {
       $numbersOrLetters = 0;
@@ -68,7 +68,7 @@
       $varZero = 0;
 
     for ($i = 0; $i < $numberOfOptions; $i++) {
-      var $insertOptions;
+      $insertOptions;
 
       if ($numbersOrLetters == 0) {
 

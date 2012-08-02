@@ -100,7 +100,7 @@
 
     });
 
-    $( '#surveyResultsPage' ).live('pageshow', function() {
+    $( '#surveyResultsPage' ).bind('pageshow', function() {
             
         $.jqplot.config.enablePlugins = true;
         var s1 = [40, 30, 100];
