@@ -41,9 +41,8 @@
    array_push($container,$arrayOfOptionsValues,$arrayOfPercents,$arrayTest);
    
    // return the json result.
-   //echo '{"Results":'.json_encode($container).'}';
-   echo '$arrayOfOptionsValues';
-
+//   echo '{"Results":'.json_encode($container).'}';
+   echo $arrayOfOptionsValues;
 
    // close connection 
    mysql_close();
