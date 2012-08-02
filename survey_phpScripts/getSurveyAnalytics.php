@@ -22,22 +22,24 @@
    
    // Create an array to hold our results
    $arrayOfOptionsValues = array();
+   $arrayTest = array();
    
    $result = mysql_query("SELECT Option_value FROM Survey_Results WHERE Survey_authKey = '$surveyAuthKey'");
 
    // Add the rows to the array 
    while($holdObj = mysql_fetch_object($result)) {
    $arrayOfOptionsValues[] = $holdObj;
+   $arrayTest[] = $holdObj['Option_value'];
    }
 
    $total = array_sum($arrayOfOptionsValues);
 
    $arrayOfPercents = array_map(function($a) use($total){
-    return round(($a*1000) / $total, 1) . '%';
+    return round(($a*100) / $total, 1) . '%';
    }, $arrayOfOptionsValues);
 
    $container = array();
-   array_push($container,$arrayOfOptionsValues,$arrayOfPercents,$total);
+   array_push($container,$arrayOfOptionsValues,$arrayOfPercents,$arrayTest);
    
    // return the json result.
    echo '{"Results":'.json_encode($container).'}';
