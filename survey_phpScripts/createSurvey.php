@@ -73,13 +73,13 @@
       if ($numbersOrLetters == 0) {
 
                $optionNumber = $i + 1;
-               $insertOptions = "INSERT INTO Survey_results (Survey_authKey, Option_name, Option_value) 
+               $insertOptions = "INSERT INTO Survey_Results (Survey_authKey, Option_name, Option_value) 
                            VALUES ('$userAuthKey','$optionNumber','$varZero')";
          }
       else {
                $currentValue = $letter[$i];
 
-               $insertOptions = "INSERT INTO Survey_results (Survey_authKey, Option_name, Option_value) 
+               $insertOptions = "INSERT INTO Survey_Results (Survey_authKey, Option_name, Option_value) 
                            VALUES ('$userAuthKey','$currentValue','$varZero')";
          }
 
