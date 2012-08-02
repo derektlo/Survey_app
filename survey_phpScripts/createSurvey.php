@@ -63,6 +63,7 @@
 
 // if data is successfully inserted into database, displays message "Successful". 
    if($result){
+      /*
       echo "made it";
       $letters = range('a','z');
 
@@ -83,6 +84,7 @@
 
                   mysql_query($insertOptions);
       }
+      */
       
          }
       echo "Successful";
