@@ -24,6 +24,9 @@
 	<section id="userSurvey" data-role="page" data-theme="b">
 <script>
 
+var surveyTokenVar;
+
+
 function incrementOptionValue(optionName) {
 
 	// if optionName is a letter, convert it from ascii to character
@@ -64,7 +67,7 @@ function convertASCIItoCharacter(asciiNum) {
 
 			var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
 
-			if (numbersOrLetters === 0)
+			if (numbersOrLetters === '0')
 				{
 				for (i = 0; i < num_options; i++){
 
@@ -164,12 +167,10 @@ function convertASCIItoCharacter(asciiNum) {
         }        
 
         // Submit the form
-        
-        $.post("http://classtempo.org/Survey_app/survey_phpScripts/post_option.php?surveyAuthKey=alo-1&optionName=" + surveyValue, function(data){
+        $.post("http://classtempo.org/Survey_app/survey_phpScripts/post_option.php?surveyAuthKey=" + surveyTokenVar + "&optionName=" + surveyValue, function(data){
 
         	if (Modernizr.sessionstorage) {
 
-        			console.log(sessionStorage.checkStringAlreadySubmitted);
         			if (sessionStorage.checkStringAlreadySubmitted == null) {
 
         				var arrayOfSubmits = [];
@@ -179,7 +180,6 @@ function convertASCIItoCharacter(asciiNum) {
         				sessionStorage.checkStringAlreadySubmitted = JSON.stringify(arrayOfSubmits);
         			}
         			else{
-        				console.log(JSON.parse(sessionStorage.checkStringAlreadySubmitted));
         				var arrayOfSubmits = JSON.parse(sessionStorage.checkStringAlreadySubmitted.slice());
         				console.log("arrayOfSubmits: ",arrayOfSubmits);
         				var newTokenString = sessionStorage.surveyToken + "entered";

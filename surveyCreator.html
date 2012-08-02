@@ -136,12 +136,13 @@
           console.log(data);
           if (data != 'Error') {
 
-            console.log("onOffValue ",onOffValue);
             if (Modernizr.sessionstorage) {
               sessionStorage.surveyTag = data;
+              sessionStorage.numbersOrLetters = numbersOrLetters;
             }
             else {
               $.cookie("surveyTag",data);
+              $.cookie("numbersOrLetters",numbersOrLetters);
             }
 
             // If we have created a survey successfully go to it's analytics page

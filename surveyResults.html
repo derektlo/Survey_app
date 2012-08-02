@@ -77,65 +77,117 @@
     $( '#surveyResultsPage' ).live( 'pageinit',function(event){
     });
 
+    function returnTicks(results){
+        var ticks = [];
+        console.log(sessionStorage.numbersOrLetters);
+
+      if (Modernizr.sessionstorage){
+          if (sessionStorage.numbersOrLetters === '0') {
+              for (var i = 0; i < results.length; i++){
+                  ticks.push(i);
+              }
+          }
+          else {
+            var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+
+            // Add ticks for the x-axis
+            ticks = alphabet.slice(0,results.length);
+          }
+        }
+        else {
+
+            if ($.cookie("numbersOrLetters") === '0'){
+                for (var i = 0; i < results.length; i++){
+                  ticks.push(i);
+              }
+            }
+            else {
+                var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+
+                  // Add ticks for the x-axis
+                  ticks = alphabet.slice(0,results.length);
+                }
+        }
+
+        return ticks;    
+    }
+
     $( '#surveyResultsPage' ).bind('pageshow', function() {
           console.log(sessionStorage.surveyTag);
 
-    $.getJSON("http://classtempo.org/Survey_app/survey_phpScripts/getSurveyAnalytics.php?surveyAuthKey=" +sessionStorage.surveyTag, function(json) {
-      console.log(json);
+          // Load Graph 
 
-        // Load Graph    
-        $.jqplot.config.enablePlugins = true;
-        var s1 = [40, 30, 100];
-        var ticks = ['a', 'b', 'c'];
+          $.getJSON("http://classtempo.org/Survey_app/survey_phpScripts/getSurveyAnalytics.php?surveyAuthKey=" +sessionStorage.surveyTag, function(json) {
 
-         console.log("sessionStorage stuff: ",sessionStorage.surveyTokenVar);
-        plot1 = $.jqplot('chart1', [s1], {
-            // Only animate if we're not using excanvas (not in IE 7 or IE 8)..
-            animate: !$.jqplot.use_excanvas,
-            title: sessionStorage.surveyTag + ' Results',
-            seriesDefaults:{
-                renderer:$.jqplot.BarRenderer,
-                rendererOptions:{ varyBarColor : true },
-                pointLabels: {show: true}
-            },
-            series:[
-              {pointLabels:{
-                            show: true,
-                            labels:['40, 14%', '30, 26%', '100, 60%'],
-                            ypadding: 12,
-                          }}],
-            axes: {
-                xaxis: {
-                    renderer: $.jqplot.CategoryAxisRenderer,
-                    ticks: ticks
+              $.jqplot.config.enablePlugins = true;
+
+              // Define local variables used to create graph
+              var arrayOfValues = json.Results[0];
+              var arrayOfPercents = json.Results[1];
+              var arrayOfPointLabels = [];  
+              var ticks = returnTicks(json.Results[0]);    
+              console.log("ticks: ", ticks);
+
+              // Add Point Labels
+              for (var i = 0; i < arrayOfValues.length; i++){
+                  arrayOfPointLabels.push(arrayOfValues[i] + ", " + arrayOfPercents[i]);
+              }
+
+              // Get array of ints to actually plot data
+              var arrayOfValuesNumbers = arrayOfValues.map(Number);;
+
+              plot1 = $.jqplot('chart1', [arrayOfValuesNumbers], {
+                  // Only animate if we're not using excanvas (not in IE 7 or IE 8)..
+                  animate: !$.jqplot.use_excanvas,
+                  title: sessionStorage.surveyTag + ' Results',
+                  seriesDefaults:{
+                      renderer:$.jqplot.BarRenderer,
+                      rendererOptions:{ 
+                        varyBarColor : true ,
+                      animation: {speed: 1000} },
+                      pointLabels: {show: true}
+                  },
+                  series:[
+                    {pointLabels:{
+                                  show: true,
+                                  labels:arrayOfPointLabels,
+                                  ypadding: 12,
+                                }}],
+                  axes: {
+                      xaxis: {
+                          renderer: $.jqplot.CategoryAxisRenderer,
+                          ticks: ticks
+                      }
+                  },
+                  highlighter: { show: false },
+                  seriesColors: $.merge([ "#55A9D3", "#D4EDE2", "#EA2E49"], $.jqplot.config.defaultColors)
+              });
+
+              // Load other analytics
+                /*
+                $('#resultsList').children().remove('li');
+
+                $('ul#resultsList').append('<li>Mean: </li>');
+                $('ul#resultsList').append('<li>Standard Deviation: </li>');
+
+                $('ul#resultsList').listview();
+                $('ul#resultsList').listview('refresh');
+                */
+
+                // set On or Off
+                if (Modernizr.sessionstorage) {
+                    var onOffValue = sessionStorage.onOffValue;
                 }
-            },
-            highlighter: { show: false },
-            seriesColors: $.merge([ "#55A9D3", "#D4EDE2", "#EA2E49"], $.jqplot.config.defaultColors)
-        });
+                else {
+                  var onOffValue = $.cookie("onOffValue");
+                }
 
-        // Load other analytics
-        if (Modernizr.sessionstorage) {
-            var onOffValue = sessionStorage.onOffValue;
-        }
-        else {
-          var onOffValue = $.cookie("onOffValue");
-        }
-
-          $('#resultsList').children().remove('li');
-
-          $('ul#resultsList').append('<li>Mean: </li>');
-          $('ul#resultsList').append('<li>Standard Deviation: </li>');
-
-          $('ul#resultsList').listview();
-          $('ul#resultsList').listview('refresh');
-
-          if (onOffValue == 'On')
-            $('#surveyOnOff').val('on').slider("refresh");
-          else
-            $('#surveyOnOff').val('off').slider("refresh");
-       
-       }); // END JSON CALLBACK
+                if (onOffValue == 'On')
+                  $('#surveyOnOff').val('on').slider("refresh");
+                else
+                  $('#surveyOnOff').val('off').slider("refresh");
+             
+             }); // END JSON CALLBACK
   });
 
     $(document).ready( function () { 

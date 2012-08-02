@@ -28,7 +28,7 @@
    $arr = array();
    
    //Execute the query
-     $rs = mysql_query("UPDATE Options SET Option_value = Option_value+1 
+     $rs = mysql_query("UPDATE Survey_Results SET Option_value = Option_value+1 
       WHERE Survey_authKey = '$surveyAuthKey' AND Option_name = '$optionName'");
    
    if ($rs) {
