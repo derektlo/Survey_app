@@ -63,24 +63,27 @@
 
 // if data is successfully inserted into database, displays message "Successful". 
    if($result){
-
+      echo "made it";
       $letters = range('a','z');
 
-    for ($i = 1; $i < $numberOfOptions; $i++) {
-      $optionNumber = $i + 1;
-      echo 'working';
+    for ($i = 0; $i < $numberOfOptions; $i++) {
+      var $insertOptions;
+
       if ($numbersOrLetters == 0) {
-         $insertOptions = "INSERT INTO Survey_results (Survey_authKey, Option_name, Option_value) 
+
+               $optionNumber = $i + 1;
+               $insertOptions = "INSERT INTO Survey_results (Survey_authKey, Option_name, Option_value) 
                            VALUES ('$userAuthKey','$optionNumber', 0");
          }
       else {
 
-         $insertOptions = "INSERT INTO Survey_results (Survey_authKey, Option_name, Option_value) 
+               $insertOptions = "INSERT INTO Survey_results (Survey_authKey, Option_name, Option_value) 
                            VALUES ('$userAuthKey',letters[$i], 0");
          }
+
+                  mysql_query($insertOptions);
       }
-         
-         mysql_query($insertOptions);
+      
          }
       echo "Successful";
    }
