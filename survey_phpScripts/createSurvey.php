@@ -77,7 +77,7 @@
                            VALUES ('$userAuthKey','$optionNumber','$varZero')";
          }
       else {
-               $currentValue = $letter($i);
+               $currentValue = $letter[$i];
 
                $insertOptions = "INSERT INTO Survey_Results (Survey_authKey, Option_name, Option_value) 
                            VALUES ('$userAuthKey','$currentValue','$varZero')";
