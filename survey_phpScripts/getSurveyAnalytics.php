@@ -31,8 +31,6 @@
    $arrayOfOptionsValues[] = $holdObj;
    }
 
-   echo '$arrayOfOptionsValues';
-
    $total = array_sum($arrayOfOptionsValues);
 
    $arrayOfPercents = array_map(function($a) use($total){
@@ -43,7 +41,8 @@
    array_push($container,$arrayOfOptionsValues,$arrayOfPercents,$arrayTest);
    
    // return the json result.
-   echo '{"Results":'.json_encode($container).'}';
+   //echo '{"Results":'.json_encode($container).'}';
+   echo '$arrayOfOptionsValues';
 
 
    // close connection 
