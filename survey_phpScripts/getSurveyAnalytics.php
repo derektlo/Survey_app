@@ -23,7 +23,7 @@
    // Create an array to hold our results
    $arrayOfOptionsValues = array();
    
-   $result = mysql_query("SELECT Options_value FROM Survey_Results WHERE Survey_authKey = '$surveyAuthKey'");
+   $result = mysql_query("SELECT Option_value FROM Survey_Results WHERE Survey_authKey = '$surveyAuthKey'");
 
    // Add the rows to the array 
    while($holdObj = mysql_fetch_object($result)) {

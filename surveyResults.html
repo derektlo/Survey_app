@@ -80,7 +80,7 @@
     $( '#surveyResultsPage' ).bind('pageshow', function() {
           console.log(sessionStorage.surveyTag);
 
-    $.getJSON("http://classtempo.org/Survey_app/survey_phpScripts/getSurveyAnalytics.php?surveyAuthKey="sessionStorage.surveyTag, function(json) {
+    $.getJSON("http://classtempo.org/Survey_app/survey_phpScripts/getSurveyAnalytics.php?surveyAuthKey=" +sessionStorage.surveyTag, function(json) {
       console.log(json);
 
         // Load Graph    
