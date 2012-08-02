@@ -73,12 +73,12 @@
 
                $optionNumber = $i + 1;
                $insertOptions = "INSERT INTO Survey_results (Survey_authKey, Option_name, Option_value) 
-                           VALUES ('$userAuthKey','$optionNumber', 0)";
+                           VALUES ('$userAuthKey','$optionNumber','0')";
          }
       else {
 
                $insertOptions = "INSERT INTO Survey_results (Survey_authKey, Option_name, Option_value) 
-                           VALUES ('$userAuthKey',letters[$i], 0)";
+                           VALUES ('$userAuthKey','letters[$i]','0')";
          }
 
                   mysql_query($insertOptions);
