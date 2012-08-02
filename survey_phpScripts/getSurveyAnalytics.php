@@ -31,14 +31,16 @@
    $arrayOfOptionsValues[] = $holdObj;
    }
 
-   $total = array_sum($arrayOfOptionsValues['Option_value']);
+   echo '$arrayOfOptionsValues';
+
+   $total = array_sum($arrayOfOptionsValues);
 
    $arrayOfPercents = array_map(function($a) use($total){
     return round(($a*100) / $total, 1) . '%';
-   }, $arrayOfOptionsValues['Option_value']);
+   }, $arrayOfOptionsValues);
 
    $container = array();
-   array_push($container,$arrayOfOptionsValues['Option_value'],$arrayOfPercents,$arrayTest);
+   array_push($container,$arrayOfOptionsValues,$arrayOfPercents,$arrayTest);
    
    // return the json result.
    echo '{"Results":'.json_encode($container).'}';
