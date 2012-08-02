@@ -66,16 +66,17 @@
 
       $letters = range('a','z');
 
-    for ($i = 0; i < $numberOfOptions; i++) {
+    for ($i = 1; $i < $numberOfOptions; $i++) {
+      $optionNumber = $i + 1;
       echo 'working';
       if ($numbersOrLetters == 0) {
          $insertOptions = "INSERT INTO Survey_results (Survey_authKey, Option_name, Option_value) 
-                           VALUES ('$userAuthKey','$i' + 1, 0");
+                           VALUES ('$userAuthKey','$optionNumber', 0");
          }
       else {
 
          $insertOptions = "INSERT INTO Survey_results (Survey_authKey, Option_name, Option_value) 
-                           VALUES ('$userAuthKey',letters[i], 0");
+                           VALUES ('$userAuthKey',letters[$i], 0");
          }
       }
          
