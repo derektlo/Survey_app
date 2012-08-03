@@ -1,5 +1,4 @@
 <?php
-    header("content-type: application/json");
    // Set Database information
    
    // Database host
