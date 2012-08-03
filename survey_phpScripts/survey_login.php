@@ -51,7 +51,8 @@
       //echo '{"Results":'.json_encode($arr).'}';
           echo $callbackValue . '(' . json_encode($arr) . ')';
       }
-      else echo '{"Results":' .json_encode("Invalid Password or Email.").'}';
+      echo $callbackValue . '(' . json_encode("Invalid Password Or Email") . ')';
+      //else echo '{"Results":' .json_encode("Invalid Password or Email.").'}';
 
    }
    else{ // email does not exist

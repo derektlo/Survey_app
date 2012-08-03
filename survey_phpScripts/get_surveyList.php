@@ -13,6 +13,7 @@
    
 	// set restaurantID to get categories for selected restaurant
  	$email   = isset($_GET['email']) ? $_GET['email']  : "";
+   $callbackValue = isset($_GET['callback']) ? $_GET['callback']  : "";
 	
 	// Connect to the Database server   
     $link = mysql_connect($host, $uid, $pwd) or die("Could not connect");
@@ -33,8 +34,8 @@
    }
    
    // return the json result.
-   echo '{"Results":'.json_encode($arr).'}';
-
+   //echo '{"Results":'.json_encode($arr).'}';
+   echo $callbackValue . '(' . json_encode($arr) . ')';
 
    // close connection 
    mysql_close();
