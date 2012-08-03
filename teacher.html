@@ -179,7 +179,7 @@
         // Submit the form
         $.getJSON("http://classtempo.org/Survey_app/survey_phpScripts/survey_login.php?email=" + emailVar.val() + "&password=" + passwordVar.val() + "&callback=?", teacherFormVar.serialize(), function(data){
 
-            console.log(date);
+       
 
           userTagVar = data.Results[0].User_tag;
 
