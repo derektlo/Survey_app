@@ -15,7 +15,6 @@
    $email   = isset($_GET['email']) ? $_GET['email']  : "";
    $password   = isset($_GET['password']) ? $_GET['password']  : "";
    $hashedPassword = sha1($password);
-   $callbackValue = isset($_GET['callback']) ? $_GET['callback']  : "";
    //echo $email;
 
 	/// Connect to the Database server   
