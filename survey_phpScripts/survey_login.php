@@ -48,8 +48,8 @@
    
 
    // return the json result.
-     // echo '{"Results":'.json_encode($arr).'}';
-          echo $callbackValue . '(' . json_encode($arr) . ')';
+      echo '{"Results":'.json_encode($arr).'}';
+         // echo $callbackValue . '(' . json_encode($arr) . ')';
       }
       else echo '{"Results":' .json_encode("Invalid Password or Email.").'}';
 
