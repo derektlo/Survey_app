@@ -30,6 +30,14 @@
   <script language="javascript" type="text/javascript" src="js/plugins/jqplot.pointLabels.js"></script>
   <script language="javascript" type="text/javascript" src="js/plugins/jqplot.pointLabels.min.js"></script>
   
+  <style>
+      #hdrMain {
+        background-color: white;
+      }
+
+
+  </style>
+
 <!-- Page starts here -->
 <div data-role="page" data-theme="b" id="teacherPage" data-add-back-btn="true">
   
@@ -132,10 +140,20 @@
     $('#teacherForm').submit(function() {
 
         var emtpyError = false;
+      emailVar = $('#email');
+      passwordVar = $('#password');
+      teacherFormVar = $('#teacherForm');
+
+
+       if ((emailVar != undefined) && (passwordVar != undefined))  {
 
         if ((emailVar.val() == EMPTY) || (passwordVar.val() == EMPTY)){
 
         	emtpyError = true;
+          }
+        }
+        else {
+          emptyError = true;
         }
 
         // If validation fails, show error message
@@ -180,6 +198,10 @@
     		 else{
     		 	// show error message
           // wrong password or email
+          passwordVar = '';
+          $('#password').val('');
+
+
               $('<div>').simpledialog2({
                     mode: 'button',
                     headerText: 'Whoops!',
