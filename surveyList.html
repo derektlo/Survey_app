@@ -97,7 +97,7 @@ function deleteSurvey(surveyID, surveyAuthKey) {
       'Delete': {
         click: function () {
 
-              $.post("http://classtempo.org/Survey_app/survey_phpScripts/delete_survey.php?surveyID=" + surveyID + "&surveyAuthKey=" + surveyAuthKey + "&callback=?", function(json) {
+              $.post("http://classtempo.org/Survey_app/survey_phpScripts/delete_survey.php?surveyID=" + surveyID + "&surveyAuthKey=" + surveyAuthKey, function(json) {
                  location.reload(true);
           });
         },icon: "delete"
@@ -125,16 +125,16 @@ $('#surveyList').bind('pageinit', function() {
   $('#footer').append('<p>  Today: ' + fullDate + '</p>');
   var getSurveyListURL;
   if (Modernizr.sessionstorage) {
-      getSurveyListURL = "http://classtempo.org/Survey_app/survey_phpScripts/get_surveyList.php?email=" + sessionStorage.emailVar + "&callback=?";
+      getSurveyListURL = "http://classtempo.org/Survey_app/survey_phpScripts/get_surveyList.php?email=" + sessionStorage.emailVar;
     } 
     else {
-      getSurveyListURL = "http://classtempo.org/Survey_app/survey_phpScripts/get_surveyList.php?email=" + $.cookie("emailVar") + "&callback=?";
+      getSurveyListURL = "http://classtempo.org/Survey_app/survey_phpScripts/get_surveyList.php?email=" + $.cookie("emailVar");
     }
 
 // get the JSON data from server
     $.getJSON(getSurveyListURL, function(data) {
-
-       var listOfSurveys = data;
+        console.log(data);
+       var listOfSurveys = data.Results;
 
     listOfSurveys.sort(function(a,b){
       var c = new Date(a.Date);
