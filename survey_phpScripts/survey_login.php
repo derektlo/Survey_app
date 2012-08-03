@@ -15,6 +15,7 @@
    $email   = isset($_GET['email']) ? $_GET['email']  : "";
    $password   = isset($_GET['password']) ? $_GET['password']  : "";
    $hashedPassword = sha1($password);
+   $callbackValue = isset($_GET['callback']) ? $_GET['callback']  : "";
    //echo $email;
 
 	/// Connect to the Database server   
@@ -47,7 +48,8 @@
    
 
    // return the json result.
-      echo '{"Results":'.json_encode($arr).'}';
+     // echo '{"Results":'.json_encode($arr).'}';
+          echo $callbackValue . '(' . json_encode($arr) . ')';
       }
       else echo '{"Results":' .json_encode("Invalid Password or Email.").'}';
 
