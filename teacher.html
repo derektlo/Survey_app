@@ -2,6 +2,8 @@
 <html> 
   <head> 
   <meta name="viewport" content="height=device-height,width=device-width,initial-scale=1.0,maximum-scale=1.0" >
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+
   <title>Sign up</title> 
 
   <!-- CSS -->
@@ -108,27 +110,27 @@
    
     $(document).ready(function() {
 
-  // //check the navigator.userAgent string to detect if the user is using an iPhone
-  //   if (navigator.userAgent.match(/iPhone/i)) {
+   //check the navigator.userAgent string to detect if the user is using an iPhone
+    if (navigator.userAgent.match(/iPhone/i)) {
 
-  //       //cache the viewport tag if the user is using an iPhone
-  //       var $viewport = $('head').children('meta[name="viewport"]');
+        //cache the viewport tag if the user is using an iPhone
+        var $viewport = $('head').children('meta[name="viewport"]');
 
-  //       //bind an event handler to the window object for the orientationchange event
-  //       $(window).bind('orientationchange', function() {
-  //           if (window.orientation == 90 || window.orientation == -90 || window.orientation == 270) {
+        //bind an event handler to the window object for the orientationchange event
+        $(window).bind('orientationchange', function() {
+            if (window.orientation == 90 || window.orientation == -90 || window.orientation == 270) {
 
-  //               //landscape
-  //               $viewport.attr('content', 'height=device-width,width=device-height,initial-scale=1.0,maximum-scale=1.0');
-  //           } else {
+                //landscape
+                $viewport.attr('content', 'height=device-width,width=device-height,initial-scale=1.0,maximum-scale=1.0');
+            } else {
 
-  //               //portrait
-  //               $viewport.attr('content', 'height=device-height,width=device-width,initial-scale=1.0,maximum-scale=1.0');
-  //           }
+                //portrait
+                $viewport.attr('content', 'height=device-height,width=device-width,initial-scale=1.0,maximum-scale=1.0');
+            }
 
-  //       //trigger an orientationchange event on the window object to initialize this code (basically in-case the user opens the page in landscape mode)
-  //       }).trigger('orientationchange');
-  //   }
+        //trigger an orientationchange event on the window object to initialize this code (basically in-case the user opens the page in landscape mode)
+        }).trigger('orientationchange');
+    }
     
     // Assign global variables
       emailVar = $('#email');
@@ -174,8 +176,8 @@
 
           return false;
         }        
-        $.support.cors = true;
-        $.mobile.allowCrossDomainPages = true;
+    //    $.support.cors = true;
+    //  $.mobile.allowCrossDomainPages = true;
         // Submit the form
         $.getJSON("http://classtempo.org/Survey_app/survey_phpScripts/survey_login.php?email=" + emailVar.val() + "&password=" + passwordVar.val(), teacherFormVar.serialize(), function(data){
 
