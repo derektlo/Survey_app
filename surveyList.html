@@ -119,8 +119,8 @@ $('#surveyList').bind('pageshow', function() {
  
 }); // End pageinit function
 
-$(document).on('pageinit', '#teacherPage', function() {
-//$(document).bind('pageinit', '#teacherPage', function(){
+$(document).die("pageinit");
+$(document).bind('pageinit', function(){
 
      //check the navigator.userAgent string to detect if the user is using an iPhone
     if (navigator.userAgent.match(/iPhone/i)) {
