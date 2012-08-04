@@ -34,6 +34,7 @@
       #hdrMain {
         background-color: white;
       }
+      [data-role=page]{height: 100% !important; position:relative !important;}
 
 
   </style>
@@ -103,8 +104,6 @@
     </form>
   </div><!-- contentMain -->
   
-  <div data-role="footer" id="ftrMain" name="ftrMain"></div>
-  
   <script>
    
     $(document).ready(function() {
@@ -138,7 +137,7 @@
     }); 
     
     $('#teacherForm').submit(function() {
-
+      if (window.navigator.onLine != false) {
         var emtpyError = false;
       emailVar = $('#email');
       passwordVar = $('#password');
@@ -218,7 +217,25 @@
              });
     		 }
         });        
-        return false;      
+        return false;
+        }
+        else {
+
+                $('<div>').simpledialog2({
+                    mode: 'button',
+                    headerText: 'No Internet',
+                    buttonPrompt: 'Either it\'s the apocalypse or you just have really poor service...',
+                    headerClose: false,
+                    buttons : {
+                      'Ok': {
+                        click: function () { 
+                        }
+                      }
+                    }
+                   });
+
+        return false;
+        }      
     });   
 
     

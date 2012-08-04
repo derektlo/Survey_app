@@ -87,8 +87,6 @@
     </form>
   </div> <!-- contentMain -->
   
-  <div data-role="footer" id="ftrMain" name="ftrMain"></div>
-  
   <script>
 
     $('#studentPage').live('pageshow', function(){
@@ -122,6 +120,7 @@
     }); 
     
     $('#studentSubmitForm').submit(function() {
+      if (window.navigator.onLine != false) {
         var err = false;
         var passwordError = false;
         var alreadySubmitted = false;
@@ -208,7 +207,24 @@
         });  // END JSON Callback to validate survey token
       }
   
-        return false;      
+        return false;
+        }
+        else {
+
+             $('<div>').simpledialog2({
+                    mode: 'button',
+                    headerText: 'No Internet',
+                    headerClose: false,
+                    buttonPrompt: 'Either it\'s the apocalypse or you just have really poor service...',
+                    buttons : {
+                      'OK': {
+                        click: function () { 
+                        }
+                      }
+                    }
+                  });
+             return false;
+        }      
     });   
 
     
