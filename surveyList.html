@@ -119,7 +119,6 @@ $('#surveyList').bind('pageshow', function() {
  
 }); // End pageinit function
 
-$(document).die("pageinit");
 $(document).bind('pageinit', function(){
 
      //check the navigator.userAgent string to detect if the user is using an iPhone
@@ -227,6 +226,7 @@ console.log("second");
     }); // End JSON callback function
 
 });
+$(document).die("pageinit");
 
 </script>
 
