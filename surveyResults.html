@@ -84,7 +84,7 @@
       if (Modernizr.sessionstorage){
           if (sessionStorage.numbersOrLetters === '0') {
               for (var i = 0; i < results.length; i++){
-                  ticks.push(i);
+                  ticks.push(i+1);
               }
           }
           else {
@@ -98,7 +98,7 @@
 
             if ($.cookie("numbersOrLetters") === '0'){
                 for (var i = 0; i < results.length; i++){
-                  ticks.push(i);
+                  ticks.push(i+1);
               }
             }
             else {

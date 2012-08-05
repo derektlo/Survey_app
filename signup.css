@@ -16,3 +16,12 @@ overflow: hidden;
 white-space: nowrap;
 outline: 0 !important;
 }
+
+[data-role=page]{height: 100% !important; position:relative !important;}
+
+#navbar .ul {
+   width: 100%;
+}
+#navbar .li {
+  width: 100%;
+}

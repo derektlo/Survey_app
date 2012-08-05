@@ -158,6 +158,9 @@
           console.log(data);
           if (data != 'Error') {
 
+              if (numbersOrLetters === 'Numbers'){numbersOrLetters = 0;}
+              else {numbersOrLetters = 1;}
+
             if (Modernizr.sessionstorage) {
               sessionStorage.surveyTag = data;
               sessionStorage.numbersOrLetters = numbersOrLetters;
