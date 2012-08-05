@@ -77,44 +77,44 @@
     $( '#surveyResultsPage' ).live( 'pageinit',function(event){
     });
 
-    function returnTicks(results){
-        var ticks = [];
-        console.log(sessionStorage.numbersOrLetters);
+    // function returnTicks(results){
+    //     var ticks = [];
+    //     console.log(sessionStorage.numbersOrLetters);
 
-      if (Modernizr.sessionstorage){
-          if (sessionStorage.numbersOrLetters === '0') {
-              for (var i = 0; i < results.length; i++){
-                  ticks.push(i+1);
-                  console.log("ticks::::: ",ticks);
-              }
-          }
-          else {
-            var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+    //   if (Modernizr.sessionstorage){
+    //       if (sessionStorage.numbersOrLetters === '0') {
+    //           for (var i = 0; i < results.length; i++){
+    //               ticks.push(i+1);
+    //               console.log("ticks::::: ",ticks);
+    //           }
+    //       }
+    //       else {
+    //         var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
 
-            // Add ticks for the x-axis
-            ticks = alphabet.slice(0,results.length);
-          }
-        }
-        else {
+    //         // Add ticks for the x-axis
+    //         ticks = alphabet.slice(0,results.length);
+    //       }
+    //     }
+    //     else {
 
-            if ($.cookie("numbersOrLetters") === '0'){
-                for (var i = 0; i < results.length; i++){
-                  ticks.push(i+1);
-              }
-            }
-            else {
-                var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+    //         if ($.cookie("numbersOrLetters") === '0'){
+    //             for (var i = 0; i < results.length; i++){
+    //               ticks.push(i+1);
+    //           }
+    //         }
+    //         else {
+    //             var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
 
-                  // Add ticks for the x-axis
-                  ticks = alphabet.slice(0,results.length);
-                }
-        }
+    //               // Add ticks for the x-axis
+    //               ticks = alphabet.slice(0,results.length);
+    //             }
+    //     }
 
-        return ticks;    
-    }
+    //     return ticks;    
+    // }
 
     $( '#surveyResultsPage' ).bind('pageshow', function() {
-          console.log(sessionStorage.surveyTag);
+          console.log("num/letters: ",sessionStorage.numbersOrLetters);
 
           // Load Graph 
 
@@ -126,8 +126,35 @@
               var arrayOfValues = json.Results[0];
               var arrayOfPercents = json.Results[1];
               var arrayOfPointLabels = [];  
-              var ticks = returnTicks(json.Results[0]);    
-              console.log("ticks: ", ticks);
+              
+         if (Modernizr.sessionstorage){
+          if (sessionStorage.numbersOrLetters === '0') {
+              for (var i = 0; i < arrayOfValues.length; i++){
+                  ticks.push(i+1);
+                  console.log("ticks::::: ",ticks);
+              }
+          }
+          else {
+            var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+
+            // Add ticks for the x-axis
+            ticks = alphabet.slice(0,arrayOfValues.length);
+          }
+        }
+        else {
+
+            if ($.cookie("numbersOrLetters") === '0'){
+                for (var i = 0; i < arrayOfValues.length; i++){
+                  ticks.push(i+1);
+              }
+            }
+            else {
+                var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+
+                  // Add ticks for the x-axis
+                  ticks = alphabet.slice(0,arrayOfValues.length);
+                }
+        }
 
               // Add Point Labels
               for (var i = 0; i < arrayOfValues.length; i++){
