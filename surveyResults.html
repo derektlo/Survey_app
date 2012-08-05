@@ -123,8 +123,8 @@
               var arrayOfValues = json.Results[0];
               var arrayOfPercents = json.Results[1];
               var arrayOfPointLabels = [];  
-              var myTicks = returnTicks(json.Results[0]);    
-              console.log("myTicks: ", myTicks);
+              var ticks = returnTicks(json.Results[0]);    
+              console.log("myTicks: ", ticks);
 
               // Add Point Labels
               for (var i = 0; i < arrayOfValues.length; i++){
