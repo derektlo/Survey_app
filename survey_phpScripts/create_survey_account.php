@@ -127,7 +127,7 @@ function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output =
    else {
    
    $securePassword = create_hash($password);
-   echo $securePassword;
+   echo $salt;
 
    $sql = "INSERT INTO $tbl_name (Email, User_tag, Password, Salt) 
    VALUES ('$email', '$userTag' , '$securePassword', '$salt')";
