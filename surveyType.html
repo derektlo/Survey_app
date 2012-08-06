@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="height=device-height,width=device-width,initial-scale=1.0,maximum-scale=1.0" >
+  <title>First jQuery Mobile Example</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="./signup.css">
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" />
+  <link rel="stylesheet" type="text/css" href="simpleDialog2/jquery.mobile.simpledialog.min.css" /> 
+
+  <!-- Modernizer -->
+  <script type="text/javascript" src="./modernizr.custom.56582.js"></script>
+
+  <!-- jQuery/jQuery Mobile -->
+  <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script>
+
+   <!-- simpleDiaglo2 -->
+  <script src="simpleDialog2/jquery.mobile.simpledialog2.min.js"></script>
+
+  <!-- jqPlot -->
+  <!--[if lt IE 9]><script language="javascript" type="text/javascript" src="js/excanvas.js"></script><![endif]-->
+  <script language="javascript" type="text/javascript" src="js/jquery.jqplot.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="js/jquery.jqplot.css" />
+
+  <!-- Dependencies required for surveyResults.html Graphing -->
+  <script language="javascript" type="text/javascript" src="js/plugins/jqplot.barRenderer.js"></script>
+  <script language="javascript" type="text/javascript" src="js/plugins/jqplot.barRenderer.min.js"></script>
+  <script language="javascript" type="text/javascript" src="js/plugins/jqplot.categoryAxisRenderer.js"></script>
+  <script language="javascript" type="text/javascript" src="js/plugins/jqplot.pointLabels.js"></script>
+  <script language="javascript" type="text/javascript" src="js/plugins/jqplot.pointLabels.min.js"></script>
+
+</head>
+
+
+<body>
+
+  <!-- Page starts here -->
+<div data-role="page" data-theme="b" id="surveyTypes">
+
+<script>
+
+function showSimpleDialogue(alertHeader, alertMessage) {
+    
+    $(document).simpledialog2({
+                    mode: 'button',
+                    headerText: alertHeader,
+                    buttonPrompt: alertMessage,
+                    headerClose: false,
+                    buttons : {
+                      'Log in': {
+                        click: function () {
+                            $.mobile.changePage("teacher.html"); 
+                        }
+                      }
+                    }
+             })
+ }
+
+function createNewSurveyWithType(surveyType) {
+    // change the page to the surveyCreator.html
+    console.log(surveyType);
+   $.mobile.changePage( "surveyCreator.html", { transition: "slide"} );
+}
+
+function logMeOut(){
+  
+  if (Modernizr.sessionstorage) {
+    sessionStorage.loggedIn = 'false';
+  }
+  else {
+    $.cookie("loggedIn","false");
+  }
+
+  $.mobile.changePage("teacher.html",{transition:"fade"});
+}
+
+$(document).ready(function() {
+
+  var sessionActive;
+
+  sessionStorage.loggedIn = 'true';
+
+  if (Modernizr.sessionstorage){
+      if (sessionStorage.loggedIn === 'true'){sessionActive = true;}
+      else {sessionActive = false;}
+  }
+  else {
+      if ($.cookie("loggedIn") === 'true'){sessionActive = true;}
+      else {sessionActive = false;}
+  }
+
+  if (sessionActive === false){
+      $('#surveyTypeContainer').remove();
+      showSimpleDialogue("Whoops!","Looks like you've logged out.");
+    }
+
+     //check the navigator.userAgent string to detect if the user is using an iPhone
+    if (navigator.userAgent.match(/iPhone/i)) {
+
+        //cache the viewport tag if the user is using an iPhone
+        var $viewport = $('head').children('meta[name="viewport"]');
+
+        //bind an event handler to the window object for the orientationchange event
+        $(window).bind('orientationchange', function() {
+            if (window.orientation == 90 || window.orientation == -90 || window.orientation == 270) {
+
+                //landscape
+                $viewport.attr('content', 'height=device-width,width=device-height,initial-scale=1.0,maximum-scale=1.0');
+            } else {
+
+                //portrait
+                $viewport.attr('content', 'height=device-height,width=device-width,initial-scale=1.0,maximum-scale=1.0');
+            }
+
+        //trigger an orientationchange event on the window object to initialize this code (basically in-case the user opens the page in landscape mode)
+        }).trigger('orientationchange');
+    }
+
+});
+</script>
+
+<div id="surveyTypeContainer">
+
+    <header data-role="header">
+    <a href="" onclick="logMeOut()" data-direction="reverse" rel="external" data-icon="" data-transition="slide" class="ui-btn-right">Logout</a>
+    <h1>Select Survey Type</h1>
+
+  </header>
+
+  <div data-role="myContent">
+
+      <ul id="surveyTypeList" data-role="listview">
+        <li><a href="" onclick="createNewSurveyWithType('Numbers')"><h1>Numbers</h1><p>Creates a survey using numbers as options (example survey: Do you understand? 1 = yes, 2 = no)</p></a></li>
+        <li><a href="" onclick="createNewSurveyWithType('Letters')"><h1>Letters</h1><p>Creates a survey using letters as options (example survey: Would you rather receive $100 or $200 a = 100$, b = 200$)</p></a></li>
+        <li><a href="" onclick="createNewSurveyWithType('Custom')"><h1>Custom Options</h1><p>Want more flexibility in your survey options? Create your own categories. (example survey: I love reading, I hate reading</p></a></li>
+        <li><a href="" onclick="createNewSurveyWithType('Specific')"><h1>Specfic Response</h1><p>If you are expecting a specific answer, either numberical or textual. This type of survey can also be used to poll a class for questions.</p></a></li>
+      </ul>
+
+  </div>  
+
+<footer data-role="footer" id="footer"></footer>
+
+</div>
+</div>
+
+  </body>
+
+</head>
+</html>
