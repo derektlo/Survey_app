@@ -86,7 +86,7 @@ define("HASH_PBKDF2_INDEX", 3);
       echo "Error";
       }
    }
-}
+
 
       // close connection 
    mysql_close();
