@@ -100,6 +100,8 @@ function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output =
         return bin2hex(substr($output, 0, $key_length));
 }
 
+
+
    $tbl_name = 'Survey_Accounts';
 
    // Connect to the Database server   
@@ -127,7 +129,7 @@ function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output =
    else {
    
    $securePassword = create_hash($password);
-   echo saltValue;
+   $salt = saltValue;
 
    $sql = "INSERT INTO $tbl_name (Email, User_tag, Password, Salt) 
    VALUES ('$email', '$userTag' , '$securePassword', '$salt')";
