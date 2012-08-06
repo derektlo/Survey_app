@@ -64,14 +64,14 @@ define("HASH_PBKDF2_INDEX", 3);
    if (mysql_num_rows($checkEmail) > 0) {
       echo "Email already exists.";
    }
-   else{
+   else if (mysql_num_rows($checkTag) > 0) {
 
-         if (mysql_num_rows($checkTag) > 0) {
       echo "User tag already exists.";
    }
    else {
    
    $securePassword = create_hash($password);
+   echo $securePassword;
 
    $sql = "INSERT INTO $tbl_name (Email, User_tag, Password, Salt) 
    VALUES ('$email', '$userTag' , '$securePassword', '$salt')";
