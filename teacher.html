@@ -63,6 +63,23 @@
 
     $.mobile.defaultPageTransition = 'none';
     $('#teacherPage').css('height', $(document).height());
+
+    function showSimpleDialogue(alertHeader, alertMessage) {
+    
+    $('<div>').simpledialog2({
+                    mode: 'button',
+                    headerText: alertHeader,
+                    buttonPrompt: alertMessage,
+                    headerClose: false,
+                    buttons : {
+                      'OK': {
+                        click: function () { 
+                        }
+                      }
+                    }
+             })
+ }
+
   </script>
 
 </head> 
@@ -154,19 +171,7 @@
         // If validation fails, show error message
         if(emtpyError == true){  
          // missing password or email
-
-            $('<div>').simpledialog2({
-                    mode: 'button',
-                    headerText: 'Whoops!',
-                    buttonPrompt: 'Please enter a valid password and email.',
-                    headerClose: false,
-                    buttons : {
-                      'OK': {
-                        click: function () { 
-                        }
-                      }
-                    }
-             })
+          showSimpleDialogue('Whoops!', 'Please enter a valid email and password.');
 
           return false;
         }        
@@ -197,39 +202,14 @@
           // wrong password or email
           passwordVar = '';
           $('#password').val('');
-
-
-              $('<div>').simpledialog2({
-                    mode: 'button',
-                    headerText: 'Whoops!',
-                    buttonPrompt: 'Invalid password or email.',
-                    headerClose: false,
-                    buttons : {
-                      'OK': {
-                        click: function () { 
-                        }
-                      }
-                    }
-             });
-    		 }
-        });        
-        return false;
+          showSimpleDialogue('Whoops!','Invalid email or password.');
+        
+          return false;
         }
         else {
 
-                $('<div>').simpledialog2({
-                    mode: 'button',
-                    headerText: 'No Internet',
-                    buttonPrompt: 'Either it\'s the apocalypse or you just have really poor service...',
-                    headerClose: false,
-                    buttons : {
-                      'Ok': {
-                        click: function () { 
-                        }
-                      }
-                    }
-                   });
-
+          showSimpleDialogue('No Internet!','Either it\'s the apocalypse or you just have really poor service...');
+ 
         return false;
         }      
     });   

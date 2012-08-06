@@ -45,10 +45,21 @@ $(document).bind('mobileinit', function () {
     $.mobile.page.prototype.options.theme  = "c";
 });
 
+function logMeOut(){
+  
+  if (Modernizr.sessionstorage) {
+    sessionStorage.loggedIn = 'false';
+  }
+  else {
+    $.cookie("loggedIn","false");
+  }
+
+  $.mobile.changePage("teacher.html",{transition:"fade"});
+}
+
 function createNewSurvey() {
     // change the page to the surveyCreator.html
-
-   $.mobile.changePage( "surveyCreator.html", { transition: "slide"} );
+   $.mobile.changePage( "surveyType.html", { transition: "slide"} );
 }
 
 //function goToSurveyResults(surveyID, onOrOff, surveyTag) {
@@ -202,13 +213,9 @@ console.log(listOfSurveys);
 
           if (listOfSurveys[i].Date == currentDate) {
               // create row in same section
-console.log("first");
                  $('ul#surveyList').append('<li class="ui-btn ui-btn-icon-right"' + dataTheme + '><a href="javascript:void(goToSurveyResults(' + listOfSurveys[i].Survey_id + ',' + listOfSurveys[i].On_off + ',\'' + listOfSurveys[i].Survey_authKey + '\'' + ',\'' + listOfSurveys[i].Numbers_or_letters + '\'));"><h1>' + listOfSurveys[i].Survey_authKey + '</h1><p>' + listOfSurveys[i].Number_of_options + ' Options, ' + numbersOrLetters + ', ' + onOff + surveyDescription + '</p></a><a href="#" onclick="deleteSurvey(' + listOfSurveys[i].Survey_id + ',\'' + listOfSurveys[i].Survey_authKey + '\')" data-icon="delete" class="ui-li-link-alt ui-btn "' + dataTheme + ' ></a></li>');
-                 console.log("if: current date==currentDate ListDate", listOfSurveys[i].Date);
-                  console.log("if: current date==currentDate", currentDate);
           }
           else {
-console.log("second");
               // otherwise create a new section
               currentDate = listOfSurveys[i].Date;
 

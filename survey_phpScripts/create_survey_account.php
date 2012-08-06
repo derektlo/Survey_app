@@ -15,7 +15,34 @@
    $email   = isset($_GET['email']) ? $_GET['email']  : "";
    $userTag   = isset($_GET['userTag']) ? $_GET['userTag']  : "";
    $password = isset($_GET['password']) ? $_GET['password']  : "";
-   $hashed_password = sha1($password);
+   $salt;
+
+   // These constants may be changed without breaking existing hashes.
+define("PBKDF2_HASH_ALGORITHM", "sha256");
+define("PBKDF2_ITERATIONS", 1000);
+define("PBKDF2_SALT_BYTES", 24);
+define("PBKDF2_HASH_BYTES", 24);
+
+define("HASH_SECTIONS", 4);
+define("HASH_ALGORITHM_INDEX", 0);
+define("HASH_ITERATION_INDEX", 1);
+define("HASH_SALT_INDEX", 2);
+define("HASH_PBKDF2_INDEX", 3);
+
+   function create_hash($password)
+{
+    // format: algorithm:iterations:salt:hash
+    $salt = base64_encode(mcrypt_create_iv(PBKDF2_SALT_BYTES, MCRYPT_DEV_URANDOM));
+    return PBKDF2_HASH_ALGORITHM . ":" . PBKDF2_ITERATIONS . ":" .  $salt . ":" . 
+        base64_encode(pbkdf2(
+            PBKDF2_HASH_ALGORITHM,
+            $password,
+            $salt,
+            PBKDF2_ITERATIONS,
+            PBKDF2_HASH_BYTES,
+            true
+        ));
+}
 
    $tbl_name = 'Survey_Accounts';
 
@@ -44,9 +71,10 @@
    }
    else {
    
+   $securePassword = create_hash($password);
 
-   $sql = "INSERT INTO $tbl_name (Email, User_tag, Password) 
-   VALUES ('$email', '$userTag' , '$hashed_password')";
+   $sql = "INSERT INTO $tbl_name (Email, User_tag, Password, Salt) 
+   VALUES ('$email', '$userTag' , '$securePassword', '$salt')";
 
    $result = mysql_query($sql);
 

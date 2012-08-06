@@ -111,7 +111,6 @@
     }
 
     $(document).ready(function() { 
-          console.log(sessionStorage.surveyTag);
 
           // Load Graph 
 
@@ -123,8 +122,7 @@
               var arrayOfValues = json.Results[0];
               var arrayOfPercents = json.Results[1];
               var arrayOfPointLabels = [];  
-              var ticks = returnTicks(json.Results[0]);    
-              console.log("myTicks: ", ticks);
+              var ticks = returnTicks(json.Results[0]);
 
               // Add Point Labels
               for (var i = 0; i < arrayOfValues.length; i++){
