@@ -15,7 +15,6 @@
    $email   = isset($_GET['email']) ? $_GET['email']  : "";
    $userTag   = isset($_GET['userTag']) ? $_GET['userTag']  : "";
    $password = isset($_GET['password']) ? $_GET['password']  : "";
-   $salt;
 
    // These constants may be changed without breaking existing hashes.
 define("PBKDF2_HASH_ALGORITHM", "sha256");
@@ -33,6 +32,7 @@ define("HASH_PBKDF2_INDEX", 3);
 {
     // format: algorithm:iterations:salt:hash
     $salt = base64_encode(mcrypt_create_iv(PBKDF2_SALT_BYTES, MCRYPT_DEV_URANDOM));
+    define("saltValue",$salt);
     return PBKDF2_HASH_ALGORITHM . ":" . PBKDF2_ITERATIONS . ":" .  $salt . ":" . 
         base64_encode(pbkdf2(
             PBKDF2_HASH_ALGORITHM,
@@ -127,7 +127,7 @@ function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output =
    else {
    
    $securePassword = create_hash($password);
-   echo $salt;
+   echo saltValue;
 
    $sql = "INSERT INTO $tbl_name (Email, User_tag, Password, Salt) 
    VALUES ('$email', '$userTag' , '$securePassword', '$salt')";
