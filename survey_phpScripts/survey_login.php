@@ -142,9 +142,7 @@ function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output =
    $tbl_name = 'Survey_Accounts';
 
    //Execute the query to create the account
-   // Insert data into mysql
    $checkEmail = mysql_query("SELECT Email FROM Survey_Accounts WHERE Email = '$email'");
-   $getUserTag = mysql_query("SELECT User_tag FROM Survey_Accounts WHERE Email = '$email' AND Password = '$hashedPassword'");
 
 
    if (!$checkEmail) {
@@ -159,12 +157,10 @@ function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output =
     $salt = mysql_result($saltQuery, 0);
 
       $currentHash = create_hash_with_salt($password,$salt);
-      echo 'hash: ';
-      echo $currentHash;
-      echo $hash;
-
 
       if($hash === $currentHash){
+
+           $getUserTag = mysql_query("SELECT User_tag FROM Survey_Accounts WHERE Email = '$email'");
           // Add the rows to the array 
           while($obj = mysql_fetch_object($getUserTag)) {
             $arr[] = $obj;
