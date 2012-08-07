@@ -198,19 +198,20 @@
                 $.mobile.changePage( "surveyList.html", { transition: "slide"} );
     		 }  
     		 else{
-    		 	// show error message
-          // wrong password or email
-          passwordVar = '';
-          $('#password').val('');
-          showSimpleDialogue('Whoops!','Invalid email or password.');
-        
-          return false;
+          		 	// show error message
+                // wrong password or email
+                passwordVar = '';
+                $('#password').val('');
+                showSimpleDialogue('Whoops!','Invalid email or password.');
+              
+                return false;
+            }
+          });
         }
         else {
 
           showSimpleDialogue('No Internet!','Either it\'s the apocalypse or you just have really poor service...');
- 
-        return false;
+          return false;
         }      
     });   
 
