@@ -130,11 +130,10 @@
         //bind an event handler to the window object for the orientationchange event
         $(window).bind('orientationchange', function() {
             if (window.orientation == 90 || window.orientation == -90 || window.orientation == 270) {
-
                 //landscape
                 $viewport.attr('content', 'height=device-width,width=device-height,initial-scale=1.0,maximum-scale=1.0');
-            } else {
-
+            } 
+            else {
                 //portrait
                 $viewport.attr('content', 'height=device-height,width=device-width,initial-scale=1.0,maximum-scale=1.0');
             }
@@ -151,10 +150,11 @@
     
     $('#teacherForm').submit(function() {
       if (window.navigator.onLine != false) {
+
         var emtpyError = false;
-      emailVar = $('#email');
-      passwordVar = $('#password');
-      teacherFormVar = $('#teacherForm');
+        emailVar = $('#email');
+        passwordVar = $('#password');
+        teacherFormVar = $('#teacherForm');
 
 
        if ((emailVar != undefined) && (passwordVar != undefined))  {
@@ -180,8 +180,8 @@
         // Submit the form
         $.getJSON("http://classtempo.org/Survey_app/survey_phpScripts/survey_login.php?email=" + emailVar.val() + "&password=" + passwordVar.val(), teacherFormVar.serialize(), function(data){
 
-         console.log(data);
-          userTagVar = data.Results[0].User_tag;
+              console.log(data);
+              userTagVar = data.Results[0].User_tag;
 
          	 if (userTagVar != null){
                  
@@ -206,7 +206,7 @@
               
                 return false;
             }
-          });
+          })
         }
         else {
 
