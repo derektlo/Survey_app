@@ -155,7 +155,7 @@ function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output =
     $hashQuery = mysql_query("SELECT Password FROM Survey_Accounts WHERE Email = '$email'");
     $saltQuery = mysql_query("SELECT Salt FROM Survey_Accounts WHERE Email = '$email'");
     
-    $hash = mysql_result($currentHashedPasswordQuery, 0);
+    $hash = mysql_result($hashQuery, 0);
     $salt = mysql_result($saltQuery, 0);
 
       $currentHash = create_hash_with_salt($password,$salt);
