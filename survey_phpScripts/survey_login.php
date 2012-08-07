@@ -161,6 +161,7 @@ function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output =
       $currentHash = create_hash_with_salt($password,$salt);
       echo 'hash: ';
       echo $currentHash;
+      echo $hash;
 
 
       if($hash === $currentHash){
@@ -173,7 +174,7 @@ function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output =
    // return the json result.
       echo '{"Results":'.json_encode($arr).'}';
       }
-      else echo '{"Results":' .json_encode("Invalid Password or Email.").'}';
+      else {echo '{"Results":' .json_encode("Invalid Password or Email.").'}';}
 
    }
    else{ // email does not exist
