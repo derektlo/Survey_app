@@ -120,11 +120,7 @@
       surveyDescriptionVar = $('#SurveyDescription')
       surveyCreatorFormVar = $('#surveyCreatorForm');
       sliderValue = $('#optionSlider');
-    }); 
 
-    $('#optionSlider').live('change', function() {
-        sliderValue = $(this).slider();
-    // do whatever you want with that value...
 
        //check the navigator.userAgent string to detect if the user is using an iPhone
     if (navigator.userAgent.match(/iPhone/i)) {
@@ -146,7 +142,25 @@
 
         //trigger an orientationchange event on the window object to initialize this code (basically in-case the user opens the page in landscape mode)
         }).trigger('orientationchange');
-    }
+      }
+
+        if (sessionStorage.surveyType === 'Numbers') {
+            console.log("appending start list");
+              $('#startingNumberOrLetter').append('<div data-role="fieldcontain"><label for="select-choice-1" class="select">Select Starting Number:</label><select name="select-choice-1" id="select-choice-1">');
+
+              var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+
+              for (var i = 0; i < alphabet.length; i++) {
+                $('#startingNumberOrLetter').append('<option value=\'' + alphabet[i] + '\'>\'' + alphabet[i] + '\'</option>');
+              }
+
+              $('#startingNumberOrLetter').append('</select></div>');
+            }
+
+    }); 
+
+    $('#optionSlider').live('change', function() {
+        sliderValue = $(this).slider();
 
     // SET UP SURVEY CREATOR
 
@@ -159,20 +173,6 @@
 //       <option value="overnight">Overnight</option>
 //    </select>
 // </div>
-  if (sessionStorage.surveyType === 'Numbers') {
-    console.log("appending start list");
-      $('#startingNumberOrLetter').append('<div data-role="fieldcontain"><label for="select-choice-1" class="select">Select Starting Number:</label><select name="select-choice-1" id="select-choice-1">');
-
-      var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
-
-      for (var i = 0; i < alphabet.length; i++) {
-        $('#startingNumberOrLetter').append('<option value=\'' + alphabet[i] + '\'>\'' + alphabet[i] + '</option>');
-      }
-
-      $('#startingNumberOrLetter').append('</select></div>');
-    }
-
-
 });
    
     
