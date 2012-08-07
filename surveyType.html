@@ -80,8 +80,6 @@ $(document).ready(function() {
 
   var sessionActive;
 
-  sessionStorage.loggedIn = 'true';
-
   if (Modernizr.sessionstorage){
       if (sessionStorage.loggedIn === 'true'){sessionActive = true;}
       else {sessionActive = false;}
@@ -123,7 +121,7 @@ $(document).ready(function() {
 
 <div id="surveyTypeContainer">
 
-    <header data-role="header">
+    <header data-role="header" data-add-back-btn="true">
     <a href="" onclick="logMeOut()" data-direction="reverse" rel="external" data-icon="" data-transition="slide" class="ui-btn-right">Logout</a>
     <h1>Select Survey Type</h1>
 

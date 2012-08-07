@@ -166,10 +166,12 @@
                       // browser supports local storage
                       sessionStorage.emailVar = emailVar.val();
                       sessionStorage.userTagVar = userTagVar;
+                      sessionStorage.loggedIn 
                   }
                   else {
                       $.cookie("emailVar",emailVar.val());
                       $.cookie("userTagVar",userTagVar);
+                      $.cookie("loggedIn","true");
                   }
          		     
                 $.mobile.changePage( "surveyList.html", { transition: "slide"} );
