@@ -55,7 +55,7 @@ function showSimpleDialogue(alertHeader, alertMessage) {
                         }
                       }
                     }
-             })
+             });
  }
 
 function createNewSurveyWithType(surveyType) {
@@ -121,7 +121,7 @@ $(document).ready(function() {
 
 <div id="surveyTypeContainer">
 
-  <div data-role="header" id="" data-add-back-btn="true">
+  <div data-role="header" id="surveyTypeHeader" data-add-back-btn="true">
         <a href="" onclick="logMeOut()" data-direction="reverse" rel="external" data-icon="" data-transition="slide" class="ui-btn-right">Logout</a>
     <h1>Select Survey Type</h1>
   </div>
@@ -136,8 +136,6 @@ $(document).ready(function() {
       </ul>
 
   </div>  
-
-<footer data-role="footer" id="footer"></footer>
 
 </div>
 </div>
