@@ -40,12 +40,14 @@
 <!-- Page starts here -->
 <div data-role="page" data-theme="b" id="surveyCreatorPage" data-add-back-btn="true"> 
 
-<div data-role="content" id="surveyCreatorContent">
+<div id="surveyCreatorContainer">
 
-  <div data-role="header">
+  <div data-role="header" id="hdrMain">
     <a href="" onclick="logMeOut()" data-direction="reverse" rel="external" data-icon="" data-transition="slide" class="ui-btn-right">Logout</a>
     <h1>Class Tempo</h1>
   </div>
+
+<div data-role="content" id="surveyCreatorContent">
 
   <form id="surveyCreatorForm">
 
@@ -82,6 +84,7 @@
     </div>
     </form>
   </div>
+</div>
 
   <script>
 
@@ -111,13 +114,12 @@
     }
 
     if (sessionActive === false){
-      $('#surveyCreatorContent').remove();
+      $('#surveyCreatorContainer').remove();
       showSimpleDialogue("Whoops!","Looks like you're logged out.");
     }
 
       surveyCreatorContentVar = $('#surveyCreatorContent');
       surveyDescriptionVar = $('#SurveyDescription')
-
       surveyCreatorFormVar = $('#surveyCreatorForm');
       sliderValue = $('#optionSlider');
     }); 
