@@ -56,14 +56,8 @@
     <input type="range" name="optionSlider" id="optionSlider" value="2" min="2" max="25" data-highlight="true" />
   </div>
 
-  <fieldset data-role="controlgroup">
-  <legend>Numbers or Letters?:</legend>
-      <input type="radio" name="numbersOrLetters" id="Numbers" value="Numbers" checked="checked" />
-      <label for="Numbers">Numbers</label>
-
-      <input type="radio" name="numbersOrLetters" id="Letters" value="Letters"  />
-      <label for="Letters">Letters</label>
-  </fieldset>
+  <div id="startingNumberOrLetter">
+  </div>
 
   <fieldset data-role="controlgroup">
   <legend>Survey On/Off</legend>
@@ -87,6 +81,10 @@
 </div>
 
   <script>
+
+  $(document).bind('mobileinit',function(){
+   $.mobile.selectmenu.prototype.options.nativeMenu = false;
+  });
 
     function logMeOut(){
       
@@ -149,6 +147,31 @@
         //trigger an orientationchange event on the window object to initialize this code (basically in-case the user opens the page in landscape mode)
         }).trigger('orientationchange');
     }
+
+    // SET UP SURVEY CREATOR
+
+//       <div data-role="fieldcontain">
+//    <label for="select-choice-1" class="select">Shipping method:</label>
+//    <select name="select-choice-1" id="select-choice-1">
+//       <option value="standard">Standard: 7 day</option>
+//       <option value="rush">Rush: 3 days</option>
+//       <option value="express">Express: next day</option>
+//       <option value="overnight">Overnight</option>
+//    </select>
+// </div>
+  if (sessionStorage.surveyType === 'Numbers') {
+      $('#startingNumberOrLetter').append('<div data-role="fieldcontain"><label for="select-choice-1" class="select">Select Starting Number:</label><select name="select-choice-1" id="select-choice-1">');
+
+      var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+
+      for (var i = 0; i < alphabet.length; i++) {
+        $('#startingNumberOrLetter').append('<option value=\'' + alphabet[i] + '\'>\'' + alphabet[i] + '</option>');
+      }
+
+      $('#startingNumberOrLetter').append('</select></div>');
+    }
+
+
 });
    
     
