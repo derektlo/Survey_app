@@ -159,6 +159,9 @@ function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output =
     $salt = mysql_result($saltQuery, 0);
 
       $currentHash = create_hash_with_salt($password,$salt);
+      echo 'hash: ';
+      echo $currentHash;
+
 
       if($hash === $currentHash){
           // Add the rows to the array 
