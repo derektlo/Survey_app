@@ -144,36 +144,23 @@
         }).trigger('orientationchange');
       }
 
-var theDiv = document.getElementById("startingNumberOrLetter");
-
-
-
         if (sessionStorage.surveyType === 'Numbers') {
             console.log("appending start list");
-              var createOptionsListString;
-
+              $('#startingNumberOrLetter').append('<div data-role="fieldcontain"><label for="select-choice-1" class="select">Select Starting Number:</label><select name="select-choice-1" id="select-choice-1">');
+              var beginLastAppend;
               var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
 
-              var done;
               for (var i = 0; i < alphabet.length; i++) {
-               // $('#startingNumberOrLetter').append('<option value=\'' + alphabet[i] + '\'>\'' + alphabet[i] + '\'</option>');
+                $('#startingNumberOrLetter').append('<option value=\'' + alphabet[i] + '\'>\'' + alphabet[i] + '\'</option>');
               
-              createOptionsListString = createOptionsListString + '<option value=\'' + alphabet[i] + '\'>\'' + alphabet[i] + '\'</option>';
-               // if (i === (alphabet.length - 1) ){('#startingNumberOrLetter').append('</select></div>');}
-                console.log("i: ",i);
-                    if (i == (alphabet.length - 1))
-                      {done = true;}
-                    console.log("optionsliststring:ffffff ",createOptionsListString);
+                if (i === (alphabet.length - 1) ) {
+                    beginLastAppend = "true";
+                }
               }
-              if (done = true) {
-              console.log("optionsliststring: ",createOptionsListString);
+              if (beginLastAppend === "true")
+                 $('#startingNumberOrLetter').append('</select></div>');
 
-              var myString = '<div data-role="fieldcontain"><label for="select-choice-1" class="select">Select Starting Number:</label><select name="select-choice-1" id="select-choice-1">' + createOptionsListString + '</select></div>';
-              var content = document.createTextNode(myString);
-              theDiv.appendChild(content);
-
-             // $('#startingNumberOrLetter').append('<div data-role="fieldcontain"><label for="select-choice-1" class="select">Select Starting Number:</label><select name="select-choice-1" id="select-choice-1">' + createOptionsListString + '</select></div>');
-              }
+               $('select').selectmenu();
             }
 
     }); 
