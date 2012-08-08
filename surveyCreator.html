@@ -146,7 +146,7 @@
 
         if (sessionStorage.surveyType === 'Numbers') {
             console.log("appending start list");
-              $('#startingNumberOrLetter').append('<div data-role="fieldcontain"><label for="select-choice-1" class="select">Select Starting Number:</label><select name="select-choice-1" id="select-choice-1">');
+              $('#startingNumberOrLetter').append('<div data-role="fieldcontain"><label for="select-choice-1" class="select">Select First Letter:</label><select name="select-choice-1" id="select-choice-1">');
               var beginLastAppend;
               var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
 
@@ -157,10 +157,10 @@
                     beginLastAppend = "true";
                 }
               }
-              if (beginLastAppend === "true")
+              if (beginLastAppend === "true") {
                  $('#startingNumberOrLetter').append('</select></div>');
-
-               $('select').selectmenu();
+                 $('#select-choice-1').selectmenu();
+             }
             }
 
     }); 
