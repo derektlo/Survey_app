@@ -67,6 +67,7 @@ function showSimpleDialogue(alertHeader, alertMessage) {
 function createNewSurveyWithType(surveyType) {
     // change the page to the surveyCreator.html
     console.log(surveyType);
+    
       if (Modernizr.sessionstorage) {
         sessionStorage.surveyType = surveyType;
       }
