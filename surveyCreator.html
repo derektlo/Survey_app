@@ -144,6 +144,10 @@
         }).trigger('orientationchange');
       }
 
+var theDiv = document.getElementById("startingNumberOrLetter");
+
+
+
         if (sessionStorage.surveyType === 'Numbers') {
             console.log("appending start list");
               var createOptionsListString;
@@ -164,7 +168,11 @@
               if (done = true) {
               console.log("optionsliststring: ",createOptionsListString);
 
-              $('#startingNumberOrLetter').append('<div data-role="fieldcontain"><label for="select-choice-1" class="select">Select Starting Number:</label><select name="select-choice-1" id="select-choice-1">' + createOptionsListString + '</select></div>');
+              var myString = '<div data-role="fieldcontain"><label for="select-choice-1" class="select">Select Starting Number:</label><select name="select-choice-1" id="select-choice-1">' + createOptionsListString + '</select></div>';
+              var content = document.createTextNode(myString);
+              theDiv.appendChild(content);
+
+             // $('#startingNumberOrLetter').append('<div data-role="fieldcontain"><label for="select-choice-1" class="select">Select Starting Number:</label><select name="select-choice-1" id="select-choice-1">' + createOptionsListString + '</select></div>');
               }
             }
 
