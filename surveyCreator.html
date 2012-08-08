@@ -146,12 +146,12 @@
 
         if (sessionStorage.surveyType === 'Numbers') {
             console.log("appending start list");
-              $('#startingNumberOrLetter').append('<div data-role="fieldcontain"><label for="select-choice-1" class="select">Select First Letter:</label><select name="select-choice-1" id="select-choice-1">');
+              $('#startingNumberOrLetter').append('<div data-role="fieldcontain"><label for="lettersMenu" class="select">Select First Letter:</label><select name="lettersMenu" id="lettersMenu">');
               var beginLastAppend;
               var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
 
               for (var i = 0; i < alphabet.length; i++) {
-                $('#startingNumberOrLetter').append('<option value=\'' + alphabet[i] + '\'>\'' + alphabet[i] + '\'</option>');
+                $('#lettersMenu').append('<option value=\'' + alphabet[i] + '\'>\'' + alphabet[i] + '\'</option>');
               
                 if (i === (alphabet.length - 1) ) {
                     beginLastAppend = "true";
@@ -159,7 +159,7 @@
               }
               if (beginLastAppend === "true") {
                  $('#startingNumberOrLetter').append('</select></div>');
-                 $('#select-choice-1').selectmenu();
+                 $('#lettersMenu').selectmenu();
              }
             }
 
