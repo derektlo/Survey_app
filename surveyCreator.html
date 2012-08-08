@@ -147,25 +147,21 @@
         if (sessionStorage.surveyType === 'Numbers') {
             console.log("appending start list");
               $('#startingNumberOrLetter').append('<div data-role="fieldcontain"><label for="lettersMenu" class="select">Select First Letter:</label><select name="lettersMenu" id="lettersMenu" data-native-menu="false">');
-              console.log("error1");
+
               var beginLastAppend;
               var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
 
               for (var i = 0; i < alphabet.length; i++) {
                 $('#lettersMenu').append('<option value=\'' + alphabet[i] + '\'>' + alphabet[i] + '</option>');
-                console.log("error2");
-                if (i === (alphabet.length - 1) ) {
-                    beginLastAppend = "true";
-                }
               }
 
-              if (beginLastAppend === "true") {
-                console.log("error3");
-                 $('#lettersMenu').selectmenu('refresh',true);
-             }
             }
 
-    }); 
+    });
+
+     $("#surveyCreatorPage").live('pageinit', function() {
+           $('#lettersMenu').selectmenu('refresh',true);
+      });
 
     $('#optionSlider').live('change', function() {
         sliderValue = $(this).slider();
