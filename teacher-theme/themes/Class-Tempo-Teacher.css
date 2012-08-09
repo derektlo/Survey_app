@@ -13,17 +13,17 @@
 -----------------------------------------------------------------------------------------------------------*/
 
 .ui-bar-a {
-	border: 1px solid #B3B3B3 /*{a-bar-border}*/;
-	background: #e4e2e2 /*{a-bar-background-color}*/;
+	border: 1px solid #b1b9b1 /*{a-bar-border}*/;
+	background: #c2c7c1 /*{a-bar-background-color}*/;
 	color: #3E3E3E /*{a-bar-color}*/;
 	font-weight: bold;
 	text-shadow: 0 /*{a-bar-shadow-x}*/ 1px /*{a-bar-shadow-y}*/ 1px /*{a-bar-shadow-radius}*/ #ffffff /*{a-bar-shadow-color}*/;
-	background-image: -webkit-gradient(linear, left top, left bottom, from( #e6e4e4 /*{a-bar-background-start}*/), to( #e1dfdf /*{a-bar-background-end}*/)); /* Saf4+, Chrome */
-	background-image: -webkit-linear-gradient( #e6e4e4 /*{a-bar-background-start}*/, #e1dfdf /*{a-bar-background-end}*/); /* Chrome 10+, Saf5.1+ */
-	background-image:    -moz-linear-gradient( #e6e4e4 /*{a-bar-background-start}*/, #e1dfdf /*{a-bar-background-end}*/); /* FF3.6 */
-	background-image:     -ms-linear-gradient( #e6e4e4 /*{a-bar-background-start}*/, #e1dfdf /*{a-bar-background-end}*/); /* IE10 */
-	background-image:      -o-linear-gradient( #e6e4e4 /*{a-bar-background-start}*/, #e1dfdf /*{a-bar-background-end}*/); /* Opera 11.10+ */
-	background-image:         linear-gradient( #e6e4e4 /*{a-bar-background-start}*/, #e1dfdf /*{a-bar-background-end}*/);
+	background-image: -webkit-gradient(linear, left top, left bottom, from( #c5cac4 /*{a-bar-background-start}*/), to( #bec3bd /*{a-bar-background-end}*/)); /* Saf4+, Chrome */
+	background-image: -webkit-linear-gradient( #c5cac4 /*{a-bar-background-start}*/, #bec3bd /*{a-bar-background-end}*/); /* Chrome 10+, Saf5.1+ */
+	background-image:    -moz-linear-gradient( #c5cac4 /*{a-bar-background-start}*/, #bec3bd /*{a-bar-background-end}*/); /* FF3.6 */
+	background-image:     -ms-linear-gradient( #c5cac4 /*{a-bar-background-start}*/, #bec3bd /*{a-bar-background-end}*/); /* IE10 */
+	background-image:      -o-linear-gradient( #c5cac4 /*{a-bar-background-start}*/, #bec3bd /*{a-bar-background-end}*/); /* Opera 11.10+ */
+	background-image:         linear-gradient( #c5cac4 /*{a-bar-background-start}*/, #bec3bd /*{a-bar-background-end}*/);
 }
 .ui-bar-a .ui-link-inherit {
 	color: #3E3E3E /*{a-bar-color}*/;
@@ -58,13 +58,13 @@
 	border: 1px solid #aaaaaa /*{a-body-border}*/;
 	color: #333333 /*{a-body-color}*/;
 	text-shadow: 0 /*{a-body-shadow-x}*/ 1px /*{a-body-shadow-y}*/ 0 /*{a-body-shadow-radius}*/ #ffffff /*{a-body-shadow-color}*/;
-	background: #ecefec /*{a-body-background-color}*/;
-	background-image: -webkit-gradient(linear, left top, left bottom, from( #ecefec /*{a-body-background-start}*/), to( #ecefec /*{a-body-background-end}*/)); /* Saf4+, Chrome */
-	background-image: -webkit-linear-gradient( #ecefec /*{a-body-background-start}*/, #ecefec /*{a-body-background-end}*/); /* Chrome 10+, Saf5.1+ */
-	background-image:    -moz-linear-gradient( #ecefec /*{a-body-background-start}*/, #ecefec /*{a-body-background-end}*/); /* FF3.6 */
-	background-image:     -ms-linear-gradient( #ecefec /*{a-body-background-start}*/, #ecefec /*{a-body-background-end}*/); /* IE10 */
-	background-image:      -o-linear-gradient( #ecefec /*{a-body-background-start}*/, #ecefec /*{a-body-background-end}*/); /* Opera 11.10+ */
-	background-image:         linear-gradient( #ecefec /*{a-body-background-start}*/, #ecefec /*{a-body-background-end}*/);
+	background: #d9ded9 /*{a-body-background-color}*/;
+	background-image: -webkit-gradient(linear, left top, left bottom, from( #dde2dd /*{a-body-background-start}*/), to( #d4d9d4 /*{a-body-background-end}*/)); /* Saf4+, Chrome */
+	background-image: -webkit-linear-gradient( #dde2dd /*{a-body-background-start}*/, #d4d9d4 /*{a-body-background-end}*/); /* Chrome 10+, Saf5.1+ */
+	background-image:    -moz-linear-gradient( #dde2dd /*{a-body-background-start}*/, #d4d9d4 /*{a-body-background-end}*/); /* FF3.6 */
+	background-image:     -ms-linear-gradient( #dde2dd /*{a-body-background-start}*/, #d4d9d4 /*{a-body-background-end}*/); /* IE10 */
+	background-image:      -o-linear-gradient( #dde2dd /*{a-body-background-start}*/, #d4d9d4 /*{a-body-background-end}*/); /* Opera 11.10+ */
+	background-image:         linear-gradient( #dde2dd /*{a-body-background-start}*/, #d4d9d4 /*{a-body-background-end}*/);
 }
 .ui-overlay-a {
 	background-image: none;
@@ -82,7 +82,7 @@
 }
 
 .ui-body-a .ui-link {
-	color: #2489CE /*{a-body-link-color}*/;
+	color: #3ea037 /*{a-body-link-color}*/;
 	font-weight: bold;
 }
 
