@@ -59,6 +59,11 @@
   <div id="startingNumberOrLetter">
   </div>
 
+  <div id="customOptionsList">
+      <ul>
+      </ul>
+  </div>
+
   <fieldset data-role="controlgroup">
   <legend>Survey On/Off</legend>
       <input type="radio" name="OnOff" id="On" value="On" checked="checked" />
@@ -80,10 +85,18 @@
   </div>
 </div>
 
+  <div id="footer" data-role="footer">
+  </div>
+
   <script>
 
   $(document).bind('mobileinit',function(){
         $.mobile.selectmenu.prototype.options.nativeMenu = false;
+  });
+
+  $(document).delegate('#surveyCreatorPage', 'pageshow', function () {
+    var the_height = ($(window).height() - $(this).find('[data-role="header"]').height() - $(this).find('[data-role="footer"]').height());
+    $(this).height($(window).height()).find('[data-role="content"]').height(the_height);
   });
 
     function logMeOut(){
@@ -146,7 +159,7 @@
         }).trigger('orientationchange');
       }
 
-        if (sessionStorage.surveyType === 'Numbers') {
+        if (sessionStorage.surveyType === 'Letters') {
             console.log("appending start list");
               $('#startingNumberOrLetter').append('<div data-role="fieldcontain"><label for="lettersMenu" class="select">Select Letter:</label><select name="lettersMenu" id="lettersMenu" data-native-menu="false">');
 
@@ -156,8 +169,21 @@
               for (var i = 0; i < alphabet.length; i++) {
                 $('#lettersMenu').append('<option value=\'' + alphabet[i] + '\'>' + alphabet[i] + '</option>');
               }
+          }
+        else if (sessionStorage.surveyType === 'Custom') {
 
-            }
+          var numberOfCustomOptions;
+
+          if (sessionStorage.numCustom === undefined)
+                numberOfCustomOptions = 1;
+          else
+                numberOfCustomOptions = parseInt(sessionStorage.numCustom);
+
+          for (var i = 0; i < numberOfCustomOptions; i++) {
+            $('ul#customOptionsList').append('<li><label for="custom' + (i+1) + '" class="ui-input-text">Option ' + (i+1) + ':</label><input type="text" name="custom' + (i+1) + '" id="custom' + (i+1) + '" value="" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset"></li>');
+          }
+        }
+
 
     });
 

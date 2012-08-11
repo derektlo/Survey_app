@@ -64,12 +64,33 @@ function showSimpleDialogue(alertHeader, alertMessage) {
              });
  }
 
+function isNumeric(num){
+    return !isNaN(num)
+}
+
 function createNewSurveyWithType(surveyType) {
     // change the page to the surveyCreator.html
     console.log(surveyType);
     
       if (Modernizr.sessionstorage) {
         sessionStorage.surveyType = surveyType;
+          
+          if (surveyType === 'Custom') {
+
+                  $(document).simpledialog2({
+                    mode: 'button',
+                    headerText: alertHeader,
+                    buttonPrompt: alertMessage,
+                    headerClose: false,
+                    buttons : {
+                      'Submit': {
+                        click: function () {
+                            $.mobile.changePage("surveyCreator.html"); 
+                        }
+                      }
+                    }
+             });
+          }
       }
       else {
         $.cookie("surveyType",surveyType);
@@ -147,7 +168,7 @@ $(document).ready(function() {
       <ul id="surveyTypeList" data-role="listview">
         <li><a href="" onclick="createNewSurveyWithType('Numbers')"><h1>Numbers</h1><p>Creates a survey using numbers as options (example survey: Do you understand this concept? 1 = yes, 2 = no)</p></a></li>
         <li><a href="" onclick="createNewSurveyWithType('Letters')"><h1>Letters</h1><p>Creates a survey using letters as options (example survey: Would you rather go to California or Alaska a = CA, b = AK)</p></a></li>
-        <li><a href="" onclick="createNewSurveyWithType('Custom')"><h1>Custom Options</h1><p>Want more flexibility in your survey options? Create your own categories. (example survey: I love reading, I hate reading</p></a></li>
+        <li><a href="" onclick="createNewSurveyWithType('Custom')"><h1>Custom Options</h1><p>Want more flexibility in your survey options? Create your own categories. (example survey: I love reading, I hate reading)</p></a></li>
         <li><a href="" onclick="createNewSurveyWithType('Specific')"><h1>Specfic Response</h1><p>If you are expecting a specific answer, either numberical or textual. This type of survey can also be used to poll a class for questions.</p></a></li>
       </ul>
 
