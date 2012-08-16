@@ -99,17 +99,17 @@
 }
 
 .ui-btn-up-a {
-	border: 1px solid #cccccc /*{a-bup-border}*/;
-	background: #62d246 /*{a-bup-background-color}*/;
+	border: 1px solid #a7aea8 /*{a-bup-border}*/;
+	background: #88f96c /*{a-bup-background-color}*/;
 	font-weight: bold;
 	color: #2F3E46 /*{a-bup-color}*/;
 	text-shadow: 0 /*{a-bup-shadow-x}*/ 1px /*{a-bup-shadow-y}*/ 0 /*{a-bup-shadow-radius}*/ #ffffff /*{a-bup-shadow-color}*/;
-	background-image: -webkit-gradient(linear, left top, left bottom, from( #62d246 /*{a-bup-background-start}*/), to( #62d246 /*{a-bup-background-end}*/)); /* Saf4+, Chrome */
-	background-image: -webkit-linear-gradient( #62d246 /*{a-bup-background-start}*/, #62d246 /*{a-bup-background-end}*/); /* Chrome 10+, Saf5.1+ */
-	background-image:    -moz-linear-gradient( #62d246 /*{a-bup-background-start}*/, #62d246 /*{a-bup-background-end}*/); /* FF3.6 */
-	background-image:     -ms-linear-gradient( #62d246 /*{a-bup-background-start}*/, #62d246 /*{a-bup-background-end}*/); /* IE10 */
-	background-image:      -o-linear-gradient( #62d246 /*{a-bup-background-start}*/, #62d246 /*{a-bup-background-end}*/); /* Opera 11.10+ */
-	background-image:         linear-gradient( #62d246 /*{a-bup-background-start}*/, #62d246 /*{a-bup-background-end}*/);
+	background-image: -webkit-gradient(linear, left top, left bottom, from( #91FF73 /*{a-bup-background-start}*/), to( #7ee764 /*{a-bup-background-end}*/)); /* Saf4+, Chrome */
+	background-image: -webkit-linear-gradient( #91FF73 /*{a-bup-background-start}*/, #7ee764 /*{a-bup-background-end}*/); /* Chrome 10+, Saf5.1+ */
+	background-image:    -moz-linear-gradient( #91FF73 /*{a-bup-background-start}*/, #7ee764 /*{a-bup-background-end}*/); /* FF3.6 */
+	background-image:     -ms-linear-gradient( #91FF73 /*{a-bup-background-start}*/, #7ee764 /*{a-bup-background-end}*/); /* IE10 */
+	background-image:      -o-linear-gradient( #91FF73 /*{a-bup-background-start}*/, #7ee764 /*{a-bup-background-end}*/); /* Opera 11.10+ */
+	background-image:         linear-gradient( #91FF73 /*{a-bup-background-start}*/, #7ee764 /*{a-bup-background-end}*/);
 }
 .ui-btn-up-a:visited,
 .ui-btn-up-a a.ui-link-inherit {
