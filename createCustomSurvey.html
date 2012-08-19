@@ -4,7 +4,6 @@
   <title>Sign up</title> 
   <meta name="viewport" content="height=100%,width=device-width,initial-scale=1.0,maximum-scale=1.0, user-scalable=0" >
     <!-- CSS -->
-  <!-- CSS -->
   <link rel="stylesheet" href="./signup.css">
   <link rel="stylesheet" href="./teacher-theme/themes/Class-Tempo-Teacher.min.css" />
   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile.structure-1.1.1.min.css" />
@@ -109,6 +108,56 @@ $(document).delegate('#surveyCreatorPage', 'pageshow', function () {
    
 $(document).ready(function() {
 
+    $('#customSurveyCreatorPage').css('height', $(document).height());
+    
+    var sessionActive;
+
+    if (Modernizr.sessionstorage){
+        if (sessionStorage.loggedIn === 'true'){sessionActive = true;}
+        else {sessionActive = false;}
+    }
+    else {
+        if ($.cookie("loggedIn") === 'true'){sessionActive = true;}
+        else {sessionActive = false;}
+    }
+
+    if (sessionActive === false){
+      $('#customSurveyCreatorPage').remove();
+      showSimpleDialogue("Whoops!","Looks like you're logged out.");
+    }
+
+      surveyCreatorContentVar = $('#surveyCreatorContent');
+      surveyDescriptionVar = $('#SurveyDescription');
+      surveyCreatorFormVar = $('#surveyCreatorForm');
+      sliderValue = $('#optionSlider');
+
+    console.log("made it hereasfasdfdsfa..");
+
+        if (sessionStorage.surveyType === 'Custom') {
+             var options = parseInt(sessionStorage.customNumber);
+
+             for (var i = 0; i < options; i++) {
+
+                $('ul#customOptionsList').append('<li data-role="filedcontainer"><label for="basic">Option ' + i + ' :</label>
+              <input type="text" name="optionInput' + i + '" id="optionInput' + i + '" value=""  /></li>');
+             }
+
+          }
+        else if (sessionStorage.surveyType === 'Specific') {
+          console.log("made it here..");
+
+          // Append a textbox
+          if (sessionStorage.textual == 'true') {
+            $('#specificResponseBox').append('<label for="basic">Specific Response:</label>
+              <input type="text" name="specificText" id="specificText" value=""  />');
+          }
+          else { // otherwise append a numberical box
+            $('#specificResponseBox').append('<label for="number">Specific Response:</label>
+              <input type="number" name="specificNumber" id="specificNumber" value=""  />');
+          }
+
+          $('input').textinput(); 
+        }
 
 
 });
