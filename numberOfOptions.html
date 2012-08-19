@@ -99,7 +99,7 @@ $(document).ready(function() {
   });
 
  $('#confirmNumOptionsButton').click(function() { 
-    console.log("confirmed");
+  
       if (Modernizr.sessionstorage) {
             sessionStorage.customNumber = sliderValue;
       }
@@ -107,11 +107,7 @@ $(document).ready(function() {
         $.cookie("customNumber",sliderValue);
       }
 
-      $.mobile.changePage("surveyCreator.html", { transition: "slide"} );
-  });
-
-  $('#confirmNumOptions').click(function() { 
-    console.log("confirmeddddd");
+      $.mobile.changePage("createCustomSurvey.html", { transition: "slide"} );
   });
 
 </script>

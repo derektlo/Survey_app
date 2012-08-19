@@ -21,12 +21,6 @@
   
   <script>   
    // Global declarations - assignments made in $(document).ready() below
-    var hdrMainvar = null;
-    var surveyCreatorContentVar = null;
-    var ftrMainVar = null;
-
-    var sliderValue = null;
-    var numbersOrLetters = null;
     var onOffValue = null;
     var surveyDescriptionVar = null;
 
@@ -59,7 +53,7 @@
       </ul>
   </div>
 
-  <div id="specificResponseBox" data-role="fieldcontainer">
+  <div id="specificResponseBox">
   </div>
 
   <fieldset data-role="controlgroup">
@@ -76,10 +70,11 @@
     <textarea name="SurveyDescription" id="SurveyDescription"></textarea>
   </div>
 
-    <div id="createSurveyButtonDiv">    
-    <a id="createSurveyButton" name="createSurveyButton" data-role="button" data-inline="true" data-ajax="false">Create Survey</a>
+    <div id="createCustomSurveyButtonDiv">    
+    <a id="createCustomSurveyButton" name="createCustomSurveyButton" data-role="button" data-inline="true" data-ajax="false">Create Survey</a>
     </div>
     </form>
+
   </div>
 </div>
 
@@ -90,7 +85,7 @@
 
 $(document).bind('mobileinit',function(){
         $.mobile.selectmenu.prototype.options.nativeMenu = false;
-  });
+});
 
 function showSimpleDialogue(alertHeader, alertMessage) {
     
@@ -112,18 +107,6 @@ $(document).delegate('#surveyCreatorPage', 'pageshow', function () {
     var the_height = ($(window).height() - $(this).find('[data-role="header"]').height() - $(this).find('[data-role="footer"]').height());
     $(this).height($(window).height()).find('[data-role="content"]').height(the_height);
   });
-
-    function logMeOut(){
-      
-      if (Modernizr.sessionstorage) {
-        sessionStorage.loggedIn = 'false';
-      }
-      else {
-        $.cookie("loggedIn","false");
-      }
-
-      $.mobile.changePage("teacher.html",{transition:"fade"});
-    }
    
 $(document).ready(function() {
 
@@ -180,17 +163,8 @@ $(document).ready(function() {
 
 
 });
-
-$("#surveyCreatorPage").live('pageinit', function() {
-           $('#lettersMenu').selectmenu('refresh',true);
-});
-
-$('#optionSlider').live('change', function() {
-        sliderValue = $(this).slider();
-});
-   
     
-    $('#createSurveyButton').click(function() { 
+    $('#createCustomSurveyButton').click(function() { 
 
         $('input[name=OnOff]').each(function() { 
             onOffValue = $('input[name=OnOff]:checked').val();
