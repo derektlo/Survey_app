@@ -77,11 +77,11 @@ function createNewSurveyWithType(surveyType) {
           
           if (surveyType === 'Custom') {
 
-                   $(document).simpledialog2({
+                   $('<div>').simpledialog2({
                           mode: 'button',
-                          headerText: 'How many options?',
+                          headerText: 'Custom Survey',
                           headerClose: true,
-                          buttonPrompt: '',
+                          buttonPrompt: 'How many options?',
                           buttonInput: true,
                           buttons : {
                             'OK': {
