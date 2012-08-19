@@ -77,26 +77,39 @@ function createNewSurveyWithType(surveyType) {
           
           if (surveyType === 'Custom') {
 
-                  $(document).simpledialog2({
-                    mode: 'button',
-                    headerText: alertHeader,
-                    buttonPrompt: alertMessage,
-                    headerClose: false,
-                    buttons : {
-                      'Submit': {
-                        click: function () {
-                            $.mobile.changePage("surveyCreator.html"); 
-                        }
-                      }
-                    }
-             });
+                   $(document).simpledialog2({
+                          mode: 'button',
+                          headerText: 'How many options?',
+                          headerClose: true,
+                          buttonPrompt: '',
+                          buttonInput: true,
+                          buttons : {
+                            'OK': {
+                              click: function () { 
+                                console.log("inputted text: ",$.mobile.sdLastInput);
+                                
+
+                                // set local storage variables
+
+                                // change page
+                                $.mobile.changePage( "surveyCreator.html", { transition: "slide"} );
+
+
+                              }
+                            },
+                          }
+                        });
+          }
+          else { // Survey type is not custom
+
+            $.mobile.changePage( "surveyCreator.html", { transition: "slide"} );
           }
       }
       else {
         $.cookie("surveyType",surveyType);
       }
 
-   $.mobile.changePage( "surveyCreator.html", { transition: "slide"} );
+   
 }
 
 function logMeOut(){
