@@ -35,16 +35,15 @@
 <body> 
 
 <!-- Page starts here -->
-<div data-role="page" data-theme="a" id="surveyCreatorPage" data-add-back-btn="true"> 
+<div data-role="page" data-theme="a" id="customSurveyCreatorPage" data-add-back-btn="true"> 
 
 <div id="surveyCreatorContainer">
 
   <div data-role="header" id="hdrMain">
-    <a href="" onclick="logMeOut()" data-direction="reverse" rel="external" data-icon="" data-transition="slide" class="ui-btn-right">Logout</a>
     <h1>Class Tempo</h1>
   </div>
 
-<div data-role="content" id="surveyCreatorContent">
+<div data-role="content" id="customSurveyCreatorContent">
 
   <form id="surveyCreatorForm">
 
@@ -124,12 +123,12 @@ $(document).ready(function() {
     }
 
     if (sessionActive === false){
-      $('#surveyCreatorContainer').remove();
+      $('#customSurveyCreatorPage').remove();
       showSimpleDialogue("Whoops!","Looks like you're logged out.");
     }
 
       surveyCreatorContentVar = $('#surveyCreatorContent');
-      surveyDescriptionVar = $('#SurveyDescription')
+      surveyDescriptionVar = $('#SurveyDescription');
       surveyCreatorFormVar = $('#surveyCreatorForm');
       sliderValue = $('#optionSlider');
 
@@ -141,7 +140,7 @@ $(document).ready(function() {
              for (var i = 0; i < options; i++) {
 
                 $('ul#customOptionsList').append('<li data-role="filedcontainer"><label for="basic">Option ' + i + ' :</label>
-              <input type="text" name="optionInput' + i + '" id="optionInput' + i + '" value=""  /></li>')
+              <input type="text" name="optionInput' + i + '" id="optionInput' + i + '" value=""  /></li>');
              }
 
           }

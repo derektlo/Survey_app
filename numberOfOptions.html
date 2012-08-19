@@ -57,14 +57,12 @@ function showSimpleDialogue(alertHeader, alertMessage) {
                       }
                     }
              });
- }
+}
 
 $(document).ready(function() {
 
 
 });
-
-
 </script>
 
 <div id="numberOfOptionsContainer">
@@ -99,7 +97,7 @@ $(document).ready(function() {
   });
 
  $('#confirmNumOptionsButton').click(function() { 
-  
+
       if (Modernizr.sessionstorage) {
             sessionStorage.customNumber = sliderValue;
       }
