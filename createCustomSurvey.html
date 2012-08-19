@@ -147,6 +147,8 @@ $(document).ready(function() {
       surveyCreatorFormVar = $('#surveyCreatorForm');
       sliderValue = $('#optionSlider');
 
+    console.log("made it hereasfasdfdsfa..");d
+
         if (sessionStorage.surveyType === 'Custom') {
              var options = parseInt(sessionStorage.customNumber);
 
@@ -158,6 +160,7 @@ $(document).ready(function() {
 
           }
         else if (sessionStorage.surveyType === 'Specific') {
+          console.log("made it here..");
 
           // Append a textbox
           if (sessionStorage.textual == 'true') {
