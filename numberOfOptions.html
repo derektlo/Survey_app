@@ -100,7 +100,7 @@ $(document).ready(function() {
   });
 
  $('#confirmNumOptionsButton').click(function() { 
-
+    console.log("confirmed");
       if (Modernizr.sessionstorage) {
             sessionStorage.customNumber = sliderValue;
       }
@@ -109,6 +109,10 @@ $(document).ready(function() {
       }
 
       $.mobile.changePage("surveyCreator.html", { transition: "slide"} );
+  });
+
+  $('#confirmNumOptions').click(function() { 
+    console.log("confirmeddddd");
   });
 
 </script>
