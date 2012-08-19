@@ -76,29 +76,7 @@ function createNewSurveyWithType(surveyType) {
         sessionStorage.surveyType = surveyType;
           
           if (surveyType === 'Custom') {
-
-                   $('<div>').simpledialog2({
-                          mode: 'button',
-                          headerText: 'Custom Survey',
-                          headerClose: true,
-                          buttonPrompt: 'How many options?',
-                          buttonInput: true,
-                          buttons : {
-                            'OK': {
-                              click: function () { 
-                                console.log("inputted text: ",$.mobile.sdLastInput);
-                                
-
-                                // set local storage variables
-
-                                // change page
-                                $.mobile.changePage( "surveyCreator.html", { transition: "slide"} );
-
-
-                              }
-                            },
-                          }
-                        });
+              $.mobile.changePage( "numberOfOptions.html", { transition: "slide"} );
           }
           else { // Survey type is not custom
 

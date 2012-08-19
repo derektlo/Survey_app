@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="height=device-height,width=device-width,initial-scale=1.0,maximum-scale=1.0" >
+  <title>Survey-Type Selector</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="./signup.css">
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" />
+  <link rel="stylesheet" type="text/css" href="simpleDialog2/jquery.mobile.simpledialog.min.css" /> 
+
+  <!-- Modernizer -->
+  <script type="text/javascript" src="./modernizr.custom.56582.js"></script>
+
+  <!-- jQuery/jQuery Mobile -->
+  <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script>
+
+   <!-- simpleDiaglo2 -->
+  <script src="simpleDialog2/jquery.mobile.simpledialog2.min.js"></script>
+
+  <!-- jqPlot -->
+  <!--[if lt IE 9]><script language="javascript" type="text/javascript" src="js/excanvas.js"></script><![endif]-->
+  <script language="javascript" type="text/javascript" src="js/jquery.jqplot.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="js/jquery.jqplot.css" />
+
+  <!-- Dependencies required for surveyResults.html Graphing -->
+  <script language="javascript" type="text/javascript" src="js/plugins/jqplot.barRenderer.js"></script>
+  <script language="javascript" type="text/javascript" src="js/plugins/jqplot.barRenderer.min.js"></script>
+  <script language="javascript" type="text/javascript" src="js/plugins/jqplot.categoryAxisRenderer.js"></script>
+  <script language="javascript" type="text/javascript" src="js/plugins/jqplot.pointLabels.js"></script>
+  <script language="javascript" type="text/javascript" src="js/plugins/jqplot.pointLabels.min.js"></script>
+
+</head>
+
+
+<body>
+
+  <!-- Page starts here -->
+<div data-role="page" data-theme="a" id="numberOfOptions" data-add-back-btn="true">
+
+<script>
+
+  var sliderValue = null;
+
+function showSimpleDialogue(alertHeader, alertMessage) {
+    
+    $(document).simpledialog2({
+                    mode: 'button',
+                    headerText: alertHeader,
+                    buttonPrompt: alertMessage,
+                    headerClose: false,
+                    buttons : {
+                      'Log in': {
+                        click: function () {
+                            $.mobile.changePage("teacher.html"); 
+                        }
+                      }
+                    }
+             });
+ }
+
+$(document).ready(function() {
+
+
+});
+
+
+</script>
+
+<div id="numberOfOptionsContainer">
+
+  <div data-role="header" id="hdrMain">
+    <h1>Number of Options</h1>
+  </div>
+
+  <div data-role="content" id="numberOfOptionsContent">
+
+   <form id="numberOfOptionsForm">
+
+     <div id="optionSliderDiv" data-role="fieldcontain">
+    <label for="optionSlider">How Many Options?</label>
+    <input type="range" name="optionSlider" id="optionSlider" value="2" min="2" max="25" data-highlight="true" />
+    </div>
+
+    <div id="confirmNumOptions">    
+    <a id="confirmNumOptionsButton" name="confirmNumOptionsButton" data-role="button" data-inline="true" data-ajax="false">Confirm</a>
+    </div>
+
+  </form>
+
+  </div>  
+
+</div>
+</div>
+
+<script>
+
+ $('#optionSlider').live('change', function() {
+        sliderValue = $(this).slider();
+  });
+
+ $('#createSurveyButton').click(function() { 
+
+      $.mobile.changePage("surveyCreator.html", { transition: "slide"} );
+
+  });
+
+</script>
+
+  </body>
+
+</head>
+</html>
