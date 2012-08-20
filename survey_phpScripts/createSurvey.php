@@ -20,7 +20,7 @@
    $email = isset($_GET['email']) ? $_GET['email']  : "";
 
    $surveyType = isset($_GET['surveyType']) ? $_GET['surveyType']  : "";
-   echo $surveyType;
+
    if ($surveyType == 'Custom') {
    $customOptions = $_POST['customOptionsArray'];
    }
