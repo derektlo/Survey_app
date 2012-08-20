@@ -174,8 +174,7 @@ $(document).bind('pageinit', function(){
       $('ul#customOptionsList').listview('refresh');
 });
    
-// $('#createPowerSurveyButton').click(function() { 
-      $('#surveyCreatorForm').submit(function() {
+$('#surveyCreatorForm').submit(function() {
   console.log("clicked");
 
 
@@ -197,7 +196,16 @@ $(document).bind('pageinit', function(){
               currentUserTagVar = $.cookie("userTagVar");
            }
 
-         var customOptionsArray = ["peach","pear","plum"];
+         var customOptionsArray;
+
+         for (var i = 0; i < optionsNumber; i++) {
+
+              var optionInputAccessor = 'optionInput' + (i + 1);
+              console.log("optionInputAccesor: ",optionInputAccesor);
+              customOptionsArray.push($('#' + optionInputAccessor).val());
+         }
+
+         console.log("customOptionsArray: ",customOptionsArray);
 
         if (surveyType === 'Custom') {
           // Submit the form
@@ -220,7 +228,8 @@ $(document).bind('pageinit', function(){
               }
               else {
                 // show some kind of error message to inform user that there was a problem
-                // in creating survey    
+                // in creating survey
+                showSimpleDialogue("Whoops!","Sorry, it looks like there was an issue creating your survey. Please try again or send us an email at classtempo.support@classtempo.org")    
               }
             }); 
         }
