@@ -213,19 +213,17 @@ $('#surveyCreatorForm').submit(function() {
 
          var customOptionsArray = [];
 
+         // Get the User's custom options from the textboxes
          for (var i = 0; i < optionsNumber; i++) {
 
               var optionInputAccessor = '#optionInput' + (i + 1);
-              console.log("optionInputAccesor: ",optionInputAccessor);
-
               customOptionsArray.push($(optionInputAccessor).val());
          }
-
-         console.log("customOptionsArray: ",customOptionsArray);
-
+         console.log("surveyType: ",surveyType);
+         // Set up POST requests for either a Custom Survey or a Specific Response Survey
         if (surveyType === 'Custom') {
           // Submit the form
-            $.post("/Survey_app/survey_phpScripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&numberOfOptions=" + optionsNumber + "&surveyType=" + surveyType + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar, { 'customOptionsArray': customOptionsArray },surveyCreatorFormVar.serialize(), function(data){
+            $.post("/Survey_app/survey_phpScripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&numberOfOptions=" + optionsNumber + "&surveyType=" + surveyType + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar, { 'customOptionsArray': customOptionsArray }, surveyCreatorFormVar.serialize(), function(data){
               
               console.log(data);
               if (data != 'Error') {
@@ -245,7 +243,7 @@ $('#surveyCreatorForm').submit(function() {
               else {
                 // show some kind of error message to inform user that there was a problem
                 // in creating survey
-                showSimpleDialogue("Whoops!","Sorry, it looks like there was an issue creating your survey. Please try again or send us an email at classtempo.support@classtempo.org")    
+                showSimpleDialogue("Whoops!","Sorry, it looks like there was an issue creating your survey. Please try again or send us an email at classtempo.support@classtempo.org");    
               }
             }); 
         }
