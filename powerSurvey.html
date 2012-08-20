@@ -70,8 +70,8 @@
     <textarea name="SurveyDescription" id="SurveyDescription"></textarea>
   </div>
 
-    <div id="createSurveyButtonDiv">    
-    <a id="createSurveyButton" name="createSurveyButton" data-role="button" data-inline="true" data-ajax="false">Create Survey</a>
+    <div id="createPowerSurveyButtonDiv">    
+    <a id="createPowerSurveyButton" name="createPowerSurveyButton" data-role="button" data-inline="true" data-ajax="false">Create Survey</a>
     </div>
 
     </form>
@@ -174,7 +174,9 @@ $(document).bind('pageinit', function(){
       $('ul#customOptionsList').listview('refresh');
 });
    
-$('#createSurveyButton').click(function() { 
+$('#createPowerSurveyButton').click(function() { 
+  console.log("clicked");
+
 
     // Get whether survey is on or off
         $('input[name=OnOff]').each(function() { 
