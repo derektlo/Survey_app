@@ -164,8 +164,11 @@ $(document).ready(function() {
           $('input').textinput(); 
           */
         }
+});
 
-         $('ul#customOptionsList').listview('refresh');
+$(document).bind('pageinit', function(){
+
+      $('ul#customOptionsList').listview('refresh');
 });
    
 $('#createSurveyButton').click(function() { 
