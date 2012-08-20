@@ -66,7 +66,7 @@
       </ul>
   </div>
 
-  <div id="specificResponseBox">
+  <div data-role="fieldcontain" id="specificResponseBox">
   </div>
 
   <fieldset data-role="controlgroup">
@@ -149,27 +149,30 @@ $(document).ready(function() {
         if (sessionStorage.surveyType === 'Custom') {
              var options = parseInt(sessionStorage.customNumber);
 
-             for (var i = 0; i < options; i++) {
+            // for (var i = 0; i < options; i++) {
 
-                $('ul#customOptionsList').append('<li data-role="filedcontainer"><label for="basic">Option ' + i + ' :</label>
-              <input type="text" name="optionInput' + i + '" id="optionInput' + i + '" value=""  /></li>');
-             }
-
+              //  $('ul#customOptionsList').append('<li data-role="fieldcontainer"><label for="basic">Option ' + i + ' :</label>
+            //  <input type="text" name="optionInput' + i + '" id="optionInput' + i + '" value=""  /></li>');
+            // }
+           $('ul#customOptionsList').append('<li><input type="text" name="login-email" id="login-email" value="Email" /></li>');
           }
         else if (sessionStorage.surveyType === 'Specific') {
-          console.log("made it here..");
+          
+          console.log("made it to specific response..");
 
           // Append a textbox
           if (sessionStorage.textual === 'true') {
-            $('#specificResponseBox').append('<label for="basic">Specific Response:</label>
-              <input type="text" name="specificText" id="specificText" value=""  />');
+
+    //<label for="SurveyDescription">Survey Description:</label>
+    //<textarea name="SurveyDescription" id="SurveyDescription"></textarea>
+
+            $('#specificResponseBox').append('<label for="specificText">Specific Response:</label><input type="text" name="specificText" id="specificText" value=""  />');
           }
           else { // otherwise append a numberical box
-            $('#specificResponseBox').append('<label for="number">Specific Response:</label>
-              <input type="number" name="specificNumber" id="specificNumber" value=""  />');
+            $('#specificResponseBox').append('<label for="specificNumber">Specific Response:</label><input type="number" name="specificNumber" id="specificNumber" value=""  />');
           }
 
-         // $('input').textinput(); 
+          $('input').textinput(); 
         }
 });
     
