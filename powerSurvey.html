@@ -224,7 +224,7 @@ $('#surveyCreatorForm').submit(function() {
         if (surveyType === 'Custom') {
 
           // Submit the form
-            $.post("/Survey_app/survey_phpScripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&numberOfOptions=" + optionsNumber + "&surveyType=" + surveyType + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar, { 'customOptionsArray': customOptionsArray }, surveyCreatorFormVar.serialize(), function(data){
+            $.getJSON("/Survey_app/survey_phpScripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&numberOfOptions=" + optionsNumber + "&surveyType=" + surveyType + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar, { 'customOptionsArray': customOptionsArray }, surveyCreatorFormVar.serialize(), function(data){
               
               console.log("return data: ",data);
               if (data != 'Error') {
