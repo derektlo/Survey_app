@@ -18,16 +18,9 @@
   
   <script>   
    // Global declarations - assignments made in $(document).ready() below
-    var hdrMainvar = null;
-    var surveyCreatorContentVar = null;
-    var ftrMainVar = null;
 
-    var sliderValue = null;
-    var numbersOrLetters = null;
     var onOffValue = null;
     var surveyDescriptionVar = null;
-
-    var surveyCreatorFormVar = null;
 
     var MISSING = "missing";
     var EMPTY = "";
@@ -38,26 +31,18 @@
 <body> 
 
 <!-- Page starts here -->
-<div data-role="page" data-theme="a" id="surveyCreatorPage" data-add-back-btn="true"> 
+<div data-role="page" data-theme="a" id="customSurveyCreatorPage" data-add-back-btn="true"> 
 
-<div id="surveyCreatorContainer">
+<div id="customSurveyCreatorContainer">
 
   <div data-role="header" id="hdrMain">
-    <a href="" onclick="logMeOut()" data-direction="reverse" rel="external" data-icon="" data-transition="slide" class="ui-btn-right">Logout</a>
     <h1>Class Tempo</h1>
   </div>
 
-<div data-role="content" id="surveyCreatorContent">
+<div data-role="content" id="customsurveyCreatorContent">
 
-  <form id="surveyCreatorForm">
-
-  <div id="optionSliderDiv" data-role="fieldcontain">
-    <label for="optionSlider">How Many Options?</label>
-    <input type="range" name="optionSlider" id="optionSlider" value="2" min="2" max="25" data-highlight="true" />
-  </div>
-
-  <div id="startingNumberOrLetter">
-  </div>
+  <form id="customSurveyCreatorForm">
+s
 
   <fieldset data-role="controlgroup">
   <legend>Survey On/Off</legend>
@@ -73,9 +58,10 @@
     <textarea name="SurveyDescription" id="SurveyDescription"></textarea>
   </div>
 
-    <div id="createSurveyButtonDiv">    
-    <a id="createSurveyButton" name="createSurveyButton" data-role="button" data-inline="true" data-ajax="false">Create Survey</a>
+    <div id="createCustomSurveyButtonDiv">    
+    <a id="createCustomSurveyButton" name="createCustomSurveyButton" data-role="button" data-inline="true" data-ajax="false">Create Survey</a>
     </div>
+
     </form>
   </div>
 </div>
@@ -86,11 +72,6 @@
 <script>
 
 /* Convenience Methods and page set-up */
-
-$(document).bind('mobileinit',function(){
-        $.mobile.selectmenu.prototype.options.nativeMenu = false;
-  });
-
 function showSimpleDialogue(alertHeader, alertMessage) {
     
     $(document).simpledialog2({
@@ -106,113 +87,15 @@ function showSimpleDialogue(alertHeader, alertMessage) {
                     }
              })
  }
-
-$(document).delegate('#surveyCreatorPage', 'pageshow', function () {
-    var the_height = ($(window).height() - $(this).find('[data-role="header"]').height() - $(this).find('[data-role="footer"]').height());
-    $(this).height($(window).height()).find('[data-role="content"]').height(the_height);
-  });
-
-function logMeOut(){
-      
-      if (Modernizr.sessionstorage) {
-        sessionStorage.loggedIn = 'false';
-      }
-      else {
-        $.cookie("loggedIn","false");
-      }
-
-      $.mobile.changePage("teacher.html",{transition:"fade"});
-    }
  
 /* DOCUMENT READY */
 
 $(document).ready(function() {
-
-      $('#surveyCreatorPage').css('height', $(document).height());
-    
-    var sessionActive;
-
-    if (Modernizr.sessionstorage){
-        if (sessionStorage.loggedIn === 'true'){sessionActive = true;}
-        else {sessionActive = false;}
-    }
-    else {
-        if ($.cookie("loggedIn") === 'true'){sessionActive = true;}
-        else {sessionActive = false;}
-    }
-
-    if (sessionActive === false){
-      $('#surveyCreatorContainer').remove();
-      showSimpleDialogue("Whoops!","Looks like you're logged out.");
-    }
-
-      surveyCreatorContentVar = $('#surveyCreatorContent');
-      surveyDescriptionVar = $('#SurveyDescription')
-      surveyCreatorFormVar = $('#surveyCreatorForm');
-      sliderValue = $('#optionSlider');
-
-
-       //check the navigator.userAgent string to detect if the user is using an iPhone
-    if (navigator.userAgent.match(/iPhone/i)) {
-
-        //cache the viewport tag if the user is using an iPhone
-        var $viewport = $('head').children('meta[name="viewport"]');
-
-        //bind an event handler to the window object for the orientationchange event
-        $(window).bind('orientationchange', function() {
-            if (window.orientation == 90 || window.orientation == -90 || window.orientation == 270) {
-
-                //landscape
-                $viewport.attr('content', 'height=device-width,width=device-height,initial-scale=1.0,maximum-scale=1.0');
-            } else {
-
-                //portrait
-                $viewport.attr('content', 'height=device-height,width=device-width,initial-scale=1.0,maximum-scale=1.0');
-            }
-
-        //trigger an orientationchange event on the window object to initialize this code (basically in-case the user opens the page in landscape mode)
-        }).trigger('orientationchange');
-      }
-
-        if (sessionStorage.surveyType === 'Letters') {
-            console.log("appending start list");
-              $('#startingNumberOrLetter').append('<div data-role="fieldcontain"><label for="lettersMenu" class="select">Select Letter:</label><select name="lettersMenu" id="lettersMenu" data-native-menu="false">');
-
-              var beginLastAppend;
-              var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
-
-              for (var i = 0; i < alphabet.length; i++) {
-                $('#lettersMenu').append('<option value=\'' + alphabet[i] + '\'>' + alphabet[i] + '</option>');
-              }
-          }
-        else if (sessionStorage.surveyType === 'Custom') {
-
-          var numberOfCustomOptions;
-
-          if (sessionStorage.numCustom === undefined)
-                numberOfCustomOptions = 1;
-          else
-                numberOfCustomOptions = parseInt(sessionStorage.numCustom);
-
-          for (var i = 0; i < numberOfCustomOptions; i++) {
-            $('ul#customOptionsList').append('<li><label for="custom' + (i+1) + '" class="ui-input-text">Option ' + (i+1) + ':</label><input type="text" name="custom' + (i+1) + '" id="custom' + (i+1) + '" value="" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset"></li>');
-          }
-        }
-
-
-    });
-
-$("#surveyCreatorPage").live('pageinit', function() {
-           $('#lettersMenu').selectmenu('refresh',true);
+  console.log("ready");
 });
-
- $('#optionSlider').live('change', function() {
-        sliderValue = $(this).slider();
-});
-   
     
-$('#createSurveyButton').click(function() { 
-
+$('#createCustomSurveyButton').click(function() { 
+  /*
         $('input[name=OnOff]').each(function() { 
             onOffValue = $('input[name=OnOff]:checked').val();
         })
@@ -259,7 +142,8 @@ $('#createSurveyButton').click(function() {
             // in creating survey    
           }
         });        
-        return false;      
+        return false;  
+        */    
     });   
     
   </script>
