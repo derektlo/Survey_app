@@ -66,7 +66,7 @@
       </ul>
   </div>
 
-  <div data-role="fieldcontain" id="specificResponseBox">
+  <div data-role="fieldcontainer" id="specificResponseBox">
   </div>
 
   <fieldset data-role="controlgroup">
@@ -102,7 +102,7 @@ $(document).bind('mobileinit',function(){
 
 function showSimpleDialogue(alertHeader, alertMessage) {
     
-    $('<div>').simpledialog2({
+    $(document).simpledialog2({
                     mode: 'button',
                     headerText: alertHeader,
                     buttonPrompt: alertMessage,
