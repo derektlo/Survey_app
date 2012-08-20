@@ -164,7 +164,7 @@ $(document).ready(function() {
 
               var iPlusOne = i + 1;  
 
-              $('ul#customOptionsList').append('<li><label for="basic">Option ' + iPlusOne + ' :</label><input type="text" name="optionInput\'' + iPlusOne + '\'" id="optionInput\'' + iPlusOne + '\'" value=""  /></li>');
+              $('ul#customOptionsList').append('<li><label for="basic">Option ' + iPlusOne + ' :</label><input type="text" name="optionInput + iPlusOne + '" id="optionInput + iPlusOne + '" value=""  /></li>');
               }
           }
         else if (surveyType === 'Specific') {
@@ -217,7 +217,7 @@ $('#surveyCreatorForm').submit(function() {
 
               var optionInputAccessor = '#optionInput' + (i + 1);
               console.log("optionInputAccesor: ",optionInputAccessor);
-              
+
               customOptionsArray.push($(optionInputAccessor).val());
          }
 
