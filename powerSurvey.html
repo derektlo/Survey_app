@@ -48,6 +48,14 @@
 
 <div data-role="content" id="surveyCreatorContent">
 
+    <div id="customOptionsContainer">
+      <ul id="customOptionsList" data-role="listview">
+      </ul>
+    </div>
+
+    <div id="specificResponseBox">
+    </div>
+
   <form id="surveyCreatorForm">
 
   <fieldset data-role="controlgroup">
@@ -99,7 +107,11 @@ function showSimpleDialogue(alertHeader, alertMessage) {
 
 $(document).ready(function() {
 
-      $('#surveyCreatorPage').css('height', $(document).height());
+   
+$(document).ready(function() {
+  console.log("ready");
+
+    $('#customSurveyCreatorPage').css('height', $(document).height());
     
     var sessionActive;
 
@@ -113,65 +125,45 @@ $(document).ready(function() {
     }
 
     if (sessionActive === false){
-      $('#surveyCreatorContainer').remove();
+      $('#customSurveyCreatorPage').remove();
       showSimpleDialogue("Whoops!","Looks like you're logged out.");
     }
 
-      surveyCreatorContentVar = $('#surveyCreatorContent');
-      surveyDescriptionVar = $('#SurveyDescription')
+      surveyDescriptionVar = $('#SurveyDescription');
       surveyCreatorFormVar = $('#surveyCreatorForm');
-      sliderValue = $('#optionSlider');
+
+    console.log("made it hereasfasdfdsfa..");
 
 
-       //check the navigator.userAgent string to detect if the user is using an iPhone
-    if (navigator.userAgent.match(/iPhone/i)) {
+        if (sessionStorage.surveyType === 'Custom') {
+             var options = parseInt(sessionStorage.customNumber);
 
-        //cache the viewport tag if the user is using an iPhone
-        var $viewport = $('head').children('meta[name="viewport"]');
+            // for (var i = 0; i < options; i++) {
 
-        //bind an event handler to the window object for the orientationchange event
-        $(window).bind('orientationchange', function() {
-            if (window.orientation == 90 || window.orientation == -90 || window.orientation == 270) {
-
-                //landscape
-                $viewport.attr('content', 'height=device-width,width=device-height,initial-scale=1.0,maximum-scale=1.0');
-            } else {
-
-                //portrait
-                $viewport.attr('content', 'height=device-height,width=device-width,initial-scale=1.0,maximum-scale=1.0');
-            }
-
-        //trigger an orientationchange event on the window object to initialize this code (basically in-case the user opens the page in landscape mode)
-        }).trigger('orientationchange');
-      }
-
-        if (sessionStorage.surveyType === 'Letters') {
-            console.log("appending start list");
-              $('#startingNumberOrLetter').append('<div data-role="fieldcontain"><label for="lettersMenu" class="select">Select Letter:</label><select name="lettersMenu" id="lettersMenu" data-native-menu="false">');
-
-              var beginLastAppend;
-              var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
-
-              for (var i = 0; i < alphabet.length; i++) {
-                $('#lettersMenu').append('<option value=\'' + alphabet[i] + '\'>' + alphabet[i] + '</option>');
-              }
+              //  $('ul#customOptionsList').append('<li data-role="fieldcontainer"><label for="basic">Option ' + i + ' :</label>
+            //  <input type="text" name="optionInput' + i + '" id="optionInput' + i + '" value=""  /></li>');
+            // }
+           $('ul#customOptionsList').append('<li><input type="text" name="login-email" id="login-email" value="Email" /></li>');
           }
-        else if (sessionStorage.surveyType === 'Custom') {
+        else if (sessionStorage.surveyType === 'Specific') {
+          
+          console.log("made it to specific response..");
 
-          var numberOfCustomOptions;
+          // Append a textbox
+          if (sessionStorage.textual === 'true') {
 
-          if (sessionStorage.numCustom === undefined)
-                numberOfCustomOptions = 1;
-          else
-                numberOfCustomOptions = parseInt(sessionStorage.numCustom);
+    //<label for="SurveyDescription">Survey Description:</label>
+    //<textarea name="SurveyDescription" id="SurveyDescription"></textarea>
 
-          for (var i = 0; i < numberOfCustomOptions; i++) {
-            $('ul#customOptionsList').append('<li><label for="custom' + (i+1) + '" class="ui-input-text">Option ' + (i+1) + ':</label><input type="text" name="custom' + (i+1) + '" id="custom' + (i+1) + '" value="" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset"></li>');
+            $('#specificResponseBox').append('<label for="specificText">Specific Response:</label><input type="text" name="specificText" id="specificText" value=""  />');
           }
+          else { // otherwise append a numberical box
+            $('#specificResponseBox').append('<label for="specificNumber">Specific Response:</label><input type="number" name="specificNumber" id="specificNumber" value=""  />');
+          }
+
+          $('input').textinput(); 
         }
-
-
-    });
+});
    
 $('#createSurveyButton').click(function() { 
 /*
