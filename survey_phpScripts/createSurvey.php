@@ -20,7 +20,7 @@
    $email = isset($_GET['email']) ? $_GET['email']  : "";
 
    $surveyType = isset($_GET['surveyType']) ? $_GET['surveyType']  : "";
-
+   echo $surveyType;
    if ($surveyType == 'Custom') {
    $customOptions = $_POST['customOptionsArray'];
    }
@@ -87,7 +87,7 @@
          }
       else if ($surveyType == 'Custom') {
                $currentValue = $customOptions[$i];
-               
+
                $insertOptions = "INSERT INTO Survey_Results (Survey_authKey, Option_name, Option_value) 
                            VALUES ('$surveyAuthKey','$currentValue','$varZero')";
       }
