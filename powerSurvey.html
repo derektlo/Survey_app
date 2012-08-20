@@ -222,11 +222,11 @@ $('#surveyCreatorForm').submit(function() {
          console.log("surveyType: ",surveyType);
          // Set up POST requests for either a Custom Survey or a Specific Response Survey
         if (surveyType === 'Custom') {
-          console.log("this survey was selected");
+
           // Submit the form
             $.post("/Survey_app/survey_phpScripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&numberOfOptions=" + optionsNumber + "&surveyType=" + surveyType + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar, { 'customOptionsArray': customOptionsArray }, surveyCreatorFormVar.serialize(), function(data){
               
-              console.log(data);
+              console.log("return data: ",data);
               if (data != 'Error') {
 
                 if (Modernizr.sessionstorage) {
