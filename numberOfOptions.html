@@ -42,7 +42,7 @@
 
 <script>
 
-  var sliderValue = null;
+  var sliderValue = 2;
 
 function showSimpleDialogue(alertHeader, alertMessage) {
     
@@ -94,11 +94,12 @@ $(document).ready(function() {
 <script>
 
  $('#optionSlider').live('change', function() {
+  console.log("I'm changing");
         sliderValue = $(this).slider();
   });
 
  $('#confirmNumOptionsButton').click(function() { 
-
+  console.log("slidervalue: ",sliderValue);
       if (Modernizr.sessionstorage) {
             sessionStorage.customNumber = sliderValue;
       }
