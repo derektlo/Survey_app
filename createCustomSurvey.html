@@ -46,10 +46,11 @@
   </script>
 
 </head> 
-<body> 
 
 <!-- Page starts here -->
 <div data-role="page" data-theme="a" id="customSurveyCreatorPage" data-add-back-btn="true"> 
+
+<body> 
 
 <div id="surveyCreatorContainer">
 
@@ -61,13 +62,13 @@
 
   <form id="customSurveyCreatorForm">
 
-  <div id="customOptionsListContainer">
+<!--   <div id="customOptionsListContainer">
       <ul id="customOptionsList" data-role="listview">
       </ul>
   </div>
 
   <div data-role="fieldcontainer" id="specificResponseBox">
-  </div>
+  </div> -->
 
   <fieldset data-role="controlgroup">
   <legend>Survey On/Off</legend>
@@ -94,11 +95,7 @@
   <div id="footer" data-role="footer">
   </div>
 
-  <script>
-
-$(document).bind('mobileinit',function(){
-        $.mobile.selectmenu.prototype.options.nativeMenu = false;
-});
+<script>
 
 function showSimpleDialogue(alertHeader, alertMessage) {
     
@@ -113,13 +110,13 @@ function showSimpleDialogue(alertHeader, alertMessage) {
                         }
                       }
                     }
-             })
- }
+             });
+}
 
-$(document).delegate('#surveyCreatorPage', 'pageshow', function () {
-    var the_height = ($(window).height() - $(this).find('[data-role="header"]').height() - $(this).find('[data-role="footer"]').height());
-    $(this).height($(window).height()).find('[data-role="content"]').height(the_height);
-  });
+// $(document).delegate('#surveyCreatorPage', 'pageshow', function () {
+//     var the_height = ($(window).height() - $(this).find('[data-role="header"]').height() - $(this).find('[data-role="footer"]').height());
+//     $(this).height($(window).height()).find('[data-role="content"]').height(the_height);
+//   });
    
 $(document).ready(function() {
   console.log("ready");
