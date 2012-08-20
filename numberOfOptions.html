@@ -42,7 +42,7 @@
 
 <script>
 
-  var sliderValue = 2;
+  var sliderValue = null;
 
 function showSimpleDialogue(alertHeader, alertMessage) {
     
@@ -60,9 +60,6 @@ function showSimpleDialogue(alertHeader, alertMessage) {
                     }
              });
 }
-
-$(document).ready(function() {
-});
 
 </script>
 
@@ -93,18 +90,22 @@ $(document).ready(function() {
 
 <script>
 
+$(document).ready(function() {
+  sliderValue = $('#optionSlider');
+});
+
  $('#optionSlider').live('change', function() {
-  console.log("I'm changing");
         sliderValue = $(this).slider();
   });
 
  $('#confirmNumOptionsButton').click(function() { 
-  console.log("slidervalue: ",sliderValue);
+  console.log("slidervalue: ",sliderValue.val());
+
       if (Modernizr.sessionstorage) {
-            sessionStorage.customNumber = sliderValue;
+            sessionStorage.customNumber = sliderValue.val();
       }
       else {
-        $.cookie("customNumber",sliderValue);
+        $.cookie("customNumber",sliderValue.val());
       }
 
       $.mobile.changePage("powerSurvey.html", { transition: "slide"} );
