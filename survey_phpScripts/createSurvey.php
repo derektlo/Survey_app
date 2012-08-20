@@ -19,6 +19,16 @@
    $surveyDescription = isset($_GET['surveyDescription']) ? $_GET['surveyDescription']  : "";
    $email = isset($_GET['email']) ? $_GET['email']  : "";
 
+   $surveyType = isset($_GET['surveyType']) ? $_GET['surveyType']  : "";
+
+   if ($surveyType == 'Custom') {
+   $customOptions = $_POST['customOptionsArray'];
+   }
+   else if ($surveyType == 'Specific') {
+      $specificResponse = isset($_GET['surveyType']) ? $_GET['surveyType']  : "";
+   }
+
+
    /*
    echo $userAuthKey;
    echo $numberOfOptions;
@@ -26,13 +36,6 @@
    echo $onOff;
    echo $surveyDescription;
    */
-
-   if ($numbersOrLetters == 'Numbers') {
-      $numbersOrLetters = 0;
-   }
-   else {
-      $numbersOrLetters = 1;
-   }
 
    if ($onOff == 'On') {
       $onOff = 0;
@@ -56,8 +59,8 @@
     $surveyAuthKey = $userAuthKey . '-' . $maxValue;
 
 
-   $sql = "INSERT INTO $tbl_name (Survey_authKey, Number_of_options, Numbers_or_letters, On_Off, Survey_description, email) 
-   VALUES ('$surveyAuthKey', '$numberOfOptions' , '$numbersOrLetters', '$onOff', '$surveyDescription', '$email')";
+   $sql = "INSERT INTO $tbl_name (Survey_authKey, Number_of_options, Survey_type, On_Off, Survey_description, email) 
+   VALUES ('$surveyAuthKey', '$numberOfOptions' , '$surveyType', '$onOff', '$surveyDescription', '$email')";
 
    $result = mysql_query($sql);
 
@@ -70,18 +73,27 @@
     for ($i = 0; $i < $numberOfOptions; $i++) {
       $insertOptions;
 
-      if ($numbersOrLetters == 0) {
+      if ($surveyType == 'Numbers') {
 
                $optionNumber = $i + 1;
                $insertOptions = "INSERT INTO Survey_Results (Survey_authKey, Option_name, Option_value) 
                            VALUES ('$surveyAuthKey','$optionNumber','$varZero')";
          }
-      else {
+      else if ($surveyType == 'Letters'){
                $currentValue = $letters[$i];
 
                $insertOptions = "INSERT INTO Survey_Results (Survey_authKey, Option_name, Option_value) 
                            VALUES ('$surveyAuthKey','$currentValue','$varZero')";
          }
+      else if ($surveyType == 'Custom') {
+               $currentValue = $customOptions[$i];
+               
+               $insertOptions = "INSERT INTO Survey_Results (Survey_authKey, Option_name, Option_value) 
+                           VALUES ('$surveyAuthKey','$currentValue','$varZero')";
+      }
+      else if ($surveyType == 'Specific') {
+
+      }
 
                   mysql_query($insertOptions);
       }

@@ -15,15 +15,18 @@
 
    <!-- simpleDiaglo2 -->
   <script src="simpleDialog2/jquery.mobile.simpledialog2.min.js"></script>
-  
+
+
+</head> 
+<body> 
+
+<!-- Page starts here -->
+<div data-role="page" data-theme="a" id="powerSurveyPage" data-add-back-btn="true"> 
+
   <script>   
    // Global declarations - assignments made in $(document).ready() below
-    var hdrMainvar = null;
-    var surveyCreatorContentVar = null;
-    var ftrMainVar = null;
-
-    var sliderValue = null;
-    var numbersOrLetters = null;
+    var optionsNumber = null;
+    var surveyType = null;
     var onOffValue = null;
     var surveyDescriptionVar = null;
 
@@ -33,12 +36,6 @@
     var EMPTY = "";
 
   </script>
-
-</head> 
-<body> 
-
-<!-- Page starts here -->
-<div data-role="page" data-theme="a" id="powerSurveyPage" data-add-back-btn="true"> 
 
 <div id="surveyCreatorContainer">
 
@@ -130,31 +127,38 @@ $(document).ready(function() {
       surveyDescriptionVar = $('#SurveyDescription');
       surveyCreatorFormVar = $('#surveyCreatorForm');
 
-    console.log("made it hereasfasdfdsfa..");
+  
+    // Prepare to set up either a specific response Survey
+    // or a custom options Survey  
+    var textual;
+    if (Modernizr.sessionstorage) {
+      surveyType = sessionStorage.surveyType;
+      optionsNumber = parseInt(sessionStorage.customNumber);
+      textual = sessionStorage.textual;
+    }
+    else {
+      surveyType = $.cookie("surveyType");
+      optionsNumber = parseInt($.cookie("customNumber"));
+      textual = $.cookie("textual");
+    }
 
 
-        if (sessionStorage.surveyType === 'Custom') {
-          console.log("customnumber: ",sessionStorage.customNumber);
-          
-             var options = parseInt(sessionStorage.customNumber);
+        if (surveyType === 'Custom') {
 
-              for (var i = 0; i < options; i++) {
+              for (var i = 0; i < optionsNumber; i++) {
 
               var iPlusOne = i + 1;  
 
               $('ul#customOptionsList').append('<li><label for="basic">Option ' + iPlusOne + ' :</label><input type="text" name="optionInput\'' + iPlusOne + '\'" id="optionInput\'' + iPlusOne + '\'" value=""  /></li>');
               }
           }
-        else if (sessionStorage.surveyType === 'Specific') {
-             console.log("specific");
+        else if (surveyType === 'Specific') {
 
           // Append a textbox
-          if (sessionStorage.textual === 'true') {
-
-    //<label for="SurveyDescription">Survey Description:</label>
-    //<textarea name="SurveyDescription" id="SurveyDescription"></textarea>
+          if (textual === 'true') {
 
             $('#specificResponseBox').append('<label for="specificText">Specific Response:</label><input type="text" name="specificText" id="specificText" value=""  />');
+
           }
           else { // otherwise append a numberical box
             $('#specificResponseBox').append('<label for="specificNumber">Specific Response:</label><input type="number" name="specificNumber" id="specificNumber" value=""  />');
@@ -171,15 +175,13 @@ $(document).bind('pageinit', function(){
 });
    
 $('#createSurveyButton').click(function() { 
-/*
+
+    // Get whether survey is on or off
         $('input[name=OnOff]').each(function() { 
             onOffValue = $('input[name=OnOff]:checked').val();
         })
 
-        $('input[name=numbersOrLetters]').each(function() { 
-            numbersOrLetters = $('input[name=numbersOrLetters]:checked').val();
-        })
-
+    // Get the user's email and user tag
         var currentEmailVar;
         var currentUserTagVar;
 
@@ -192,35 +194,40 @@ $('#createSurveyButton').click(function() {
               currentUserTagVar = $.cookie("userTagVar");
            }
 
-        // Submit the form
-        $.post("http://classtempo.org/Survey_app/survey_phpScripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&numberOfOptions=" + sliderValue.val() + " &numbersOrLetters=" + numbersOrLetters + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar, surveyCreatorFormVar.serialize(), function(data){
-          
-          console.log(data);
-          if (data != 'Error') {
+         var customOptionsArray = ["peach","pear","plum"];
 
-              if (numbersOrLetters === 'Numbers'){numbersOrLetters = 0;}
-              else {numbersOrLetters = 1;}
+        if (surveyType === 'Custom') {
+          // Submit the form
+            $.post("/Survey_app/survey_phpScripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&numberOfOptions=" + optionsNumber + "&surveyType=" + surveyType + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar, { 'customOptionsArray': customOptionsArray },surveyCreatorFormVar.serialize(), function(data){
+              
+              console.log(data);
+              if (data != 'Error') {
 
-            if (Modernizr.sessionstorage) {
-              sessionStorage.surveyTag = data;
-              sessionStorage.numbersOrLetters = numbersOrLetters;
-            }
-            else {
-              $.cookie("surveyTag",data);
-              $.cookie("numbersOrLetters",numbersOrLetters);
-            }
+                if (Modernizr.sessionstorage) {
+                  sessionStorage.surveyTag = data;
+                  sessionStorage.surveyType = surveyType;
+                }
+                else {
+                  $.cookie("surveyTag",data);
+                  $.cookie("surveyType",surveyType);
+                }
 
-            // If we have created a survey successfully go to it's analytics page
-            $.mobile.changePage( "surveyResults.html", { transition : "slide"});
-          }
-          else {
-            // show some kind of error message to inform user that there was a problem
-            // in creating survey    
-          }
-        });        
+                // If we have created a survey successfully go to it's analytics page
+                $.mobile.changePage( "surveyResults.html", { transition : "slide"});
+              }
+              else {
+                // show some kind of error message to inform user that there was a problem
+                // in creating survey    
+              }
+            }); 
+        }
+        else if (surveType === 'Specific'){
+
+        }   
+       
         return false;   
-        */   
-    });   
+        
+});  
     
   </script>
 </div> <!-- page1 -->
