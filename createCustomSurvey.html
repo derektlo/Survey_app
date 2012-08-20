@@ -1,40 +1,29 @@
 <!DOCTYPE html> 
 <html> 
   <head> 
-  <title>Custom Survey</title> 
+  <title>Sign up</title> 
   <meta name="viewport" content="height=100%,width=device-width,initial-scale=1.0,maximum-scale=1.0, user-scalable=0" >
-  
-  <!-- CSS -->
+    <!-- CSS -->
   <link rel="stylesheet" href="./signup.css">
-  <link rel="stylesheet" href="./teacher-theme/themes/Class-Tempo-Teacher.min.css" />
-  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile.structure-1.1.1.min.css" />
- <!--  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" /> -->
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" />
   <link rel="stylesheet" type="text/css" href="simpleDialog2/jquery.mobile.simpledialog.min.css" /> 
 
   <!-- Modernizer -->
   <script type="text/javascript" src="./modernizr.custom.56582.js"></script>
-
-  <!-- jQuery/jQuery Mobile -->
   <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
   <script src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script>
 
    <!-- simpleDiaglo2 -->
   <script src="simpleDialog2/jquery.mobile.simpledialog2.min.js"></script>
-
-  <!-- jqPlot -->
-  <!--[if lt IE 9]><script language="javascript" type="text/javascript" src="js/excanvas.js"></script><![endif]-->
-  <script language="javascript" type="text/javascript" src="js/jquery.jqplot.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="js/jquery.jqplot.css" />
-
-  <!-- Dependencies required for surveyResults.html Graphing -->
-  <script language="javascript" type="text/javascript" src="js/plugins/jqplot.barRenderer.js"></script>
-  <script language="javascript" type="text/javascript" src="js/plugins/jqplot.barRenderer.min.js"></script>
-  <script language="javascript" type="text/javascript" src="js/plugins/jqplot.categoryAxisRenderer.js"></script>
-  <script language="javascript" type="text/javascript" src="js/plugins/jqplot.pointLabels.js"></script>
-  <script language="javascript" type="text/javascript" src="js/plugins/jqplot.pointLabels.min.js"></script>
   
   <script>   
    // Global declarations - assignments made in $(document).ready() below
+    var hdrMainvar = null;
+    var surveyCreatorContentVar = null;
+    var ftrMainVar = null;
+
+    var sliderValue = null;
+    var numbersOrLetters = null;
     var onOffValue = null;
     var surveyDescriptionVar = null;
 
@@ -47,10 +36,10 @@
 
 </head> 
 
-<!-- Page starts here -->
-<div data-role="page" data-theme="a" id="customSurveyCreatorPage" data-add-back-btn="true"> 
-
 <body> 
+
+<!-- Page starts here -->
+<div data-role="page" data-theme="a" id="surveyCreatorPage" data-add-back-btn="true"> 
 
 <div id="surveyCreatorContainer">
 
@@ -62,14 +51,6 @@
 
   <form id="customSurveyCreatorForm">
 
-<!--   <div id="customOptionsListContainer">
-      <ul id="customOptionsList" data-role="listview">
-      </ul>
-  </div>
-
-  <div data-role="fieldcontainer" id="specificResponseBox">
-  </div> -->
-
   <fieldset data-role="controlgroup">
   <legend>Survey On/Off</legend>
       <input type="radio" name="OnOff" id="On" value="On" checked="checked" />
@@ -80,15 +61,15 @@
   </fieldset>
 
   <div data-role="fieldcontain">
-    <label for="SurveyDescription">Survey Description:</label>
-    <textarea name="SurveyDescription" id="SurveyDescription"></textarea>
+    <label for="customSurveyDescription">Survey Description:</label>
+    <textarea name="customSurveyDescription" id="customSurveyDescription"></textarea>
   </div>
 
     <div id="createCustomSurveyButtonDiv">    
     <a id="createCustomSurveyButton" name="createCustomSurveyButton" data-role="button" data-inline="true" data-ajax="false">Create Survey</a>
     </div>
-    </form>
 
+    </form>
   </div>
 </div>
 
@@ -96,6 +77,12 @@
   </div>
 
 <script>
+
+/* Convenience Methods and page set-up */
+
+$(document).bind('mobileinit',function(){
+        $.mobile.selectmenu.prototype.options.nativeMenu = false;
+  });
 
 function showSimpleDialogue(alertHeader, alertMessage) {
     
@@ -110,18 +97,31 @@ function showSimpleDialogue(alertHeader, alertMessage) {
                         }
                       }
                     }
-             });
-}
+             })
+ }
 
-// $(document).delegate('#surveyCreatorPage', 'pageshow', function () {
-//     var the_height = ($(window).height() - $(this).find('[data-role="header"]').height() - $(this).find('[data-role="footer"]').height());
-//     $(this).height($(window).height()).find('[data-role="content"]').height(the_height);
-//   });
-   
+$(document).delegate('#surveyCreatorPage', 'pageshow', function () {
+    var the_height = ($(window).height() - $(this).find('[data-role="header"]').height() - $(this).find('[data-role="footer"]').height());
+    $(this).height($(window).height()).find('[data-role="content"]').height(the_height);
+  });
+
+function logMeOut(){
+      
+      if (Modernizr.sessionstorage) {
+        sessionStorage.loggedIn = 'false';
+      }
+      else {
+        $.cookie("loggedIn","false");
+      }
+
+      $.mobile.changePage("teacher.html",{transition:"fade"});
+    }
+ 
+/* DOCUMENT READY */
+
 $(document).ready(function() {
-  console.log("ready");
-/*
-    $('#customSurveyCreatorPage').css('height', $(document).height());
+
+      $('#surveyCreatorPage').css('height', $(document).height());
     
     var sessionActive;
 
@@ -135,49 +135,40 @@ $(document).ready(function() {
     }
 
     if (sessionActive === false){
-      $('#customSurveyCreatorPage').remove();
+      $('#surveyCreatorContainer').remove();
       showSimpleDialogue("Whoops!","Looks like you're logged out.");
     }
 
-      surveyDescriptionVar = $('#SurveyDescription');
-      surveyCreatorFormVar = $('#surveyCreatorForm');
-
-    console.log("made it hereasfasdfdsfa..");
+      surveyDescriptionVar = $('#customSurveyDescription')
+      surveyCreatorFormVar = $('#customSurveyCreatorForm');
 
 
-        if (sessionStorage.surveyType === 'Custom') {
-             var options = parseInt(sessionStorage.customNumber);
+       //check the navigator.userAgent string to detect if the user is using an iPhone
+    if (navigator.userAgent.match(/iPhone/i)) {
 
-            // for (var i = 0; i < options; i++) {
+        //cache the viewport tag if the user is using an iPhone
+        var $viewport = $('head').children('meta[name="viewport"]');
 
-              //  $('ul#customOptionsList').append('<li data-role="fieldcontainer"><label for="basic">Option ' + i + ' :</label>
-            //  <input type="text" name="optionInput' + i + '" id="optionInput' + i + '" value=""  /></li>');
-            // }
-           $('ul#customOptionsList').append('<li><input type="text" name="login-email" id="login-email" value="Email" /></li>');
-          }
-        else if (sessionStorage.surveyType === 'Specific') {
-          
-          console.log("made it to specific response..");
+        //bind an event handler to the window object for the orientationchange event
+        $(window).bind('orientationchange', function() {
+            if (window.orientation == 90 || window.orientation == -90 || window.orientation == 270) {
 
-          // Append a textbox
-          if (sessionStorage.textual === 'true') {
+                //landscape
+                $viewport.attr('content', 'height=device-width,width=device-height,initial-scale=1.0,maximum-scale=1.0');
+            } else {
 
-    //<label for="SurveyDescription">Survey Description:</label>
-    //<textarea name="SurveyDescription" id="SurveyDescription"></textarea>
+                //portrait
+                $viewport.attr('content', 'height=device-height,width=device-width,initial-scale=1.0,maximum-scale=1.0');
+            }
 
-            $('#specificResponseBox').append('<label for="specificText">Specific Response:</label><input type="text" name="specificText" id="specificText" value=""  />');
-          }
-          else { // otherwise append a numberical box
-            $('#specificResponseBox').append('<label for="specificNumber">Specific Response:</label><input type="number" name="specificNumber" id="specificNumber" value=""  />');
-          }
+        //trigger an orientationchange event on the window object to initialize this code (basically in-case the user opens the page in landscape mode)
+        }).trigger('orientationchange');
+      }
 
-          $('input').textinput(); 
-        }
-        */
-});
+
+    });
     
-    $('#createCustomSurveyButton').click(function() { 
-      /*
+$('#createCustomSurveyButton').click(function() { 
 
         $('input[name=OnOff]').each(function() { 
             onOffValue = $('input[name=OnOff]:checked').val();
@@ -225,8 +216,7 @@ $(document).ready(function() {
             // in creating survey    
           }
         });        
-        return false; 
-        */     
+        return false;      
     });   
     
   </script>
