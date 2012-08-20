@@ -99,8 +99,8 @@
       }
       
       
-         
-      echo "$surveyAuthKey";
+      '{"Results":'.json_encode($surveyAuthKey).'}';   
+    //  echo "$surveyAuthKey";
    }
    else {
       echo "Error";
