@@ -32,8 +32,10 @@
    
    while($obj = mysql_fetch_object($rs)) {
        $arr = $obj; // save the row
-       $surveyType $obj->type; // you are fetching an object, not an array
+       $surveyType = $obj->Survey_type; // you are fetching an object, not an array
    }
+
+   echo $arr->Survey_type;
 
    if ($surveyType == 'Custom')
          echo 'custom';
