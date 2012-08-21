@@ -117,8 +117,6 @@ function returnTicks(results){
 
       surveyTag = sessionStorage.surveyTag;
       surveyType = sessionStorage.surveyType;
-      console.log("surveytag: ",surveyTag);
-         console.log("surveyType: ",surveyType);
           // Load Graph 
 
           $.getJSON("http://classtempo.org/Survey_app/survey_phpScripts/getSurveyAnalytics.php?surveyAuthKey=" + surveyTag + "&surveyType=" + surveyType, function(json) {
@@ -180,16 +178,17 @@ function returnTicks(results){
                 $('ul#resultsList').listview();
                 $('ul#resultsList').listview('refresh');
                 */
-
+              var onOffValue;
+              console.log("onoffvalue: ",sessionStorage.onOffValue);
                 // set On or Off
                 if (Modernizr.sessionstorage) {
-                    var onOffValue = sessionStorage.onOffValue;
+                    onOffValue = sessionStorage.onOffValue;
                 }
                 else {
-                  var onOffValue = $.cookie("onOffValue");
+                  onOffValue = $.cookie("onOffValue");
                 }
 
-                if (onOffValue == 'On')
+                if (onOffValue === 'On')
                   $('#surveyOnOff').val('on').slider("refresh");
                 else
                   $('#surveyOnOff').val('off').slider("refresh");
