@@ -66,17 +66,13 @@ function createNewSurvey() {
 }
 
 //function goToSurveyResults(surveyID, onOrOff, surveyTag) {
-  window.goToSurveyResults = function(surveyID, onOrOff, surveyTag, numbersOrLetters) {
+  window.goToSurveyResults = function(surveyID, onOrOff, surveyTag, surveyType) {
     // change to a particular survey's results
 //    console.log("LISTOFSURVEYS ",listOfSurveys);
 console.log("SURVEYTAG: ",surveyTag);
+console.log("surveyType: ",surveyType);
     // set the currently selected survey's ID and whether it's on or off
     surveyId = surveyID;
-
-    if (onOrOff == 0)
-      onOffValue = 'On';
-    else
-      onOffValue = 'Off';
 
     // get the particular survey's analytics
     //$.getJSON("http://classtempo.org/Survey_app/survey_phpScripts/getSurveyAnalytics.php?surveyID=" + surveyId, function(json) {
@@ -84,12 +80,12 @@ console.log("SURVEYTAG: ",surveyTag);
           if (Modernizr.sessionstorage) {
           sessionStorage.onOffValue = onOffValue;
           sessionStorage.surveyTag = surveyTag;
-          sessionStorage.numbersOrLetters = numbersOrLetters;
+          sessionStorage.surveyType = surveyType;
           }
           else {
             $.cookie("onOffValue",onOffValue);
             $.cookie("surveyTag",surveyTag);
-            $.cookie("numbersOrLetters",numbersOrLetters);
+            $.cookie("surveyType",surveyType);
           }
 
          $.mobile.changePage( "surveyResults.html", { transition: "slide"} );
