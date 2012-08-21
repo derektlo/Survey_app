@@ -34,11 +34,10 @@
 
    // Add the rows to the array 
    while($obj = mysql_fetch_object($rs)) {
-      echo $obj['Survey_type'];
    $arr[] = $obj;
    }
 
-   echo $arr;
+   echo $arr['Survey_type'];
    
    // return the json result.
    echo '{"Results":'.json_encode($arr).'}';
