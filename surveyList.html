@@ -113,7 +113,7 @@ function deleteSurvey(surveyID, surveyAuthKey) {
       'Delete': {
         click: function () {
 
-              $.post("http://classtempo.org/Survey_app/survey_phpScripts/delete_survey.php?surveyID=" + surveyID, function(data) {
+              $.post("http://classtempo.org/Survey_app/survey_phpScripts/delete_survey.php?surveyID=" + surveyID + "&surveyAuthKey=" + surveyAuthKey, function(data) {
                  location.reload(true);
           });
         },icon: "delete"
