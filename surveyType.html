@@ -82,7 +82,6 @@ function createNewSurveyWithType(surveyType) {
               $.mobile.changePage( "numberOfOptions.html", { transition: "slide"} );
           }
           else if (surveyType === 'Specific') {
-              console.log("specfiicicc");
             $.mobile.changePage( "specificAnswer.html", { transition: "slide"} );
           }
           else { // Survey type is not custom
@@ -91,21 +90,17 @@ function createNewSurveyWithType(surveyType) {
       }
       else {
         $.cookie("surveyType",surveyType);
-      }
 
-   
-}
-
-function logMeOut(){
-  
-  if (Modernizr.sessionstorage) {
-    sessionStorage.loggedIn = 'false';
-  }
-  else {
-    $.cookie("loggedIn","false");
-  }
-
-  $.mobile.changePage("teacher.html",{transition:"fade"});
+          if (surveyType === 'Custom') {
+              $.mobile.changePage( "numberOfOptions.html", { transition: "slide"} );
+          }
+          else if (surveyType === 'Specific') {
+            $.mobile.changePage( "specificAnswer.html", { transition: "slide"} );
+          }
+          else { // Survey type is not custom or specific
+            $.mobile.changePage( "surveyCreator.html", { transition: "slide"} );
+          }
+      }  
 }
 
 $(document).ready(function() {
@@ -156,7 +151,6 @@ $(document).ready(function() {
 <div id="surveyTypeContainer">
 
   <div data-role="header" id="hdrMain">
-        <a href="" onclick="logMeOut()" data-direction="reverse" rel="external" data-icon="" data-transition="slide" class="ui-btn-right">Logout</a>
     <h1>Select Survey Type</h1>
   </div>
 
