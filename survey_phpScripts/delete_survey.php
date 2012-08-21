@@ -26,7 +26,8 @@
    
    if ($rs) {
 
-      $flagSurveyResults = mysql_query("UPDATE Survey_Results SET Deleted = '-1' WHERE Survey_authKey = '$surveyAuthKey'")
+      $flagSurveyResults = mysql_query("UPDATE Survey_Results SET Deleted = '-1' WHERE Survey_authKey = '$surveyAuthKey'");
+      
       if ($flagSurveyResults)
          echo 'Successful';
       else
