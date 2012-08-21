@@ -20,28 +20,38 @@
    //select the Database
    mysql_select_db($db) or die("Could not select database");
    
-   // Create an array to hold our results
- //  $arr = array();
-   $arr;
+   // Create an iVar to hold our results
+   $surveyInformation;
    //Execute the query
-  // $rs = mysql_query("SELECT email FROM customer_information");
-   $getSurveyType = mysql_query("SELECT Survey_type FROM Surveys WHERE Survey_authKey = '$surveyAuthKey'");
-
-
    $rs = mysql_query("SELECT Survey_id,Number_of_options,Survey_type FROM Surveys WHERE Survey_authKey = '$surveyAuthKey'");
    
    while($obj = mysql_fetch_object($rs)) {
-       $arr = $obj; // save the row
+       $surveyInformation = $obj; // save the row
        $surveyType = $obj->Survey_type; // you are fetching an object, not an array
    }
 
-   echo $arr->Survey_type;
+  $container = array();
 
-   if ($surveyType == 'Custom')
-         echo 'custom';
+   if ($surveyType == 'Custom') {
+      
+      // GATHER ALL OPTIONS FROM THE SURVEY BECAUSE THEY ARE CUSTOM
+      $options = mysql_query("SELECT Option_name FROM Survey_Results WHERE Survey_authKey = '$surveyAuthKey'");
+      $arrayOfOptions = array();
+
+      while($holdObj = mysql_fetch_array($options)) {
+      $arrayOfOptions[] = $holdObj['Option_name'];
+      }
+          // GENERATE FINAL ARRAY TO BE SENT BACK TO APP
+         array_push($container,$surveyInformation, $arrayOfOptions);
+   }
+   else {
+   
+   // GENERATE FINAL ARRAY TO BE SENT BACK TO APP
+   array_push($container,$surveyInformation);
+   }
    
    // return the json result.
-   echo '{"Results":'.json_encode($arr).'}';
+   echo '{"Results":'.json_encode($container).'}';
 
 
    // close connection 
