@@ -238,7 +238,7 @@ function generateAjaxPost(postURL) {
       
       if (surveyType === 'Specific') {
             customOptionsArray = null;
-            
+
       }
 
               $.ajax({        
@@ -259,7 +259,7 @@ function generateAjaxPost(postURL) {
                         }
 
                         // If we have created a survey successfully go to it's analytics page
-                       // $.mobile.changePage( "surveyResults.html", { transition : "slide"});
+                        $.mobile.changePage( "surveyResults.html", { transition : "slide"});
                       }
                       else {
                         // show some kind of error message to inform user that there was a problem
