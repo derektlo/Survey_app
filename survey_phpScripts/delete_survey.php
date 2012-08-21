@@ -21,7 +21,7 @@
    mysql_select_db($db) or die("Could not select database");
    
    //Execute the query to delete survey
-     $rs = mysql_query("UPDATE Survey_Results SET Deleted = '-1' WHERE Survey_id = '$surveyID'");
+     $rs = mysql_query("UPDATE Surveys SET Deleted = '-1' WHERE Survey_id = '$surveyID'");
    
    if ($rs) {
       echo 'Successful';

@@ -74,6 +74,12 @@ console.log("surveyType: ",surveyType);
     // set the currently selected survey's ID and whether it's on or off
     surveyId = surveyID;
 
+    var onOffValue;
+    if (onOrOff === '0')
+          onOffValue = 'On';
+    else
+          onOffValue = 'Off';
+
     // get the particular survey's analytics
     //$.getJSON("http://classtempo.org/Survey_app/survey_phpScripts/getSurveyAnalytics.php?surveyID=" + surveyId, function(json) {
         //  console.log(json);
@@ -107,7 +113,7 @@ function deleteSurvey(surveyID, surveyAuthKey) {
       'Delete': {
         click: function () {
 
-              $.post("http://classtempo.org/Survey_app/survey_phpScripts/delete_survey.php?surveyID=" + surveyID + "&surveyAuthKey=" + surveyAuthKey, function(json) {
+              $.post("http://classtempo.org/Survey_app/survey_phpScripts/delete_survey.php?surveyID=" + surveyID, function(data) {
                  location.reload(true);
           });
         },icon: "delete"
