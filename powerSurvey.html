@@ -225,10 +225,10 @@ $('#surveyCreatorForm').submit(function() {
            }
 
           // Submit the form
-              generateAjaxPost("/Survey_app/survey_phpScripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&numberOfOptions=" + optionsNumber + "&surveyType=" + surveyType + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar.php, customOptionsArray);
+              generateAjaxPost("/Survey_app/survey_phpScripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&numberOfOptions=" + optionsNumber + "&surveyType=" + surveyType + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar, customOptionsArray);
         }
         else if (surveType === 'Specific'){
-              generateAjaxPost("/Survey_app/survey_phpScripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&numberOfOptions=" + 1 + "&surveyType=" + surveyType + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar.php);
+              generateAjaxPost("/Survey_app/survey_phpScripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&numberOfOptions=" + 1 + "&surveyType=" + surveyType + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar);
         }   
        
         return false;   
