@@ -211,20 +211,21 @@ $('#surveyCreatorForm').submit(function() {
               currentUserTagVar = $.cookie("userTagVar");
            }
 
-         var customOptionsArray = [];
-
-         // Get the User's custom options from the textboxes
-         for (var i = 0; i < optionsNumber; i++) {
-
-              var optionInputAccessor = '#optionInput' + (i + 1);
-              customOptionsArray.push($(optionInputAccessor).val());
-         }
          console.log("surveyType: ",surveyType);
          // Set up POST requests for either a Custom Survey or a Specific Response Survey
         if (surveyType === 'Custom') {
 
+          var customOptionsArray = [];
+
+           // Get the User's custom options from the textboxes
+           for (var i = 0; i < optionsNumber; i++) {
+
+                var optionInputAccessor = '#optionInput' + (i + 1);
+                customOptionsArray.push($(optionInputAccessor).val());
+           }
+
           // Submit the form
-              generateAjaxPost("/Survey_app/survey_phpScripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&numberOfOptions=" + optionsNumber + "&surveyType=" + surveyType + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar.php);
+              generateAjaxPost("/Survey_app/survey_phpScripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&numberOfOptions=" + optionsNumber + "&surveyType=" + surveyType + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar.php, customOptionsArray);
         }
         else if (surveType === 'Specific'){
               generateAjaxPost("/Survey_app/survey_phpScripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&numberOfOptions=" + 1 + "&surveyType=" + surveyType + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar.php);
@@ -234,12 +235,7 @@ $('#surveyCreatorForm').submit(function() {
         
 });
 
-function generateAjaxPost(postURL) {
-      
-      if (surveyType === 'Specific') {
-            customOptionsArray = null;
-
-      }
+function generateAjaxPost(postURL, customOptionsArray) {
 
               $.ajax({        
                  type: "POST",
