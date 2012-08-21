@@ -85,10 +85,9 @@
 
   <script>
 
-function returnTicks(){
+function returnTicks(results){
         var ticks = [];
         var surveyType;
-        console.log(sessionStorage.numbersOrLetters);
 
       if (Modernizr.sessionstorage){
             surveyType = sessionStorage.surveyType;
@@ -132,7 +131,7 @@ function returnTicks(){
               var arrayOfPercents = json.Results[1];
               var arrayOfPointLabels = [];
               if ((surveyType === 'Numbers') || (surveyType === 'Letters'))  
-                var ticks = returnTicks();
+                var ticks = returnTicks(json.Results[0]);
               else if (surveyType === 'Custom')
                 var ticks = json.Results[2];
 
