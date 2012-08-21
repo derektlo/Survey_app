@@ -196,14 +196,9 @@ console.log(listOfSurveys);
 
         for (i = 0; i < listOfSurveys.length; i++){
 
-            // set whether the survey uses numbers or letters
-            if (listOfSurveys[i].Numbers_or_letters > 0) 
-                 {numbersOrLetters = 'Letters';}
-            else {numbersOrLetters = 'Numbers';}
-
             // set whether survey is on or off
-            if (listOfSurveys[i].On_off > 0) {onOff = 'Off'; dataTheme = 'data-theme="a"';}
-            else {onOff = 'On'; dataTheme = 'data-theme="b"';}
+            if (listOfSurveys[i].On_off > 0) {onOff = 'Off'; dataTheme = 'data-theme="b"';}
+            else {onOff = 'On'; dataTheme = 'data-theme="a"';}
 
             // Set description
             if (listOfSurveys[i].Survey_description != '')
@@ -216,7 +211,7 @@ console.log(listOfSurveys);
 
           if (listOfSurveys[i].Date == currentDate) {
               // create row in same section
-                 $('ul#surveyList').append('<li class="ui-btn ui-btn-icon-right"' + dataTheme + '><a href="javascript:void(goToSurveyResults(' + listOfSurveys[i].Survey_id + ',' + listOfSurveys[i].On_off + ',\'' + listOfSurveys[i].Survey_authKey + '\'' + ',\'' + listOfSurveys[i].Numbers_or_letters + '\'));"><h1>' + listOfSurveys[i].Survey_authKey + '</h1><p>' + listOfSurveys[i].Number_of_options + ' Options, ' + numbersOrLetters + ', ' + onOff + surveyDescription + '</p></a><a href="#" onclick="deleteSurvey(' + listOfSurveys[i].Survey_id + ',\'' + listOfSurveys[i].Survey_authKey + '\')" data-icon="delete" class="ui-li-link-alt ui-btn "' + dataTheme + ' ></a></li>');
+                 $('ul#surveyList').append('<li class="ui-btn ui-btn-icon-right"' + dataTheme + '><a href="javascript:void(goToSurveyResults(' + listOfSurveys[i].Survey_id + ',' + listOfSurveys[i].On_off + ',\'' + listOfSurveys[i].Survey_authKey + '\'' + ',\'' + listOfSurveys[i].surveyType + '\'));"><h1>' + listOfSurveys[i].Survey_authKey + '</h1><p>' + listOfSurveys[i].Number_of_options + ' Options, ' + listOfSurveys[i].surveyType + ', ' + onOff + surveyDescription + '</p></a><a href="#" onclick="deleteSurvey(' + listOfSurveys[i].Survey_id + ',\'' + listOfSurveys[i].Survey_authKey + '\')" data-icon="delete" class="ui-li-link-alt ui-btn "' + dataTheme + ' ></a></li>');
           }
           else {
               // otherwise create a new section
@@ -224,7 +219,7 @@ console.log(listOfSurveys);
 
                $('ul#surveyList').append('<li data-role="list-divider">' + currentDate + '</li>');
 
-                $('ul#surveyList').append('<li class="ui-btn ui-btn-icon-right"' + dataTheme + '><a href="javascript:void(goToSurveyResults(' + listOfSurveys[i].Survey_id + ',' + listOfSurveys[i].On_off + ',\'' + listOfSurveys[i].Survey_authKey + '\'' + ',\'' + listOfSurveys[i].Numbers_or_letters + '\'));"><h1>' + listOfSurveys[i].Survey_authKey + '</h1><p>' + listOfSurveys[i].Number_of_options + ' Options, ' + numbersOrLetters + ', ' + onOff +surveyDescription + '</p></a><a href="#" onclick="deleteSurvey(' + listOfSurveys[i].Survey_id + ',\'' + listOfSurveys[i].Survey_authKey + '\')" data-icon="delete" class="ui-li-link-alt ui-btn "' + dataTheme + '></a></li>');
+                $('ul#surveyList').append('<li class="ui-btn ui-btn-icon-right"' + dataTheme + '><a href="javascript:void(goToSurveyResults(' + listOfSurveys[i].Survey_id + ',' + listOfSurveys[i].On_off + ',\'' + listOfSurveys[i].Survey_authKey + '\'' + ',\'' + listOfSurveys[i].surveyType + '\'));"><h1>' + listOfSurveys[i].Survey_authKey + '</h1><p>' + listOfSurveys[i].Number_of_options + ' Options, ' + listOfSurveys[i].surveyType + ', ' + onOff +surveyDescription + '</p></a><a href="#" onclick="deleteSurvey(' + listOfSurveys[i].Survey_id + ',\'' + listOfSurveys[i].Survey_authKey + '\')" data-icon="delete" class="ui-li-link-alt ui-btn "' + dataTheme + '></a></li>');
             }
           }
 
