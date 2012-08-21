@@ -25,12 +25,19 @@
    
    //Execute the query
   // $rs = mysql_query("SELECT email FROM customer_information");
-   $rs = mysql_query("SELECT Survey_id,Number_of_options,Numbers_or_letters FROM Surveys WHERE Survey_authKey = '$surveyAuthKey'");
+   $getSurveyType = mysql_query("SELECT Survey_type FROM Surveys WHERE Survey_authKey = '$surveyAuthKey'");
+
+
+   $rs = mysql_query("SELECT Survey_id,Number_of_options,Survey_type FROM Surveys WHERE Survey_authKey = '$surveyAuthKey'");
    
+   echo $rs;
+
    // Add the rows to the array 
    while($obj = mysql_fetch_object($rs)) {
    $arr[] = $obj;
    }
+
+   echo $arr;
    
    // return the json result.
    echo '{"Results":'.json_encode($arr).'}';
