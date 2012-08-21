@@ -21,8 +21,8 @@
    mysql_select_db($db) or die("Could not select database");
    
    // Create an array to hold our results
-   $arr = array();
-   
+ //  $arr = array();
+   $arr;
    //Execute the query
   // $rs = mysql_query("SELECT email FROM customer_information");
    $getSurveyType = mysql_query("SELECT Survey_type FROM Surveys WHERE Survey_authKey = '$surveyAuthKey'");
@@ -30,14 +30,13 @@
 
    $rs = mysql_query("SELECT Survey_id,Number_of_options,Survey_type FROM Surveys WHERE Survey_authKey = '$surveyAuthKey'");
    
-   echo $rs;
-
-   // Add the rows to the array 
    while($obj = mysql_fetch_object($rs)) {
-   $arr[] = $obj;
+       $arr = $obj; // save the row
+       $surveyType $obj->type; // you are fetching an object, not an array
    }
 
-   echo $arr['Survey_type'];
+   if ($surveyType == 'Custom')
+         echo 'custom';
    
    // return the json result.
    echo '{"Results":'.json_encode($arr).'}';
