@@ -134,7 +134,7 @@ function returnTicks(){
               if ((surveyType === 'Numbers') || (surveyType === 'Letters'))  
                 var ticks = returnTicks();
               else if (surveyType === 'Custom')
-                var ticks = json.Results
+                var ticks = json.Results[2];
 
               // Add Point Labels
               for (var i = 0; i < arrayOfValues.length; i++){
