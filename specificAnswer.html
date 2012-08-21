@@ -119,11 +119,11 @@ $(document).ready(function() {
   <div data-role="content" id="specificAnswerContent">
 
       <h2>Are you expecting a specific answer?</h2>
-      <p>If you would like Class Tempo to match user answers against a desired response, press yes. You might need matching if you are expecting a specific answer to a math problem, for example. Otherwise, you can use this kind of survey to collect general feedback from users. Allow them to ask questions using the textual response option.</p>
+      <p>If you would like Class Tempo to match user answers against a desired response, press matching (Example: You might want matching if you are expecting a specific answer to a math problem). Otherwise, you can use this same type of survey to collect general feedback from users (Example: Allow them to ask questions privately).</p>
 
   <div id="yesOrNo" data-role="controlgroup" data-type="horizontal" style="text-align: center;">
-      <a href="powerSurvey.html" data-transition="slide" data-role="button" id="yes">Yes</a>
-      <a href="surveyCreator.html" data-transition="slide" data-role="button" id="no">No</a>
+      <a href="powerSurvey.html" data-transition="slide" data-role="button" id="Matching">Matching</a>
+      <a href="powerSurvey.html" data-transition="slide" data-role="button" id="Free">Free Response</a>
   </div> 
 
   </div>  
@@ -132,26 +132,22 @@ $(document).ready(function() {
 
   <script>
 
-  $('#yes').click(function() { 
+  $('#Matching').click(function() { 
       if (Modernizr.sessionstorage) {
-          sessionStorage.specificAnswer = 'true';
+          sessionStorage.matching = '0';
       }
       else {
-          $.cookie("specificAnswer","true");
+          $.cookie("matching","-1");
       }
-
-      console.log("yes");
   });
 
-   $('#no').click(function() { 
+   $('#Free').click(function() { 
       if (Modernizr.sessionstorage) {
-          sessionStorage.specificAnswer = 'false';
+          sessionStorage.matching = '0';
       }
       else {
-          $.cookie("specificAnswer","false");
+          $.cookie("matching","-1");
       }
-
-      console.log("no");
   });
 
   </script>

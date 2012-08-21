@@ -25,9 +25,11 @@
    $customOptions = $_POST['customOptionsArray'];
    }
    else if ($surveyType == 'Specific') {
-      $specificResponse = isset($_GET['surveyType']) ? $_GET['surveyType']  : "";
-   }
+      $matching = isset($_GET['matching']) ? $_GET['matching']  : "";
 
+      if ($matching === 0)
+         $matchValue = isset($_GET['matchValue']) ? $_GET['matchValue']  : "";
+   }
 
    /*
    echo $userAuthKey;
@@ -70,6 +72,8 @@
       $letters = range('a','z');
       $varZero = 0;
 
+if ($surveyType != 'Specific') {
+
     for ($i = 0; $i < $numberOfOptions; $i++) {
       $insertOptions;
 
@@ -91,12 +95,17 @@
                $insertOptions = "INSERT INTO Survey_Results (Survey_authKey, Option_name, Option_value) 
                            VALUES ('$surveyAuthKey','$currentValue','$varZero')";
       }
-      else if ($surveyType == 'Specific') {
-
-      }
 
                   mysql_query($insertOptions);
       }
+   }
+   else {
+      
+      if ($matching === 0) {
+             $insertMatchingValue = "INSERT INTO Survey_Specific_Response (Survey_authKey, Matching, Matching_value, Hits) 
+                           VALUES ('$surveyAuthKey','$varZero','$matchValue','$varZero')";
+          }
+   }
       
       
       echo "$surveyAuthKey";

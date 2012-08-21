@@ -44,8 +44,10 @@
     var surveyType = null;
     var onOffValue = null;
     var surveyDescriptionVar = null;
-
     var surveyCreatorFormVar = null;
+    var specificResponse = null;
+    var matching = null;
+    var matchValue = null;
 
     var MISSING = "missing";
     var EMPTY = "";
@@ -119,7 +121,6 @@ function showSimpleDialogue(alertHeader, alertMessage) {
 /* DOCUMENT READY */
    
 $(document).ready(function() {
-  console.log("ready");
 
     $('#customSurveyCreatorPage').css('height', $(document).height());
     
@@ -145,16 +146,15 @@ $(document).ready(function() {
   
     // Prepare to set up either a specific response Survey
     // or a custom options Survey  
-    var textual;
     if (Modernizr.sessionstorage) {
       surveyType = sessionStorage.surveyType;
       optionsNumber = parseInt(sessionStorage.customNumber);
-      textual = sessionStorage.textual;
+      matching = parseInt(sessionStorage.matching);
     }
     else {
       surveyType = $.cookie("surveyType");
       optionsNumber = parseInt($.cookie("customNumber"));
-      textual = $.cookie("textual");
+      matching = parseInt($.cookie("matching"));
     }
 
 
@@ -169,18 +169,12 @@ $(document).ready(function() {
           }
         else if (surveyType === 'Specific') {
 
+          if (matching === 0) {
           // Append a textbox
-          if (textual === 'true') {
-
             $('#specificResponseBox').append('<label for="specificText">Specific Response:</label><input type="text" name="specificText" id="specificText" value=""  />');
 
-          }
-          else { // otherwise append a numberical box
-            $('#specificResponseBox').append('<label for="specificNumber">Specific Response:</label><input type="number" name="specificNumber" id="specificNumber" value=""  />');
-          }
-
           $('input').textinput(); 
-          
+          }
         }
 });
 
@@ -190,8 +184,6 @@ $(document).bind('pageinit', function(){
 });
    
 $('#surveyCreatorForm').submit(function() {
-  console.log("clicked");
-
 
     // Get whether survey is on or off
         $('input[name=OnOff]').each(function() { 
@@ -201,17 +193,19 @@ $('#surveyCreatorForm').submit(function() {
     // Get the user's email and user tag
         var currentEmailVar;
         var currentUserTagVar;
+        var matching;
 
           if (Modernizr.sessionstorage) {
               currentEmailVar = sessionStorage.emailVar;
               currentUserTagVar = sessionStorage.userTagVar;
+              matching = parseInt(sessionStorage.matching);
           } 
          else {
                currentEmailVar = $.cookie("emailVar");
               currentUserTagVar = $.cookie("userTagVar");
+              matching = parseInt($.cookie("matching"));
            }
 
-         console.log("surveyType: ",surveyType);
          // Set up POST requests for either a Custom Survey or a Specific Response Survey
         if (surveyType === 'Custom') {
 
@@ -228,7 +222,14 @@ $('#surveyCreatorForm').submit(function() {
               generateAjaxPost("/Survey_app/survey_phpScripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&numberOfOptions=" + optionsNumber + "&surveyType=" + surveyType + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar, customOptionsArray);
         }
         else if (surveType === 'Specific'){
-              generateAjaxPost("/Survey_app/survey_phpScripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&numberOfOptions=" + 1 + "&surveyType=" + surveyType + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar);
+
+          if (matching === 0) {
+              matchValue = $('#specificText').val();
+              console.log("matchValue: ",matchValue);
+              console.log("matching: ",matching);
+          }
+
+              generateAjaxPost("/Survey_app/survey_phpScripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&numberOfOptions=" + 1 + "&surveyType=" + surveyType + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar + "&matching=" + matching + "&matchToValue=" + matchValue);
         }   
        
         return false;   
