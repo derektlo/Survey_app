@@ -112,7 +112,7 @@ function convertASCIItoCharacter(asciiNum) {
 
           for (i = 0; i < customOptionsArray.length; i++){
   
-          $('#optionsList').append('<input type="radio" name="options" id="' + (i+1) + '" value="' + customOptionsArray[i] + '" />');
+          $('#optionsList').append('<input type="radio" name="options" id="' + customOptionsArray[i] + '" value="' + customOptionsArray[i] + '" />');
               $('#optionsList').append('<label for="' + customOptionsArray[i] + '" >' + customOptionsArray[i] + '</label>');
           }
         }
