@@ -34,6 +34,7 @@
 
    // Add the rows to the array 
    while($obj = mysql_fetch_object($rs)) {
+      echo $obj['Survey_type'];
    $arr[] = $obj;
    }
 
