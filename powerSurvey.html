@@ -222,47 +222,53 @@ $('#surveyCreatorForm').submit(function() {
          console.log("surveyType: ",surveyType);
          // Set up POST requests for either a Custom Survey or a Specific Response Survey
         if (surveyType === 'Custom') {
-            console.log("userauthkey: ",currentUserTagVar + optionsNumber + onOffValue + currentEmailVar);
+
           // Submit the form
-            // $.getJSON("http://classtempo.org/Survey_app/survey_phpScripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&numberOfOptions=" + optionsNumber + "&surveyType=" + surveyType + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar, { 'customOptionsArray': customOptionsArray }, surveyCreatorFormVar.serialize(), function(data){
-              
-            //   console.log("return data: ",data);
-            //   if (data != 'Error') {
-
-            //     if (Modernizr.sessionstorage) {
-            //       sessionStorage.surveyTag = data;
-            //       sessionStorage.surveyType = surveyType;
-            //     }
-            //     else {
-            //       $.cookie("surveyTag",data);
-            //       $.cookie("surveyType",surveyType);
-            //     }
-
-            //     // If we have created a survey successfully go to it's analytics page
-            //     $.mobile.changePage( "surveyResults.html", { transition : "slide"});
-            //   }
-            //   else {
-            //     // show some kind of error message to inform user that there was a problem
-            //     // in creating survey
-            //     showSimpleDialogue("Whoops!","Sorry, it looks like there was an issue creating your survey. Please try again or send us an email at classtempo.support@classtempo.org");    
-            //   }
-            // });
-            $.ajax({        
-                 type: "POST",
-                 url: "http://classtempo.org/Survey_app/survey_phpScripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&numberOfOptions=" + optionsNumber + "&surveyType=" + surveyType + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar.php,
-                 data: { 'customOptionsArray': customOptionsArray },
-                 success: function(data) {
-                    console.log("Return data: ",data);       
-                 }
-              });  
+              generateAjaxPost("/Survey_app/survey_phpScripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&numberOfOptions=" + optionsNumber + "&surveyType=" + surveyType + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar.php);
         }
         else if (surveType === 'Specific'){
-
+              generateAjaxPost("/Survey_app/survey_phpScripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&numberOfOptions=" + 1 + "&surveyType=" + surveyType + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar.php);
         }   
        
         return false;   
         
-});  
+});
+
+function generateAjaxPost(postURL) {
+      
+      if (surveyType === 'Specific') {
+            customOptionsArray = null;
+            
+      }
+
+              $.ajax({        
+                 type: "POST",
+                 url: postURL,
+                 data: { 'customOptionsArray': customOptionsArray },
+                 success: function(data) {
+                      
+                      if (data != 'Error') {
+
+                        if (Modernizr.sessionstorage) {
+                          sessionStorage.surveyTag = data;
+                          sessionStorage.surveyType = surveyType;
+                          }
+                        else {
+                          $.cookie("surveyTag",data);
+                          $.cookie("surveyType",surveyType);
+                        }
+
+                        // If we have created a survey successfully go to it's analytics page
+                       // $.mobile.changePage( "surveyResults.html", { transition : "slide"});
+                      }
+                      else {
+                        // show some kind of error message to inform user that there was a problem
+                        // in creating survey
+                        showSimpleDialogue("Whoops!","Sorry, it looks like there was an issue creating your survey. Please try again or send us an email at classtempo.support@classtempo.org");    
+                      }     
+                 }
+              });  
+}  
     
   </script>
 </div> <!-- page1 -->

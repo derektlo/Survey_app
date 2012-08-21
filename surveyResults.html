@@ -38,6 +38,14 @@
 <div data-role="page" data-theme="a" id="surveyResultsPage" data-add-back-btn="true">
 <!-- <div data-role="page" data-theme="b" id="surveyResultsPage" data-add-back-btn="true"> -->
 
+<script>
+
+// Definition of Global Variable
+  var surveyType = null;
+  var surveyTag = null;
+
+</script>
+
 <style>
   #chart1 {
     width:98%;
@@ -77,55 +85,54 @@
 
   <script>
 
-    function returnTicks(results){
+function returnTicks(){
         var ticks = [];
+        var surveyType;
         console.log(sessionStorage.numbersOrLetters);
 
       if (Modernizr.sessionstorage){
-          if (sessionStorage.numbersOrLetters === '0') {
+            surveyType = sessionStorage.surveyType;
+      }
+      else{
+            surveyType = $.cookie("surveyType");
+      }
+
+          if (surveyType === 'Numbers') {
+
               for (var i = 0; i < results.length; i++){
                   ticks.push(i+1);
                   console.log("ticks::::: ",ticks);
               }
           }
-          else {
+          else if (surveyType === 'Letters') {
             var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
 
             // Add ticks for the x-axis
             ticks = alphabet.slice(0,results.length);
           }
-        }
-        else {
-
-            if ($.cookie("numbersOrLetters") === '0'){
-                for (var i = 0; i < results.length; i++){
-                  ticks.push(i+1);
-              }
-            }
-            else {
-                var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
-
-                  // Add ticks for the x-axis
-                  ticks = alphabet.slice(0,results.length);
-                }
-        }
-
+        
         return ticks;    
-    }
+}
 
     $(document).ready(function() { 
 
+      surveyTag = sessionStorage.surveyTag;
+      surveyType = sessionStroage.surveyType;
+
           // Load Graph 
 
-          $.getJSON("http://classtempo.org/Survey_app/survey_phpScripts/getSurveyAnalytics.php?surveyAuthKey=" +sessionStorage.surveyTag, function(json) {
+          $.getJSON("http://classtempo.org/Survey_app/survey_phpScripts/getSurveyAnalytics.php?surveyAuthKey=" + surveyTag + "&surveyType=" + surveyType, function(json) {
 
               $.jqplot.config.enablePlugins = true;
 
               // Define local variables used to create graph
               var arrayOfValues = json.Results[0];
               var arrayOfPercents = json.Results[1];
-              var arrayOfPointLabels = [];  
-              var ticks = returnTicks(json.Results[0]);
+              var arrayOfPointLabels = [];
+              if ((surveyType === 'Numbers') || (surveyType === 'Letters'))  
+                var ticks = returnTicks();
+              else if (surveyType === 'Custom')
+                var ticks = json.Results
 
               // Add Point Labels
               for (var i = 0; i < arrayOfValues.length; i++){
