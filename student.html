@@ -172,16 +172,23 @@
 
             if (Modernizr.sessionstorage) {
 
-            sessionStorage.num_options = data.Results[0].Number_of_options;
-            sessionStorage.numbersOrLetters = data.Results[0].Numbers_or_letters;
-            sessionStorage.surveyID = data.Results[0].Survey_id;
-            sessionStorage.surveyToken = surveyTokenVar.val();
+              sessionStorage.num_options = data.Results[0].Number_of_options;
+              sessionStorage.surveyType = data.Results[0].Survey_type;
+              sessionStorage.surveyID = data.Results[0].Survey_id;
+              sessionStorage.surveyToken = surveyTokenVar.val();
+              if (data.Results[0].Survey_type === 'Custom') {
+                 sessionStorage.customOptions = JSON.stringify(data.Results[1]);
+              }
             }
             else {
                $.cookie("num_options",data.Results[0].Number_of_options);
                $.cookie("numbersOrLetters",data.Results[0].Number_of_options);
                $.cookie("surveyID",data.Results[0].Survey_id);
                $.cookie("surveyToken",surveyTokenVar.val());
+
+              if (data.Results[0].Survey_type === 'Custom') {
+                   $.cookie("customOptions",JSON.stringify(data.Results[1]));
+              }
             }
 
          		$.mobile.changePage( "studentSurvey.html", {transition: "slideup"} );

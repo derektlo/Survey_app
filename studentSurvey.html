@@ -37,7 +37,11 @@
 	<section id="userSurvey" data-role="page" data-theme="b">
 <script>
 
-var surveyTokenVar;
+// Define Global Variable
+var surveyTokenVar = null;
+var num_options = null;
+var surveyType = null;
+var surveyID = null;
 
 
 function incrementOptionValue(optionName) {
@@ -63,24 +67,22 @@ function convertASCIItoCharacter(asciiNum) {
 }
 
 	$('#userSurvey').bind('pageshow', function(){
-		console.log("hello");
+
 	var surveyAuthKey;
 
 	if (Modernizr.sessionstorage) {
-	num_options = sessionStorage.num_options;
-    numbersOrLetters = sessionStorage.numbersOrLetters;
+	  num_options = sessionStorage.num_options;
+    surveyType = sessionStorage.surveyType;
     surveyID = sessionStorage.surveyID;	
     surveyTokenVar = sessionStorage.surveyToken;
 	}
 	else {
 		num_options = $.cookie("num_options");
-		numbersOrLetters = $.cookie("numbersOrLetters");
+		surveyType = $.cookie("surveyType");
 		surveyID = $.cookie("surveyID");
 	}
 
-			var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
-
-			if (numbersOrLetters === '0')
+			if (surveyType === 'Numbers')
 				{
 				for (i = 0; i < num_options; i++){
 
@@ -88,13 +90,32 @@ function convertASCIItoCharacter(asciiNum) {
 				      $('#optionsList').append('<label for="' + (i+1) + '" >' + (i+1) + '</label>');
 					}
 				}
-				else {
+				else if (surveyType === 'Letters') {
+
+          var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+
 					for (i = 0; i < num_options; i++){
 	
 					$('#optionsList').append('<input type="radio" name="options" id="' +alphabet[i] + '" value="' + alphabet[i] + '" />');
 				      $('#optionsList').append('<label for="' + alphabet[i] + '" >' + alphabet[i] + '</label>');
 					}
 				}
+        else if (surveyType === 'Custom') {
+          
+          var customOptionsArray;
+          if (Modernizr.sessionstorage)
+              customOptionsArray = JSON.parse(sessionStorage.customOptions);
+          else
+              customOptionsArray = JSON.parse($.cookie("customOptions"));
+
+            console.log(customOptionsArray);
+
+          for (i = 0; i < customOptionsArray.length; i++){
+  
+          $('#optionsList').append('<input type="radio" name="options" id="' + (i+1) + '" value="' + customOptionsArray[i] + '" />');
+              $('#optionsList').append('<label for="' + customOptionsArray[i] + '" >' + customOptionsArray[i] + '</label>');
+          }
+        }
 
 				// Append header with survey token
 				$('#header').append('<h1>' + surveyTokenVar + ' Survey</h1>');
