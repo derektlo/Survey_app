@@ -121,8 +121,11 @@ function showSimpleDialogue(alertHeader, alertMessage) {
 /* DOCUMENT READY */
    
 $(document).ready(function() {
+});
 
-    $('#customSurveyCreatorPage').css('height', $(document).height());
+$(document).bind('pageinit', function(){
+
+      $('#customSurveyCreatorPage').css('height', $(document).height());
     
     var sessionActive;
 
@@ -177,9 +180,6 @@ $(document).ready(function() {
           $('input').textinput(); 
           }
         }
-});
-
-$(document).bind('pageinit', function(){
 
       $('ul#customOptionsList').listview('refresh');
 });
