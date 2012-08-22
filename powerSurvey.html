@@ -229,7 +229,7 @@ $('#surveyCreatorForm').submit(function() {
               generateAjaxPost("/Survey_app/survey_phpScripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&numberOfOptions=" + optionsNumber + "&surveyType=" + surveyType + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar, customOptionsArray);
         }
         else if (surveType === 'Specific'){
-
+          console.log("entering a specific survey");
           if (matching === 0) {
               matchValue = $('#specificText').val();
               console.log("matchValue: ",matchValue);
