@@ -159,7 +159,7 @@ $(document).ready(function() {
 
 
         if (surveyType === 'Custom') {
-
+          console.log("surveyType: ",surveyType);
               for (var i = 0; i < optionsNumber; i++) {
 
               var iPlusOne = i + 1;  
@@ -168,7 +168,8 @@ $(document).ready(function() {
               }
           }
         else if (surveyType === 'Specific') {
-
+          $("#customOptionsContainer").remove();
+  console.log("surveyType: ",surveyType);
           if (matching === 0) {
           // Append a textbox
             $('#specificResponseBox').append('<label for="specificText">Specific Response:</label><input type="text" name="specificText" id="specificText" value=""  />');
