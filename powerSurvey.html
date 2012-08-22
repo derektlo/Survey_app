@@ -32,11 +32,12 @@
   <script language="javascript" type="text/javascript" src="js/plugins/jqplot.pointLabels.min.js"></script>
 
 
-</head> 
-<body> 
+</head>
 
 <!-- Page starts here -->
 <div data-role="page" data-theme="a" id="powerSurveyPage" data-add-back-btn="true"> 
+
+<body> 
 
   <script>   
    // Global declarations - assignments made in $(document).ready() below
@@ -121,13 +122,8 @@ function showSimpleDialogue(alertHeader, alertMessage) {
 /* DOCUMENT READY */
    
 $(document).ready(function() {
-});
 
-$(document).bind('pageshow', function(){
-  
-  console.log("pageshown");
-
-      $('#customSurveyCreatorPage').css('height', $(document).height());
+        $('#customSurveyCreatorPage').css('height', $(document).height());
     
     var sessionActive;
 
@@ -182,6 +178,10 @@ $(document).bind('pageshow', function(){
           $('input').textinput(); 
           }
         }
+
+});
+
+$(document).bind('pageinit', function(){
 
       $('ul#customOptionsList').listview('refresh');
 });
@@ -271,9 +271,8 @@ function generateAjaxPost(postURL, customOptionsArray) {
 }  
     
   </script>
-</div> <!-- page1 -->
-
 
 <!-- Page ends here -->
 </body>
+</div> <!-- page1 -->
 </html>
