@@ -206,13 +206,11 @@ $('#surveyCreatorForm').submit(function() {
               currentEmailVar = sessionStorage.emailVar;
               currentUserTagVar = sessionStorage.userTagVar;
               matching = parseInt(sessionStorage.matching);
-              surveyType = sessionStorage.surveyType;
           } 
          else {
                currentEmailVar = $.cookie("emailVar");
               currentUserTagVar = $.cookie("userTagVar");
               matching = parseInt($.cookie("matching"));
-              surveyType = $.cookie("surveyType");
            }
 
          // Set up POST requests for either a Custom Survey or a Specific Response Survey
@@ -230,7 +228,7 @@ $('#surveyCreatorForm').submit(function() {
           // Submit the form
               generateAjaxPost("/Survey_app/survey_phpScripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&numberOfOptions=" + optionsNumber + "&surveyType=" + surveyType + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar, customOptionsArray);
         }
-        else if (surveType === 'Specific'){
+        else if (surveyType === 'Specific'){
           console.log("entering a specific survey");
           if (matching === 0) {
               matchValue = $('#specificText').val();
