@@ -135,13 +135,13 @@ $(document).ready(function() {
           sessionStorage.matching = '0';
       }
       else {
-          $.cookie("matching","-1");
+          $.cookie("matching","0");
       }
   });
 
    $('#Free').click(function() { 
       if (Modernizr.sessionstorage) {
-          sessionStorage.matching = '0';
+          sessionStorage.matching = '-1';
       }
       else {
           $.cookie("matching","-1");
