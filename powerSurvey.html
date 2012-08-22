@@ -206,11 +206,13 @@ $('#surveyCreatorForm').submit(function() {
               currentEmailVar = sessionStorage.emailVar;
               currentUserTagVar = sessionStorage.userTagVar;
               matching = parseInt(sessionStorage.matching);
+              surveyType = sessionStorage.surveyType;
           } 
          else {
                currentEmailVar = $.cookie("emailVar");
               currentUserTagVar = $.cookie("userTagVar");
               matching = parseInt($.cookie("matching"));
+              surveyType = $.cookie("surveyType");
            }
 
          // Set up POST requests for either a Custom Survey or a Specific Response Survey
