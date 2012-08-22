@@ -100,11 +100,21 @@ if ($surveyType != 'Specific') {
       }
    }
    else {
-      
+      $insertMatchingValue;
       if ($matching === 0) {
              $insertMatchingValue = "INSERT INTO Survey_Specific_Response (Survey_authKey, Matching, Matching_value, Hits) 
                            VALUES ('$surveyAuthKey','$varZero','$matchValue','$varZero')";
           }
+      else {
+         // This is a free response survey
+         $varNegOne = -1;
+         $varFreeResponse = 'Free Response'
+
+          $insertMatchingValue = "INSERT INTO Survey_Specific_Response (Survey_authKey, Matching, Matching_value, Hits) 
+                           VALUES ('$surveyAuthKey','$varNegOne','$varFreeResponse','$varZero')";
+      }
+
+      mysql_query($insertMatchingValue);
    }
       
       
