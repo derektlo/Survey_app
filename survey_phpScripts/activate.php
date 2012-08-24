@@ -15,6 +15,8 @@
    $email   = isset($_GET['email']) ? $_GET['email']  : "";
    $hash   = isset($_GET['key']) ? $_GET['key']  : "";
 
+   echo $hash;
+
    $tbl_name = 'Survey_Accounts';
 
    // Connect to the Database server   
@@ -33,10 +35,8 @@
    }
 
   while($obj = mysql_fetch_object($getHash)) {
-     $activate_hash_l = $obj; // save the row
+     $activate_hash_l = $obj->Activate_hash; // you are fetching an object, not an array
   }
-
- $activate_hash_l->Activate_hash;  // you can access it here too
 
   if ($hash == $activate_hash_l) {
 
@@ -45,6 +45,7 @@
       header( 'Location: http://www.classtempo.org/successfulActivation.html' ) ;
   }
   else {
+
     header( 'Location: http://www.classtempo.org/errorActivation.html' ) ;
   }
 

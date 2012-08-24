@@ -147,7 +147,7 @@ function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output =
 
       $to = "derek.t.lo@gmail.com";
       $subject = "Confirm Account";
-      $txt = "Welcome to Class Tempo! Activate your account by clicking the following link: http://www.classtempo.org/Survey_app/Survey_phpscripts/activate.php?email=" . $Email . "&key=" . $activateHash . "If the link's broken,
+      $txt = "Welcome to Class Tempo! \n Activate your account by clicking the following link: http://www.classtempo.org/Survey_app/survey_phpScripts/activate.php?email=" . $Email . "&key=" . $activateHash . " If the link's broken,
       please paste it into your browser!";
       $headers = "From: no-reply@classtempo.org";
 
