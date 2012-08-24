@@ -39,14 +39,14 @@
       }
       else {
 
-         $varZero = 0;
+         $currentHit = 1;
          $keyValue = -1;
 
          $query = mysql_query("INSERT INTO Survey_Specific_Response (Survey_authKey, Matching_value, Key_value, Hits) 
-                              VALUES ('$surveyAuthKey','$optionName','$keyValue','$varZero')");
+                              VALUES ('$surveyAuthKey','$optionName','$keyValue','$currentHit')");
       }
    }
-   
+
    if ($query) {
       echo 'Successful';
    }

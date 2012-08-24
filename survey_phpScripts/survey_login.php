@@ -160,6 +160,8 @@ function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output =
 
       if($hash === $currentHash){
 
+          $incrementLoginTimes = mysql_query("UPDATE Survey_Accounts SET Login_times = Login_times + 1 WHERE Email = '$email'");
+
            $getUserTag = mysql_query("SELECT User_tag FROM Survey_Accounts WHERE Email = '$email'");
           // Add the rows to the array 
           while($obj = mysql_fetch_object($getUserTag)) {
