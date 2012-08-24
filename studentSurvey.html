@@ -129,7 +129,7 @@ $('#userSurvey').bind('pageshow', function(){
           }
         }
         else if (surveyType === 'Specific') {
-          $('#userResponseDiv').append('<label for="userResponse">Survey Description:</label><textarea name="userResponse" id="userResponse"></textarea>');
+          $('#userResponseDiv').append('<label for="userResponse">Enter a value:</label><textarea name="userResponse" id="userResponse"></textarea>');
         }
 
         // Append header with survey token
@@ -173,7 +173,7 @@ $('#userSurvey').bind('pageshow', function(){
           });   
         }
         else {
-            surveyValue = $('userResponse').val();
+            surveyValue = $('#userResponse').val();
         }     
 
         console.log("surveyValue ",surveyValue);
