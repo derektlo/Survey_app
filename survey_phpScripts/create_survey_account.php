@@ -135,8 +135,10 @@ function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output =
    $securePassword = create_hash($password);
    $salt = saltValue;
 
-   $sql = "INSERT INTO $tbl_name (Email, User_tag, School, Password, Salt) 
-   VALUES ('$email', '$userTag', '$school', '$securePassword', '$salt')";
+   $activateHash = md5(uniqid(mt_rand(),true));
+
+   $sql = "INSERT INTO $tbl_name (Email, User_tag, School, Password, Salt, Activate_hash) 
+   VALUES ('$email', '$userTag', '$school', '$securePassword', '$salt', '$activateHash')";
 
    $result = mysql_query($sql);
 
@@ -145,7 +147,7 @@ function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output =
 
       $to = "derek.t.lo@gmail.com";
       $subject = "Confirm Account";
-      $txt = "Welcome to Class Tempo! \n Activate your account by clicking the following link: http://www.classtempo.org/Survey_app/Survey_phpscripts/activate.php?email=" . $Email . "&key=" . $hash . "\n If the link's broken,
+      $txt = "Welcome to Class Tempo! \n Activate your account by clicking the following link: http://www.classtempo.org/Survey_app/Survey_phpscripts/activate.php?email=" . $Email . "&key=" . $activateHash . "\n If the link's broken,
       please paste it into your browser!";
       $headers = "From: derek.t.lo@gmail.com";
 
