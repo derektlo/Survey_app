@@ -18,7 +18,7 @@
    $content = isset($_GET['content']) ? $_GET['content']  : "";
    $password = isset($_GET['password']) ? $_GET['password']  : "";
 
-   if ($content != '') {
+   if ($content == '') {
 
    // These constants may be changed without breaking existing hashes.
 define("PBKDF2_HASH_ALGORITHM", "sha256");
