@@ -29,12 +29,8 @@
    // Insert data into mysql
    $getHash = mysql_query("SELECT Activate_hash FROM Survey_Accounts WHERE Email = '$email'");
 
-
-   if (!$getHash) {
-      die('Query failed');
-   }
-
   while($obj = mysql_fetch_object($getHash)) {
+
      $activate_hash_l = $obj->Activate_hash; // you are fetching an object, not an array
   }
 
@@ -51,6 +47,5 @@
 
   // close connection 
    mysql_close();
-}
 
 ?>
