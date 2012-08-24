@@ -36,8 +36,10 @@
    // Global declarations - assignments made in $(document).ready() below
     var emailVar = null;
     var userTagVar = null;
+    var schoolVar = null;
     var  passwordVar = null;
     var passwordAgainVar = null;
+    var contentVar = null;
 
     var signUpFormVar = null;
     var EMPTY = "";
@@ -67,6 +69,10 @@ function showSimpleDialogue(alertHeader, alertMessage) {
 <!-- Page starts here -->
 <div data-role="page" data-theme="a" id="signUp" data-add-back-btn="true">
 
+<style>
+  #content{visibility:hidden;}
+</style>
+
   <div data-role="header" id="hdrMain" name="hdrMain">
     <h1>Class Tempo</h1>
   </div>
@@ -89,8 +95,13 @@ function showSimpleDialogue(alertHeader, alertMessage) {
   </div>
 
   <div id="surveyTagDiv" data-role="fieldcontain">
-    <label for="userTag">Survey Tag* (Visible to Users, should ID you in some way...)</label>   
+    <label for="userTag">Survey Tag* (Visible to Users, should ID you in some way...)</label> 
     <input id="userTag" name="userTag_r" type="text" />
+  </div>
+
+    <div id="schoolDiv" data-role="fieldcontain">
+    <label for="school">Employer* (School/University)</label> 
+    <input id="school" name="school_r" type="text" />
   </div>
 
   <div id="passwordDiv" data-role="fieldcontain">
@@ -101,6 +112,11 @@ function showSimpleDialogue(alertHeader, alertMessage) {
   <div id="passwordAgainDiv" data-role="fieldcontain">
     <label for="passwordAgain">Password Again*</label>    
     <input id="passwordAgain" name="passwordAgain_r" type="password" />
+  </div>
+
+  <div id="content" data-role="fieldcontain">
+    <label for="content">If you see this, don't fill it in and please update your browser</label>
+    <input id="content" name="content" type="text" />
   </div>
 
     <div id="signUpDiv" data-role="fieldcontain">    
@@ -116,8 +132,10 @@ function showSimpleDialogue(alertHeader, alertMessage) {
   
       emailVar = $('#email');
       userTagVar = $('#userTag');
+      schoolVar = $('#school');
       passwordVar = $('#password');
       passwordAgainVar = $('#passwordAgain');
+      contentVar = $('#content');
       signUpFormVar = $('#signUpForm');
     }); 
     
@@ -127,13 +145,13 @@ function showSimpleDialogue(alertHeader, alertMessage) {
         var passwordsDontMatch = false;
         var passwordsNotLongEnough = false;
           
-        if ((emailVar.val() == EMPTY) || (userTagVar.val() == EMPTY)){
+        if ((emailVar.val() === EMPTY) || (userTagVar.val() === EMPTY) || (schoolVar.val() === EMPTY)){
           emptyError = true;
         }
-        else if ((passwordVar.val() == EMPTY) && (passwordAgainVar.val() == EMPTY)){
+        else if ((passwordVar.val() === EMPTY) && (passwordAgainVar.val() === EMPTY)){
           emptyError = true;
         }
-        else if (passwordVar.val() != passwordAgainVar.val()){
+        else if (passwordVar.val() !== passwordAgainVar.val()){
           passwordsDontMatch = true;
         }
         else if (passwordVar.val().length < 6) {
@@ -163,10 +181,10 @@ function showSimpleDialogue(alertHeader, alertMessage) {
         }      
 
         // Submit the form
-        $.post("http://classtempo.org/Survey_app/survey_phpScripts/create_survey_account.php?email=" + emailVar.val() + "&userTag=" + userTagVar.val() + "&password=" + passwordVar.val(), signUpFormVar.serialize(), function(data){
+        $.post("http://classtempo.org/Survey_app/survey_phpScripts/create_survey_account.php?email=" + emailVar.val() + "&userTag=" + userTagVar.val() + "&school=" + schoolVar.val() + "&password=" + passwordVar.val() + "&content=" + contentVar.val(), signUpFormVar.serialize(), function(data){
           
-          console.log(data);
-            if (data == 'Successful'){
+   
+            if (data === 'Successful'){
 
               showSimpleDialogue("Success","You've created a Class Tempo account.")
 
@@ -187,6 +205,9 @@ function showSimpleDialogue(alertHeader, alertMessage) {
             }
             else if (data == 'User tag already exists.')
                 showSimpleDialogue("Whoops!","The user tag you entered already exists.");
+            else {
+                showSimpleDialogue("Whoops!","Our server is temporarily down. Please try again later.");
+              }
         });        
         return false;      
     });

@@ -14,7 +14,11 @@
    // set restaurantID to get categories for selected restaurant
    $email   = isset($_GET['email']) ? $_GET['email']  : "";
    $userTag   = isset($_GET['userTag']) ? $_GET['userTag']  : "";
+   $school = isset($_GET['school']) ? $_GET['school']  : "";
+   $content = isset($_GET['content']) ? $_GET['content']  : "";
    $password = isset($_GET['password']) ? $_GET['password']  : "";
+
+   if ($content != '') {
 
    // These constants may be changed without breaking existing hashes.
 define("PBKDF2_HASH_ALGORITHM", "sha256");
@@ -131,8 +135,8 @@ function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output =
    $securePassword = create_hash($password);
    $salt = saltValue;
 
-   $sql = "INSERT INTO $tbl_name (Email, User_tag, Password, Salt) 
-   VALUES ('$email', '$userTag' , '$securePassword', '$salt')";
+   $sql = "INSERT INTO $tbl_name (Email, User_tag, School, Password, Salt) 
+   VALUES ('$email', '$userTag', '$school', '$securePassword', '$salt')";
 
    $result = mysql_query($sql);
 
@@ -148,5 +152,9 @@ function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output =
 
       // close connection 
    mysql_close();
+ }
+ else {
+  echo "Error";
+ }
 
 ?>
