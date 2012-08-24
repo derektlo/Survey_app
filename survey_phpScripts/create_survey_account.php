@@ -142,6 +142,16 @@ function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output =
 
 // if data is successfully inserted into database, displays message "Successful". 
    if($result){
+
+      $to = "derek.t.lo@gmail.com";
+      $subject = "Confirm Account";
+      $txt = "Welcome to Class Tempo! Activate your account by clicking the following link. If the link's broken,
+      please paste it into your browser!";
+      $headers = "From: derek.t.lo@gmail.com";
+
+      mail($to,$subject,$txt,$headers);
+
+
       echo "Successful";
    }
    else {
