@@ -64,11 +64,19 @@
   </div>
 
   <div data-role="content" id="surveyCreatorContent" name="surveyCreatorContent"> 
+      
       <div id="chart1" style="">
       </div>
 
-      <ul id="resultsList" data-role="listview" data-inset="true">
+      <div id="specificResponseMatching">
+      <ul id="matchingResults" data-role="listview" data-inset="true">
       </ul>
+      </div>
+
+      <div id="specificResponse">
+      <ul id="specificResponseResults" data-role="listview" data-inset="true">
+      </ul>
+      </div>
 
       <div id="onOffSection">
       <label for="surveyOnOff" >Survey ON/OFF:</label>
@@ -117,11 +125,14 @@ function returnTicks(results){
 
       surveyTag = sessionStorage.surveyTag;
       surveyType = sessionStorage.surveyType;
+        
           // Load Graph 
-
           $.getJSON("http://classtempo.org/Survey_app/survey_phpScripts/getSurveyAnalytics.php?surveyAuthKey=" + surveyTag + "&surveyType=" + surveyType, function(json) {
 
-            console.log("RETURN DATAAAAAAA: ",json);
+            console.log("RETURN DATA: ",json);
+
+            if (surveyType !== 'Specific') {
+
               $.jqplot.config.enablePlugins = true;
 
               // Define local variables used to create graph
@@ -166,6 +177,20 @@ function returnTicks(results){
                   },
                   highlighter: { show: false },
                   seriesColors: $.merge([ "#55A9D3", "#D4EDE2", "#EA2E49"], $.jqplot.config.defaultColors)
+                }
+                else {
+                  // Set up the results page for a Specific Survey
+                    var matching = json.Results[0].matching;
+
+                    if (matching === 0) {
+
+                    }
+                    else {
+                      
+                    }
+
+
+                }
               });
 
               // Load other analytics

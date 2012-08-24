@@ -34,7 +34,7 @@
 
 <body>
 	
-	<section id="userSurvey" data-role="page" data-theme="b">
+	<page id="userSurvey" data-role="page" data-theme="b">
 <script>
 
 // Define Global Variable
@@ -43,63 +43,75 @@ var num_options = null;
 var surveyType = null;
 var surveyID = null;
 
-
-function incrementOptionValue(optionName) {
-
-	// if optionName is a letter, convert it from ascii to character
-		if (optionName > 1000){
-			optionName = optionName - 5000;
-			optionName = String.fromCharCode(optionName);
-		}
-
-		console.log(optionName);
-
-	  $.post("http://classtempo.org/Survey_app/survey_phpScripts/post_option.php?surveyAuthKey=alo-1&optionName=" + optionName,function(result){
-    			console.log("called back, ",result);
-  });
-}
-
 $('body').delegate('div.ui-page', 'pagehide', function () { $(this).remove(); });
 
+</script>
 
-function convertASCIItoCharacter(asciiNum) {
-		return String.fromCharCode(asciiNum);
-}
+		<header data-role="header" id="header">
+		</header>
 
-	$('#userSurvey').bind('pageshow', function(){
+		<div data-role="content">
 
-	var surveyAuthKey;
+		<div id="optionsContainer">
 
-	if (Modernizr.sessionstorage) {
-	  num_options = sessionStorage.num_options;
+			  	<fieldset data-role="controlgroup" id="optionsList">
+				</fieldset>
+
+		</div>
+    	</div>
+
+			 <form id="form2">
+
+            <div id="userResponseDiv" data-role="fieldcontain">
+            </div>
+
+			     <div id="submitUserSurvey" data-role="fieldcontain">    
+			     	<a id="submitSurvey" name="submitSurvey" data-role="button" data-inline="true">Submit</a>
+			    	</div>
+			</form>
+
+
+<footer data-role="footer" id="footer"></footer>
+
+
+<script>
+
+$('#userSurvey').bind('pageshow', function(){
+
+  var surveyAuthKey;
+
+  if (Modernizr.sessionstorage) {
+    num_options = sessionStorage.num_options;
     surveyType = sessionStorage.surveyType;
-    surveyID = sessionStorage.surveyID;	
+    surveyID = sessionStorage.surveyID; 
     surveyTokenVar = sessionStorage.surveyToken;
-	}
-	else {
-		num_options = $.cookie("num_options");
-		surveyType = $.cookie("surveyType");
-		surveyID = $.cookie("surveyID");
-	}
+  }
+  else {
+    num_options = $.cookie("num_options");
+    surveyType = $.cookie("surveyType");
+    surveyID = $.cookie("surveyID");
+  }
 
-			if (surveyType === 'Numbers')
-				{
-				for (i = 0; i < num_options; i++){
+  console.log("surveyType ",surveyType);
 
-					$('#optionsList').append('<input type="radio" name="options" id="' + (i+1) + '" value="' + (i+1) + '" />');
-				      $('#optionsList').append('<label for="' + (i+1) + '" >' + (i+1) + '</label>');
-					}
-				}
-				else if (surveyType === 'Letters') {
+      if (surveyType === 'Numbers')
+        {
+        for (i = 0; i < num_options; i++){
+
+          $('#optionsList').append('<legend>Survey Options</legend><input type="radio" name="options" id="' + (i+1) + '" value="' + (i+1) + '" />');
+              $('#optionsList').append('<label for="' + (i+1) + '" >' + (i+1) + '</label>');
+          }
+        }
+        else if (surveyType === 'Letters') {
 
           var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
 
-					for (i = 0; i < num_options; i++){
-	
-					$('#optionsList').append('<input type="radio" name="options" id="' +alphabet[i] + '" value="' + alphabet[i] + '" />');
-				      $('#optionsList').append('<label for="' + alphabet[i] + '" >' + alphabet[i] + '</label>');
-					}
-				}
+          for (i = 0; i < num_options; i++){
+  
+          $('#optionsList').append('<legend>Survey Options</legend><input type="radio" name="options" id="' +alphabet[i] + '" value="' + alphabet[i] + '" />');
+              $('#optionsList').append('<label for="' + alphabet[i] + '" >' + alphabet[i] + '</label>');
+          }
+        }
         else if (surveyType === 'Custom') {
           
           var customOptionsArray;
@@ -112,82 +124,76 @@ function convertASCIItoCharacter(asciiNum) {
 
           for (i = 0; i < customOptionsArray.length; i++){
   
-          $('#optionsList').append('<input type="radio" name="options" id="' + customOptionsArray[i] + '" value="' + customOptionsArray[i] + '" />');
+          $('#optionsList').append('<legend>Survey Options</legend><input type="radio" name="options" id="' + customOptionsArray[i] + '" value="' + customOptionsArray[i] + '" />');
               $('#optionsList').append('<label for="' + customOptionsArray[i] + '" >' + customOptionsArray[i] + '</label>');
           }
         }
+        else if (surveyType === 'Specific') {
+          $('#userResponseDiv').append('<label for="userResponse">Survey Description:</label><textarea name="userResponse" id="userResponse"></textarea>');
+        }
 
-				// Append header with survey token
-				$('#header').append('<h1>' + surveyTokenVar + ' Survey</h1>');
-
-
-				// Get Today's Date
-				var currentTime = new Date();
-				var month = currentTime.getMonth() + 1;
-				var day = currentTime.getDate();
-				var year = currentTime.getFullYear();
-				var fullDate = month + "-" + day + "-" + year;
-
-				// Append todays date to footer
-				$('#footer').append('<p>  Today: ' + fullDate + '</p>');
-				
-				// refresh styles
-				$('#userSurvey').trigger("create");
-				$("input[type='radio']").prop("checked",false).checkboxradio("refresh");
-				
-	});
+        // Append header with survey token
+        $('#header').append('<h1>' + surveyTokenVar + ' Survey</h1>');
 
 
-</script>
+        // Get Today's Date
+        var currentTime = new Date();
+        var month = currentTime.getMonth() + 1;
+        var day = currentTime.getDate();
+        var year = currentTime.getFullYear();
+        var fullDate = month + "-" + day + "-" + year;
 
-		<header data-role="header" id="header">
-		</header>
-
-		<div data-role="content">
-
-		<div id="optionsContainer">
-
-			  	<fieldset data-role="controlgroup" id="optionsList">
-  					<legend>Survey Options</legend>
-				</fieldset>
-
-		</div>
-    	</div>
-
-			 <form id="form2">
-			        <div id="submitUserSurvey" data-role="fieldcontain">    
-			     	<a id="submitSurvey" name="submitSurvey" data-role="button" data-inline="true">Submit</a>
-			    	</div>
-			</form>
-
-
-<footer data-role="footer" id="footer"></footer>
-
-
-<script>
+        // Append todays date to footer
+        $('#footer').append('<p>  Today: ' + fullDate + '</p>');
+        
+        // refresh styles
+        $('#userSurvey').trigger("create");
+        $("input[type='radio']").prop("checked",false).checkboxradio("refresh");
+        
+  });
 
  $('#submitSurvey').click(function() {
 
  	// Present dialog to confirm that the user actually wants
  	// to submit their survey
-
         var err = false;
         var surveyValue;
+        var surveyType;
+
+        if (Modernizr.sessionstorage) {
+              surveyType = sessionStorage.surveyType;
+        }
+        else{
+              surveyType = $.cookie("surveyType");
+        }
+
+        if (surveyType !== 'Specific') {
             $('input[name=options]').each(function() { 
             surveyValue = $('input[name=options]:checked').val();
-        });        
-            console.log(surveyValue);
+          });   
+        }
+        else {
+            surveyValue = $('userResponse').val();
+        }     
+
+        console.log("surveyValue ",surveyValue);
+
             if (surveyValue === undefined){
             	err = true;
             }
 
         // If validation fails, show Dialog content
-        if(err == true){  
+        if(err == true){ 
+          var dialogErrorMessage;
+            if (surveyType !== 'Specific')
+                  dialogErrorMessage = 'Please select an option before submitting.';
+            else
+                  dialogErrorMessage = 'Please enter a response before submitting.';
 
         	$('<div>').simpledialog2({
                     mode: 'button',
                     headerText: 'Whoops!',
-                    buttonPrompt: 'Please select an option for this survey.',
+                    buttonPrompt: dialogErrorMessage,
                     headerClose: false,
                     buttons : {
                       'OK': {
@@ -201,7 +207,7 @@ function convertASCIItoCharacter(asciiNum) {
         }        
 
         // Submit the form
-        $.post("http://classtempo.org/Survey_app/survey_phpScripts/post_option.php?surveyAuthKey=" + surveyTokenVar + "&optionName=" + surveyValue, function(data){
+        $.post("http://classtempo.org/Survey_app/survey_phpScripts/post_option.php?surveyAuthKey=" + surveyTokenVar + "&surveyType=" + surveyType + "&optionName=" + surveyValue, function(data){
 
         	if (Modernizr.sessionstorage) {
 
@@ -210,12 +216,10 @@ function convertASCIItoCharacter(asciiNum) {
         				var arrayOfSubmits = [];
         				var newTokenString = sessionStorage.surveyToken + "entered";
         				arrayOfSubmits.push(newTokenString);
-        					console.log("arrayOfSubmits: ",arrayOfSubmits);
         				sessionStorage.checkStringAlreadySubmitted = JSON.stringify(arrayOfSubmits);
         			}
         			else{
         				var arrayOfSubmits = JSON.parse(sessionStorage.checkStringAlreadySubmitted.slice());
-        				console.log("arrayOfSubmits: ",arrayOfSubmits);
         				var newTokenString = sessionStorage.surveyToken + "entered";
         				arrayOfSubmits.push(newTokenString)
         				sessionStorage.checkStringAlreadySubmitted = JSON.stringify(arrayOfSubmits);
@@ -232,9 +236,8 @@ function convertASCIItoCharacter(asciiNum) {
              
         return false;      
         
-    });   
-    
-
+    }); 
+  
 </script>
 
 

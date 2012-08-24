@@ -63,6 +63,12 @@
    // return the json result.
    echo '{"Results":'.json_encode($container).'}';
    }
+   else {
+
+   // GATHER INFORMATION ABOUT THE SURVEY
+   $surveyInformation = mysql_query("SELECT Matching FROM Survey_Results WHERE Survey_authKey = '$surveyAuthKey'");
+
+   }
 
    // close connection 
    mysql_close();
