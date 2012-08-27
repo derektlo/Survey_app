@@ -183,7 +183,7 @@ function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output =
           echo '{"Results":'.json_encode($arr).'}';
         }
         else {
-          echo 'Account not active';
+          echo '{"Results":'.json_encode('Not Active').'}';
         }
       }
       else {echo '{"Results":' .json_encode("Invalid Password or Email.").'}';}
