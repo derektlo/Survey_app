@@ -186,8 +186,6 @@ function showSimpleDialogue(alertHeader, alertMessage) {
    
             if (data === 'Successful'){
 
-              showSimpleDialogue("Success","You've created a Class Tempo account.")
-
                   if (Modernizr.sessionstorage) {
                        sessionStorage.emailVar = emailVar.val();
                        sessionStorage.userTagVar = userTagVar.val();
@@ -197,7 +195,7 @@ function showSimpleDialogue(alertHeader, alertMessage) {
                        $.cookie("userTagVar",userTagVar.val());
                    }
 
-              $.mobile.changePage("surveyList.html",{transition:"slide"});
+              $.mobile.changePage("verifyAccountMessage.html",{transition:"slide"});
             }
             else if (data == 'Email already exists.') {
 

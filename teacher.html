@@ -177,7 +177,13 @@
                   }
          		     
                 $.mobile.changePage( "surveyList.html", { transition: "slide"} );
-    		 }  
+    		 }
+         else if (data === 'Account not active'){
+
+                passwordVar = '';
+                $('#password').val('');
+                showSimpleDialogue('Whoops!','Your account has not been activated yet. Please check the email you registered with to verify the account.');
+         }  
     		 else{
           		 	// show error message
                 // wrong password or email

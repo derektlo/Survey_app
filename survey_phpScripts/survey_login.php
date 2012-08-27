@@ -150,6 +150,7 @@ function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output =
    }
 
    if (mysql_num_rows($checkEmail) > 0) { // if email exists
+
     $hashQuery = mysql_query("SELECT Password FROM Survey_Accounts WHERE Email = '$email'");
     $saltQuery = mysql_query("SELECT Salt FROM Survey_Accounts WHERE Email = '$email'");
     
@@ -158,19 +159,32 @@ function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output =
 
       $currentHash = create_hash_with_salt($password,$salt);
 
+
+      // if password matches
       if($hash === $currentHash){
 
-          $incrementLoginTimes = mysql_query("UPDATE Survey_Accounts SET Login_times = Login_times + 1 WHERE Email = '$email'");
+           $checkActiveAccount = mysql_query("SELECT Active FROM Survey_Accounts WHERE Email = '$email'");
 
-           $getUserTag = mysql_query("SELECT User_tag FROM Survey_Accounts WHERE Email = '$email'");
-          // Add the rows to the array 
-          while($obj = mysql_fetch_object($getUserTag)) {
-            $arr[] = $obj;
-          }
-   
+            $activeNum = mysql_result($checkActiveAccount, 0);
 
-   // return the json result.
-      echo '{"Results":'.json_encode($arr).'}';
+            if ($activeNum == 0){           
+
+
+              $incrementLoginTimes = mysql_query("UPDATE Survey_Accounts SET Login_times = Login_times + 1 WHERE Email = '$email'");
+
+               $getUserTag = mysql_query("SELECT User_tag FROM Survey_Accounts WHERE Email = '$email'");
+              // Add the rows to the array 
+              while($obj = mysql_fetch_object($getUserTag)) {
+                $arr[] = $obj;
+              }
+       
+
+       // return the json result.
+          echo '{"Results":'.json_encode($arr).'}';
+        }
+        else {
+          echo 'Account not active';
+        }
       }
       else {echo '{"Results":' .json_encode("Invalid Password or Email.").'}';}
 
