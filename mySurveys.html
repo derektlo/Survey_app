@@ -72,57 +72,71 @@ $(document).ready(function() {
         }).trigger('orientationchange');
     }
 
-
-       var currentTime = new Date()
-  var month = currentTime.getMonth() + 1
-  var day = currentTime.getDate()
-  var year = currentTime.getFullYear()
-  var fullDate = month + "-" + day + "-" + year;
-
-  $('#footer').append('<p>  Today: ' + fullDate + '</p>');
-
-  var urlVars = getUrlVars();
-
-  if (urlVars.email !== undefined){
-
-    if (Modernizr.sessionstorage) {
-                      // browser supports local storage
-      sessionStorage.emailVar = urlVars.email;
-      sessionStorage.userTagVar = urlVars.userTag;
-      sessionStorage.loggedIn = 'true';
-    }
-    else {
-      $.cookie("emailVar",email);
-      $.cookie("userTagVar",userTag);
-      $.cookie("loggedIn","true");
-    }
-  }
-});
-
-function getUrlVars() {
-    var vars = {};
-    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-        vars[key] = value;
-    });
-    return vars;
-}
-
-function logMeOut(){
-  
+var getSurveyListURL;
   if (Modernizr.sessionstorage) {
-    sessionStorage.loggedIn = 'false';
-  }
-  else {
-    $.cookie("loggedIn","false");
-  }
+      getSurveyListURL = "/Survey_app/survey_phpScripts/get_surveyList.php?email=" + sessionStorage.emailVar;
+    } 
+    else {
+      getSurveyListURL = "/Survey_app/survey_phpScripts/get_surveyList.php?email=" + $.cookie("emailVar");
+    }
 
-  $.mobile.changePage("teacher.html",{transition:"fade"});
-}
+// get the JSON data from server
+    $.getJSON(getSurveyListURL, function(data) {
+        console.log(data);
+       var listOfSurveys = data.Results;
 
-function createNewSurvey() {
-    // change the page to the surveyCreator.html
-   $.mobile.changePage( "surveyType.html", { transition: "slide"} );
-}
+    listOfSurveys.sort(function(a,b){
+      var c = new Date(a.Date);
+      var d = new Date(b.Date);
+      return c-d;
+      });
+
+      // Define some local instance variables
+      var currentDate;
+      var numbersOrLetters;
+      var onOff;
+      var surveyDescription;
+      var dataTheme;
+
+       $('ul#surveyList').append('<li><a href="javascript:void(createNewSurvey());">Create New Survey</a></li>');
+
+        for (i = 0; i < listOfSurveys.length; i++){
+
+            // set whether survey is on or off
+            if (listOfSurveys[i].On_off > 0) {onOff = 'Off'; dataTheme = 'data-theme="b"';}
+            else {onOff = 'On'; dataTheme = 'data-theme="a"';}
+
+            // Set description
+            if (listOfSurveys[i].Survey_description != '')
+              surveyDescription = ', ' + listOfSurveys[i].Survey_description;
+            else
+              surveyDescription = listOfSurveys[i].Survey_description;
+
+            // set surveyAuthKey
+            var authKey = listOfSurveys[i].Survey_authKey;
+
+          if (listOfSurveys[i].Date == currentDate) {
+              // create row in same section
+                 $('ul#surveyList').append('<li class="ui-btn ui-btn-icon-right"' + dataTheme + '><a href="javascript:void(goToSurveyResults(' + listOfSurveys[i].Survey_id + ',' + listOfSurveys[i].On_off + ',\'' + listOfSurveys[i].Survey_authKey + '\'' + ',\'' + listOfSurveys[i].Survey_type + '\'));"><h1>Tag: ' + listOfSurveys[i].Survey_authKey + '</h1><p>' + listOfSurveys[i].Number_of_options + ' Options, ' + listOfSurveys[i].Survey_type + ', ' + onOff + surveyDescription + '</p></a><a href="#" onclick="deleteSurvey(' + listOfSurveys[i].Survey_id + ',\'' + listOfSurveys[i].Survey_authKey + '\')" data-icon="delete" class="ui-li-link-alt ui-btn "' + dataTheme + ' ></a></li>');
+          }
+          else {
+              // otherwise create a new section
+              currentDate = listOfSurveys[i].Date;
+
+               $('ul#surveyList').append('<li data-role="list-divider">Created ' + currentDate + '</li>');
+
+                $('ul#surveyList').append('<li class="ui-btn ui-btn-icon-right"' + dataTheme + '><a href="javascript:void(goToSurveyResults(' + listOfSurveys[i].Survey_id + ',' + listOfSurveys[i].On_off + ',\'' + listOfSurveys[i].Survey_authKey + '\'' + ',\'' + listOfSurveys[i].Survey_type + '\'));"><h1>Tag: ' + listOfSurveys[i].Survey_authKey + '</h1><p>' + listOfSurveys[i].Number_of_options + ' Options, ' + listOfSurveys[i].Survey_type + ', ' + onOff +surveyDescription + '</p></a><a href="#" onclick="deleteSurvey(' + listOfSurveys[i].Survey_id + ',\'' + listOfSurveys[i].Survey_authKey + '\')" data-icon="delete" class="ui-li-link-alt ui-btn "' + dataTheme + '></a></li>');
+            }
+          }
+
+          // refresh listview to re-style it
+        $('ul#surveyList').listview('refresh');
+        $("#surveyList").page();
+        $("#surveyList").trigger("create");
+
+    }); // End JSON callback function
+
+});
 
 //function goToSurveyResults(surveyID, onOrOff, surveyTag) {
   window.goToSurveyResults = function(surveyID, onOrOff, surveyTag, surveyType) {
@@ -187,7 +201,7 @@ function deleteSurvey(surveyID, surveyAuthKey) {
 
     <header data-role="header">
     <a href="teacher.html" data-direction="reverse" rel="external" data-icon="" data-transition="slide" class="ui-btn-right">Logout</a>
-    <h1>Dashboard</h1>
+    <h1>My Surveys</h1>
 
   </header>
 
@@ -195,13 +209,7 @@ function deleteSurvey(surveyID, surveyAuthKey) {
 
     <div id="surveysContainer">
 
-      <ul id="surveyList" data-role="listview">
-        <li data-role="list-divider">Tools</li>
-        <li><a href="surveyType.html">Create Survey</a></li>
-        <li><a href="mySurveys.html">My Survey Results</a></li>
-        <li><a href="Account.html">Account</a></li>
-        <li><a href="Settings.html">Settings</a></li>
-        <li><a href="Help.html">Help</a></li>
+      <ul id="surveyList" data-role="listview" data-split-icon="delete">
       </ul>
 
     </div>
