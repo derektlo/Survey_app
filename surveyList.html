@@ -48,94 +48,6 @@ $(document).bind('mobileinit', function () {
     $.mobile.page.prototype.options.theme  = "c";
 });
 
-function logMeOut(){
-  
-  if (Modernizr.sessionstorage) {
-    sessionStorage.loggedIn = 'false';
-  }
-  else {
-    $.cookie("loggedIn","false");
-  }
-
-  $.mobile.changePage("teacher.html",{transition:"fade"});
-}
-
-function createNewSurvey() {
-    // change the page to the surveyCreator.html
-   $.mobile.changePage( "surveyType.html", { transition: "slide"} );
-}
-
-//function goToSurveyResults(surveyID, onOrOff, surveyTag) {
-  window.goToSurveyResults = function(surveyID, onOrOff, surveyTag, surveyType) {
-    // change to a particular survey's results
-//    console.log("LISTOFSURVEYS ",listOfSurveys);
-console.log("SURVEYTAG: ",surveyTag);
-console.log("surveyType: ",surveyType);
-    // set the currently selected survey's ID and whether it's on or off
-    surveyId = surveyID;
-
-    var onOffValue;
-    console.log("onOrOff value: ",onOrOff);
-    if (onOrOff === 0)
-          onOffValue = 'On';
-    else
-          onOffValue = 'Off';
-
-    // get the particular survey's analytics
-    //$.getJSON("http://classtempo.org/Survey_app/survey_phpScripts/getSurveyAnalytics.php?surveyID=" + surveyId, function(json) {
-        //  console.log(json);
-          if (Modernizr.sessionstorage) {
-          sessionStorage.onOffValue = onOffValue;
-          sessionStorage.surveyTag = surveyTag;
-          sessionStorage.surveyType = surveyType;
-          }
-          else {
-            $.cookie("onOffValue",onOffValue);
-            $.cookie("surveyTag",surveyTag);
-            $.cookie("surveyType",surveyType);
-          }
-
-         $.mobile.changePage( "surveyResults.html", { transition: "slide"} );
-    //});
-
-}
-
-function deleteSurvey(surveyID, surveyAuthKey) {
-      // delete a particular survey
-
-      // show dialog box to confirm that the user does indeed
-      // want to delete this survey
-
-  $('<div>').simpledialog2({
-    mode: 'button',
-    headerText: 'Are you sure?',
-    headerClose: false,
-    buttons : {
-      'Delete': {
-        click: function () {
-
-              $.post("http://classtempo.org/Survey_app/survey_phpScripts/delete_survey.php?surveyID=" + surveyID + "&surveyAuthKey=" + surveyAuthKey, function(data) {
-                 location.reload(true);
-          });
-        },icon: "delete"
-      },
-      'Cancel': {
-        click: function () { 
-          // cancel the dialogue
-        },
-        theme: "c"
-      }
-    }
-  });
-}
-
-
-//$(document).ready(function(){
-$('#surveyList').bind('pageshow', function() {
-
- 
-}); // End pageinit function
-
 $(document).ready(function() {
 
      //check the navigator.userAgent string to detect if the user is using an iPhone
@@ -168,6 +80,26 @@ $(document).ready(function() {
   var fullDate = month + "-" + day + "-" + year;
 
   $('#footer').append('<p>  Today: ' + fullDate + '</p>');
+
+  var urlVars = getUrlVars();
+
+  console.log("urlVars: ",urlVars);
+
+  if (urlVars.length > 0){
+
+    if (Modernizr.sessionstorage) {
+                      // browser supports local storage
+      sessionStorage.emailVar = email_fromURL;
+      sessionStorage.userTagVar = userTag_fromURL;
+      sessionStorage.loggedIn = 'true';
+    }
+    else {
+      $.cookie("emailVar",email_fromURL);
+      $.cookie("userTagVar",userTagVar_fromURL);
+      $.cookie("loggedIn","true");
+    }
+  }
+
   var getSurveyListURL;
   if (Modernizr.sessionstorage) {
       getSurveyListURL = "http://classtempo.org/Survey_app/survey_phpScripts/get_surveyList.php?email=" + sessionStorage.emailVar;
@@ -187,7 +119,6 @@ $(document).ready(function() {
       return c-d;
       });
 
-console.log(listOfSurveys);
       // Define some local instance variables
       var currentDate;
       var numbersOrLetters;
@@ -234,6 +165,89 @@ console.log(listOfSurveys);
     }); // End JSON callback function
 
 });
+
+function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
+}
+
+function logMeOut(){
+  
+  if (Modernizr.sessionstorage) {
+    sessionStorage.loggedIn = 'false';
+  }
+  else {
+    $.cookie("loggedIn","false");
+  }
+
+  $.mobile.changePage("teacher.html",{transition:"fade"});
+}
+
+function createNewSurvey() {
+    // change the page to the surveyCreator.html
+   $.mobile.changePage( "surveyType.html", { transition: "slide"} );
+}
+
+//function goToSurveyResults(surveyID, onOrOff, surveyTag) {
+  window.goToSurveyResults = function(surveyID, onOrOff, surveyTag, surveyType) {
+    // change to a particular survey's results
+
+    // set the currently selected survey's ID and whether it's on or off
+    surveyId = surveyID;
+
+    var onOffValue;
+    console.log("onOrOff value: ",onOrOff);
+    if (onOrOff === 0)
+          onOffValue = 'On';
+    else
+          onOffValue = 'Off';
+
+          if (Modernizr.sessionstorage) {
+          sessionStorage.onOffValue = onOffValue;
+          sessionStorage.surveyTag = surveyTag;
+          sessionStorage.surveyType = surveyType;
+          }
+          else {
+            $.cookie("onOffValue",onOffValue);
+            $.cookie("surveyTag",surveyTag);
+            $.cookie("surveyType",surveyType);
+          }
+
+         $.mobile.changePage( "surveyResults.html", { transition: "slide"} );
+}
+
+function deleteSurvey(surveyID, surveyAuthKey) {
+      // delete a particular survey
+
+      // show dialog box to confirm that the user does indeed
+      // want to delete this survey
+
+  $('<div>').simpledialog2({
+    mode: 'button',
+    headerText: 'Are you sure?',
+    headerClose: false,
+    buttons : {
+      'Delete': {
+        click: function () {
+
+              $.post("http://classtempo.org/Survey_app/survey_phpScripts/delete_survey.php?surveyID=" + surveyID + "&surveyAuthKey=" + surveyAuthKey, function(data) {
+                 location.reload(true);
+          });
+        },icon: "delete"
+      },
+      'Cancel': {
+        click: function () { 
+          // cancel the dialogue
+        },
+        theme: "c"
+      }
+    }
+  });
+}
+
 
 </script>
 

@@ -38,7 +38,11 @@
 
       mysql_query("UPDATE Survey_Accounts SET Active = 0 WHERE Email = '$email'");
 
-      header( 'Location: http://www.classtempo.org/surveyList.html' ) ;
+            $getUserTag = mysql_query("SELECT User_tag FROM Survey_Accounts WHERE Email = '$email'");
+
+            $userTag = mysql_result($getUserTag, 0);
+
+      header( 'Location: http://www.classtempo.org/surveyList.html?email=' . $email . '&userTag=' . $userTag);
   }
   else {
 
