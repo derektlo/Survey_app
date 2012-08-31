@@ -145,14 +145,29 @@ function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output =
 // if data is successfully inserted into database, displays message "Successful". 
    if($result){
 
-      $to = $email . ', derek.t.lo@gmail.com';
-      $subject = "Confirm Account";
-      $txt = "Welcome to Class Tempo! \n Activate your account by clicking the following link: http://www.classtempo.org/Survey_app/survey_phpScripts/activate.php?email=" . $email . "&key=" . $activateHash . " If the link's broken,
-      please paste it into your browser!";
-      $headers = "From: no-reply@classtempo.org";
-      $headers .= "Bcc: derek.t.lo@gmail.com \r\n";
+      // $to = $email . ', derek.t.lo@gmail.com';
+      // $subject = "Confirm Account";
+      // $txt = "Welcome to Class Tempo! \n Activate your account by clicking the following link: http://www.classtempo.org/Survey_app/survey_phpScripts/activate.php?email=" . $email . "&key=" . $activateHash . " If the link's broken,
+      // please paste it into your browser!";
+      // $headers = "From: no-reply@classtempo.org ";
+      // $headers .= "Bcc: derek.t.lo@gmail.com \r\n";
 
-      mail($to,$subject,$txt,$headers);
+        //  mail($to,$subject,$txt,$headers);
+
+    $emailList = "derek.t.lo@gmail.com";
+    $emailSubject = "Welcome to Class Tempo!";
+
+    $to = $email;
+     $subject .= "".$emailSubject."";
+ $headers .= "Bcc: ".$emailList."\r\n";
+ $headers .= "From: no-reply@classtempo.org\r\n" .
+     "X-Mailer: php";
+     $headers .= "MIME-Version: 1.0\r\n";
+     $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+ $message = "<html><body>";
+ $message .= "Welcome to Class Tempo! \n Activate your account by clicking the following link: http://www.classtempo.org/Survey_app/survey_phpScripts/activate.php?email=" . $email . "&key=" . $activateHash . " If the link\'s broken, please paste it into your browser!";
+
+    mail($to, $subject, $message, $headers);
 
 
       echo "Successful";
