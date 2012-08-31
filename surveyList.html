@@ -85,27 +85,27 @@ $(document).ready(function() {
 
   console.log("urlVars: ",urlVars);
 
-  if (urlVars.length > 0){
+  if (urlVars.email !== ''){
 
     if (Modernizr.sessionstorage) {
                       // browser supports local storage
-      sessionStorage.emailVar = email_fromURL;
-      sessionStorage.userTagVar = userTag_fromURL;
+      sessionStorage.emailVar = urlVars.email;
+      sessionStorage.userTagVar = urlVars.userTag;
       sessionStorage.loggedIn = 'true';
     }
     else {
-      $.cookie("emailVar",email_fromURL);
-      $.cookie("userTagVar",userTagVar_fromURL);
+      $.cookie("emailVar",email);
+      $.cookie("userTagVar",userTag);
       $.cookie("loggedIn","true");
     }
   }
 
   var getSurveyListURL;
   if (Modernizr.sessionstorage) {
-      getSurveyListURL = "http://classtempo.org/Survey_app/survey_phpScripts/get_surveyList.php?email=" + sessionStorage.emailVar;
+      getSurveyListURL = "/Survey_app/survey_phpScripts/get_surveyList.php?email=" + sessionStorage.emailVar;
     } 
     else {
-      getSurveyListURL = "http://classtempo.org/Survey_app/survey_phpScripts/get_surveyList.php?email=" + $.cookie("emailVar");
+      getSurveyListURL = "/Survey_app/survey_phpScripts/get_surveyList.php?email=" + $.cookie("emailVar");
     }
 
 // get the JSON data from server
@@ -233,7 +233,7 @@ function deleteSurvey(surveyID, surveyAuthKey) {
       'Delete': {
         click: function () {
 
-              $.post("http://classtempo.org/Survey_app/survey_phpScripts/delete_survey.php?surveyID=" + surveyID + "&surveyAuthKey=" + surveyAuthKey, function(data) {
+              $.post("/Survey_app/survey_phpScripts/delete_survey.php?surveyID=" + surveyID + "&surveyAuthKey=" + surveyAuthKey, function(data) {
                  location.reload(true);
           });
         },icon: "delete"
