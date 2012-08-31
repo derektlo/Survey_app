@@ -83,10 +83,7 @@ $(document).ready(function() {
 
   var urlVars = getUrlVars();
 
-  console.log("urlVars: ",urlVars);
-  console.log("urlVars.email: ",urlVars.email);
-
-  if (urlVars.email !== ''){
+  if (urlVars.email !== undefined){
 
     if (Modernizr.sessionstorage) {
                       // browser supports local storage
