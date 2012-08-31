@@ -40,7 +40,7 @@
 
   <!-- Page starts here -->
 <!-- <div data-role="page" data-theme="c" id="surveyList"> -->
-<div data-role="page" data-theme="a" id="surveyList">
+<div data-role="page" data-theme="a" id="surveyList" data-add-back-btn="true">
 
 <script>
 
@@ -97,8 +97,6 @@ var getSurveyListURL;
       var onOff;
       var surveyDescription;
       var dataTheme;
-
-       $('ul#surveyList').append('<li><a href="javascript:void(createNewSurvey());">Create New Survey</a></li>');
 
         for (i = 0; i < listOfSurveys.length; i++){
 
