@@ -38,7 +38,7 @@
 
       mysql_query("UPDATE Survey_Accounts SET Active = 0 WHERE Email = '$email'");
 
-      header( 'Location: http://www.classtempo.org/successfulActivation.html' ) ;
+      header( 'Location: http://www.classtempo.org/surveyList.html' ) ;
   }
   else {
 

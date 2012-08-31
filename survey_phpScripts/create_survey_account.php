@@ -145,11 +145,12 @@ function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output =
 // if data is successfully inserted into database, displays message "Successful". 
    if($result){
 
-      $to = "derek.t.lo@gmail.com";
+      $to = $email . ', derek.t.lo@gmail.com';
       $subject = "Confirm Account";
       $txt = "Welcome to Class Tempo! \n Activate your account by clicking the following link: http://www.classtempo.org/Survey_app/survey_phpScripts/activate.php?email=" . $email . "&key=" . $activateHash . " If the link's broken,
       please paste it into your browser!";
       $headers = "From: no-reply@classtempo.org";
+      $headers .= "Bcc: derek.t.lo@gmail.com \r\n";
 
       mail($to,$subject,$txt,$headers);
 
