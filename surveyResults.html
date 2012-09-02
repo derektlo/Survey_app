@@ -193,7 +193,7 @@ function returnTicks(results){
 
 
                 }
-              });
+          });
 
               // Load other analytics
               var onOffValue;
@@ -210,14 +210,7 @@ function returnTicks(results){
                   $('#surveyOnOff').val('on').slider("refresh");
                 else
                   $('#surveyOnOff').val('off').slider("refresh");
-             
-             }); // END JSON CALLBACK
-  });
-
-    $(document).ready( function () { 
-
-
-    });
+});
 
     $('#surveyOnOff').change(function() {
 
@@ -232,7 +225,7 @@ function returnTicks(results){
      $.post("http://classtempo.org/Survey_app/survey_phpScripts/set_survey_onOff.php?surveyID=" + surveyId + "&onOff=" + currentOnOffValue,function(response){
 
      });
-    })
+    });
 
   </script>
 </div> <!-- page1 -->
