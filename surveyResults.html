@@ -59,7 +59,7 @@
 
   <div data-role="header" id="hdrMain" name="hdrMain">
      <a href="mySurveys.html" data-direction="reverse" rel="external" data-icon="back" data-transition="slide" class="ui-btn-left">Back</a>
-     
+
     <h1>Class Tempo</h1>
     <a href="surveyResults.html" rel="external" data-icon="refresh" class="ui-btn-right">refresh</a>
   </div>
@@ -130,9 +130,6 @@ function returnTicks(results){
           $.getJSON("http://classtempo.org/Survey_app/survey_phpScripts/getSurveyAnalytics.php?surveyAuthKey=" + surveyTag + "&surveyType=" + surveyType, function(json) {
             console.log("json: ",json);
 
-            if (surveyType !== 'Specific') {
-              console.log("not specific");
-
               $.jqplot.config.enablePlugins = true;
 
               // Define local variables used to create graph
@@ -156,58 +153,44 @@ function returnTicks(results){
               // Get array of ints to actually plot data
               var arrayOfValuesNumbers = arrayOfValues.map(Number);
 
-              // plot1 = $.jqplot('chart1', [arrayOfValuesNumbers], {
-              //     // Only animate if we're not using excanvas (not in IE 7 or IE 8)..
-              //     animate: !$.jqplot.use_excanvas,
-              //     title: sessionStorage.surveyTag + ' Results',
-              //     seriesDefaults:{
-              //         renderer:$.jqplot.BarRenderer,
-              //         rendererOptions:{ 
-              //           varyBarColor : true ,
-              //         animation: {speed: 1000} },
-              //         pointLabels: {show: true}
-              //     },
-              //     series:[
-              //       {pointLabels:{
-              //                     show: true,
-              //                     labels:arrayOfPointLabels,
-              //                     ypadding: 12,
-              //                   }}],
-              //     axes: {
-              //         xaxis: {
-              //             renderer: $.jqplot.CategoryAxisRenderer,
-              //             ticks: ticks
-              //         }
-              //     },
-              //     highlighter: { show: false },
-              //     seriesColors: $.merge([ "#55A9D3", "#D4EDE2", "#EA2E49"], $.jqplot.config.defaultColors)
-              //   }
-              }
-              else {
-                console.log("matching");
-                  // Set up the results page for a Specific Survey
-                    var matching = json.Results[0].matching;
-
-                    if (matching === 0){
-
-                    }
-                    else {
-                      
-                    }
+              plot1 = $.jqplot('chart1', [arrayOfValuesNumbers], {
+                  // Only animate if we're not using excanvas (not in IE 7 or IE 8)..
+                  animate: !$.jqplot.use_excanvas,
+                  title: sessionStorage.surveyTag + ' Results',
+                  seriesDefaults:{
+                      renderer:$.jqplot.BarRenderer,
+                      rendererOptions:{ 
+                        varyBarColor : true ,
+                      animation: {speed: 1000} },
+                      pointLabels: {show: true}
+                  },
+                  series:[
+                    {pointLabels:{
+                                  show: true,
+                                  labels:arrayOfPointLabels,
+                                  ypadding: 12,
+                                }}],
+                  axes: {
+                      xaxis: {
+                          renderer: $.jqplot.CategoryAxisRenderer,
+                          ticks: ticks
+                      }
+                  },
+                  highlighter: { show: false },
+                  seriesColors: $.merge([ "#55A9D3", "#D4EDE2", "#EA2E49"], $.jqplot.config.defaultColors)
                 }
-
           });
 
-              // // Load other analytics
-              // var onOffValue;
-              // console.log("onoffvalue: ",sessionStorage.onOffValue);
-              //   // set On or Off
-              //   if (Modernizr.sessionstorage) {
-              //       onOffValue = sessionStorage.onOffValue;
-              //   }
-              //   else {
-              //     onOffValue = $.cookie("onOffValue");
-              //   }
+              // Load other analytics
+              var onOffValue;
+              console.log("onoffvalue: ",sessionStorage.onOffValue);
+                // set On or Off
+                if (Modernizr.sessionstorage) {
+                    onOffValue = sessionStorage.onOffValue;
+                }
+                else {
+                  onOffValue = $.cookie("onOffValue");
+                }
 
               //   if (onOffValue === 'On') {
               //     $('#surveyOnOff').val('on').slider("refresh");

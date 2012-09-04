@@ -73,8 +73,9 @@ $(document).bind('mobileinit', function () {
     $.mobile.page.prototype.options.theme  = "c";
 });
 
-$(document).delegate('#dashboardPage', 'pagebeforecreate', function () {
+//$(document).delegate('#dashboardPage', 'pageinit', function () {
 //$(document).delegate('.ui-page', 'pageshow', function () {
+  $(document).ready(function() {
     //Your code for each page load here
 
      //check the navigator.userAgent string to detect if the user is using an iPhone
