@@ -125,7 +125,11 @@ function returnTicks(results){
 
           // Load Graph 
 
-          $.getJSON("http://classtempo.org/Survey_app/survey_phpScripts/getSurveyAnalytics.php?surveyAuthKey=" +sessionStorage.surveyTag, function(json) {
+       surveyTag = sessionStorage.surveyTag;
+       surveyType = sessionStorage.surveyType;
+        
+//           // Load Graph 
+           $.getJSON("http://classtempo.org/Survey_app/survey_phpScripts/getSurveyAnalytics.php?surveyAuthKey=" + surveyTag + "&surveyType=" + surveyType, function(json) {
 
               $.jqplot.config.enablePlugins = true;
 
