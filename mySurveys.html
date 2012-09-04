@@ -40,7 +40,7 @@
 
   <!-- Page starts here -->
 <!-- <div data-role="page" data-theme="c" id="surveyList"> -->
-<div data-role="page" data-theme="a" id="surveyListPage" data-add-back-btn="true">
+<div data-role="page" data-theme="a" id="mySurveysPage" data-add-back-btn="true">
 
     <header data-role="header">
     <a href="teacher.html" data-direction="reverse" rel="external" data-icon="" data-transition="slide" class="ui-btn-right">Logout</a>
@@ -55,9 +55,11 @@
 
     </div> 
 
-<footer data-role="footer" id="footer"></footer>
+<footer data-role="footer" id="footer">
+</footer>
 
-<script>
+<script type="text/javascript">
+
 $(document).bind('mobileinit', function () {
     $.mobile.page.prototype.options.theme  = "c";
 });
@@ -119,7 +121,7 @@ function deleteSurvey(surveyID, surveyAuthKey) {
   });
 }
 
-$(document).ready(function() {
+$(document).delegate('#mySurveysPage', 'pageshow', function () {
 //$('#surveyListPage').live('pageinit', function() {
      //check the navigator.userAgent string to detect if the user is using an iPhone
     if (navigator.userAgent.match(/iPhone/i)) {

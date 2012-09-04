@@ -42,13 +42,38 @@
 <!-- <div data-role="page" data-theme="c" id="surveyList"> -->
 <div data-role="page" data-theme="a" id="dashboardPage">
 
+
+    <header data-role="header">
+    <a href="teacher.html" data-direction="reverse" rel="external" data-icon="" data-transition="slide" class="ui-btn-right">Logout</a>
+    <h1>Dashboard</h1>
+
+  </header>
+
+    <div id="dashboardContainer">
+
+      <ul id="dashboardList" data-role="listview">
+        <li data-role="list-divider">Tools</li>
+        <li><a href="surveyType.html">Create Survey</a></li>
+        <li><a href="mySurveys.html">My Survey Results</a></li>
+        <li><a href="Settings.html">Settings</a></li>
+        <li><a href="Help.html">Help</a></li>
+      </ul>
+
+      <ul id="surveyList" data-role="listview">
+      </ul>
+
+    </div>
+
+<footer data-role="footer" id="footer"></footer>
+
+
 <script>
 
 $(document).bind('mobileinit', function () {
     $.mobile.page.prototype.options.theme  = "c";
 });
 
-$(document).ready(function() {
+$(document).delegate('#dashboardPage', 'pageshow', function () {
 //$(document).delegate('.ui-page', 'pageshow', function () {
     //Your code for each page load here
 
@@ -129,29 +154,6 @@ function createNewSurvey() {
 
 </script>
 
-
-    <header data-role="header">
-    <a href="teacher.html" data-direction="reverse" rel="external" data-icon="" data-transition="slide" class="ui-btn-right">Logout</a>
-    <h1>Dashboard</h1>
-
-  </header>
-
-    <div id="dashboardContainer">
-
-      <ul id="dashboardList" data-role="listview">
-        <li data-role="list-divider">Tools</li>
-        <li><a href="surveyType.html">Create Survey</a></li>
-        <li><a href="mySurveys.html">My Survey Results</a></li>
-        <li><a href="Settings.html">Settings</a></li>
-        <li><a href="Help.html">Help</a></li>
-      </ul>
-
-      <ul id="surveyList" data-role="listview">
-      </ul>
-
-    </div>
-
-<footer data-role="footer" id="footer"></footer>
 
 </div>
 
