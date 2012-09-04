@@ -136,7 +136,15 @@ function returnTicks(results){
               var arrayOfValues = json.Results[0];
               var arrayOfPercents = json.Results[1];
               var arrayOfPointLabels = [];
-              var ticks = ['hello','hello','hello'];
+              var ticks;
+
+           //   if ((surveyType === 'Numbers') || (surveyType === 'Letters')) {  
+            if (surveyType === 'Numbers') {
+                 ticks = returnTicks(json.Results[0]);
+               }
+              else if (surveyType === 'Custom') {
+                 ticks = json.Results[2];
+               }
 
               // Add Point Labels
               for (var i = 0; i < arrayOfValues.length; i++){
@@ -185,12 +193,12 @@ function returnTicks(results){
                   onOffValue = $.cookie("onOffValue");
                 }
 
-              //   if (onOffValue === 'On') {
-              //     $('#surveyOnOff').val('on').slider("refresh");
-              //   }
-              //   else {
-              //     $('#surveyOnOff').val('off').slider("refresh");
-              //   }
+                if (onOffValue === 'On') {
+                  $('#surveyOnOff').val('on').slider("refresh");
+                }
+                else {
+                  $('#surveyOnOff').val('off').slider("refresh");
+                }
 
 });
 
