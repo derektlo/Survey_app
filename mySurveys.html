@@ -42,11 +42,82 @@
 <!-- <div data-role="page" data-theme="c" id="surveyList"> -->
 <div data-role="page" data-theme="a" id="surveyListPage" data-add-back-btn="true">
 
-<script>
+    <header data-role="header">
+    <a href="teacher.html" data-direction="reverse" rel="external" data-icon="" data-transition="slide" class="ui-btn-right">Logout</a>
+    <h1>My Surveys</h1>
 
+  </header>
+
+    <div id="mySurveysContainer">
+
+      <ul id="surveyList" data-role="listview" data-split-icon="delete">
+      </ul>
+
+    </div> 
+
+<footer data-role="footer" id="footer"></footer>
+
+<script>
 $(document).bind('mobileinit', function () {
     $.mobile.page.prototype.options.theme  = "c";
 });
+
+//function goToSurveyResults(surveyID, onOrOff, surveyTag) {
+  window.goToSurveyResults = function(surveyID, onOrOff, surveyTag, surveyType) {
+    // change to a particular survey's results
+
+    // set the currently selected survey's ID and whether it's on or off
+    surveyId = surveyID;
+
+    var onOffValue;
+    console.log("onOrOff value: ",onOrOff);
+    if (onOrOff === 0)
+          onOffValue = 'On';
+    else
+          onOffValue = 'Off';
+
+          if (Modernizr.sessionstorage) {
+          sessionStorage.onOffValue = onOffValue;
+          sessionStorage.surveyTag = surveyTag;
+          sessionStorage.surveyType = surveyType;
+          }
+          else {
+            $.cookie("onOffValue",onOffValue);
+            $.cookie("surveyTag",surveyTag);
+            $.cookie("surveyType",surveyType);
+          }
+
+         $.mobile.changePage( "surveyResults.html", { transition: "slide"} );
+}
+
+function deleteSurvey(surveyID, surveyAuthKey) {
+      // delete a particular survey
+
+      // show dialog box to confirm that the user does indeed
+      // want to delete this survey
+
+  $('<div>').simpledialog2({
+    mode: 'button',
+    headerText: 'Are you sure?',
+    headerClose: false,
+    buttons : {
+      'Delete': {
+        click: function () {
+
+              $.post("/Survey_app/survey_phpScripts/delete_survey.php?surveyID=" + surveyID + "&surveyAuthKey=" + surveyAuthKey, function(data) {
+                 location.reload(true);
+          });
+        },icon: "delete"
+      },
+      'Cancel': {
+        click: function () { 
+          // cancel the dialogue
+        },
+        theme: "c"
+      }
+    }
+  });
+}
 
 $(document).ready(function() {
 //$('#surveyListPage').live('pageinit', function() {
@@ -136,81 +207,8 @@ var getSurveyListURL;
 
 });
 
-//function goToSurveyResults(surveyID, onOrOff, surveyTag) {
-  window.goToSurveyResults = function(surveyID, onOrOff, surveyTag, surveyType) {
-    // change to a particular survey's results
-
-    // set the currently selected survey's ID and whether it's on or off
-    surveyId = surveyID;
-
-    var onOffValue;
-    console.log("onOrOff value: ",onOrOff);
-    if (onOrOff === 0)
-          onOffValue = 'On';
-    else
-          onOffValue = 'Off';
-
-          if (Modernizr.sessionstorage) {
-          sessionStorage.onOffValue = onOffValue;
-          sessionStorage.surveyTag = surveyTag;
-          sessionStorage.surveyType = surveyType;
-          }
-          else {
-            $.cookie("onOffValue",onOffValue);
-            $.cookie("surveyTag",surveyTag);
-            $.cookie("surveyType",surveyType);
-          }
-
-         $.mobile.changePage( "surveyResults.html", { transition: "slide"} );
-}
-
-function deleteSurvey(surveyID, surveyAuthKey) {
-      // delete a particular survey
-
-      // show dialog box to confirm that the user does indeed
-      // want to delete this survey
-
-  $('<div>').simpledialog2({
-    mode: 'button',
-    headerText: 'Are you sure?',
-    headerClose: false,
-    buttons : {
-      'Delete': {
-        click: function () {
-
-              $.post("/Survey_app/survey_phpScripts/delete_survey.php?surveyID=" + surveyID + "&surveyAuthKey=" + surveyAuthKey, function(data) {
-                 location.reload(true);
-          });
-        },icon: "delete"
-      },
-      'Cancel': {
-        click: function () { 
-          // cancel the dialogue
-        },
-        theme: "c"
-      }
-    }
-  });
-}
-
-
 </script>
 
-
-    <header data-role="header">
-    <a href="teacher.html" data-direction="reverse" rel="external" data-icon="" data-transition="slide" class="ui-btn-right">Logout</a>
-    <h1>My Surveys</h1>
-
-  </header>
-
-    <div id="mySurveysContainer">
-
-      <ul id="surveyList" data-role="listview" data-split-icon="delete">
-      </ul>
-
-    </div> 
-
-<footer data-role="footer" id="footer"></footer>
 
 </div>
 
