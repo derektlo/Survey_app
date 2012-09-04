@@ -40,7 +40,7 @@
 
   <!-- Page starts here -->
 <!-- <div data-role="page" data-theme="c" id="surveyList"> -->
-<div data-role="page" data-theme="a" id="surveyListPage" data-add-back-btn="true">
+<div data-role="page" data-theme="a" id="mySurveyPage" data-add-back-btn="true">
 
 <script>
 
@@ -48,9 +48,9 @@ $(document).bind('mobileinit', function () {
     $.mobile.page.prototype.options.theme  = "c";
 });
 
-//$(document).ready(function() {
+$(document).ready(function() {
 //$('#surveyListPage').live('pageinit', function() {
-  $(document).delegate('.ui-page', 'pageshow', function () {
+ // $(document).delegate('.ui-page', 'pageshow', function () {
      //check the navigator.userAgent string to detect if the user is using an iPhone
     if (navigator.userAgent.match(/iPhone/i)) {
 
@@ -136,11 +136,6 @@ var getSurveyListURL;
     }); // End JSON callback function
 
 });
-
-$('#surveyListPage').live('pagebeforehide', function() {
-
-    $('#surveyList').remove();
-  });
 
 //function goToSurveyResults(surveyID, onOrOff, surveyTag) {
   window.goToSurveyResults = function(surveyID, onOrOff, surveyTag, surveyType) {
