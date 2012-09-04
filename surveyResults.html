@@ -140,47 +140,47 @@ function returnTicks(results){
               var arrayOfPointLabels = [];
               var ticks;
 
-              // if ((surveyType === 'Numbers') || (surveyType === 'Letters')) {  
-              //    ticks = returnTicks(json.Results[0]);
-              //  }
-              // else if (surveyType === 'Custom') {
-              //    ticks = json.Results[2];
-              //  }
+              if ((surveyType === 'Numbers') || (surveyType === 'Letters')) {  
+                 ticks = returnTicks(json.Results[0]);
+               }
+              else if (surveyType === 'Custom') {
+                 ticks = json.Results[2];
+               }
 
-              // // Add Point Labels
-              // for (var i = 0; i < arrayOfValues.length; i++){
-              //     arrayOfPointLabels.push(arrayOfValues[i] + ", " + arrayOfPercents[i]);
-              // }
+              // Add Point Labels
+              for (var i = 0; i < arrayOfValues.length; i++){
+                  arrayOfPointLabels.push(arrayOfValues[i] + ", " + arrayOfPercents[i]);
+              }
 
-              // // Get array of ints to actually plot data
-              // var arrayOfValuesNumbers = arrayOfValues.map(Number);
+              // Get array of ints to actually plot data
+              var arrayOfValuesNumbers = arrayOfValues.map(Number);
 
-              // plot1 = $.jqplot('chart1', [arrayOfValuesNumbers], {
-              //     // Only animate if we're not using excanvas (not in IE 7 or IE 8)..
-              //     animate: !$.jqplot.use_excanvas,
-              //     title: sessionStorage.surveyTag + ' Results',
-              //     seriesDefaults:{
-              //         renderer:$.jqplot.BarRenderer,
-              //         rendererOptions:{ 
-              //           varyBarColor : true ,
-              //         animation: {speed: 1000} },
-              //         pointLabels: {show: true}
-              //     },
-              //     series:[
-              //       {pointLabels:{
-              //                     show: true,
-              //                     labels:arrayOfPointLabels,
-              //                     ypadding: 12,
-              //                   }}],
-              //     axes: {
-              //         xaxis: {
-              //             renderer: $.jqplot.CategoryAxisRenderer,
-              //             ticks: ticks
-              //         }
-              //     },
-              //     highlighter: { show: false },
-              //     seriesColors: $.merge([ "#55A9D3", "#D4EDE2", "#EA2E49"], $.jqplot.config.defaultColors)
-              //   }
+              plot1 = $.jqplot('chart1', [arrayOfValuesNumbers], {
+                  // Only animate if we're not using excanvas (not in IE 7 or IE 8)..
+                  animate: !$.jqplot.use_excanvas,
+                  title: sessionStorage.surveyTag + ' Results',
+                  seriesDefaults:{
+                      renderer:$.jqplot.BarRenderer,
+                      rendererOptions:{ 
+                        varyBarColor : true ,
+                      animation: {speed: 1000} },
+                      pointLabels: {show: true}
+                  },
+                  series:[
+                    {pointLabels:{
+                                  show: true,
+                                  labels:arrayOfPointLabels,
+                                  ypadding: 12,
+                                }}],
+                  axes: {
+                      xaxis: {
+                          renderer: $.jqplot.CategoryAxisRenderer,
+                          ticks: ticks
+                      }
+                  },
+                  highlighter: { show: false },
+                  seriesColors: $.merge([ "#55A9D3", "#D4EDE2", "#EA2E49"], $.jqplot.config.defaultColors)
+                }
               }
               else {
                 console.log("matching");
