@@ -217,7 +217,8 @@ function returnTicks(results){
       console.log($('#surveyOnOff').val());
 
       var currentOnOffValue;
-      if ($('#surveyOnOff').val() == 'on')
+      
+      if ($('#surveyOnOff').val() === 'on')
         currentOnOffValue = 0;
       else
         currentOnOffValue = 1;
