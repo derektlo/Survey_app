@@ -136,6 +136,11 @@ var getSurveyListURL;
 
 });
 
+$('#surveyListPage').live('pagebeforehide', function() {
+
+    $('#surveyList').remove();
+  });
+
 //function goToSurveyResults(surveyID, onOrOff, surveyTag) {
   window.goToSurveyResults = function(surveyID, onOrOff, surveyTag, surveyType) {
     // change to a particular survey's results
