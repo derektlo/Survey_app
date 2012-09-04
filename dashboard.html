@@ -40,7 +40,7 @@
 
   <!-- Page starts here -->
 <!-- <div data-role="page" data-theme="c" id="surveyList"> -->
-<div data-role="page" data-theme="a" id="surveyList">
+<div data-role="page" data-theme="a" id="dashboardPage">
 
 <script>
 
@@ -48,7 +48,7 @@ $(document).bind('mobileinit', function () {
     $.mobile.page.prototype.options.theme  = "c";
 });
 
-$(document).ready(function() {
+$('#dashboardPage').live('pageinit',function() {
 
      //check the navigator.userAgent string to detect if the user is using an iPhone
     if (navigator.userAgent.match(/iPhone/i)) {
