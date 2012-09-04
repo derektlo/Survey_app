@@ -130,7 +130,7 @@ function returnTicks(results){
 
             if (surveyType !== 'Specific') {
               console.log("not specific");
-              
+
               }
               else {
                   // Set up the results page for a Specific Survey
@@ -145,24 +145,6 @@ function returnTicks(results){
                 }
 
           });
-
-              // Load other analytics
-              var onOffValue;
-              console.log("onoffvalue: ",sessionStorage.onOffValue);
-                // set On or Off
-                if (Modernizr.sessionstorage) {
-                    onOffValue = sessionStorage.onOffValue;
-                }
-                else {
-                  onOffValue = $.cookie("onOffValue");
-                }
-
-                if (onOffValue === 'On') {
-                  $('#surveyOnOff').val('on').slider("refresh");
-                }
-                else {
-                  $('#surveyOnOff').val('off').slider("refresh");
-                }
 
 });
 
