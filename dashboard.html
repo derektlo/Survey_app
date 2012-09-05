@@ -49,8 +49,6 @@
 
   </header>
 
-    <div id="dashboardContainer">
-
       <ul id="dashboardList" data-role="listview">
         <li data-role="list-divider">Tools</li>
         <li><a href="surveyType.html">Create Survey</a></li>
@@ -59,19 +57,10 @@
         <li><a href="help.html">Help</a></li>
       </ul>
 
-      <ul id="surveyList" data-role="listview">
-      </ul>
-
-    </div>
-
 <footer data-role="footer" id="footer"></footer>
 
 
 <script>
-
-$(document).bind('mobileinit', function () {
-    $.mobile.page.prototype.options.theme  = "c";
-});
 
 //$(document).delegate('#dashboardPage', 'pageinit', function () {
 //$(document).delegate('.ui-page', 'pageshow', function () {

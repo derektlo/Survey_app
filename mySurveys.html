@@ -48,18 +48,10 @@
 
   </header>
 
-    <div id="mySurveysContainer">
-
-      <ul id="surveyList" data-role="listview">
+       <ul id="surveyList" data-role="listview">
       </ul>
 
-    </div> 
-
 <script type="text/javascript">
-
-$(document).bind('mobileinit', function () {
-    $.mobile.page.prototype.options.theme  = "c";
-});
 
 //function goToSurveyResults(surveyID, onOrOff, surveyTag) {
   window.goToSurveyResults = function(surveyID, onOrOff, surveyTag, surveyType) {
@@ -203,8 +195,8 @@ var getSurveyListURL;
 
           // refresh listview to re-style it
         $('ul#surveyList').listview('refresh');
-        $("#surveyList").page();
-        $("#surveyList").trigger("create");
+       // $("#surveyList").page();
+       // $("#surveyList").trigger("create");
 
     }); // End JSON callback function
 
