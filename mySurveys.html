@@ -115,7 +115,7 @@ function deleteSurvey(surveyID, surveyAuthKey) {
 // $(document).ready(function() {
   $(document).on('pageinit', '#mySurveysPage', function() {
     console.log("pageinit triggered");
-    $("#surveyList").empty();
+    $("ul#surveyList").empty();
      //check the navigator.userAgent string to detect if the user is using an iPhone
     if (navigator.userAgent.match(/iPhone/i)) {
 
@@ -195,8 +195,8 @@ var getSurveyListURL;
 
           // refresh listview to re-style it
         $('ul#surveyList').listview('refresh');
-        $("#surveyList").page();
-        $("#surveyList").trigger("create");
+       // $("#surveyList").page();
+       // $("#surveyList").trigger("create");
 
     }); // End JSON callback function
 
