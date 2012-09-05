@@ -113,7 +113,7 @@ function deleteSurvey(surveyID, surveyAuthKey) {
 //$(document).delegate('#mySurveysPage', 'pagebeforecreate', function () {
 //$('#surveyListPage').live('pageinit', function() {
 // $(document).ready(function() {
-  $(document).on('pageinit', '#mySurveysPage', function() {
+  $('#mySurveysPage').on('pageinit', function() {
     console.log("pageinit triggered");
     $("ul#surveyList").empty();
      //check the navigator.userAgent string to detect if the user is using an iPhone
