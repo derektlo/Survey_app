@@ -108,7 +108,7 @@ function createNewSurveyWithType(surveyType) {
 }
 
 //$(document).ready(function() {
-    $(document).delegate('pageinit', '#surveyTypesPage', function() {
+        $('#surveyTypesPage').on('pageinit', function() {
 
   var sessionActive;
 
