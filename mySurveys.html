@@ -122,6 +122,7 @@ function deleteSurvey(surveyID, surveyAuthKey) {
 //$('#surveyListPage').live('pageinit', function() {
 // $(document).ready(function() {
   $(document).on('pageinit', '#mySurveysPage', function() {
+    console.log("pageinit triggered");
      //check the navigator.userAgent string to detect if the user is using an iPhone
     if (navigator.userAgent.match(/iPhone/i)) {
 
@@ -207,6 +208,11 @@ var getSurveyListURL;
     }); // End JSON callback function
 
 });
+
+  $(document).on('pagebeforehide', '#mySurveysPage', function() {
+    console.log("about to hide: ");
+    $('#footer').empty();
+    });
 
 </script>
 
