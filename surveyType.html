@@ -38,7 +38,7 @@
 <body>
 
 <!-- Page starts here -->
-<div data-role="page" data-theme="b" id="surveyTypes" data-add-back-btn="true">
+<div data-role="page" data-theme="b" id="surveyTypesPage" data-add-back-btn="true">
 
 <style>
     #surveyTypeList li p {
@@ -107,7 +107,8 @@ function createNewSurveyWithType(surveyType) {
       }  
 }
 
-$(document).ready(function() {
+//$(document).ready(function() {
+    $(document).on('pageinit', '#surveyTypesPage', function() {
 
   var sessionActive;
 
