@@ -59,6 +59,9 @@
         <li><a href="help.html">Help</a></li>
       </ul>
 
+      <ul id="surveyList" data-role="listview">
+      </ul>
+
     </div>
 
 <footer data-role="footer" id="footer"></footer>
@@ -149,7 +152,7 @@ function logMeOut(){
 
 function createNewSurvey() {
     // change the page to the surveyCreator.html
-   $.mobile.changePage( "#mySurveysPage", { transition: "slide"} );
+   $.mobile.changePage( "mySurveys.html", { transition: "slide"} );
 }
 
 
