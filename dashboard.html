@@ -76,7 +76,8 @@ $(document).bind('mobileinit', function () {
 //$(document).delegate('#dashboardPage', 'pageinit', function () {
 //$(document).delegate('.ui-page', 'pageshow', function () {
  // $('#dashboardPage').live('pagecreate', function() {
-  $(document).ready(function() {
+ // $(document).ready(function() {
+  $(document).on('pageinit', '#dashboardPage' function() {
     //Your code for each page load here
 
      //check the navigator.userAgent string to detect if the user is using an iPhone
