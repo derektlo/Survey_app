@@ -53,7 +53,10 @@
       <ul id="surveyList" data-role="listview" data-split-icon="delete">
       </ul>
 
-    </div>
+    </div> 
+
+<footer data-role="footer" id="footer">
+</footer>
 
 <script type="text/javascript">
 
@@ -121,7 +124,7 @@ function deleteSurvey(surveyID, surveyAuthKey) {
 //$(document).delegate('#mySurveysPage', 'pagebeforecreate', function () {
 //$('#surveyListPage').live('pageinit', function() {
 // $(document).ready(function() {
-  $(document).on('pageinit', '#mySurveysPage' function() {
+  $(document).on('pageinit', '#mySurveysPage', function() {
      //check the navigator.userAgent string to detect if the user is using an iPhone
     if (navigator.userAgent.match(/iPhone/i)) {
 
