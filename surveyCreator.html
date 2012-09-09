@@ -126,6 +126,9 @@ function logMeOut(){
 
 $(document).ready(function() {
 
+});
+
+ $('#surveyCreatorPage').on('pageinit', function() {
       $('#surveyCreatorPage').css('height', $(document).height());
     
     var sessionActive;
@@ -211,12 +214,9 @@ $(document).ready(function() {
         else {
           surveyType = $.cookie("surveyType");
         }
-
-        $("input[type='radio']").prop("checked",false).checkboxradio("refresh");
-});
-
-$("#surveyCreatorPage").live('pageinit', function() {
-           $('#lettersMenu').selectmenu('refresh',true);
+  
+    $("input[type='radio']").prop("checked",false).checkboxradio("refresh");
+      // $('#lettersMenu').selectmenu('refresh',true);
 });
 
  $('#optionSlider').live('change', function() {
