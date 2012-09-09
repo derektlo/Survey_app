@@ -188,10 +188,10 @@ $(document).ready(function() {
 */
 // Set up Survey Viewer
         if (sessionStorage.surveyType === 'Numbers'){
-            $('#surveyViewer').append('<input type="radio" name="options" id="1" value="1" /><label for="1">1</label><input type="radio" name="options" id="2" value="2" /><label for="2">2</label>');
+            $('#surveyViewer').append('<legend>Survey Preview:</legend><input type="radio" name="options" id="1" value="1" /><label for="1">1</label><input type="radio" name="options" id="2" value="2" /><label for="2">2</label>');
         }
         else if (sessionStorage.surveyType === 'Letters') {
-            $('#surveyViewer').append('<input type="radio" name="options" id="a" value="a" /><label for="a">a</label><input type="radio" name="options" id="b" value="b" /><label for="b" >b</label>');
+            $('#surveyViewer').append('<legend>Survey Preview:</legend><input type="radio" name="options" id="a" value="a" /><label for="a">a</label><input type="radio" name="options" id="b" value="b" /><label for="b" >b</label>');
           }
         else if (sessionStorage.surveyType === 'Custom') {
 
@@ -229,6 +229,7 @@ $(document).ready(function() {
         sliderValue = $(this).slider();
 
         $('#surveyViewer').empty();
+        $('#surveyViewer').append('<legend>Survey Preview:</legend>');
 
         if (surveyType === 'Numbers')
         {
@@ -244,7 +245,7 @@ $(document).ready(function() {
           var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
 
           for (i = 0; i < sliderValue; i++){
-  
+        
           $('#surveyViewer').append('<input type="radio" name="options" id="' +alphabet[i] + '" value="' + alphabet[i] + '" />');
            $('#surveyViewer').append('<label for="' + alphabet[i] + '" >' + alphabet[i] + '</label>');
           }
