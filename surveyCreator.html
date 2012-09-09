@@ -105,29 +105,6 @@ function showSimpleDialogue(alertHeader, alertMessage) {
              })
  }
 
-$(document).delegate('#surveyCreatorPage', 'pageshow', function () {
-    var the_height = ($(window).height() - $(this).find('[data-role="header"]').height() - $(this).find('[data-role="footer"]').height());
-    $(this).height($(window).height()).find('[data-role="content"]').height(the_height);
-  });
-
-function logMeOut(){
-      
-      if (Modernizr.sessionstorage) {
-        sessionStorage.loggedIn = 'false';
-      }
-      else {
-        $.cookie("loggedIn","false");
-      }
-
-      $.mobile.changePage("teacher.html",{transition:"fade"});
-    }
- 
-/* DOCUMENT READY */
-
-$(document).ready(function() {
-
-});
-
  $('#surveyCreatorPage').on('pageinit', function() {
       $('#surveyCreatorPage').css('height', $(document).height());
     
@@ -174,6 +151,15 @@ $(document).ready(function() {
         //trigger an orientationchange event on the window object to initialize this code (basically in-case the user opens the page in landscape mode)
         }).trigger('orientationchange');
       }
+
+        // Initiate surveyType
+        if (Modernizr.sessionstorage) {
+          surveyType = sessionStorage.surveyType;
+        }
+        else {
+          surveyType = $.cookie("surveyType");
+        }
+
 /* CHANGE LATER IF PROVIDING FUNCTIONALITY FOR PICKING FIST LETTER 
 
               $('#startingNumberOrLetter').append('<div data-role="fieldcontain"><label for="lettersMenu" class="select">Select Letter:</label><select name="lettersMenu" id="lettersMenu" data-native-menu="false">');
@@ -186,7 +172,7 @@ $(document).ready(function() {
               }
 
 */
-// Set up Survey Viewer
+      // Set up Survey Viewer
         if (sessionStorage.surveyType === 'Numbers'){
             $('#surveyViewer').append('<legend>Survey Preview:</legend><input type="radio" name="options" id="1" value="1" /><label for="1">1</label><input type="radio" name="options" id="2" value="2" /><label for="2">2</label>');
         }
@@ -206,21 +192,10 @@ $(document).ready(function() {
             $('ul#customOptionsList').append('<li><label for="custom' + (i+1) + '" class="ui-input-text">Option ' + (i+1) + ':</label><input type="text" name="custom' + (i+1) + '" id="custom' + (i+1) + '" value="" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset"></li>');
           }
         }
-
-        // Initiate surveyType
-        if (Modernizr.sessionstorage) {
-          surveyType = sessionStorage.surveyType;
-        }
-        else {
-          surveyType = $.cookie("surveyType");
-        }
-
-    //$("input[type='radio']").prop("checked",false).checkboxradio("refresh");
-      // $('#lettersMenu').selectmenu('refresh',true);
 });
 
  $('#surveyCreatorPage').live('pageinit', function() {
-    console.log("called");
+
     $('#surveyViewer').trigger("create");
     $("input[type='radio']").checkboxradio("refresh");
   });
@@ -231,9 +206,9 @@ $(document).ready(function() {
         $('#surveyViewer').empty();
         $('#surveyViewer').append('<legend>Survey Preview:</legend>');
 
-        if (surveyType === 'Numbers')
+        if (sessionStorage.surveyType === 'Numbers')
         {
-        for (i = 1; i <= sliderValue; i++){
+        for (i = 1; i <= sliderValue.val(); i++){
 
           $('#surveyViewer').append('<input type="radio" name="options" id="' + i + '" value="' + i + '" />');
            $('#surveyViewer').append('<label for="' + i + '" >' + i + '</label>');
@@ -244,7 +219,7 @@ $(document).ready(function() {
 
           var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
 
-          for (i = 0; i < sliderValue; i++){
+          for (i = 0; i < sliderValue.val(); i++){
         
           $('#surveyViewer').append('<input type="radio" name="options" id="' +alphabet[i] + '" value="' + alphabet[i] + '" />');
            $('#surveyViewer').append('<label for="' + alphabet[i] + '" >' + alphabet[i] + '</label>');
