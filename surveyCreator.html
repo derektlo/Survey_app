@@ -250,6 +250,9 @@ $(document).ready(function() {
            $('#surveyViewer').append('<label for="' + alphabet[i] + '" >' + alphabet[i] + '</label>');
           }
         }
+
+    $('#surveyViewer').trigger("create");
+    $("input[type='radio']").checkboxradio("refresh");
 });
    
     
