@@ -215,7 +215,7 @@ $(document).ready(function() {
           surveyType = $.cookie("surveyType");
         }
 
-   // $("input[type='radio']").prop("checked",false).checkboxradio("refresh");
+    $("input[type='radio']").prop("checked",false).checkboxradio("refresh");
       // $('#lettersMenu').selectmenu('refresh',true);
 });
 
@@ -242,8 +242,11 @@ $(document).ready(function() {
            $('#surveyViewer').append('<label for="' + alphabet[i] + '" >' + alphabet[i] + '</label>');
           }
         }
-        $("input[type='radio']").prop("checked",false).checkboxradio("refresh");
 });
+
+  $('#surveyCreatorPage').live('pageinit', function() {
+     $("input[type='radio']").prop("checked",false).checkboxradio("refresh");
+  });
    
     
 $('#createSurveyButton').click(function() { 
