@@ -42,7 +42,7 @@
 
             $userTag = mysql_result($getUserTag, 0);
 
-      header( 'Location: http://www.classtempo.org/surveyList.html?email=' . $email . '&userTag=' . $userTag);
+      header( 'Location: http://www.classtempo.org/welcomeMessage.html?email=' . $email . '&userTag=' . $userTag);
   }
   else {
 

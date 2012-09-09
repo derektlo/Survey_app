@@ -100,32 +100,7 @@
   var fullDate = month + "-" + day + "-" + year;
 
   $('#footer').append('<p>  Today: ' + fullDate + '</p>');
-
-  var urlVars = getUrlVars();
-
-  if (urlVars.email !== undefined){
-
-    if (Modernizr.sessionstorage) {
-                      // browser supports local storage
-      sessionStorage.emailVar = urlVars.email;
-      sessionStorage.userTagVar = urlVars.userTag;
-      sessionStorage.loggedIn = 'true';
-    }
-    else {
-      $.cookie("emailVar",email);
-      $.cookie("userTagVar",userTag);
-      $.cookie("loggedIn","true");
-    }
-  }
 });
-
-function getUrlVars() {
-    var vars = {};
-    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-        vars[key] = value;
-    });
-    return vars;
-}
 
 function logMeOut(){
   
