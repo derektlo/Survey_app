@@ -211,6 +211,9 @@ $(document).ready(function() {
         else {
           surveyType = $.cookie("surveyType");
         }
+
+        $("input[type='radio']").prop("checked",false).checkboxradio("refresh");
+});
 });
 
 $("#surveyCreatorPage").live('pageinit', function() {
