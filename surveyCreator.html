@@ -215,9 +215,15 @@ $(document).ready(function() {
           surveyType = $.cookie("surveyType");
         }
 
-    $("input[type='radio']").prop("checked",false).checkboxradio("refresh");
+    //$("input[type='radio']").prop("checked",false).checkboxradio("refresh");
       // $('#lettersMenu').selectmenu('refresh',true);
 });
+
+ $('#surveyCreatorPage').live('pageinit', function() {
+    console.log("called");
+    //$('#surveyViewer').trigger("create");
+    $("input[type='radio']").prop("checked",false).checkboxradio("refresh");
+  });
 
  $('#optionSlider').live('change', function() {
         sliderValue = $(this).slider();
@@ -244,12 +250,6 @@ $(document).ready(function() {
           }
         }
 });
-
-  $('#surveyCreatorPage').live('pageinit', function() {
-    console.log("called");
-    $('#surveyViewer').trigger("create");
-    // $("input[type='radio']").prop("checked",false).checkboxradio("refresh");
-  });
    
     
 $('#createSurveyButton').click(function() { 
