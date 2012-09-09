@@ -221,8 +221,8 @@ $(document).ready(function() {
 
  $('#surveyCreatorPage').live('pageinit', function() {
     console.log("called");
-    //$('#surveyViewer').trigger("create");
-    $("input[type='radio']").prop("checked",false).checkboxradio("refresh");
+    $('#surveyViewer').trigger("create");
+    //$("input[type='radio']").prop("checked",false).checkboxradio("refresh");
   });
 
  $('#optionSlider').live('change', function() {
