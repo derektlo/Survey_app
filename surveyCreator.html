@@ -54,8 +54,8 @@
     <input type="range" name="optionSlider" id="optionSlider" value="2" min="2" max="25" data-highlight="true" />
   </div>
 
-  <div id="surveyViewer">
-  </div>
+  <fieldset id="surveyViewer" data-role="controlgroup">
+  </fieldset>
 
   <fieldset data-role="controlgroup">
   <legend>Survey On/Off</legend>
@@ -214,8 +214,8 @@ $(document).ready(function() {
         else {
           surveyType = $.cookie("surveyType");
         }
-  
-    $("input[type='radio']").prop("checked",false).checkboxradio("refresh");
+
+   // $("input[type='radio']").prop("checked",false).checkboxradio("refresh");
       // $('#lettersMenu').selectmenu('refresh',true);
 });
 
