@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta name="viewport" content="height=device-height,width=device-width,initial-scale=1.0,maximum-scale=1.0" >
-  <title>Class Tempo: Welcome and Quick Tutorial</title>
+  <title>Class Tempo: Verify Account</title>
 
   <!-- CSS -->
   <link rel="stylesheet" href="./signup.css">
@@ -54,8 +54,7 @@
 
   <div data-role="content" id="welcomeMessageContent">
 
-      <h2>Welcome!</h2><br>
-      <p>Thank you so much for activating your Class Tempo Account. It will revolutionize the way you teach. How? Well, follow the tutorial below to learn about all the functions of Class Tempo.</p>
+      <h2>How to use Class Tempo</h2><br>
 
       <span id="tutorialHeader">1. How do I create a survey?</span>
       <p> Go to "Create Survey", choose a survey type, fill in some options, and your survey will be created instantaneously!</p>
@@ -74,44 +73,9 @@
 
       <span id="tutorialHeader">6. Where do I go from here?</span>
       <p> The information provided here should be enough to get you whipping up surveys like a storm, but if you have other questions or suggestions feel free to email support@classtempo.org. Thanks for joining our mission to improve the classroom!</p> 
-
-      <div id="readyDiv" data-role="fieldcontain">    
-      <a id="ready" name="ready" data-role="button" data-inline="true" href="dashboard.html">I'm Ready!</a>
-      </div>
-
   </div>
 
 <script>
-
-function getUrlVars() {
-    var vars = {};
-    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-        vars[key] = value;
-    });
-    return vars;
-}
-
-  $('#welcomeMessagePage').on('pageinit', function() {
-
-  var urlVars = getUrlVars();
-
-  if (urlVars.email !== undefined){
-
-    if (Modernizr.sessionstorage) {
-                      // browser supports local storage
-      sessionStorage.emailVar = urlVars.email;
-      sessionStorage.userTagVar = urlVars.userTag;
-      sessionStorage.loggedIn = 'true';
-    }
-    else {
-      $.cookie("emailVar",email);
-      $.cookie("userTagVar",userTag);
-      $.cookie("loggedIn","true");
-    }
-  }
-
-});
-
 </script>
 
     </div>

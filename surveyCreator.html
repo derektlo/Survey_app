@@ -234,7 +234,7 @@ $('#createSurveyButton').click(function() {
            }
 
         // Submit the form
-        $.post("http://classtempo.org/Survey_app/survey_phpScripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&numberOfOptions=" + sliderValue.val() + " &surveyType=" + surveyType + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar, surveyCreatorFormVar.serialize(), function(data){
+        $.post("/Survey_app/survey_phpScripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&numberOfOptions=" + sliderValue.val() + " &surveyType=" + surveyType + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar, surveyCreatorFormVar.serialize(), function(data){
           
           console.log(data);
           if (data != 'Error') {
