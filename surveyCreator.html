@@ -246,7 +246,9 @@ $(document).ready(function() {
 });
 
   $('#surveyCreatorPage').live('pageinit', function() {
-     $("input[type='radio']").prop("checked",false).checkboxradio("refresh");
+    console.log("called");
+    $('#surveyViewer').trigger("create");
+    // $("input[type='radio']").prop("checked",false).checkboxradio("refresh");
   });
    
     
