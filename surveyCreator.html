@@ -188,10 +188,10 @@ $(document).ready(function() {
 */
 // Set up Survey Viewer
         if (sessionStorage.surveyType === 'Numbers'){
-            $('#surveyViewer').append('<input type="radio" name="options" id="1" value="1" /></input><input type="radio" name="options" id="2" value="2" />');
+            $('#surveyViewer').append('<input type="radio" name="options" id="1" value="1" /><label for="1">1</label><input type="radio" name="options" id="2" value="2" /><label for="2">2</label>');
         }
         else if (sessionStorage.surveyType === 'Letters') {
-            $('#surveyViewer').append('<input type="radio" name="options" id="a" value="a" /></input><input type="radio" name="options" id="b" value="b" />');
+            $('#surveyViewer').append('<input type="radio" name="options" id="a" value="a" /><label for="a">a</label><input type="radio" name="options" id="b" value="b" /><label for="b" >b</label>');
           }
         else if (sessionStorage.surveyType === 'Custom') {
 
@@ -229,7 +229,7 @@ $(document).ready(function() {
         for (i = 1; i <= sliderValue; i++){
 
           $('#surveyViewer').append('<input type="radio" name="options" id="' + i + '" value="' + i + '" />');
-              // $('#optionsList').append('<label for="' + i + '" >' + i + '</label>');
+           $('#surveyViewer').append('<label for="' + i + '" >' + i + '</label>');
           }
         }
         else if (surveyType === 'Letters') {
@@ -239,7 +239,7 @@ $(document).ready(function() {
           for (i = 0; i < sliderValue; i++){
   
           $('#surveyViewer').append('<input type="radio" name="options" id="' +alphabet[i] + '" value="' + alphabet[i] + '" />');
-              // $('#optionsList').append('<label for="' + alphabet[i] + '" >' + alphabet[i] + '</label>');
+           $('#surveyViewer').append('<label for="' + alphabet[i] + '" >' + alphabet[i] + '</label>');
           }
         }
         $("input[type='radio']").prop("checked",false).checkboxradio("refresh");
