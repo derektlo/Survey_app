@@ -10,6 +10,8 @@
    $uid = 'external_user';
    // MySQL password
    $pwd = 'jTJW7xTn8MrjDyRd';
+
+   $dsn = 'mysql:host=50.112.249.251;dbname=survey_app_db';
  
 	// set restaurantID to get categories for selected restaurant
  	$surveyAuthKey   = isset($_GET['surveyAuthKey']) ? $_GET['surveyAuthKey']  : "";
@@ -51,6 +53,30 @@
       while($holdObj = mysql_fetch_array($options)) {
       $arrayOfOptions[] = $holdObj['Option_name'];
       }
+
+      // Do some analytics, such as finding percentages for each options
+      // As well as detecting whether the survey is matching
+      // If it is, we perform more analytics
+
+//       $query = <<<EOD
+//     SELECT Matching_value
+//     FROM Survey_Specific_Response
+//     WHERE key_value = 0 
+
+// EOD;
+
+// $pdo = new PDO($dsn, $uid, $pwd);
+// $stmt = $pdo->prepare($query);
+// if ($stmt->execute()) {
+//     while ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
+//         $result = $result['result_id'];
+//         //do something with this result?
+//     }
+// }
+
+
+
+
           // GENERATE FINAL ARRAY TO BE SENT BACK TO APP
          array_push($container,$arrayOfOptionsValues,$arrayOfPercents, $arrayOfOptions);
    }
