@@ -72,25 +72,50 @@
    }
    else if ($surveyType == 'Specific'){
 
-//              $query = <<<EOD
-//     SELECT Matching_value
-//     FROM Survey_Specific_Response
-//     WHERE key_value = 0 
+$fetchSpecificResults = mysql_query("SELECT Response,Key_value,Hits FROM Survey_Specific_Response WHERE Survey_authKey = '$surveyAuthKey'");
 
-// EOD;
+// Variable to calculate and sort analytics
+$totalHits;
+$matching;
+$matchingResponse;
+$matchingHits;
+$allResponses = array();
+$hitsForEachResponse = array();
 
-// $pdo = new PDO($dsn, $uid, $pwd);
-// $stmt = $pdo->prepare($query);
-// if ($stmt->execute()) {
-//     while ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
-//         $result = $result['result_id'];
-//         //do something with this result?
-//     }
+while ($row = mysql_fetch_object($fetchSpecificResults)) {
+    if(($row->Key_value) == 0) {
+         $matching = 0;
+         $matchingResponse = $row->Response;
+         $matchingHits = $row->Hits;
+    }
+    // save all responses and hits for each response
+    $allResponses[] = $row->Response;
+    $hitsForEachResponse[] = $row->Hits;
+    // keep a running count of the total number of hits
+    $totalHits = $totalHits + $row->Hits;
+}
 
-   // GATHER INFORMATION ABOUT THE SURVEY
-   $surveyInformation = mysql_query("SELECT Matching FROM Survey_Results WHERE Survey_authKey = '$surveyAuthKey'");
+$percentCorrect;
+$percentWrong;
+$percentContainer = array();
 
-   }
+if ($matching == 0) {
+
+   $percentCorrect = $matchingHits / $totalHits;
+   $percentWrong = ($totalHits - $matchingHits) / $totalHits;
+
+   array_push($percentContainer,$percentContainer, $percentWrong);
+}
+   $container = array();
+
+if ($matching == 0)
+ array_push($container,$allResponses,$hitsForEachResponse,$matching,$percentContainer);
+else
+ array_push($container,$allResponses,$hitsForEachResponse,$matching);
+
+// return the json result.
+   echo '{"Results":'.json_encode($container).'}';
+}
 
    // close connection 
    mysql_close();
