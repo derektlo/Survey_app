@@ -57,7 +57,6 @@
       // Do some analytics, such as finding percentages for each options
       // As well as detecting whether the survey is matching
       // If it is, we perform more analytics
-}
 
           // GENERATE FINAL ARRAY TO BE SENT BACK TO APP
          array_push($container,$arrayOfOptionsValues,$arrayOfPercents, $arrayOfOptions);
