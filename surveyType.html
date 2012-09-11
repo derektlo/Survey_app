@@ -79,12 +79,12 @@ function createNewSurveyWithType(surveyType) {
         console.log("modernizer");
 
           if (surveyType === 'Custom') {
-            showSimpleDialogue("Sorry!","Development for this survey type is still underway but will be completed shortly. Sorry for any inconvenience!");
-             // $.mobile.changePage( "numberOfOptions.html", { transition: "slide"} );
+            // showSimpleDialogue("Sorry!","Development for this survey type is still underway but will be completed shortly. Sorry for any inconvenience!");
+              $.mobile.changePage( "numberOfOptions.html", { transition: "slide"} );
           }
           else if (surveyType === 'Specific') {
-            showSimpleDialogue("Sorry!","Development for this survey type is still underway but will be completed shortly. Sorry for any inconvenience!");
-          //  $.mobile.changePage( "specificAnswer.html", { transition: "slide"} );
+            // showSimpleDialogue("Sorry!","Development for this survey type is still underway but will be completed shortly. Sorry for any inconvenience!");
+            $.mobile.changePage( "specificAnswer.html", { transition: "slide"} );
           }
           else { // Survey type is not custom
             $.mobile.changePage( "surveyCreator.html", { transition: "slide"} );

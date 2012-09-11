@@ -136,7 +136,15 @@ function returnTicks(results){
               var arrayOfValues = json.Results[0];
               var arrayOfPercents = json.Results[1];
               var arrayOfPointLabels = [];  
-              var ticks = returnTicks(json.Results[0]);
+             // var ticks = returnTicks(json.Results[0]);
+              var ticks;
+
+              if ((surveyType === 'Numbers') || (surveyType === 'Letters')) {
+                 ticks = returnTicks(json.Results[0]);
+               }
+              else if (surveyType === 'Custom') {
+                 ticks = json.Results[2];
+               }
 
               // Add Point Labels
               for (var i = 0; i < arrayOfValues.length; i++){

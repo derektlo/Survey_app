@@ -57,25 +57,7 @@
       // Do some analytics, such as finding percentages for each options
       // As well as detecting whether the survey is matching
       // If it is, we perform more analytics
-
-//       $query = <<<EOD
-//     SELECT Matching_value
-//     FROM Survey_Specific_Response
-//     WHERE key_value = 0 
-
-// EOD;
-
-// $pdo = new PDO($dsn, $uid, $pwd);
-// $stmt = $pdo->prepare($query);
-// if ($stmt->execute()) {
-//     while ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
-//         $result = $result['result_id'];
-//         //do something with this result?
-//     }
-// }
-
-
-
+}
 
           // GENERATE FINAL ARRAY TO BE SENT BACK TO APP
          array_push($container,$arrayOfOptionsValues,$arrayOfPercents, $arrayOfOptions);
@@ -89,7 +71,22 @@
    // return the json result.
    echo '{"Results":'.json_encode($container).'}';
    }
-   else {
+   else if ($surveyType == 'Specific'){
+
+//              $query = <<<EOD
+//     SELECT Matching_value
+//     FROM Survey_Specific_Response
+//     WHERE key_value = 0 
+
+// EOD;
+
+// $pdo = new PDO($dsn, $uid, $pwd);
+// $stmt = $pdo->prepare($query);
+// if ($stmt->execute()) {
+//     while ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
+//         $result = $result['result_id'];
+//         //do something with this result?
+//     }
 
    // GATHER INFORMATION ABOUT THE SURVEY
    $surveyInformation = mysql_query("SELECT Matching FROM Survey_Results WHERE Survey_authKey = '$surveyAuthKey'");
