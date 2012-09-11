@@ -120,7 +120,7 @@ function returnTicks(results){
         return ticks;    
 }
 
-     $('#surveyResultsPage').on('pageinit', function() {
+$('#surveyResultsPage').on('pageinit', function() {
 
           // Load Graph 
 
@@ -129,7 +129,7 @@ function returnTicks(results){
         
 //           // Load Graph 
            $.getJSON("http://classtempo.org/Survey_app/survey_phpScripts/getSurveyAnalytics.php?surveyAuthKey=" + surveyTag + "&surveyType=" + surveyType, function(json) {
-
+            console.log("json: ",json);
               $.jqplot.config.enablePlugins = true;
 
               // Define local variables used to create graph
