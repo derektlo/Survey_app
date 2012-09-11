@@ -54,7 +54,7 @@
     <input type="range" name="optionSlider" id="optionSlider" value="2" min="2" max="25" data-highlight="true" />
   </div>
 
-  <fieldset id="surveyViewer" data-role="controlgroup">
+  <fieldset data-role="controlgroup" id="surveyViewer">
   </fieldset>
 
   <fieldset data-role="controlgroup">
@@ -196,7 +196,9 @@ function showSimpleDialogue(alertHeader, alertMessage) {
 
  $('#surveyCreatorPage').live('pageinit', function() {
 
-    $('#surveyViewer').trigger("create");
+ 
+    $("input[type='radio']").controlgroup("refresh");
+       $('#surveyViewer').trigger("create");
  //   $('#surveyViewer').page();
     $("input[type='radio']").checkboxradio("refresh");
   });
