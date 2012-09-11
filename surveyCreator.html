@@ -178,7 +178,7 @@ function showSimpleDialogue(alertHeader, alertMessage) {
             for (i = 0; i < 2; i++){
 
           $('#surveyViewer').append('<legend>Survey Options</legend><input type="radio" name="options" id="' + (i+1) + '" value="' + (i+1) + '" />');
-              $('#optionsList').append('<label for="' + (i+1) + '" >' + (i+1) + '</label>');
+              $('#surveyViewer').append('<label for="' + (i+1) + '" >' + (i+1) + '</label>');
           }
         }
         else if (sessionStorage.surveyType === 'Letters') {
