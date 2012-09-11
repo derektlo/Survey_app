@@ -197,9 +197,8 @@ function showSimpleDialogue(alertHeader, alertMessage) {
  $('#surveyCreatorPage').live('pageinit', function() {
 
     $('#surveyViewer').trigger("create");
-    $('#surveyViewer').page();
+ //   $('#surveyViewer').page();
     $("input[type='radio']").checkboxradio("refresh");
-    $("input[type='radio']").appendTo( ".ui-page" ).trigger( "create" );
   });
 
  $('#optionSlider').live('change', function() {
