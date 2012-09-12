@@ -18,6 +18,9 @@
    $onOff = isset($_GET['onOff']) ? $_GET['onOff']  : "";
    $surveyDescription = isset($_GET['surveyDescription']) ? $_GET['surveyDescription']  : "";
    $email = isset($_GET['email']) ? $_GET['email']  : "";
+   $matchValue;
+   $customOptions;
+   $matching;
 
    $surveyType = isset($_GET['surveyType']) ? $_GET['surveyType']  : "";
 
@@ -103,7 +106,7 @@ if ($surveyType != 'Specific') {
       $insertMatchingValue;
       if ($matching == 0) {
          // This is a matching survey.
-         
+
              $insertMatchingValue = "INSERT INTO Survey_Specific_Response (Survey_authKey, Response, Key_value, Hits) 
                            VALUES ('$surveyAuthKey','$matchValue','$varZero','$varZero')";
           }
