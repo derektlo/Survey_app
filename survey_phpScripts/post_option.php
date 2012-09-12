@@ -31,18 +31,18 @@
    }
    else {
 
-      $checkValue = mysql_query("SELECT Match_value FROM Survey_Specific_Response WHERE Match_value = '$optionName'");
+      $checkValue = mysql_query("SELECT Response FROM Survey_Specific_Response WHERE Response = '$optionName'");
 
       if (mysql_num_rows($checkValue) > 0) {
             $query = mysql_query("UPDATE Survey_Specific_Response SET Hits = Hits+1 
-                                 WHERE Survey_authKey = '$surveyAuthKey' AND Matching_value = '$optionName'");
+                                 WHERE Survey_authKey = '$surveyAuthKey' AND Response = '$optionName'");
       }
       else {
 
          $currentHit = 1;
          $keyValue = -1;
 
-         $query = mysql_query("INSERT INTO Survey_Specific_Response (Survey_authKey, Matching_value, Key_value, Hits) 
+         $query = mysql_query("INSERT INTO Survey_Specific_Response (Survey_authKey, Response, Key_value, Hits) 
                               VALUES ('$surveyAuthKey','$optionName','$keyValue','$currentHit')");
       }
    }
