@@ -102,7 +102,7 @@ function showSimpleDialogue(alertHeader, alertMessage) {
     <div id="schoolDiv" data-role="fieldcontain">
     <label for="school">Employer* (School/University)</label> 
     <input id="school" name="school_r" type="text" />
-  </div>
+    </div>  
 
   <div id="passwordDiv" data-role="fieldcontain">
     <label for="password">Password* (at least 6 characters)</label>   
@@ -181,7 +181,7 @@ function showSimpleDialogue(alertHeader, alertMessage) {
         }      
 
         // Submit the form
-        $.post("/Survey_app/survey_phpScripts/create_survey_account.php?email=" + emailVar.val() + "&userTag=" + userTagVar.val() + "&school=" + schoolVar.val() + "&password=" + passwordVar.val() + "&content=" + contentVar.val(), signUpFormVar.serialize(), function(data){
+        $.post("/Survey_app/survey_phpScripts/create_survey_account.php?email=" + emailVar.val() + "&userTag=" + userTagVar.val() + "&school=" + schoolVar.val() + "&class=" + classVar.val() + "&classSize=" + classSize.val() + "&password=" + passwordVar.val() + "&content=" + contentVar.val(), signUpFormVar.serialize(), function(data){
           
    
             if (data === 'Successful'){

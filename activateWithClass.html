@@ -44,28 +44,35 @@
 
 
     <header data-role="header">
-    <h1>Education</h1>
+    <h1>One more thing!</h1>
     </header>
 
       <div data-role="content" id="myClassesContent">
 
-      <h2>This page coming soon!</h2>
-      <p>Thank you for your patience.</p>
+    <h2>Add a class</h2>
+    <p>Just take a quick second to add a course that you teach! You can always add more, even from different schools, under My Classes/Schools, at the Class Tempo Dashboard. Thanks! </p>
+
+    <div id="classDiv" data-role="fieldcontain">
+    <label for="class">Primary Class* (Full Course Title)</label> 
+    <input id="class" name="class_r" type="text" />
+    </div>
+
+    <div id="classSizeDiv" data-role="fieldcontain">
+    <label for="classSize">Class Size (Optional)</label> 
+    <input id="classSize" name="classSize_r" type="number" />
+    </div>  
 
   </div>  
 
-<!--       <ul id="dashboardList" data-role="listview">
-        <li data-role="list-divider">Manage your Classes &#38; Schools</li>
-        <li><a href="surveyType.html">Add Class</a></li>
-        <li><a href="surveyType.html">Add School</a></li>
-        <li><a href="mySurveys.html">Edit Existing Class</a></li>
-        <li><a href="mySurveys.html">Edit Existing School</a></li>
-      </ul> -->
-
 <script>
+
+    var classVar = null;
+    var classSizeVar = null;
 
   $('#myClassesPage').on('pageinit', function() {
     //Your code for each page load here
+      classVar = $('#class');
+      classSizeVar = $('#classSize');
 
      //check the navigator.userAgent string to detect if the user is using an iPhone
     if (navigator.userAgent.match(/iPhone/i)) {
@@ -89,6 +96,8 @@
         }).trigger('orientationchange');
     }
 });
+
+
 
 
 </script>
