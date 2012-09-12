@@ -109,10 +109,10 @@ if ($matching == 0) {
    $wrong = $totalHits - $matchingHits;
    array_push($correctWrongContainer,$correct,$wrong);
 
-   $percentCorrect = $matchingHits / $totalHits;
-   $percentWrong = ($totalHits - $matchingHits) / $totalHits;
+   $percentCorrect = ($matchingHits / $totalHits) * 100) . '%';
+   $percentWrong = ((($totalHits - $matchingHits) / $totalHits) * 100) .'%';
 
-   array_push($percentContainer,$percentContainer, $percentWrong);
+   array_push($percentContainer,$percentCorrect, $percentWrong);
 }
    $container = array();
 
