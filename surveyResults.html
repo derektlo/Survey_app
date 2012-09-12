@@ -198,7 +198,7 @@ $('#surveyResultsPage').on('pageinit', function() {
 
                 $('#matchingResults').children().remove('li');
 
-                $('ul#matchingResults').append('<li data-role="list-divider">Results:</li>');
+                $('ul#matchingResults').append('<li data-role="list-divider">Results</li>');
                 $('ul#matchingResults').append('<li>Matching Value: ' + matchingResponse + '</li>');
                 $('ul#matchingResults').append('<li>Correct: ' + correctWrong[0] + '</li>');
                 $('ul#matchingResults').append('<li>Wrong: ' + correctWrong[1] + ' </li>');
@@ -222,13 +222,18 @@ $('#surveyResultsPage').on('pageinit', function() {
 
                 $('ul#freeResults').append('<li data-role="list-divider">Results</li>');
 
-                for (i = 0; i < allResponses.length; i++) {
-                    $('ul#freeResults').append('<li>' + allResponses[i] + ': ' + allHits[i] + '</li>');
+                if (allResponses.length === 0) {
+                  $('ul#freeResults').append('<li>No responses yet...</li>');
                 }
+                else {
+
+                  for (i = 0; i < allResponses.length; i++) {
+                    $('ul#freeResults').append('<li>' + allResponses[i] + ': ' + allHits[i] + '</li>');
+                  }
 
                 $('ul#freeResults').listview();
                 $('ul#freeResults').listview('refresh');
-
+                }
               }
           }
 
