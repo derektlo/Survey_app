@@ -218,11 +218,16 @@ $('#surveyResultsPage').on('pageinit', function() {
                 var allResponses = json.Results[1];
                 var allHits = json.Results[2];
 
+                $('#freeResults').children().remove('li');
+
                 $('ul#freeResults').append('<li data-role="list-divider">Results</li>');
 
                 for (i = 0; i < allResponses.length; i++) {
                     $('ul#freeResults').append('<li>' + allResponses[i] + ': ' + allHits[i] + '</li>');
                 }
+
+                $('ul#freeResults').listview();
+                $('ul#freeResults').listview('refresh');
 
               }
           }
