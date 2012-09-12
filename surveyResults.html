@@ -198,15 +198,15 @@ $('#surveyResultsPage').on('pageinit', function() {
 
                 $('#matchingResults').children().remove('li');
 
-                $('ul#matchingResults').append('<li data-role="list-divider">Matching Results:</li>');
+                $('ul#matchingResults').append('<li data-role="list-divider">Results:</li>');
                 $('ul#matchingResults').append('<li>Matching Value: ' + matchingResponse + '</li>');
                 $('ul#matchingResults').append('<li>Correct: ' + correctWrong[0] + '</li>');
                 $('ul#matchingResults').append('<li>Wrong: ' + correctWrong[1] + ' </li>');
 
-                $('ul#matchingResults').append('<li data-role="list-divider">All Results</li>');
+                $('ul#matchingResults').append('<li data-role="list-divider">All Responses</li>');
 
                 for (i = 0; i < allResponses.length; i++) {
-                    $('ul#freeResults').append('<li>' + allResponses[i] + ': ' + allHits[i] + '</li>');
+                    $('ul#matchingResults').append('<li>' + allResponses[i] + ': ' + allHits[i] + '</li>');
                 }
 
 
@@ -218,7 +218,7 @@ $('#surveyResultsPage').on('pageinit', function() {
                 var allResponses = json.Results[1];
                 var allHits = json.Results[2];
 
-                $('ul#matchingResults').append('<li data-role="list-divider">Results</li>');
+                $('ul#freeResults').append('<li data-role="list-divider">Results</li>');
 
                 for (i = 0; i < allResponses.length; i++) {
                     $('ul#freeResults').append('<li>' + allResponses[i] + ': ' + allHits[i] + '</li>');
