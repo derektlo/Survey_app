@@ -76,7 +76,7 @@ $fetchSpecificResults = mysql_query("SELECT Response,Key_value,Hits FROM Survey_
 
 // Variable to calculate and sort analytics
 $totalHits;
-$matching;
+$matching = -1;
 $matchingResponse;
 $matchingHits;
 $allResponses = array();
@@ -99,7 +99,15 @@ $percentCorrect;
 $percentWrong;
 $percentContainer = array();
 
+$correct;
+$wrong;
+$correctWrongContainer = array();
+
 if ($matching == 0) {
+
+   $correct = $matchingHits;
+   $wrong = $totalHits - $matchingHits;
+   array_push($correctWrongContainer,$correct,$wrong);
 
    $percentCorrect = $matchingHits / $totalHits;
    $percentWrong = ($totalHits - $matchingHits) / $totalHits;
@@ -108,10 +116,12 @@ if ($matching == 0) {
 }
    $container = array();
 
+array_multisort($allResponses, SORT_DESC, $hitsForEachResponse);
+
 if ($matching == 0)
- array_push($container,$allResponses,$hitsForEachResponse,$matching,$percentContainer);
+ array_push($container,$matching,$machingResponse,$allResponses,$hitsForEachResponse,$correctWrongContainer,$percentContainer);
 else
- array_push($container,$allResponses,$hitsForEachResponse,$matching);
+ array_push($container,$matching,$allResponses,$hitsForEachResponse);
 
 // return the json result.
    echo '{"Results":'.json_encode($container).'}';
