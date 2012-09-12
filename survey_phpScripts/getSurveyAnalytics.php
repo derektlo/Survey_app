@@ -119,7 +119,7 @@ if ($matching == 0) {
 array_multisort($allResponses, SORT_DESC, $hitsForEachResponse);
 
 if ($matching == 0)
- array_push($container,$matching,$machingResponse,$allResponses,$hitsForEachResponse,$correctWrongContainer,$percentContainer);
+ array_push($container,$matching,$matchingResponse,$allResponses,$hitsForEachResponse,$correctWrongContainer,$percentContainer);
 else
  array_push($container,$matching,$allResponses,$hitsForEachResponse);
 
