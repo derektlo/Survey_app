@@ -30,7 +30,7 @@
    else if ($surveyType == 'Specific') {
       $matching = isset($_GET['matching']) ? $_GET['matching']  : "";
 
-      if ($matching === 0)
+      if ($matching == 'true')
          $matchValue = isset($_GET['matchValue']) ? $_GET['matchValue']  : "";
    }
 

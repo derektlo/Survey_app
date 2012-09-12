@@ -242,6 +242,7 @@ $('#surveyCreatorForm').submit(function() {
                   showSimpleDialogue('Whoops!','Please enter a valid value for matching.');
                   return false;
                 }
+                matching = 'true';
           }
           console.log("matching value: ", matchValue);
               generateAjaxPost("/Survey_app/survey_phpScripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&numberOfOptions=" + 1 + "&surveyType=" + surveyType + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar + "&matching=" + matching + "&matchValue=" + matchValue);
