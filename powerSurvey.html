@@ -243,7 +243,7 @@ $('#surveyCreatorForm').submit(function() {
                   return false;
                 }
           }
-
+          console.log("matching value: ", matchValue);
               generateAjaxPost("/Survey_app/survey_phpScripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&numberOfOptions=" + 1 + "&surveyType=" + surveyType + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar + "&matching=" + matching + "&matchValue=" + matchValue);
         }   
        

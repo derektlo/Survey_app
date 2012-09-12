@@ -103,7 +103,7 @@ if ($surveyType != 'Specific') {
       $insertMatchingValue;
       if ($matching == 0) {
          // This is a matching survey.
-
+         
              $insertMatchingValue = "INSERT INTO Survey_Specific_Response (Survey_authKey, Response, Key_value, Hits) 
                            VALUES ('$surveyAuthKey','$matchValue','$varZero','$varZero')";
           }
