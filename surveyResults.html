@@ -184,7 +184,11 @@ $('#surveyResultsPage').on('pageinit', function() {
               });
           }
           else {
-            console.log("specific survey");
+            console.log("specific survey: ",json);
+            var allResponses = json.Results[0];
+            var allHits = json.Results[1];
+            var matching = json.Results[2];
+            var percentArray = json.Results[3];
 
             if (matching === 0) { // If this specific survey is matching
 
