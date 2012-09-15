@@ -33,6 +33,11 @@
 
       $checkValue = mysql_query("SELECT Response FROM Survey_Specific_Response WHERE Response = '$optionName'");
 
+      echo $checkValue;
+
+      var $numRows = mysql_num_rows($checkValue);
+      echo $numRows;
+
       if (mysql_num_rows($checkValue) > 0) {
             $query = mysql_query("UPDATE Survey_Specific_Response SET Hits = Hits+1 
                                  WHERE Survey_authKey = '$surveyAuthKey' AND Response = '$optionName'");
