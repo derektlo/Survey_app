@@ -38,7 +38,7 @@
                                  WHERE Survey_authKey = '$surveyAuthKey' AND Response = '$optionName'");
       }
       else {
-
+         echo 'not there';
          $currentHit = 1;
          $keyValue = -1;
 
