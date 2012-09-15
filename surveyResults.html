@@ -200,8 +200,8 @@ $('#surveyResultsPage').on('pageinit', function() {
 
                 $('ul#matchingResults').append('<li data-role="list-divider">Results</li>');
                 $('ul#matchingResults').append('<li>Matching Value: ' + matchingResponse + '</li>');
-                $('ul#matchingResults').append('<li>Correct: ' + correctWrong[0] + '</li>');
-                $('ul#matchingResults').append('<li>Wrong: ' + correctWrong[1] + ' </li>');
+                $('ul#matchingResults').append('<li>Correct: ' + correctWrong[0] + ' (' + percentArray[0] + ')</li>');
+                $('ul#matchingResults').append('<li>Wrong: ' + correctWrong[1] + ' (' + percentArray[1] + ')</li>');
 
                 $('ul#matchingResults').append('<li data-role="list-divider">All Responses</li>');
 
@@ -231,7 +231,7 @@ $('#surveyResultsPage').on('pageinit', function() {
                     $('ul#freeResults').append('<li>' + allResponses[i] + ': ' + allHits[i] + '</li>');
                   }
                 }
-                
+
                 $('ul#freeResults').listview();
                 $('ul#freeResults').listview('refresh');
               }
