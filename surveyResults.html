@@ -230,10 +230,10 @@ $('#surveyResultsPage').on('pageinit', function() {
                   for (i = 0; i < allResponses.length; i++) {
                     $('ul#freeResults').append('<li>' + allResponses[i] + ': ' + allHits[i] + '</li>');
                   }
-
+                }
+                
                 $('ul#freeResults').listview();
                 $('ul#freeResults').listview('refresh');
-                }
               }
           }
 
