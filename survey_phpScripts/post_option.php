@@ -31,15 +31,14 @@
    }
    else {
 
-      $checkValue = mysql_query("SELECT Response FROM Survey_Specific_Response WHERE Response = '$optionName'");
-
+      $checkValue = mysql_query("SELECT Response FROM Survey_Specific_Response WHERE Response = '$optionName' AND Survey_authKey = '$surveyAuthKey'");
 
       if (mysql_num_rows($checkValue) > 0) {
             $query = mysql_query("UPDATE Survey_Specific_Response SET Hits = Hits+1 
                                  WHERE Survey_authKey = '$surveyAuthKey' AND Response = '$optionName'");
       }
       else {
-         echo 'not there';
+
          $currentHit = 1;
          $keyValue = -1;
 
