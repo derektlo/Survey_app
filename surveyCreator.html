@@ -320,14 +320,15 @@ $('#createSurveyButton').click(function() {
             $.mobile.changePage( "surveyResults.html", { transition : "slide"});
           }
           else {
-            // show some kind of error message to inform user that there was a problem
-            // in creating survey    
+            // show an error message to inform user that there was a problem
+            // in creating survey
+            showSimpleDialogue("Whoops","It appears that you already have a survey with this custom tag. Please either delete your current survey with this tag or use a different tag. Thank you!");    
           }
         });
 
         }
         else {
-          showSimpleDialogue("Whoops","You must enter a survey tag! Thanks!");
+          showSimpleDialogue("Whoops","You must enter a survey tag! Thank you!");
         }        
         return false;      
     });   
