@@ -33,8 +33,8 @@
     var onOffValue = null;
     var surveyDescriptionVar = null;
 
-      var currentEmailVar = null;
-        var currentUserTagVar = null;
+    var currentEmailVar = null;
+    var currentUserTagVar = null;
 
     var surveyCreatorFormVar = null;
 
@@ -270,8 +270,6 @@ $('#createSurveyButton').click(function() {
 
         var error = 'false';
 
-        console.log("custommmmmm: ",customSurveyTag);
-
         $('input[name=OnOff]').each(function() { 
             onOffValue = $('input[name=OnOff]:checked').val();
         })
@@ -281,8 +279,6 @@ $('#createSurveyButton').click(function() {
           customSurveyTag = $('#customTagField').val();
 
           if ((customSurveyTag !== null) && (customSurveyTag !== '')){
-
-                console.log("customSurveyTag: ",customSurveyTag);
                 customSurveyTag = currentUserTagVar + "-" + customSurveyTag;
           }
           else{
@@ -291,17 +287,6 @@ $('#createSurveyButton').click(function() {
         }
 
         if (error !== 'true') {
-        // var currentEmailVar;
-        // var currentUserTagVar;
-
-        //   if (Modernizr.sessionstorage) {
-        //       currentEmailVar = sessionStorage.emailVar;
-        //       currentUserTagVar = sessionStorage.userTagVar;
-        //   } 
-        //  else {
-        //        currentEmailVar = $.cookie("emailVar");
-        //       currentUserTagVar = $.cookie("userTagVar");
-        //    }
 
         // Submit the form
         $.post("/Survey_app/survey_phpScripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&numberOfOptions=" + sliderValue.val() + " &surveyType=" + surveyType + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar + "&customSurveyTag_bool=" + customSurveyTag_bool + "&customSurveyTag=" + customSurveyTag, surveyCreatorFormVar.serialize(), function(data){
@@ -322,7 +307,7 @@ $('#createSurveyButton').click(function() {
           else {
             // show an error message to inform user that there was a problem
             // in creating survey
-            showSimpleDialogue("Whoops","It appears that you already have a survey with this custom tag. Please either delete your current survey with this tag or use a different tag. Thank you!");    
+            showSimpleDialogue("Whoops","It appears that you already have a survey with this custom tag. Please either delete your current survey with this tag or use a different tag. If this persists or something is wrong, please email support@classtempo.org. Thank you!");    
           }
         });
 

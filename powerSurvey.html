@@ -43,6 +43,8 @@
    // Global declarations - assignments made in $(document).ready() below
     var optionsNumber = null;
     var surveyType = null;
+    var customSurveyTag_bool = 'true';
+    var customSurveyTag = null;
     var onOffValue = null;
     var surveyDescriptionVar = null;
     var surveyCreatorFormVar = null;
@@ -52,6 +54,9 @@
 
     var MISSING = "missing";
     var EMPTY = "";
+
+    var currentEmailVar = null;
+    var currentUserTagVar = null;
 
   </script>
 
@@ -72,6 +77,11 @@
     <h2>Custom Options</h2>
       <ul id="customOptionsList" data-role="listview" data-inset="true">
       </ul>
+  </div>
+
+  <div id="customTagEntryDiv">
+  <span id="userTag"></span>
+  <input type="text" name="customTagField" id="customTagField" value=""  />
   </div>
 
   <fieldset data-role="controlgroup">
@@ -120,8 +130,7 @@ function showSimpleDialogue(alertHeader, alertMessage) {
  }
  
 /* DOCUMENT READY */
-   
-$(document).ready(function() {
+ $('#powerSurveyPage').on('pageinit', function() {
 
         $('#customSurveyCreatorPage').css('height', $(document).height());
     
@@ -143,11 +152,14 @@ $(document).ready(function() {
 
       surveyDescriptionVar = $('#SurveyDescription');
       surveyCreatorFormVar = $('#surveyCreatorForm');
+      customSurveyTag = $('#customTagField').val();
 
   
     // Prepare to set up either a specific response Survey
     // or a custom options Survey  
     if (Modernizr.sessionstorage) {
+      currentEmailVar = sessionStorage.emailVar;
+      currentUserTagVar = sessionStorage.userTagVar;
       surveyType = sessionStorage.surveyType;
       optionsNumber = parseInt(sessionStorage.customNumber);
       matching = parseInt(sessionStorage.matching);
@@ -156,7 +168,11 @@ $(document).ready(function() {
       surveyType = $.cookie("surveyType");
       optionsNumber = parseInt($.cookie("customNumber"));
       matching = parseInt($.cookie("matching"));
+      currentEmailVar = $.cookie("emailVar");
+      currentUserTagVar = $.cookie("userTagVar");
     }
+
+        $('#userTag').append(currentUserTagVar + '-');
 
 
         if (surveyType === 'Custom') {
@@ -185,31 +201,69 @@ $(document).ready(function() {
 
 });
 
-$(document).bind('pageinit', function(){
+ $("input[type='radio']").bind( "change", function(event, ui) {
+  console.log("toggled");
 
-      $('ul#customOptionsList').listview('refresh');
+  var $radio = $('input[name=surveyTagControl]:checked');
+  var id = $radio.attr('id');
+  console.log("id: ",id);
+
+      if (id === 'Custom') {
+         $('#customTagEntryDiv').append('<span id="userTag">' + currentUserTagVar + '-</span>');
+          $('#customTagEntryDiv').append('<input type="text" name="customTagField" id="customTagField" value=""  />');
+
+          $('#customTagEntryDiv').trigger('create');
+          $("input[name='customTagField']").textinput();
+
+          customSurveyTag_bool = 'true';
+      }
+      else{
+          $('#customTagEntryDiv').empty();
+          customSurveyTag_bool = 'false';
+      }
 });
+
+
+ $('#surveyCreatorPage').live('pageinit', function() {
+
+    $('ul#customOptionsList').listview('refresh');
+});
+
+// $(document).bind('pageinit', function(){
+
+//       $('ul#customOptionsList').listview('refresh');
+// });
    
 $('#surveyCreatorForm').submit(function() {
+
+        var error = 'false';
 
     // Get whether survey is on or off
         $('input[name=OnOff]').each(function() { 
             onOffValue = $('input[name=OnOff]:checked').val();
         })
 
+        if (customSurveyTag_bool === 'true') {
+
+          customSurveyTag = $('#customTagField').val();
+
+          if ((customSurveyTag !== null) && (customSurveyTag !== '')){
+                customSurveyTag = currentUserTagVar + "-" + customSurveyTag;
+          }
+          else{
+            error = 'true';
+          }
+        }
+
+        if (error !== 'true') {
+
     // Get the user's email and user tag
-        var currentEmailVar;
-        var currentUserTagVar;
         var matching;
 
           if (Modernizr.sessionstorage) {
-              currentEmailVar = sessionStorage.emailVar;
-              currentUserTagVar = sessionStorage.userTagVar;
               matching = parseInt(sessionStorage.matching);
           } 
          else {
-               currentEmailVar = $.cookie("emailVar");
-              currentUserTagVar = $.cookie("userTagVar");
               matching = parseInt($.cookie("matching"));
            }
 
@@ -247,6 +301,7 @@ $('#surveyCreatorForm').submit(function() {
           console.log("matching value: ", matchValue);
               generateAjaxPost("/Survey_app/survey_phpScripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&numberOfOptions=" + 1 + "&surveyType=" + surveyType + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar + "&matching=" + matching + "&matchValue=" + matchValue);
         }   
+      }
        
         return false;   
         
@@ -260,7 +315,7 @@ function generateAjaxPost(postURL, customOptionsArray) {
                  data: { 'customOptionsArray': customOptionsArray },
                  success: function(data) {
                       
-                      if (data != 'Error') {
+                      if (data !== 'Error') {
 
                         if (Modernizr.sessionstorage) {
                           sessionStorage.surveyTag = data;
@@ -277,7 +332,7 @@ function generateAjaxPost(postURL, customOptionsArray) {
                       else {
                         // show some kind of error message to inform user that there was a problem
                         // in creating survey
-                        showSimpleDialogue("Whoops!","Sorry, it looks like there was an issue creating your survey. Please try again or send us an email at classtempo.support@classtempo.org");    
+                        showSimpleDialogue("Whoops!","It appears that you already have a survey with this custom tag. Please either delete your current survey with this tag or use a different tag. If this persists or something is wrong, please email support@classtempo.org. Thank you!");    
                       }     
                  }
               });  
