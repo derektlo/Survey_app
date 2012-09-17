@@ -131,12 +131,11 @@ function showSimpleDialogue(alertHeader, alertMessage) {
   console.log("id: ",id);
 
       if (id === 'Custom') {
-
-        $('#userTag').append(currentUserTagVar + '-');
+         $('#customTagEntryDiv').append('<span id="userTag">' + currentUserTagVar + '-</span>');
           $('#customTagEntryDiv').append('<input type="text" name="customTagField" id="customTagField" value=""  />');
 
-          $('#customTagEntryDiv').trigger('refresh');
-        //  $("input[name='customTagField']").refresh();
+          $('#customTagEntryDiv').trigger('create');
+          $("input[name='customTagField']").textinput();
 
           customSurveyTag_bool = 'true';
       }
