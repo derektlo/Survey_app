@@ -66,6 +66,9 @@
       if (mysql_num_rows($checkSurveyTag) > 0) {
          exit('Error');
       }
+      else{
+         $surveyAuthKey = $customSurveyTag;
+      }
    }
    else{
     $findMaxSQL = mysql_query("SELECT MAX(Survey_id) FROM Surveys");
