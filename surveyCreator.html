@@ -125,9 +125,11 @@ function showSimpleDialogue(alertHeader, alertMessage) {
   var $radio = $('input[name=surveyTagControl]:checked');
   var id = $radio.attr('id');
   console.log("id: ",id);
-  
+
       if (id === 'Custom') {
           $('#customTagEntryDiv').append('<p>Tag + </p><input type="text" name="customTagField" id="customTagField" value=""  />');
+
+          $('#customTagEntryDiv').trigger('create');
 
           customSurveyTag_bool = 'true';
       }
