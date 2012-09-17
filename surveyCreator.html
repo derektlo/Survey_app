@@ -303,7 +303,7 @@ $('#createSurveyButton').click(function() {
         //    }
 
         // Submit the form
-        $.post("/Survey_app/survey_phpScripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&numberOfOptions=" + sliderValue.val() + " &surveyType=" + surveyType + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar + "&customTag_bool=" + customSurveyTag_bool + "&customTag=" + customSurveyTag, surveyCreatorFormVar.serialize(), function(data){
+        $.post("/Survey_app/survey_phpScripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&numberOfOptions=" + sliderValue.val() + " &surveyType=" + surveyType + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar + "&customSurveyTag_bool=" + customSurveyTag_bool + "&customSurveyTag=" + customSurveyTag, surveyCreatorFormVar.serialize(), function(data){
           
           console.log(data);
           if (data != 'Error') {
