@@ -190,6 +190,8 @@ function showSimpleDialogue(alertHeader, alertMessage) {
               var iPlusOne = i + 1;  
 
               $('ul#customOptionsList').append('<li><label for="basic">Option ' + iPlusOne + ' :</label><input type="text" name="optionInput' + iPlusOne + '" id="optionInput' + iPlusOne + '" value=""  /></li>');
+
+              $('#optionInput').textinput();
               }
           }
         else if (surveyType === 'Specific') {
