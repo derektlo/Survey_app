@@ -283,6 +283,7 @@ $('#createSurveyButton').click(function() {
           if ((customSurveyTag !== null) && (customSurveyTag !== '')){
 
                 console.log("customSurveyTag: ",customSurveyTag);
+                customSurveyTag = currentUserTagVar + "-" + customSurveyTag;
           }
           else{
             error = 'true';
