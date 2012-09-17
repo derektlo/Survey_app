@@ -33,6 +33,9 @@
     var onOffValue = null;
     var surveyDescriptionVar = null;
 
+      var currentEmailVar = null;
+        var currentUserTagVar = null;
+
     var surveyCreatorFormVar = null;
 
     var MISSING = "missing";
@@ -68,7 +71,8 @@
   </fieldset>
 
   <div id="customTagEntryDiv">
-    <p>Tag + </p><input type="text" name="customTagField" id="customTagField" value=""  />
+  <span id="userTag"></span>
+  <input type="text" name="customTagField" id="customTagField" value=""  />
   </div>
 
   <fieldset data-role="controlgroup">
@@ -129,7 +133,7 @@ function showSimpleDialogue(alertHeader, alertMessage) {
       if (id === 'Custom') {
           $('#customTagEntryDiv').append('<p>Tag + </p><input type="text" name="customTagField" id="customTagField" value=""  />');
 
-          $('#customTagEntryDiv').trigger('create');
+          $('#customTagEntryDiv').trigger('created');
 
           customSurveyTag_bool = 'true';
       }
@@ -189,11 +193,17 @@ function showSimpleDialogue(alertHeader, alertMessage) {
 
         // Initiate surveyType
         if (Modernizr.sessionstorage) {
-          surveyType = sessionStorage.surveyType;
+              currentEmailVar = sessionStorage.emailVar;
+              currentUserTagVar = sessionStorage.userTagVar;
+              surveyType = sessionStorage.surveyType;
         }
         else {
           surveyType = $.cookie("surveyType");
-        }
+          currentEmailVar = $.cookie("emailVar");
+          currentUserTagVar = $.cookie("userTagVar");
+           }
+
+           $('#userTag').append(currentUserTagVar);
 
       // Set up Survey Viewer
         if (sessionStorage.surveyType === 'Numbers'){
@@ -272,20 +282,20 @@ $('#createSurveyButton').click(function() {
         }
 
         if (error !== 'true') {
-        var currentEmailVar;
-        var currentUserTagVar;
+        // var currentEmailVar;
+        // var currentUserTagVar;
 
-          if (Modernizr.sessionstorage) {
-              currentEmailVar = sessionStorage.emailVar;
-              currentUserTagVar = sessionStorage.userTagVar;
-          } 
-         else {
-               currentEmailVar = $.cookie("emailVar");
-              currentUserTagVar = $.cookie("userTagVar");
-           }
+        //   if (Modernizr.sessionstorage) {
+        //       currentEmailVar = sessionStorage.emailVar;
+        //       currentUserTagVar = sessionStorage.userTagVar;
+        //   } 
+        //  else {
+        //        currentEmailVar = $.cookie("emailVar");
+        //       currentUserTagVar = $.cookie("userTagVar");
+        //    }
 
         // Submit the form
-        $.post("/Survey_app/survey_phpScripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&numberOfOptions=" + sliderValue.val() + " &surveyType=" + surveyType + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar + "&customTag_bool=" + customSurveyTag_bool + "&customTag=" + customTag, surveyCreatorFormVar.serialize(), function(data){
+        $.post("/Survey_app/survey_phpScripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&numberOfOptions=" + sliderValue.val() + " &surveyType=" + surveyType + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar + "&customTag_bool=" + customSurveyTag_bool + "&customTag=" + customSurveyTag, surveyCreatorFormVar.serialize(), function(data){
           
           console.log(data);
           if (data != 'Error') {
