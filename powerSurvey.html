@@ -79,6 +79,14 @@
       </ul>
   </div>
 
+  <fieldset data-role="controlgroup">
+  <legend>Survey Tag</legend>
+      <input type="radio" name="surveyTagControl" id="Custom" value="Custom" checked="checked" />
+      <label for="Custom">Custom</label>
+      <input type="radio" name="surveyTagControl" id="Auto" value="Auto"  />
+      <label for="Auto">Auto (Usertag-random #)</label>
+  </fieldset>
+
   <div id="customTagEntryDiv">
   <span id="userTag"></span>
   <input type="text" name="customTagField" id="customTagField" value=""  />
@@ -224,7 +232,7 @@ function showSimpleDialogue(alertHeader, alertMessage) {
 });
 
 
- $('#surveyCreatorPage').live('pageinit', function() {
+ $('#powerSurveyPage').live('pageinit', function() {
 
     $('ul#customOptionsList').listview('refresh');
 });
