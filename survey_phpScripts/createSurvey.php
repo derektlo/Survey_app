@@ -12,12 +12,14 @@
    $pwd = 'jTJW7xTn8MrjDyRd';
  
    // set restaurantID to get categories for selected restaurant
-   $userAuthKey = isset($_GET['userAuthKey']) ? $_GET['userAuthKey']  : "";
-   $numberOfOptions   = isset($_GET['numberOfOptions']) ? $_GET['numberOfOptions']  : "";
-   $numbersOrLetters   = isset($_GET['numbersOrLetters']) ? $_GET['numbersOrLetters']  : "";
-   $onOff = isset($_GET['onOff']) ? $_GET['onOff']  : "";
+   $userAuthKey          = isset($_GET['userAuthKey']) ? $_GET['userAuthKey']  : "";
+   $numberOfOptions      = isset($_GET['numberOfOptions']) ? $_GET['numberOfOptions']  : "";
+   $numbersOrLetters     = isset($_GET['numbersOrLetters']) ? $_GET['numbersOrLetters']  : "";
+   $customSurveyTag_bool = isset($_GET['customSurveyTag_bool']) ? $_GET['customSurveyTag_bool']  : "";
+   $customSurveyTag      = isset($_GET['customSurveyTag']) ? $_GET['customSurveyTag']  : "";
+   $onOff                = isset($_GET['onOff']) ? $_GET['onOff']  : "";
    $surveyDescription = isset($_GET['surveyDescription']) ? $_GET['surveyDescription']  : "";
-   $email = isset($_GET['email']) ? $_GET['email']  : "";
+   $email                = isset($_GET['email']) ? $_GET['email']  : "";
    $matchValue;
    $customOptions;
    $matching;
@@ -58,10 +60,19 @@
    mysql_select_db($db) or die("Could not select database");
 
 
+   if ($customSurveyTag_bool == 'true'){
+      $checkSurveyTag = mysql_query("SELECT $customSurveyTag FROM Surveys")
+      
+      if (mysql_num_rows($checkSurveyTag) > 0) {
+         exit('Error');
+      }
+   }
+   else{
     $findMaxSQL = mysql_query("SELECT MAX(Survey_id) FROM Surveys");
     $row = mysql_fetch_array($findMaxSQL);
     $maxValue = $row[0] + 1;
     $surveyAuthKey = $userAuthKey . '-' . $maxValue;
+   }
 
 
    $sql = "INSERT INTO $tbl_name (Survey_authKey, Number_of_options, Survey_type, On_Off, Survey_description, email) 
