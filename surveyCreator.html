@@ -270,12 +270,18 @@ $('#createSurveyButton').click(function() {
 
         var error = 'false';
 
+        console.log("custommmmmm: ",customSurveyTag);
+
         $('input[name=OnOff]').each(function() { 
             onOffValue = $('input[name=OnOff]:checked').val();
         })
 
         if (customSurveyTag_bool === 'true') {
+
+          customSurveyTag = $('#customTagField').val();
+
           if ((customSurveyTag !== null) && (customSurveyTag !== '')){
+
                 console.log("customSurveyTag: ",customSurveyTag);
           }
           else{
