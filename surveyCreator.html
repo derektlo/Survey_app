@@ -131,9 +131,12 @@ function showSimpleDialogue(alertHeader, alertMessage) {
   console.log("id: ",id);
 
       if (id === 'Custom') {
-          $('#customTagEntryDiv').append('<p>Tag + </p><input type="text" name="customTagField" id="customTagField" value=""  />');
+
+        $('#userTag').append(currentUserTagVar + '-');
+          $('#customTagEntryDiv').append('<input type="text" name="customTagField" id="customTagField" value=""  />');
 
           $('#customTagEntryDiv').trigger('created');
+        //  $("input[name='customTagField']").refresh();
 
           customSurveyTag_bool = 'true';
       }
@@ -203,7 +206,7 @@ function showSimpleDialogue(alertHeader, alertMessage) {
           currentUserTagVar = $.cookie("userTagVar");
            }
 
-           $('#userTag').append(currentUserTagVar);
+           $('#userTag').append(currentUserTagVar + '-');
 
       // Set up Survey Viewer
         if (sessionStorage.surveyType === 'Numbers'){
