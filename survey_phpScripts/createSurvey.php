@@ -61,7 +61,7 @@
 
 
    if ($customSurveyTag_bool == 'true'){
-      $checkSurveyTag = mysql_query("SELECT $customSurveyTag FROM Surveys")
+      $checkSurveyTag = mysql_query("SELECT Survey_id FROM Surveys WHERE Survey_authKey = '$customSurveyTag'");
       
       if (mysql_num_rows($checkSurveyTag) > 0) {
          exit('Error');
