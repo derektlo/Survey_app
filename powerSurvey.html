@@ -245,7 +245,7 @@ function showSimpleDialogue(alertHeader, alertMessage) {
 // });
    
 $('#surveyCreatorForm').submit(function() {
-console.log("form submitted");
+  
         var error = 'false';
 
     // Get whether survey is on or off
@@ -311,6 +311,9 @@ console.log("form submitted");
           console.log("matching value: ", matchValue);
               generateAjaxPost("/Survey_app/survey_phpScripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&numberOfOptions=" + 1 + "&surveyType=" + surveyType + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar + "&matching=" + matching + "&matchValue=" + matchValue);
         }   
+      }
+      else{
+          showSimpleDialogue("Whoops","You must enter a survey tag! Thank you!");
       }
        
         return false;   
