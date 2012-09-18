@@ -70,8 +70,8 @@
       <label for="Auto">Auto (Usertag-random #)</label>
   </fieldset>
 
-  <div id="customTagEntryDiv">
-  <span id="userTag"></span>
+  <div id="customTagEntryDiv" data-role="fieldcontain">
+  <label id="userTag" for="customTagField"></label>
   <input type="text" name="customTagField" id="customTagField" value=""  />
   </div>
 
@@ -129,8 +129,8 @@ function showSimpleDialogue(alertHeader, alertMessage) {
   var id = $radio.attr('id');
 
       if (id === 'Custom') {
-         $('#customTagEntryDiv').append('<span id="userTag">' + currentUserTagVar + '-</span>');
-          $('#customTagEntryDiv').append('<input type="text" name="customTagField" id="customTagField" value=""  />');
+        
+         $('#customTagEntryDiv').append('<label id="userTag" for="customTagField">' + currentUserTagVar + '-</label><input type="text" name="customTagField" id="customTagField" value=""  />');
 
           $('#customTagEntryDiv').trigger('create');
           $("input[name='customTagField']").textinput();
