@@ -212,11 +212,9 @@ function showSimpleDialogue(alertHeader, alertMessage) {
 });
 
  $("input[type='radio']").bind( "change", function(event, ui) {
-  console.log("toggled");
 
   var $radio = $('input[name=surveyTagControl]:checked');
   var id = $radio.attr('id');
-  console.log("id: ",id);
 
       if (id === 'Custom') {
          $('#customTagEntryDiv').append('<span id="userTag">' + currentUserTagVar + '-</span>');

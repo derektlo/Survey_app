@@ -124,11 +124,9 @@ function showSimpleDialogue(alertHeader, alertMessage) {
  }
 
  $("input[type='radio']").bind( "change", function(event, ui) {
-  console.log("toggled");
 
   var $radio = $('input[name=surveyTagControl]:checked');
   var id = $radio.attr('id');
-  console.log("id: ",id);
 
       if (id === 'Custom') {
          $('#customTagEntryDiv').append('<span id="userTag">' + currentUserTagVar + '-</span>');
@@ -247,7 +245,6 @@ function showSimpleDialogue(alertHeader, alertMessage) {
 
           $('#surveyViewer').append('<input type="radio" name="options" id="' + i + '" value="' + i + '" />');
            $('#surveyViewer').append('<label for="' + i + '" >' + i + '</label>');
-           console.log("appending to numbers");
           }
         }
         else if (surveyType === 'Letters') {
@@ -291,7 +288,6 @@ $('#createSurveyButton').click(function() {
         // Submit the form
         $.post("/Survey_app/survey_phpScripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&numberOfOptions=" + sliderValue.val() + " &surveyType=" + surveyType + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar + "&customSurveyTag_bool=" + customSurveyTag_bool + "&customSurveyTag=" + customSurveyTag, surveyCreatorFormVar.serialize(), function(data){
           
-          console.log(data);
           if (data != 'Error') {
 
             if (Modernizr.sessionstorage) {
