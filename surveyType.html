@@ -71,12 +71,9 @@ function isNumeric(num){
 
 function createNewSurveyWithType(surveyType) {
     // change the page to the surveyCreator.html
-    console.log(surveyType);
     
       if (Modernizr.sessionstorage) {
         sessionStorage.surveyType = surveyType;
-          
-        console.log("modernizer");
 
           if (surveyType === 'Custom') {
             // showSimpleDialogue("Sorry!","Development for this survey type is still underway but will be completed shortly. Sorry for any inconvenience!");
