@@ -36,12 +36,12 @@
   <script>   
 
    // Global declarations - assignments made in $(document).ready() below
-    var studentSubmitFormVar = null;
+    var studentSubmitFormVar;
 
-    var num_options = null;
-    var numbersOrLetters = null;
-    var surveyID = null;
-    var surveyTokenVar = null;
+    var num_options;
+    var numbersOrLetters;
+    var surveyID;
+    var surveyTokenVar;
 
 
     var MISSING = "missing";
@@ -90,7 +90,8 @@
   <script>
 
     $('#studentPage').live('pageshow', function(){
-      $('#surveyToken').val('')
+
+      $('#surveyToken').val('');
 
         //check the navigator.userAgent string to detect if the user is using an iPhone
         if (navigator.userAgent.match(/iPhone/i)) {
@@ -113,6 +114,7 @@
         //trigger an orientationchange event on the window object to initialize this code (basically in-case the user opens the page in landscape mode)
         }).trigger('orientationchange');
     }
+
     console.log("called")
       // Assign global variables
       surveyTokenVar = $('#surveyToken');
