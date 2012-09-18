@@ -121,7 +121,7 @@ function returnTicks(results){
 }
 
 $('#surveyResultsPage').on('pageinit', function() {
-  console.log("results page triggered");
+
           // Load Graph 
 
        surveyTag = sessionStorage.surveyTag;
@@ -184,7 +184,7 @@ $('#surveyResultsPage').on('pageinit', function() {
               });
           }
           else {
-            console.log("specific survey: ",json);
+           
             var matching = json.Results[0];
 
             if (matching === 0) { // If this specific survey is matching
@@ -254,8 +254,6 @@ $('#surveyResultsPage').on('pageinit', function() {
   });
 
     $('#surveyOnOff').change(function() {
-
-      console.log($('#surveyOnOff').val());
 
       var currentOnOffValue;
       

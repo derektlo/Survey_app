@@ -62,7 +62,7 @@
     surveyId = surveyID;
 
     var onOffValue;
-    console.log("onOrOff value: ",onOrOff);
+   
     if (onOrOff === 0)
           onOffValue = 'On';
     else
@@ -115,8 +115,6 @@ function deleteSurvey(surveyID, surveyAuthKey) {
 //$('#surveyListPage').live('pageinit', function() {
 // $(document).ready(function() {
   $('#mySurveysPage').on('pageinit', function() {
-    console.log("pageinit triggered");
-
    
      //check the navigator.userAgent string to detect if the user is using an iPhone
     if (navigator.userAgent.match(/iPhone/i)) {
@@ -150,7 +148,7 @@ var getSurveyListURL;
 
 // get the JSON data from server
     $.getJSON(getSurveyListURL, function(data) {
-        console.log(data);
+
        var listOfSurveys = data.Results;
 
     listOfSurveys.sort(function(a,b){
