@@ -245,7 +245,7 @@ function showSimpleDialogue(alertHeader, alertMessage) {
 // });
    
 $('#surveyCreatorForm').submit(function() {
-  
+
         var error = 'false';
 
     // Get whether survey is on or off
@@ -295,7 +295,7 @@ $('#surveyCreatorForm').submit(function() {
            }
 
           // Submit the form
-              generateAjaxPost("/Survey_app/survey_phpScripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&numberOfOptions=" + optionsNumber + "&surveyType=" + surveyType + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar, customOptionsArray);
+              generateAjaxPost("/Survey_app/survey_phpScripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&numberOfOptions=" + optionsNumber + "&surveyType=" + surveyType + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar + "&customSurveyTag_bool=" + customSurveyTag_bool + "&customSurveyTag=" + customSurveyTag, customOptionsArray);
         }
         else if (surveyType === 'Specific'){
 
@@ -308,8 +308,8 @@ $('#surveyCreatorForm').submit(function() {
                 }
                 matching = 'true';
           }
-          console.log("matching value: ", matchValue);
-              generateAjaxPost("/Survey_app/survey_phpScripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&numberOfOptions=" + 1 + "&surveyType=" + surveyType + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar + "&matching=" + matching + "&matchValue=" + matchValue);
+         
+              generateAjaxPost("/Survey_app/survey_phpScripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&numberOfOptions=" + 1 + "&surveyType=" + surveyType + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar + "&customSurveyTag_bool=" + customSurveyTag_bool + "&customSurveyTag=" + customSurveyTag + "&matching=" + matching + "&matchValue=" + matchValue);
         }   
       }
       else{
