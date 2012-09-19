@@ -115,7 +115,6 @@
         }).trigger('orientationchange');
     }
 
-    console.log("called")
       // Assign global variables
       surveyTokenVar = $('#surveyToken');
       studentSubmitFormVar = $('#studentSubmitForm');
@@ -167,9 +166,8 @@
       if (alreadySubmitted == false) {
 
         $.getJSON("http://classtempo.org/Survey_app/survey_phpScripts/get_survey.php?surveyAuthKey=" + surveyTokenVar.val(), studentSubmitFormVar.serialize(), function(data){
-          console.log(data);
+
           var results = data.Results[0];
-          console.log("results",results);
 
          	 if (results !== 'null'){
 
@@ -198,7 +196,6 @@
     		 }
     		 else{
     		 	// show error message
-          console.log("invalid token");
           
              $('<div>').simpledialog2({
                     mode: 'button',

@@ -92,8 +92,6 @@ $('#userSurvey').bind('pageshow', function(){
     surveyID = $.cookie("surveyID");
   }
 
-  console.log("surveyType ",surveyType);
-
       if (surveyType === 'Numbers')
         {
         for (i = 0; i < num_options; i++){
@@ -119,8 +117,6 @@ $('#userSurvey').bind('pageshow', function(){
               customOptionsArray = JSON.parse(sessionStorage.customOptions);
           else
               customOptionsArray = JSON.parse($.cookie("customOptions"));
-
-            console.log(customOptionsArray);
 
           for (i = 0; i < customOptionsArray.length; i++){
   
@@ -175,8 +171,6 @@ $('#userSurvey').bind('pageshow', function(){
         else {
             surveyValue = $('#userResponse').val();
         }     
-
-        console.log("surveyValue ",surveyValue);
 
             if (surveyValue === undefined){
             	err = true;
