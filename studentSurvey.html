@@ -201,7 +201,7 @@ $('#userSurvey').bind('pageshow', function(){
         }        
 
         // Submit the form
-        $.post("http://classtempo.org/Survey_app/survey_phpScripts/post_option.php?surveyAuthKey=" + surveyTokenVar + "&surveyType=" + surveyType + "&optionName=" + surveyValue, function(data){
+        $.post("/Survey_app/survey_phpScripts/post_option.php?surveyAuthKey=" + surveyTokenVar + "&surveyType=" + surveyType + "&optionName=" + surveyValue, function(data){
 
         	if (Modernizr.sessionstorage) {
 

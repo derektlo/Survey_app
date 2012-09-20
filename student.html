@@ -165,7 +165,7 @@
 
       if (alreadySubmitted == false) {
 
-        $.getJSON("http://classtempo.org/Survey_app/survey_phpScripts/get_survey.php?surveyAuthKey=" + surveyTokenVar.val(), studentSubmitFormVar.serialize(), function(data){
+        $.getJSON("/Survey_app/survey_phpScripts/get_survey.php?surveyAuthKey=" + surveyTokenVar.val(), studentSubmitFormVar.serialize(), function(data){
 
           var results = data.Results[0];
 
