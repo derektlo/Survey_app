@@ -128,7 +128,7 @@ $('#surveyResultsPage').on('pageinit', function() {
        surveyType = sessionStorage.surveyType;
         
 //           // Load Graph 
-           $.getJSON("http://classtempo.org/Survey_app/survey_phpScripts/getSurveyAnalytics.php?surveyAuthKey=" + surveyTag + "&surveyType=" + surveyType, function(json) {
+           $.getJSON("/Survey_app/survey_phpScripts/getSurveyAnalytics.php?surveyAuthKey=" + surveyTag + "&surveyType=" + surveyType, function(json) {
             
             if (surveyType !== 'Specific') {
 
@@ -262,7 +262,7 @@ $('#surveyResultsPage').on('pageinit', function() {
       else
         currentOnOffValue = 1;
 
-     $.post("http://classtempo.org/Survey_app/survey_phpScripts/set_survey_onOff.php?surveyID=" + surveyId + "&onOff=" + currentOnOffValue,function(response){
+     $.post("/Survey_app/survey_phpScripts/set_survey_onOff.php?surveyID=" + surveyId + "&onOff=" + currentOnOffValue,function(response){
 
      });
     });
