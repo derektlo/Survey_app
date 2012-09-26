@@ -116,6 +116,7 @@
     }
 
     if (Modernizr.sessionstorage) {
+      console.log("email set");
       email = sessionStorage.emailVar;
     }
     else {
@@ -139,6 +140,7 @@
  $('#addClassForm').submit(function() {
 
       console.log("submitted : ",className.val());
+      console.log("email: ",email);
 
       var error = 'false';
 
