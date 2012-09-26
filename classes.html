@@ -102,12 +102,18 @@
 
         for(var i = 0; i < classes.length; i++) {
 
-          $('#classList').append('<li><a href="javascript:void(goToSurveyResults());">' + classes[i].className + '</a></li>');
+          $('#classList').append('<li><a href="javascript:void(goToClass(' + classes[i] + '));">' + classes[i].Full_class_name + '</a></li>');
         }
 
+        $('ul#classList').listview('refresh');
   });
 
 });
+
+function goToClass(class){
+
+  console.log("class: ",class);
+}
 
 
 </script>

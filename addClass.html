@@ -148,7 +148,7 @@
 
       if (error !== 'true') {
        
-        $.post("/Survey_app/survey_phpScripts/createClass.php?email=" + email + "&className=" + className.val() + "&school=" + school.val() + "&classSize" + classSize.val(), function(data) {
+        $.post("/Survey_app/survey_phpScripts/createClass.php?email=" + email + "&className=" + className.val() + "&school=" + school.val() + "&classSize=" + classSize.val(), function(data) {
 
               if (data !== 'Error') {
                    $.mobile.changePage( "classes.html", { transition : "slide"});
