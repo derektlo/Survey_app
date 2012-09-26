@@ -47,6 +47,7 @@
 <script>
 // Define Global Variables
 
+    var email = null;
     var  className = null;
     var  school = null;
     var  classSize = null;
@@ -113,8 +114,6 @@
         //trigger an orientationchange event on the window object to initialize this code (basically in-case the user opens the page in landscape mode)
         }).trigger('orientationchange');
     }
-
-    var email;
 
     if (Modernizr.sessionstorage) {
       email = sessionStorage.emailVar;
