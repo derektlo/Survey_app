@@ -47,9 +47,9 @@
 <script>
 // Define Global Variables
 
-    var  className = '';
-    var  school = '';
-    var  classSize = '';
+    var  className = null;
+    var  school = null;
+    var  classSize = null;
 
 </script>
 
@@ -123,6 +123,8 @@
       email = $.cookie("emailVar");
     }
 
+    console.log("classname: ",classname);
+
 // GET SCHOOLS
   //   $.getJSON("/Survey_app/survey_phpScripts/get_schools.php?email=" + email, function(json) {
 
@@ -137,7 +139,7 @@
 
  $('#addClassForm').submit(function() {
 
-      console.log("submitted : ",className,school,classSize);
+      console.log("submitted : ",className);
 
       var error = 'false';
 
@@ -147,10 +149,10 @@
 
       if (error !== 'true') {
        
-        $.post("/Survey_app/survey_phpScripts/createClass.php?email=" + email + "&className=" + className.val() + "&school=" + school + "&classSize" + classSize, function(data) {
+        $.post("/Survey_app/survey_phpScripts/createClass.php?email=" + email + "&className=" + className + "&school=" + school + "&classSize" + classSize, function(data) {
 
               if (data !== 'Error') {
-
+                   $.mobile.changePage( "classes.html", { transition : "slide"});
               }
               else {
                   showSimpleDialogue("Whoops!","It appears that our server is busy at this time. Please try again later. Sorry for the inconvenience!");
