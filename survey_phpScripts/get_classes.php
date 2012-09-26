@@ -23,7 +23,7 @@
    // Create an iVar to hold our results
    $classesArray = array();
    //Execute the query
-   $rs = mysql_query("SELECT Full_class_name, Abbreviation, School, Class_size FROM Classes WHERE User_tag = '$email'");
+   $rs = mysql_query("SELECT Full_class_name, School, Class_size FROM Classes WHERE User_tag = '$email'");
    
    while($obj = mysql_fetch_object($rs)) {
        $classesArray[] = $obj;

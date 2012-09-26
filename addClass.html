@@ -41,6 +41,14 @@
   <!-- Page starts here -->
 <div data-role="page" data-theme="a" id="addClassPage" data-add-back-btn="true">
 
+<script>
+// Define Global Variables
+
+    var  className = '';
+    var  school = '';
+    var  classSize = '';
+
+</script>
 
     <header data-role="header">
     <h1>Add a Class</h1>
@@ -76,7 +84,10 @@
 <script>
 
   $('#addClassPage').on('pageinit', function() {
-    //Your code for each page load here
+      
+      className = $('#name').val();
+      school = $('#school').val();
+      classSize = $('#size').val();
 
      //check the navigator.userAgent string to detect if the user is using an iPhone
     if (navigator.userAgent.match(/iPhone/i)) {
@@ -109,16 +120,60 @@
       email = $.cookie("emailVar");
     }
 
-    $.getJSON("http://classtempo.org/Survey_app/survey_phpScripts/get_schools.php?email=" + email, function(json) {
+// GET SCHOOLS
+  //   $.getJSON("/Survey_app/survey_phpScripts/get_schools.php?email=" + email, function(json) {
 
-            console.log(json);
+  //           console.log(json);
 
-      var schools = json.Results[0];
+  //     var schools = json.Results[0];
 
-      console.log("schools: ",schools);
-  });
+  //     console.log("schools: ",schools);
+  // });
 
 });
+
+ $('#addClassForm').submit(function() {
+
+      console.log("submitted : ",className,school,classSize);
+
+      var error = 'false';
+
+      if ((className === '') || (school === '') || (classSize === '')) {
+        error = 'true';
+      }
+
+      if (error !== 'true') {
+       
+        $.post("/Survey_app/survey_phpScripts/createClass.php?email=" + email + "&className=" + className.val() + "&school=" + school + "&classSize" + classSize, function(data) {
+
+              if (data !== 'Error') {
+
+              }
+              else {
+                  showSimpleDialogue("Whoops!","It appears that our server is busy at this time. Please try again later. Sorry for the inconvenience!");
+              }
+
+            }
+          );
+      }
+
+  });
+
+ function showSimpleDialogue(alertHeader, alertMessage) {
+    
+    $('<div>').simpledialog2({
+                    mode: 'button',
+                    headerText: alertHeader,
+                    buttonPrompt: alertMessage,
+                    headerClose: false,
+                    buttons : {
+                      'OK': {
+                        click: function () { 
+                        }
+                      }
+                    }
+             })
+ }
 
 
 </script>

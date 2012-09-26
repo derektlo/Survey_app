@@ -91,15 +91,19 @@
       email = $.cookie("emailVar");
     }
 
-    $.getJSON("http://classtempo.org/Survey_app/survey_phpScripts/get_classes.php?email=" + email, function(json) {
+    $.getJSON("/Survey_app/survey_phpScripts/get_classes.php?email=" + email, function(json) {
 
-            console.log(json);
+        console.log(" json: ", json);
 
-      var classes = json.Results[0];
+        var classes = json.Results;
 
-      console.log("classes: ",classes);
 
-    $('#classList').append('<li><a href="class.html">My Classes</a></li>');
+        console.log("classes: ",classes);
+
+        for(var i = 0; i < classes.length; i++) {
+
+          $('#classList').append('<li><a href="javascript:void(goToSurveyResults());">' + classes[i].className + '</a></li>');
+        }
 
   });
 
