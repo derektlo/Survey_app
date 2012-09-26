@@ -73,7 +73,7 @@
 
           <div id="classSizeDiv" data-role="fieldcontain">
           <label for="size">Class Size</label> 
-          <input id="size" name="size" type="text" />
+          <input id="size" name="size" type="number" />
         </div>
 
         <div id="submitDiv" data-role="fieldcontain">    
@@ -88,9 +88,9 @@
 
   $('#addClassPage').on('pageinit', function() {
       
-      className = $('#name').val();
-      school = $('#school').val();
-      classSize = $('#size').val();
+      className = $('#name');
+      school = $('#school');
+      classSize = $('#size');
 
      //check the navigator.userAgent string to detect if the user is using an iPhone
     if (navigator.userAgent.match(/iPhone/i)) {
@@ -123,7 +123,7 @@
       email = $.cookie("emailVar");
     }
 
-    console.log("classname: ",className);
+    console.log("classname: ",className.val());
 
 // GET SCHOOLS
   //   $.getJSON("/Survey_app/survey_phpScripts/get_schools.php?email=" + email, function(json) {
@@ -139,17 +139,17 @@
 
  $('#addClassForm').submit(function() {
 
-      console.log("submitted : ",className);
+      console.log("submitted : ",className.val());
 
       var error = 'false';
 
-      if ((className === '') || (school === '') || (classSize === '')) {
+      if ((className.val() === '') || (school.val() === '') || (classSize.val() === '')) {
         error = 'true';
       }
 
       if (error !== 'true') {
        
-        $.post("/Survey_app/survey_phpScripts/createClass.php?email=" + email + "&className=" + className + "&school=" + school + "&classSize" + classSize, function(data) {
+        $.post("/Survey_app/survey_phpScripts/createClass.php?email=" + email + "&className=" + className.val() + "&school=" + school.val() + "&classSize" + classSize.val(), function(data) {
 
               if (data !== 'Error') {
                    $.mobile.changePage( "classes.html", { transition : "slide"});
