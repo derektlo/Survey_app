@@ -102,7 +102,7 @@
 
         for(var i = 0; i < classes.length; i++) {
 
-          $('#classList').append('<li><a href="javascript:void(goToClass(hello));">' + classes[i].Full_class_name + ' (' + classes[i].School + ')</a></li>');
+          $('#classList').append('<li><a href="javascript:void(goToClass());">' + classes[i].Full_class_name + ' (' + classes[i].School + ')</a></li>');
         }
 
         $('ul#classList').listview('refresh');
@@ -110,13 +110,30 @@
 
 });
 
+    function showSimpleDialogue(alertHeader, alertMessage) {
+    
+    $('<div>').simpledialog2({
+                    mode: 'button',
+                    headerText: alertHeader,
+                    buttonPrompt: alertMessage,
+                    headerClose: false,
+                    buttons : {
+                      'OK': {
+                        click: function () { 
+                        }
+                      }
+                    }
+             })
+ }
+
 window.goToSurveyResults = function(myClasses) {
 
   console.log("clicked");
 
   var myClass = myClass;
 
-  console.log("class: ",myClass);
+  showSimpleDialogue('Coming Soon!','This feature is currently under development. Please check back soon! Thanks, and sorry for any inconvenience!')
+
 }
 
 
