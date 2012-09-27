@@ -51,6 +51,7 @@
     var  className = null;
     var  school = null;
     var  classSize = null;
+    var addClassFormVar = null;
 
 </script>
 
@@ -92,6 +93,7 @@
       className = $('#name');
       school = $('#school');
       classSize = $('#size');
+      addClassFormVar = $('#addClassForm');
 
      //check the navigator.userAgent string to detect if the user is using an iPhone
     if (navigator.userAgent.match(/iPhone/i)) {
@@ -140,6 +142,8 @@
  $('#addClassForm').submit(function() {
 
       console.log("submitted : ",className.val());
+       console.log("submitted : ",school.val());
+        console.log("submitted : ",classSize.val());
       console.log("email: ",email);
 
       var error = 'false';
@@ -150,13 +154,13 @@
 
       if (error !== 'true') {
        
-        $.post("/Survey_app/survey_phpScripts/createClass.php?email=" + email + "&className=" + className.val() + "&school=" + school.val() + "&classSize=" + classSize.val(), function(data) {
+        $.post("/Survey_app/survey_phpScripts/createClass.php?email=" + email + "&className=" + className.val() + "&school=" + school.val() + "&classSize=" + classSize.val(), addClassFormVar.serialize(), function(data) {
 
               if (data !== 'Error') {
                    $.mobile.changePage( "classes.html", { transition : "slide"});
               }
               else {
-                  showSimpleDialogue("Whoops!","It appears that our server is busy at this time. Please try again later. Sorry for the inconvenience!");
+                  showSimpleDialogue("Whoops!","It appears that our server is busy at this time. Please try again at a later time. Sorry for the inconvenience!");
               }
 
             }

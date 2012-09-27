@@ -17,13 +17,15 @@
    $school = isset($_GET['school']) ? $_GET['school']  : "";
    $classSize = isset($_GET['classSize']) ? $_GET['classSize']  : "";
 
-	// Connect to the Database server   
+   // Connect to the Database server   
     $link = mysql_connect($host, $uid, $pwd) or die("Could not connect");
    
    //select the Database
    mysql_select_db($db) or die("Could not select database");
 
-      $query = mysql_query("INSERT INTO Classes (User_tag, Full_class_name, School, Class_size) 
+   $query;
+
+      $query = mysql_query("INSERT INTO Classes (Email, Full_class_name, School, Class_size) 
                               VALUES ('$email','$className','$school','$classSize')");
    
 
