@@ -130,7 +130,11 @@ window.goToClass = function(className, school, classSize) {
 
   console.log("clicked: ",className);
 
+  console.log()
+
+
   if (Modernizr.sessionstorage) {
+
     sessionStorage.Full_class_name = className;
     sessionStorage.school = school;
     sessionStorage.classSize = classSize;
