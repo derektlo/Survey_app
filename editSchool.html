@@ -79,7 +79,7 @@
       schoolName_unchanged = sessionStorage.School_name;
     }
     else {
-      schoolName_unchanged = $.cookie("name");
+      schoolName_unchanged = $.cookie("School_name");
     }
 
       $('#name').val(schoolName_unchanged);
@@ -116,7 +116,7 @@
     }
 });
 
-$('#editClassForm').submit(function() {
+$('#editSchoolForm').submit(function() {
 
       console.log("name updated : ",school_updated.val());
      
