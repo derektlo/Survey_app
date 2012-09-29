@@ -172,7 +172,7 @@
       var emptyError = 'false';
       var noUpdatesError = 'false';
 
-      if ((className.val() === '') || (school.val() === '')) {
+      if ((className_updated.val() === '') || (school_updated.val() === '')) {
         emptyError = 'true';
 
         showSimpleDialogue("Whoops","You must have a class name and a school/university to update your class information. Thank you!");
@@ -190,7 +190,7 @@
 
       if ((emptyError === 'false') && (noUpdatesError === 'false')) {
        
-        $.post("/Survey_app/survey_phpScripts/editClass.php?email=" + email + "&className=" + className.val() + "&school=" + school.val() + "&classSize=" + classSize.val(), addClassFormVar.serialize(), function(data) {
+        $.post("/Survey_app/survey_phpScripts/editClass.php?email=" + email + "&className=" + className_updated.val() + "&school=" + school_updated.val() + "&classSize=" + classSize_updated.val(), addClassFormVar.serialize(), function(data) {
 
               if (data !== 'Error') {
                    $.mobile.changePage( "classes.html", { transition : "fade"});
