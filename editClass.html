@@ -118,8 +118,8 @@
       classSize_updated = $('#size');
       addClassFormVar = $('#addClassForm');
 
-      console.log("className: ",className_updated);
-      console.log("classSize: ",classSize_updated);
+      console.log("className: ",className_updated.val());
+      console.log("classSize: ",classSize_updated.val());
 
      //check the navigator.userAgent string to detect if the user is using an iPhone
     if (navigator.userAgent.match(/iPhone/i)) {
@@ -180,7 +180,7 @@
 
       if (emptyError === 'false') {
 
-        if ((className.updated.val() === className_unchanged) && (className.updated.val() === className_unchanged) && (className.updated.val() === className_unchanged)) {
+        if ((className_updated.val() === className_unchanged) && (className_updated.val() === className_unchanged) && (className_updated.val() === className_unchanged)) {
               
               noUpdatesError = 'true';
 
