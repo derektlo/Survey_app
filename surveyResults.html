@@ -78,8 +78,13 @@
       </ul>
       </div>
 
+      <div id="surveyDescription">
+        <label><strong>Survey Description</strong></label>
+        <p id="descriptionParagraph"></p>
+      </div>
+
       <div id="onOffSection">
-      <label for="surveyOnOff" >Survey ON/OFF:</label>
+      <label for="surveyOnOff" ><strong>Survey on/off:</strong></label>
       <select name="surveyOnOff" id="surveyOnOff" data-role="slider" data-theme="c" data-track-theme="a">
         <option value="off">Off</option>
         <option value="on">On</option>
@@ -121,6 +126,9 @@ function returnTicks(results){
 }
 
 $('#surveyResultsPage').on('pageinit', function() {
+
+      // Set Description for Survey
+      $('#descriptionParagraph').append(sessionStorage.surveyDescription);
 
           // Load Graph 
 
