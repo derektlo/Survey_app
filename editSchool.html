@@ -118,13 +118,13 @@
 
 $('#editSchoolForm').submit(function() {
 
-      console.log("name updated : ",school_updated.val());
+      console.log("name updated : ",schoolName_updated.val());
      
 
       var emptyError = 'false';
       var noUpdatesError = 'false';
 
-      if (school_updated.val() === '') {
+      if (schoolName_updated.val() === '') {
         emptyError = 'true';
 
         showSimpleDialogue("Whoops","You must have a valid school/university name to update your information. Thank you!");
@@ -132,7 +132,7 @@ $('#editSchoolForm').submit(function() {
 
       if (emptyError === 'false') {
 
-        if (school_updated.val() === school_unchanged) {
+        if (schoolName_updated.val() === schoolName_unchanged) {
               
               noUpdatesError = 'true';
 
@@ -142,7 +142,7 @@ $('#editSchoolForm').submit(function() {
 
       if ((emptyError === 'false') && (noUpdatesError === 'false')) {
        
-        $.post("/Survey_app/survey_phpScripts/editSchool.php?email=" + email + "&schoolName=" + school_updated.val(), editSchoolForm.serialize(), function(data) {
+        $.post("/Survey_app/survey_phpScripts/editSchool.php?email=" + email + "&schoolName=" + schoolName_updated.val(), editSchoolForm.serialize(), function(data) {
 
               if (data !== 'Error') {
                    $.mobile.changePage( "education.html", { transition : "fade"});
