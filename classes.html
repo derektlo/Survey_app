@@ -102,7 +102,7 @@
 
         for(var i = 0; i < classes.length; i++) {
 
-          $('#classList').append('<li><a href="javascript:void(goToClass());">' + classes[i].Full_class_name + ' (' + classes[i].Full_class_name + ', ' + classes[i].School + ', ' + classes[i].Class_size + ')</a></li>');
+          $('#classList').append('<li><a href="javascript:void(goToClass(' + classes[i].Full_class_name + ', ' + classes[i].School + ', ' + classes[i].Class_size + '));">' + classes[i].Full_class_name + ' (' + classes[i].School + ')</a></li>');
         }
 
         $('ul#classList').listview('refresh');

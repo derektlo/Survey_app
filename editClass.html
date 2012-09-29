@@ -90,9 +90,24 @@
 
   $('#editClassPage').on('pageinit', function() {
     
-      $('#name').val("name");
-      $('#school').val("school");
-      $('#size').val("size");
+    var className;
+    var school;
+    var classSize;
+
+   if (Modernizr.sessionstorage) {
+    className = sessionStorage.Full_class_name;
+    school = sessionStorage.school;
+    classSize = sessionStorage.classSize;
+    }
+    else{
+      className = $.cookie("Full_class_name");
+      school = $.cookie("school");
+      classSize = $.cookie("classSize");
+    }
+
+      $('#name').val(className);
+      $('#school').val(school);
+      $('#size').val(classSize);
 
       className = $('#name');
       school = $('#school');
