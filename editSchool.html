@@ -142,7 +142,7 @@ $('#editSchoolForm').submit(function() {
 
       if ((emptyError === 'false') && (noUpdatesError === 'false')) {
        
-        $.post("/Survey_app/survey_phpScripts/editSchool.php?email=" + email + "&schoolName=" + schoolName_updated.val(), editSchoolForm.serialize(), function(data) {
+        $.post("/Survey_app/survey_phpScripts/editSchool.php?email=" + email + "&schoolName=" + schoolName_updated.val(), function(data) {
 
               if (data !== 'Error') {
                    $.mobile.changePage( "education.html", { transition : "fade"});
