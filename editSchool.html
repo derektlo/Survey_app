@@ -148,11 +148,11 @@ $('#editSchoolForm').submit(function() {
 
                     if (Modernizr.sessionstorage) {
                           sessionStorage.Old_school_name = schoolName_unchanged;
-                          sessionStorage.New_school_name = schoolName_updated;
+                          sessionStorage.New_school_name = schoolName_updated.val();
                         }
                         else {
                           $.cookie("Old_school_name",schoolName_unchanged);
-                          $.cookie("New_school_name",schoolName_updated);
+                          $.cookie("New_school_name",schoolName_updated.val());
                         }
 
                    $.mobile.changePage( "successfulSchoolEdit.html", { transition : "fade"});
