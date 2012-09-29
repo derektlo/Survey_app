@@ -42,6 +42,10 @@
 <!-- <div data-role="page" data-theme="c" id="surveyList"> -->
 <div data-role="page" data-theme="a" id="myClassesPage" data-add-back-btn="true">
 
+  <script>
+      var email;
+  </script>
+
 
     <header data-role="header">
       <a href="dashboard.html" data-direction="reverse" rel="external" data-icon="back" data-transition="slide" class="ui-btn-left">Back</a>
@@ -54,8 +58,7 @@
         <li data-role="list-divider">Manage your Classes &#38; Schools</li>
         <li><a href="classes.html">My Classes</a></li>
         <li><a href="addClass.html">Add Class</a></li>
-<!--         <li><a href="school.html">My School</a></li>
-        <li><a href="addSchool.html">Add School</a></li> -->
+        <li><a href="school.html">Edit My School</a></li>
       </ul>
   </div>  
 
@@ -63,6 +66,13 @@
 
   $('#myClassesPage').on('pageinit', function() {
     //Your code for each page load here
+
+      if (Modernizr.sessionstorage) {
+        email = sessionStorage.emailVar;
+      }
+      else {
+        email = $.cookie("emailVar");
+      }
 
      //check the navigator.userAgent string to detect if the user is using an iPhone
     if (navigator.userAgent.match(/iPhone/i)) {
@@ -86,6 +96,30 @@
         }).trigger('orientationchange');
     }
 });
+
+window.goToSchool = function() {
+
+  var schoolName;
+
+  $.getJSON("/Survey_app/survey_phpScripts/get_schools.php?email=" + email, function(json) {
+
+        console.log("json: ", json);
+
+        schoolName = json.Results[0].School;
+
+      });
+
+
+  if (Modernizr.sessionstorage) {
+
+    sessionStorage.School_name = schoolName;
+  }
+  else{
+    $.cookie("School_name",schoolName);
+  }
+
+  $.mobile.changePage( "editSchool.html", { transition : "slide"});
+}
 
 
 </script>
