@@ -190,7 +190,7 @@
 
       if ((emptyError === 'false') && (noUpdatesError === 'false')) {
        
-        $.post("/Survey_app/survey_phpScripts/editClass.php?email=" + email + "&className=" + className_updated.val() + "&school=" + school_updated.val() + "&classSize=" + classSize_updated.val(), addClassFormVar.serialize(), function(data) {
+        $.post("/Survey_app/survey_phpScripts/editClass.php?email=" + email + "&className=" + className_updated.val() + "&school=" + school_updated.val() + "&classSize=" + classSize_updated.val(), function(data) {
 
               if (data !== 'Error') {
                    $.mobile.changePage( "classes.html", { transition : "fade"});
