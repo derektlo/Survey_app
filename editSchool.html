@@ -145,7 +145,17 @@ $('#editSchoolForm').submit(function() {
         $.post("/Survey_app/survey_phpScripts/editSchool.php?email=" + email + "&schoolName=" + schoolName_updated.val(), function(data) {
 
               if (data !== 'Error') {
-                   $.mobile.changePage( "education.html", { transition : "fade"});
+
+                    if (Modernizr.sessionstorage) {
+                          sessionStorage.Old_school_name = schoolName_unchanged;
+                          sessionStorage.New_school_name = schoolName_updated;
+                        }
+                        else {
+                          $.cookie("Old_school_name",schoolName_unchanged);
+                          $.cookie("New_school_name",schoolName_updated);
+                        }
+
+                   $.mobile.changePage( "successfulSchoolEdit.html", { transition : "fade"});
               }
               else {
                   showSimpleDialogue("Whoops!","It appears that our server is busy at this time. Please try again at a later time. Sorry for the inconvenience!");
