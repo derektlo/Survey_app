@@ -90,6 +90,12 @@
     else {
       email = $.cookie("emailVar");
     }
+});
+
+  $('#classPage').on('pageshow',function(){
+      console.log("page shown");
+
+      $('#classList').empty();
 
     $.getJSON("/Survey_app/survey_phpScripts/get_classes.php?email=" + email, function(json) {
 
@@ -106,9 +112,8 @@
         }
 
         $('ul#classList').listview('refresh');
-  });
-
-});
+    });
+  })
 
     function showSimpleDialogue(alertHeader, alertMessage) {
     
