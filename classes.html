@@ -109,7 +109,7 @@
 
         for(var i = 0; i < classes.length; i++) {
 
-          $('ul#classList').append('<li><a class="ui-btn ui-btn-icon-right" href="javascript:void(goToClass(\'' + classes[i].Full_class_name + '\', \'' + classes[i].School + '\', \'' + classes[i].Class_size + '\'));"><h1>' + classes[i].Full_class_name + ' (' + classes[i].School + ')</h1></a><a href="#" onclick="deleteClass(\'' + classes[i].Full_class_name + '\')" data-icon="delete" class="ui-li-link-alt ui-btn "></a></li>');
+          $('#classList').append('<li class="ui-btn ui-btn-icon-right"><a href="javascript:void(goToClass(\'' + classes[i].Full_class_name + '\', \'' + classes[i].School + '\', \'' + classes[i].Class_size + '\'));">' + classes[i].Full_class_name + ' (' + classes[i].School + ')</a><a href="#" onclick="deleteClass(\'' + classes[i].Full_class_name + '\')" data-icon="delete" class="ui-li-link-alt ui-btn "></a></li>');
         }
 
         $('ul#classList').listview('refresh');
