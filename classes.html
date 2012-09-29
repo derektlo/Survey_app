@@ -102,7 +102,7 @@
 
         for(var i = 0; i < classes.length; i++) {
 
-          $('#classList').append('<li><a href="javascript:void(goToClass());">' + classes[i].Full_class_name + ' (' + classes[i].School + ')</a></li>');
+          $('#classList').append('<li><a href="javascript:void(goToClass());">' + classes[i].Full_class_name + ' (' + classes[i].Full_class_name + ', ' + classes[i].School + ', ' + classes[i].Class_size + ')</a></li>');
         }
 
         $('ul#classList').listview('refresh');
@@ -126,13 +126,22 @@
              })
  }
 
-window.goToClass = function(myClasses) {
+window.goToClass = function(className, school, classSize) {
 
-  console.log("clicked");
+  console.log("clicked: ",className);
 
-  var myClass = myClass;
+  if (Modernizr.sessionstorage) {
+    sessionStorage.Full_class_name = className;
+    sessionStorage.school = school;
+    sessionStorage.classSize = classSize;
+  }
+  else{
+    $.cookie("Full_class_name",className);
+    $.cookie("school",school);
+    $.cookie("classSize",classSize);
+  }
 
-  showSimpleDialogue('Coming Soon!','This feature is currently under development. Please check back soon! Thanks, and sorry for any inconvenience!')
+  $.mobile.changePage( "editClass.html", { transition : "slide"});
 
 }
 
