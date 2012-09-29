@@ -50,7 +50,6 @@
       <div data-role="content" id="classContent">
 
        <ul id="classList" data-role="listview">
-        <li data-role="list-divider">Manage your Classes</li>
       </ul>
 
   </div>  
@@ -95,8 +94,6 @@
       email = $.cookie("emailVar");
     }
 
-      $('#classList').empty();
-
     $.getJSON("/Survey_app/survey_phpScripts/get_classes.php?email=" + email, function(json) {
 
         console.log(" json: ", json);
@@ -105,6 +102,10 @@
 
 
         console.log("classes: ",classes);
+
+        $('#classList').empty();
+        $('#classList').append('<li data-role="list-divider">Manage your Classes</li>');
+
 
         for(var i = 0; i < classes.length; i++) {
 
