@@ -23,7 +23,7 @@
    // Create an iVar to hold our results
    $schoolsArray = array();
    //Execute the query
-   $rs = mysql_query("SELECT School FROM Classes WHERE Email = '$email'");
+   $rs = mysql_query("SELECT School FROM Survey_Accounts WHERE Email = '$email'");
    
    while($obj = mysql_fetch_object($rs)) {
        $schoolsArray[] = $obj;

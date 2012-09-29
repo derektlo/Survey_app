@@ -107,18 +107,17 @@ window.goToSchool = function() {
 
         schoolName = json.Results[0].School;
 
+          if (Modernizr.sessionstorage) {
+
+              sessionStorage.School_name = schoolName;
+            }
+            else{
+              $.cookie("School_name",schoolName);
+            }
+
+            $.mobile.changePage( "editSchool.html", { transition : "slide"});
+
       });
-
-
-  if (Modernizr.sessionstorage) {
-
-    sessionStorage.School_name = schoolName;
-  }
-  else{
-    $.cookie("School_name",schoolName);
-  }
-
-  $.mobile.changePage( "editSchool.html", { transition : "slide"});
 }
 
 
