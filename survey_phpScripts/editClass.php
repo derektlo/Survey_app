@@ -25,7 +25,7 @@
 
    $query;
 
-      $query = mysql_query("UPDATE Classes SET Full_class_name = $className AND School = $school AND Class_size = $classSize WHERE Email = $email");
+      $query = mysql_query("UPDATE Classes SET Full_class_name = $className, School = $school, Class_size = $classSize WHERE Email = $email");
    
 
    if ($query) {
