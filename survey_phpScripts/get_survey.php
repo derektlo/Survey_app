@@ -23,7 +23,7 @@
    // Create an iVar to hold our results
    $surveyInformation;
    //Execute the query
-   $rs = mysql_query("SELECT Survey_id,Number_of_options,Survey_type FROM Surveys WHERE Survey_authKey = '$surveyAuthKey'");
+   $rs = mysql_query("SELECT Survey_id,Number_of_options,Survey_type,Survey_description FROM Surveys WHERE Survey_authKey = '$surveyAuthKey'");
    
    while($obj = mysql_fetch_object($rs)) {
        $surveyInformation = $obj; // save the row

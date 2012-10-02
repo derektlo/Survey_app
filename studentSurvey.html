@@ -39,6 +39,7 @@
 
 // Define Global Variable
 var surveyTokenVar = null;
+var surveyDescription;
 var num_options = null;
 var surveyType = null;
 var surveyID = null;
@@ -65,6 +66,10 @@ $('body').delegate('div.ui-page', 'pagehide', function () { $(this).remove(); })
             <div id="userResponseDiv" data-role="fieldcontain">
             </div>
 
+            <div id="surveyDescriptionDiv">
+              <label><strong>Survey Description</strong></label>
+            </div>
+
 			     <div id="submitUserSurvey" data-role="fieldcontain">    
 			     	<a id="submitSurvey" name="submitSurvey" data-role="button" data-inline="true">Submit</a>
 			    	</div>
@@ -84,19 +89,22 @@ $('#userSurvey').bind('pageshow', function(){
     num_options = sessionStorage.num_options;
     surveyType = sessionStorage.surveyType;
     surveyID = sessionStorage.surveyID; 
+    surveyDescription = sessionStorage.surveyDescription;
     surveyTokenVar = sessionStorage.surveyToken;
   }
   else {
     num_options = $.cookie("num_options");
     surveyType = $.cookie("surveyType");
     surveyID = $.cookie("surveyID");
+    surveyDescription = $.cookie("surveyDescription");
+    surveyTokenVar = $.cookie("surveyTokenVar");
   }
 
       if (surveyType === 'Numbers')
         {
         for (i = 0; i < num_options; i++){
 
-          $('#optionsList').append('<legend>Survey Options</legend><input type="radio" name="options" id="' + (i+1) + '" value="' + (i+1) + '" />');
+          $('#optionsList').append('<legend><strong>Survey Options</strong></legend><input type="radio" name="options" id="' + (i+1) + '" value="' + (i+1) + '" />');
               $('#optionsList').append('<label for="' + (i+1) + '" >' + (i+1) + '</label>');
           }
         }
@@ -106,7 +114,7 @@ $('#userSurvey').bind('pageshow', function(){
 
           for (i = 0; i < num_options; i++){
   
-          $('#optionsList').append('<legend>Survey Options</legend><input type="radio" name="options" id="' +alphabet[i] + '" value="' + alphabet[i] + '" />');
+          $('#optionsList').append('<legend><strong>Survey Options</strong></legend><input type="radio" name="options" id="' +alphabet[i] + '" value="' + alphabet[i] + '" />');
               $('#optionsList').append('<label for="' + alphabet[i] + '" >' + alphabet[i] + '</label>');
           }
         }
@@ -120,16 +128,20 @@ $('#userSurvey').bind('pageshow', function(){
 
           for (i = 0; i < customOptionsArray.length; i++){
   
-          $('#optionsList').append('<legend>Survey Options</legend><input type="radio" name="options" id="' + customOptionsArray[i] + '" value="' + customOptionsArray[i] + '" />');
+          $('#optionsList').append('<legend><strong>Survey Options</strong></legend><input type="radio" name="options" id="' + customOptionsArray[i] + '" value="' + customOptionsArray[i] + '" />');
               $('#optionsList').append('<label for="' + customOptionsArray[i] + '" >' + customOptionsArray[i] + '</label>');
           }
         }
         else if (surveyType === 'Specific') {
-          $('#userResponseDiv').append('<label for="userResponse">Enter a value:</label><textarea name="userResponse" id="userResponse"></textarea>');
+          $('#userResponseDiv').append('<label for="userResponse"><strong>Enter value:</strong></label><textarea name="userResponse" id="userResponse"></textarea>');
         }
 
         // Append header with survey token
         $('#header').append('<h1>' + surveyTokenVar + ' Survey</h1>');
+
+        // Append survey description
+        $('#surveyDescriptionDiv').append('<p>' + surveyDescription + '</p>');
+
 
 
         // Get Today's Date

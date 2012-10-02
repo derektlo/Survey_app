@@ -167,7 +167,11 @@
 
         $.getJSON("/Survey_app/survey_phpScripts/get_survey.php?surveyAuthKey=" + surveyTokenVar.val(), studentSubmitFormVar.serialize(), function(data){
 
+          console.log("data: ",data);
+
           var results = data.Results[0];
+
+          console.log("results: ",results);
 
          	 if (results !== 'null'){
 
@@ -176,6 +180,7 @@
               sessionStorage.num_options = data.Results[0].Number_of_options;
               sessionStorage.surveyType = data.Results[0].Survey_type;
               sessionStorage.surveyID = data.Results[0].Survey_id;
+              sessionStorage.surveyDescription = data.Results[0].Survey_description;
               sessionStorage.surveyToken = surveyTokenVar.val();
               if (data.Results[0].Survey_type === 'Custom') {
                  sessionStorage.customOptions = JSON.stringify(data.Results[1]);
@@ -185,6 +190,7 @@
                $.cookie("num_options",data.Results[0].Number_of_options);
                $.cookie("numbersOrLetters",data.Results[0].Number_of_options);
                $.cookie("surveyID",data.Results[0].Survey_id);
+               $.cookie("surveyDescription",data.Results[0].Survey_description);
                $.cookie("surveyToken",surveyTokenVar.val());
 
               if (data.Results[0].Survey_type === 'Custom') {
