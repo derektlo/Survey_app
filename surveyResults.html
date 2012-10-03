@@ -144,7 +144,22 @@ $('#surveyResultsPage').on('pageinit', function() {
            // Load Graph 
            $.getJSON("/Survey_app/survey_phpScripts/getSurveyAnalytics.php?surveyAuthKey=" + surveyTag + "&surveyType=" + surveyType, function(json) {
             
-            if (surveyType !== 'Specific') {
+
+          if (surveyType === 'Tempo') {
+
+            console.log("tempo results: ",json);
+            
+            var tempoResults = json.Results[0];
+            var hits = tempoResults[0];
+            var classSize = tempoResults[1];
+            var percent = tempoResults[2];
+
+            if ((hits/classSize) === percent) {
+              // play sound
+              document.getElementById('alertNoise').play()
+            }
+          }
+            else if (surveyType !== 'Specific') {
 
               $.jqplot.config.enablePlugins = true;
 
@@ -196,20 +211,6 @@ $('#surveyResultsPage').on('pageinit', function() {
                   highlighter: { show: false },
                   seriesColors: $.merge([ "#55A9D3", "#D4EDE2", "#EA2E49"], $.jqplot.config.defaultColors)
               });
-          }
-          else if (surveyType === 'Tempo') {
-
-            console.log("tempo results: ",json);
-            
-            var tempoResults = json.Results[0];
-            var hits = tempoResults[0];
-            var classSize = tempoResults[1];
-            var percent = tempoResults[2];
-
-            if ((hits/classSize) === percent) {
-              // play sound
-              document.getElementById('alertNoise').play()
-            }
           }
           else {
            
