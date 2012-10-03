@@ -115,15 +115,17 @@ function showSimpleDialogue(alertHeader, alertMessage) {
 /* DOCUMENT READY */
  $('#tempoSurveyPage').on('pageinit', function() {
 
-    var foo = document.createElement('audio');
-foo.src = 'https://dl.dropbox.com/u/8090976/Matrix%20Ring.aiff';
+  var x = 0;
 
- document.getElementById('foo').play()
+  if (x > 5) {
 
-
+    document.getElementById('foo').play()
+  }
 });
    
 $('#tempoSurveyForm').submit(function() {
+
+  console.log("submited");
         
 });
 
