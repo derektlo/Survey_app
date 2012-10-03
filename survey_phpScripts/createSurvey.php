@@ -35,14 +35,10 @@
       if ($matching == 'true')
          $matchValue = isset($_GET['matchValue']) ? $_GET['matchValue']  : "";
    }
-
-   /*
-   echo $userAuthKey;
-   echo $numberOfOptions;
-   echo $numbersOrLetters;
-   echo $onOff;
-   echo $surveyDescription;
-   */
+   else if ($surveyType == 'Tempo') {
+       $classSize        = isset($_GET['classSize']) ? $_GET['classSize']  : "";
+       $percent          = isset($_GET['percent']) ? $_GET['percent']  : "";
+   }
 
    if ($onOff == 'On') {
       $onOff = 0;
@@ -77,11 +73,30 @@
     $surveyAuthKey = $userAuthKey . '-' . $maxValue;
    }
 
-
+   if ($surveyType != 'Tempo') {
    $sql = "INSERT INTO $tbl_name (Survey_authKey, Number_of_options, Survey_type, On_Off, Survey_description, email) 
    VALUES ('$surveyAuthKey', '$numberOfOptions' , '$surveyType', '$onOff', '$surveyDescription', '$email')";
+   
+      $result = mysql_query($sql);
+   }
+   else {
 
-   $result = mysql_query($sql);
+      $insertSurvey = "INSERT INTO $tbl_name (Survey_authKey, Number_of_options, Survey_type, On_Off, Survey_description, email) 
+   VALUES ('$surveyAuthKey', '$numberOfOptions' , '$surveyType', '$onOff', '$surveyDescription', '$email')";
+      $insertSizePercent = "INSERT INTO Survey_Tempo (Survey_authKey, Class_size, Percent) 
+   VALUES ('$surveyAuthKey', '$classSize' , '$percent')";
+
+      $resultTempo = mysql_query($insertSurvey);
+      $resultSizePercent = mysql_query($insertSizePercent);
+
+      if ($resultSizePercent) {
+               echo "$surveyAuthKey";
+      }
+      else {
+         echo 'Error';
+      }
+
+   }
 
 // if data is successfully inserted into database, displays message "Successful". 
    if($result){

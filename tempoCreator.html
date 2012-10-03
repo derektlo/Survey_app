@@ -245,10 +245,12 @@ $('#createSurveyButton').click(function() {
             error = 'true';
         }
 
+        console.log("classsize: ",classSize.val());
+
         if (error !== 'true') {
 
         // Submit the form
-        $.post("/Survey_app/survey_phpScripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&classSize=" + classSize.val() + "&percent=" + percent.val() + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar + "&customSurveyTag_bool=" + customSurveyTag_bool + "&customSurveyTag=" + customSurveyTag, surveyCreatorFormVar.serialize(), function(data){
+        $.post("/Survey_app/survey_phpScripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&surveyType=" + surveyType + "&classSize=" + classSize.val() + "&percent=" + percent.val() + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar + "&customSurveyTag_bool=" + customSurveyTag_bool + "&customSurveyTag=" + customSurveyTag, surveyCreatorFormVar.serialize(), function(data){
           
           if (data != 'Error') {
 
