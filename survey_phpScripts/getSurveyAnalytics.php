@@ -126,6 +126,18 @@ else
 // return the json result.
    echo '{"Results":'.json_encode($container).'}';
 }
+else if ($surveyType == 'Tempo') {
+
+  $fetchTempoResults = mysql_query("SELECT Class_size,Percent,Hits FROM Survey_Tempo WHERE Survey_authKey = '$surveyAuthKey'");
+
+     while($obj = mysql_fetch_object($fetchTempoResults)) {
+       $tempoResultsArray[] = $obj;
+   }
+   
+   // return the json result.
+   echo '{"Results":'.json_encode($tempoResultsArray).'}';
+
+}
 
    // close connection 
    mysql_close();

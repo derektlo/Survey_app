@@ -24,7 +24,11 @@
 
    $query;
 
-   if ($surveyType != 'Specific') {
+   if ($surveyType == 'Tempo') {
+      $query = mysql_query("UPDATE Survey_Tempo SET Hits = Hits+1 
+      WHERE Survey_authKey = '$surveyAuthKey'");
+   }
+   else if ($surveyType != 'Specific') {
    //Execute the query
      $query = mysql_query("UPDATE Survey_Results SET Option_value = Option_value+1 
       WHERE Survey_authKey = '$surveyAuthKey' AND Option_name = '$optionName'");
