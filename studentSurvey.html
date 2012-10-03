@@ -152,8 +152,8 @@ $('#userSurvey').bind('pageshow', function(){
           $('#userResponseDiv').append('<label for="userResponse"><strong>Enter value:</strong></label><textarea name="userResponse" id="userResponse"></textarea>');
         }
         else if (surveyType === 'Tempo') {
-          $('#optionsList').append('<legend><strong>Too fast?</strong></legend><input type="radio" name="tooFast" id="tooFast" />');
-              $('#optionsList').append('<label for="tooFast" >Press if I am going too fast.</label>');
+          $('#optionsList').append('<legend><strong>Too fast?</strong></legend><input type="radio" name="options" id="options" />');
+              $('#optionsList').append('<label for="options" >Press and submit if I am going too fast.</label>');
         }
 
         // Append header with survey token
