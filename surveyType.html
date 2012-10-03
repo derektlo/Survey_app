@@ -83,6 +83,9 @@ function createNewSurveyWithType(surveyType) {
             // showSimpleDialogue("Sorry!","Development for this survey type is still underway but will be completed shortly. Sorry for any inconvenience!");
             $.mobile.changePage( "specificAnswer.html", { transition: "slide"} );
           }
+          else if (surveyType === 'Tempo') {
+            $.mobile.changePage("tempoSurvey.html", {transition: "slide"});
+          }
           else { // Survey type is not custom
             $.mobile.changePage( "surveyCreator.html", { transition: "slide"} );
           }
@@ -163,6 +166,7 @@ function createNewSurveyWithType(surveyType) {
         <li><a href="" onclick="createNewSurveyWithType('Letters')"><h1>Letters</h1><p>Creates a survey using letters as options (Example Survey: Assign options to letters a,b,c. Then receive quick results on how many people have selected a,b, or c)</p></a></li>
         <li><a href="" onclick="createNewSurveyWithType('Custom')"><h1>Custom Options</h1><p>Want more flexibility in your survey options? Create your own categories outlined explicitely in the survey, instead of assigning meaning to each option on the fly. (Example Survey: Option 1 could be "I love red", while the second options is "I hate red". Poll the class in real time to receive quick results.)</p></a></li>
         <li><a href="" onclick="createNewSurveyWithType('Specific')"><h1>Specfic Response</h1><p>If you are expecting a specific answer, either numberical or textual, you may want to use this survey. (Example Survey: You can use this survey to poll a class for questions that they might be embarrased or afraid to ask in front of everyone.)</p></a></li>
+        <li><a href="" onclick="createNewSurveyWithType('Tempo')"><h1>Tempo</h1><p>This survey will allow you to regulate the speed of your class. You keep the survey running for the duration of your class, and students can respond to it if they feel you are going too fast. After a certain percentage of students tell you to slow down, the app will beep at you.</p></a></li>
       </ul>
 
   </div>  
