@@ -72,6 +72,11 @@
   <input type="text" name="customTagField" id="customTagField" value=""  />
   </div>
 
+  <!-- allow user to choose what class this survey is for -->
+  <label for="classOptions" class="select"><strong>Choose Class</strong></label>
+  <select name="classOptions" id="classOptions">
+  </select>
+
   <!-- Turn surveys on/off -->
   <fieldset data-role="controlgroup">
   <legend><strong>On/Off</strong></legend>
@@ -174,7 +179,7 @@ function showSimpleDialogue(alertHeader, alertMessage) {
       customSurveyTag = $('#customTagField').val();
 
 
-       //check the navigator.userAgent string to detect if the user is using an iPhone
+    //check the navigator.userAgent string to detect if the user is using an iPhone
     if (navigator.userAgent.match(/iPhone/i)) {
 
         //cache the viewport tag if the user is using an iPhone
@@ -196,21 +201,45 @@ function showSimpleDialogue(alertHeader, alertMessage) {
         }).trigger('orientationchange');
       }
 
+        /* ********* Initialize some local/global variables ********* */
+      var classes;
+
         // Initiate surveyType
         if (Modernizr.sessionstorage) {
               currentEmailVar = sessionStorage.emailVar;
               currentUserTagVar = sessionStorage.userTagVar;
               surveyType = sessionStorage.surveyType;
+              classes = JSON.parse(sessionStorage.classesArray);
         }
         else {
           surveyType = $.cookie("surveyType");
           currentEmailVar = $.cookie("emailVar");
           currentUserTagVar = $.cookie("userTagVar");
+          classes = JSON.parse($.cookie("classesArray"));
            }
 
-           $('#userTag').append('<strong>' + currentUserTagVar + '-</strong>');
+           console.log("classes: ",classes);
 
-      // Set up Survey Viewer
+        /* ********* Append User Tag ********* */
+          $('#userTag').append('<strong>' + currentUserTagVar + '-</strong>');
+
+
+        /* ********* Append class options ********* */
+      if (classes.length > 0) {
+
+        for (var i = 0; i < classes.length; i++) {
+            $('#classOptions').append('<option value="' + classes[i].Full_class_name + '">' + classes[i] .Full_class_name + ' (' + classes[i].School + ')</option>');
+        }
+
+        $('#classOptions').append('<option value="Independent Lecture">Independent Lecture</option>');
+        $('#classOptions').append('<option value="Other">Other</option>');
+      }
+      else {
+        $('#classOptions').append('<option value="Independent Lecture">Independent Lecture</option>');
+        $('#classOptions').append('<option value="Other">Other</option>');
+      }
+
+      /* ********* Set up Survey Viewer ********* */
         if (sessionStorage.surveyType === 'Numbers'){
             $('#surveyViewer').append('<legend><strong>Survey Preview:</strong></legend><input type="radio" name="options" id="1" value="1" /><label for="1">1</label><input type="radio" name="options" id="2" value="2" /><label for="2">2</label>');
         }
