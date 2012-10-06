@@ -130,6 +130,8 @@ function showSimpleDialogue(alertHeader, alertMessage) {
 
       if (id === 'Custom') {
 
+        $('#customTagEntryDiv').empty();
+
          $('#customTagEntryDiv').append('<label id="userTag" for="customTagField">' + currentUserTagVar + '-</label><input type="text" name="customTagField" id="customTagField" value=""  />');
 
           $('#customTagEntryDiv').trigger('create');
