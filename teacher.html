@@ -181,10 +181,7 @@
               userTagArray = data.Results[0];
               userTagVar = userTagArray[0].User_tag;
 
-              classesArray = data.Results[0];
-
-              console.log("classesArray: ",classesArray);
-
+              classesArray = data.Results[1];
 
          	 if (userTagVar != null){
                  
@@ -192,7 +189,10 @@
                       // browser supports local storage
                       sessionStorage.emailVar = emailVar.val();
                       sessionStorage.userTagVar = userTagVar;
+                      sessionStorage.classesArray = JSON.stringify(classesArray);
                       sessionStorage.loggedIn = 'true';
+
+                      console.log("parsed array: ",JSON.parse(sessionStorage.classesArray));
                   }
                   else {
                       $.cookie("emailVar",emailVar.val());
