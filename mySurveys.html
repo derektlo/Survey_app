@@ -157,11 +157,11 @@
 
        listOfSurveys = data.Results;
 
-       listOfSurveys.sort(function(x){
-          if (x.Class === ""){
-            x.Class = "Other";
+       for (var i = 0; i < listOfSurveys.length; i++) {
+          if (listOfSurveys[i].Class === ""){
+            listOfSurveys[i].Class = "Other";
           }
-       });
+       }
 
        listOfSurveys.sort(function(x, y){
         console.log("x: ",x);
