@@ -43,6 +43,8 @@
 // Definition of Global Variable
   var surveyType = null;
   var surveyTag = null;
+  var surveyClass = null;
+  var surveyDescription = null;
 
 </script>
 
@@ -81,13 +83,18 @@
 
       <audio id="alertNoise" hidden="true" src="alarmsound.wav" controls preload="auto" autobuffer></audio>
 
+      <div id="classDiv">
+        <label><strong>Class:</strong></label>
+        <p id="classParagraph"></p>
+      </div>
+
       <div id="surveyDescription">
-        <label><strong>Survey Description:</strong></label>
+        <label><strong>Description:</strong></label>
         <p id="descriptionParagraph"></p>
       </div>
 
       <div id="onOffSection">
-      <label for="surveyOnOff" ><strong>Survey on/off:</strong></label>
+      <label for="surveyOnOff" ><strong>On/off:</strong></label>
       <select name="surveyOnOff" id="surveyOnOff" data-role="slider" data-theme="c" data-track-theme="a">
         <option value="off">Off</option>
         <option value="on">On</option>
@@ -130,19 +137,40 @@ function returnTicks(results){
 
 $('#surveyResultsPage').on('pageinit', function() {
 
-      // Set Description for Survey
-      if (sessionStorage.surveyDescription === '') {
-        //$('#surveyDescription').empty();
-        $('#descriptionParagraph').append('N/A');
-    }
-    else {
-        $('#descriptionParagraph').append(sessionStorage.surveyDescription);
-    }
 
-          // Load Graph
-       surveyTag = sessionStorage.surveyTag;
-       surveyType = sessionStorage.surveyType;
-        
+  /* *************** Set Local Variable *************** */
+           if (Modernizr.sessionstorage) {
+                  surveyTag = sessionStorage.surveyTag;
+                  surveyType = sessionStorage.surveyType;
+                  surveyClass = sessionStorage.surveyClass;
+                  surveyDescription = sessionStorage.surveyDescription;
+          }
+          else {
+                  surveyTag = $.cookie("surveyTag");
+                  surveyType = $.cookie("surveyType");
+                  surveyClass = $.cookie("surveyClass");
+                  surveyDescription = $.cookie("surveyDescription");
+          }
+
+      
+      // Set Class/Description for Survey
+
+      // set class
+      if (surveyClass === '') {
+        $('#classParagraph').append('Other');
+      }
+      else {
+        $('#classParagraph').append(surveyClass);
+      }
+
+      // set description
+      if (surveyDescription === '') {
+        $('#descriptionParagraph').append('N/A');
+      }
+      else {
+        $('#descriptionParagraph').append(surveyDescription);
+      }
+
            // Load Graph 
            $.getJSON("/Survey_app/survey_phpScripts/getSurveyAnalytics.php?surveyAuthKey=" + surveyTag + "&surveyType=" + surveyType, function(json) {
             
