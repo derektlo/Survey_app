@@ -157,11 +157,19 @@
 
        listOfSurveys = data.Results;
 
+       listOfSurveys.sort(function(x){
+          if (x.Class === ""){
+            x.Class = "Other";
+          }
+       });
+
        listOfSurveys.sort(function(x, y){
         console.log("x: ",x);
 
         // add all classes
-        if ($.inArray(x.Class, allClasses)){}
+        if ($.inArray(x.Class, allClasses)){
+
+        }
           else{
             allClasses.push(x.Class);
           }
