@@ -191,8 +191,6 @@
                       sessionStorage.userTagVar = userTagVar;
                       sessionStorage.classesArray = JSON.stringify(classesArray);
                       sessionStorage.loggedIn = 'true';
-
-                      console.log("parsed array: ",JSON.parse(sessionStorage.classesArray));
                   }
                   else {
                       $.cookie("emailVar",emailVar.val());

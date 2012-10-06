@@ -55,12 +55,12 @@
   <form id="surveyCreatorForm">
 
   <div id="optionSliderDiv" data-role="fieldcontain">
-    <label for="optionSlider">How Many Options?</label>
+    <label for="optionSlider"><strong>How Many Options?</strong></label>
     <input type="range" name="optionSlider" id="optionSlider" value="2" min="2" max="25" data-highlight="true" />
   </div>
 
   <fieldset data-role="controlgroup">
-  <legend>Survey Tag</legend>
+  <legend><strong>Survey-Tag</strong></legend>
       <input type="radio" name="surveyTagControl" id="Custom" value="Custom" checked="checked" />
       <label for="Custom">Custom</label>
       <input type="radio" name="surveyTagControl" id="Auto" value="Auto"  />
@@ -68,13 +68,13 @@
   </fieldset>
 
   <div id="customTagEntryDiv" data-role="fieldcontain">
-  <label id="userTag" for="customTagField"></label>
+  <label id="userTag" for="customTagField"><strong></strong></label>
   <input type="text" name="customTagField" id="customTagField" value=""  />
   </div>
 
   <!-- Turn surveys on/off -->
   <fieldset data-role="controlgroup">
-  <legend>Survey On/Off</legend>
+  <legend><strong>On/Off</strong></legend>
       <input type="radio" name="OnOff" id="On" value="On" checked="checked" />
       <label for="On">Survey On</label>
 
@@ -83,7 +83,7 @@
   </fieldset>
 
   <div data-role="fieldcontain">
-    <label for="SurveyDescription">Survey Description:</label>
+    <label for="SurveyDescription"><strong>Description:</strong></label>
     <textarea name="SurveyDescription" id="SurveyDescription"></textarea>
   </div>
 
@@ -212,10 +212,10 @@ function showSimpleDialogue(alertHeader, alertMessage) {
 
       // Set up Survey Viewer
         if (sessionStorage.surveyType === 'Numbers'){
-            $('#surveyViewer').append('<legend>Survey Preview:</legend><input type="radio" name="options" id="1" value="1" /><label for="1">1</label><input type="radio" name="options" id="2" value="2" /><label for="2">2</label>');
+            $('#surveyViewer').append('<legend><strong>Survey Preview:</strong></legend><input type="radio" name="options" id="1" value="1" /><label for="1">1</label><input type="radio" name="options" id="2" value="2" /><label for="2">2</label>');
         }
         else if (sessionStorage.surveyType === 'Letters') {
-            $('#surveyViewer').append('<legend>Survey Preview:</legend><input type="radio" name="options" id="a" value="a" /><label for="a">a</label><input type="radio" name="options" id="b" value="b" /><label for="b" >b</label>');
+            $('#surveyViewer').append('<legend><strong>Survey Preview:</strong></legend><input type="radio" name="options" id="a" value="a" /><label for="a">a</label><input type="radio" name="options" id="b" value="b" /><label for="b" >b</label>');
           }
         else if (sessionStorage.surveyType === 'Custom') {
 
