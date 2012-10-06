@@ -105,7 +105,7 @@
       var dataTheme;
       var surveyClass;
 
-      // Clear the array
+      // Clear the list of surveys
       $('#surveyList').empty();
 
         for (i = 0; i < listOfSurveys.length; i++){
@@ -169,6 +169,9 @@
           }
        }
 
+        // get all classes in alphabetical order
+        allClasses.sort();
+
        // Sort classes in alphabetical order
        listOfSurveys.sort(function(x, y){
 
@@ -179,14 +182,11 @@
           : 1;
       });
 
-       allClasses.sort();
-
-       console.log("listOfSurveys: ",listOfSurveys);
-       console.log("allclasses: ",allClasses);
-       /*
+        // Clear the list of surveys
+      $('#surveyList').empty();       
 
       // Define some local instance variables
-      var currentDate;
+      var currentClass;
       var numbersOrLetters;
       var onOff;
       var surveyDescription;
@@ -208,25 +208,17 @@
             // set surveyAuthKey
             var authKey = listOfSurveys[i].Survey_authKey;
 
-            // set class
-            if (listOfSurveys[i].Class === '') {
-              surveyClass = "Other";
-            }
-            else {
-              surveyClass = listOfSurveys[i].Class;
-            }
-
-          if (listOfSurveys[i].Date == currentDate) {
+          if (listOfSurveys[i].Class == currentClass) {
               // create row in same section
-                 $('ul#surveyList').append('<li class="ui-btn ui-btn-icon-right"' + dataTheme + '><a href="javascript:void(goToSurveyResults(' + listOfSurveys[i].Survey_id + ',' + listOfSurveys[i].On_off + ',\'' + listOfSurveys[i].Survey_authKey + '\',\'' + listOfSurveys[i].Survey_type + '\',\'' + listOfSurveys[i].Survey_description + '\',\'' + listOfSurveys[i].Class + '\'));"><h1>Tag: <span class="notbold">' + listOfSurveys[i].Survey_authKey + '</span> Class: <span class="notbold">' + surveyClass + '</span></h1><p>' + listOfSurveys[i].Number_of_options + ' Options, ' + listOfSurveys[i].Survey_type + ', ' + onOff + surveyDescription + '</p></a><a href="#" onclick="deleteSurvey(' + listOfSurveys[i].Survey_id + ',\'' + listOfSurveys[i].Survey_authKey + '\')" data-icon="delete" class="ui-li-link-alt ui-btn "' + dataTheme + ' ></a></li>');
+                 $('ul#surveyList').append('<li class="ui-btn ui-btn-icon-right"' + dataTheme + '><a href="javascript:void(goToSurveyResults(' + listOfSurveys[i].Survey_id + ',' + listOfSurveys[i].On_off + ',\'' + listOfSurveys[i].Survey_authKey + '\',\'' + listOfSurveys[i].Survey_type + '\',\'' + listOfSurveys[i].Survey_description + '\',\'' + listOfSurveys[i].Class + '\'));"><h1>Tag: <span class="notbold">' + listOfSurveys[i].Survey_authKey + '</span> Creation Date: <span class="notbold">' + listOfSurveys[i].Date + '</span></h1><p>' + listOfSurveys[i].Number_of_options + ' Options, ' + listOfSurveys[i].Survey_type + ', ' + onOff + surveyDescription + '</p></a><a href="#" onclick="deleteSurvey(' + listOfSurveys[i].Survey_id + ',\'' + listOfSurveys[i].Survey_authKey + '\')" data-icon="delete" class="ui-li-link-alt ui-btn "' + dataTheme + ' ></a></li>');
           }
           else {
               // otherwise create a new section
-              currentDate = listOfSurveys[i].Date;
+              currentClass = listOfSurveys[i].Class;
 
-               $('ul#surveyList').append('<li data-role="list-divider">Created ' + currentDate + '</li>');
+               $('ul#surveyList').append('<li data-role="list-divider">' + currentClass + '</li>');
 
-                $('ul#surveyList').append('<li class="ui-btn ui-btn-icon-right"' + dataTheme + '><a href="javascript:void(goToSurveyResults(' + listOfSurveys[i].Survey_id + ',' + listOfSurveys[i].On_off + ',\'' + listOfSurveys[i].Survey_authKey + '\'' + ',\'' + listOfSurveys[i].Survey_type + '\',\'' + listOfSurveys[i].Survey_description + '\',\'' + listOfSurveys[i].Class + '\'));"><h1>Tag: <span class="notbold">' + listOfSurveys[i].Survey_authKey + '</span> Class: <span class="notbold">' + surveyClass + '</span></h1><p>' + listOfSurveys[i].Number_of_options + ' Options, ' + listOfSurveys[i].Survey_type + ', ' + onOff + surveyDescription + '</p></a><a href="#" onclick="deleteSurvey(' + listOfSurveys[i].Survey_id + ',\'' + listOfSurveys[i].Survey_authKey + '\')" data-icon="delete" class="ui-li-link-alt ui-btn "' + dataTheme + '></a></li>');
+                $('ul#surveyList').append('<li class="ui-btn ui-btn-icon-right"' + dataTheme + '><a href="javascript:void(goToSurveyResults(' + listOfSurveys[i].Survey_id + ',' + listOfSurveys[i].On_off + ',\'' + listOfSurveys[i].Survey_authKey + '\'' + ',\'' + listOfSurveys[i].Survey_type + '\',\'' + listOfSurveys[i].Survey_description + '\',\'' + listOfSurveys[i].Class + '\'));"><h1>Tag: <span class="notbold">' + listOfSurveys[i].Survey_authKey + '</span> Creation Date: <span class="notbold">' + listOfSurveys[i].Date + '</span></h1><p>' + listOfSurveys[i].Number_of_options + ' Options, ' + listOfSurveys[i].Survey_type + ', ' + onOff + surveyDescription + '</p></a><a href="#" onclick="deleteSurvey(' + listOfSurveys[i].Survey_id + ',\'' + listOfSurveys[i].Survey_authKey + '\')" data-icon="delete" class="ui-li-link-alt ui-btn "' + dataTheme + '></a></li>');
             }
           }
 
@@ -234,7 +226,6 @@
         $('ul#surveyList').listview('refresh');
        // $("#surveyList").page();
        // $("#surveyList").trigger("create");
-       */
   }
 
   window.goToSurveyResults = function(surveyID, onOrOff, surveyTag, surveyType, surveyDescription, surveyClass) {
