@@ -30,6 +30,7 @@
     var surveyType = null;
     var customSurveyTag_bool = 'true';
     var customSurveyTag = null;
+    var classVar = null;
     var onOffValue = null;
     var surveyDescriptionVar = null;
 
@@ -177,6 +178,7 @@ function showSimpleDialogue(alertHeader, alertMessage) {
       surveyCreatorFormVar = $('#surveyCreatorForm');
       sliderValue = $('#optionSlider');
       customSurveyTag = $('#customTagField').val();
+      classVar = $('#classOptions');
 
 
     //check the navigator.userAgent string to detect if the user is using an iPhone
@@ -300,6 +302,8 @@ function showSimpleDialogue(alertHeader, alertMessage) {
     
 $('#createSurveyButton').click(function() { 
 
+  console.log("classVar.val(): ",classVar.val());
+
         var error = 'false';
 
         $('input[name=OnOff]').each(function() { 
@@ -321,7 +325,7 @@ $('#createSurveyButton').click(function() {
         if (error !== 'true') {
 
         // Submit the form
-        $.post("/Survey_app/survey_phpScripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&numberOfOptions=" + sliderValue.val() + " &surveyType=" + surveyType + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar + "&customSurveyTag_bool=" + customSurveyTag_bool + "&customSurveyTag=" + customSurveyTag, surveyCreatorFormVar.serialize(), function(data){
+        $.post("/Survey_app/survey_phpScripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&numberOfOptions=" + sliderValue.val() + " &surveyType=" + surveyType + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar + "&customSurveyTag_bool=" + customSurveyTag_bool + "&customSurveyTag=" + customSurveyTag + "&class=" + classVar.val(), surveyCreatorFormVar.serialize(), function(data){
           
           if (data != 'Error') {
 
