@@ -158,21 +158,21 @@
        listOfSurveys = data.Results;
 
        for (var i = 0; i < listOfSurveys.length; i++) {
+          
+          // Make sure no class values are nil
           if (listOfSurveys[i].Class === ""){
             listOfSurveys[i].Class = "Other";
           }
+          // Make a running list of all classes
+          if ($.inArray(listOfSurveys[i].Class, allClasses)) {
+          }
+          else {
+            allClasses.push(listOfSurveys[i].Class);
+          }
        }
 
+       // Sort classes in alphabetical order
        listOfSurveys.sort(function(x, y){
-        console.log("x: ",x);
-
-        // add all classes
-        if ($.inArray(x.Class, allClasses)){
-
-        }
-          else{
-            allClasses.push(x.Class);
-          }
 
         var n1 = x.Class;
         var n2 = y.Class;
