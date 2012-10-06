@@ -17,6 +17,7 @@
    $numbersOrLetters     = isset($_GET['numbersOrLetters']) ? $_GET['numbersOrLetters']  : "";
    $customSurveyTag_bool = isset($_GET['customSurveyTag_bool']) ? $_GET['customSurveyTag_bool']  : "";
    $customSurveyTag      = isset($_GET['customSurveyTag']) ? $_GET['customSurveyTag']  : "";
+   $class                = isset($_GET['class']) ? $_GET['class']  : "";
    $onOff                = isset($_GET['onOff']) ? $_GET['onOff']  : "";
    $surveyDescription = isset($_GET['surveyDescription']) ? $_GET['surveyDescription']  : "";
    $email                = isset($_GET['email']) ? $_GET['email']  : "";
@@ -74,15 +75,15 @@
    }
 
    if ($surveyType != 'Tempo') {
-   $sql = "INSERT INTO $tbl_name (Survey_authKey, Number_of_options, Survey_type, On_Off, Survey_description, email) 
-   VALUES ('$surveyAuthKey', '$numberOfOptions' , '$surveyType', '$onOff', '$surveyDescription', '$email')";
+   $sql = "INSERT INTO $tbl_name (Survey_authKey, Number_of_options, Survey_type, On_Off, Survey_description, Class, Email) 
+   VALUES ('$surveyAuthKey', '$numberOfOptions' , '$surveyType', '$onOff', '$surveyDescription', '$class','$email')";
    
       $result = mysql_query($sql);
    }
    else {
 
-      $insertSurvey = "INSERT INTO $tbl_name (Survey_authKey, Number_of_options, Survey_type, On_Off, Survey_description, email) 
-   VALUES ('$surveyAuthKey', '$numberOfOptions' , '$surveyType', '$onOff', '$surveyDescription', '$email')";
+      $insertSurvey = "INSERT INTO $tbl_name (Survey_authKey, Number_of_options, Survey_type, On_Off, Survey_description, Class, Email) 
+   VALUES ('$surveyAuthKey', '$numberOfOptions' , '$surveyType', '$onOff', '$surveyDescription', '$class', '$email')";
       $insertSizePercent = "INSERT INTO Survey_Tempo (Survey_authKey, Class_size, Percent) 
    VALUES ('$surveyAuthKey', '$classSize' , '$percent')";
 

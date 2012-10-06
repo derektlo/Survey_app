@@ -45,6 +45,7 @@
     var surveyType = null;
     var customSurveyTag_bool = 'true';
     var customSurveyTag = null;
+    var classVar = null;
     var onOffValue = null;
     var surveyDescriptionVar = null;
     var surveyCreatorFormVar = null;
@@ -166,6 +167,7 @@ function showSimpleDialogue(alertHeader, alertMessage) {
       surveyDescriptionVar = $('#SurveyDescription');
       surveyCreatorFormVar = $('#surveyCreatorForm');
       customSurveyTag = $('#customTagField').val();
+      classVar = $('#classOptions');
 
   
       /* ********* Initialize some local/global variables ********* */
@@ -327,7 +329,7 @@ $('#surveyCreatorForm').submit(function() {
            }
 
           // Submit the form
-              generateAjaxPost("/Survey_app/survey_phpScripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&numberOfOptions=" + optionsNumber + "&surveyType=" + surveyType + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar + "&customSurveyTag_bool=" + customSurveyTag_bool + "&customSurveyTag=" + customSurveyTag, customOptionsArray);
+              generateAjaxPost("/Survey_app/survey_phpScripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&numberOfOptions=" + optionsNumber + "&surveyType=" + surveyType + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar + "&customSurveyTag_bool=" + customSurveyTag_bool + "&customSurveyTag=" + customSurveyTag + "&class=" + classVar.val(), customOptionsArray);
         }
         else if (surveyType === 'Specific'){
 
@@ -341,7 +343,7 @@ $('#surveyCreatorForm').submit(function() {
                 matching = 'true';
           }
          
-              generateAjaxPost("/Survey_app/survey_phpScripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&numberOfOptions=" + 1 + "&surveyType=" + surveyType + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar + "&customSurveyTag_bool=" + customSurveyTag_bool + "&customSurveyTag=" + customSurveyTag + "&matching=" + matching + "&matchValue=" + matchValue);
+              generateAjaxPost("/Survey_app/survey_phpScripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&numberOfOptions=" + 1 + "&surveyType=" + surveyType + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar + "&customSurveyTag_bool=" + customSurveyTag_bool + "&customSurveyTag=" + customSurveyTag + "&matching=" + matching + "&matchValue=" + matchValue + "&class=" + classVar.val());
         }   
       }
       else{
