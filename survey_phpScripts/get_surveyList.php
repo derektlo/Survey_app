@@ -24,7 +24,7 @@
    $arr = array();
    //Execute the query
   // $rs = mysql_query("SELECT email FROM customer_information");
-   $rs = mysql_query("SELECT Survey_id,Survey_authKey,Number_of_options,Survey_type,On_off, Survey_description, DATE_FORMAT(Date,\"%b %e %Y\") AS Date FROM Surveys WHERE Email = '$email' AND Deleted = '0'");
+   $rs = mysql_query("SELECT Survey_id,Survey_authKey,Number_of_options,Survey_type,On_off,Survey_description,Class, DATE_FORMAT(Date,\"%b %e %Y\") AS Date FROM Surveys WHERE Email = '$email' AND Deleted = '0'");
    
    // Add the rows to the array 
    while($obj = mysql_fetch_object($rs)) {
