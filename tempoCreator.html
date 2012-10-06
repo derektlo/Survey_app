@@ -59,7 +59,7 @@
   </fieldset>
 
   <fieldset data-role="controlgroup">
-  <legend>Survey Tag</legend>
+  <legend><strong>Survey Tag</strong></legend>
       <input type="radio" name="surveyTagControl" id="Custom" value="Custom" checked="checked" />
       <label for="Custom">Custom</label>
       <input type="radio" name="surveyTagControl" id="Auto" value="Auto"  />
@@ -72,19 +72,19 @@
   </div>
 
   <div id="classSizeDiv" data-role="fieldcontain">
-    <legend>Class Size:</legend>
+    <legend><strong>Class Size</strong></legend>
   <label id="classSize" for="classSizeField"></label>
   <input type="number" name="classSizeField" id="classSizeField" value=""  />
   </div>
 
   <div id="percentDiv" data-role="fieldcontain">
-  <legend>Alert Percentage (ex. 14 = 14% of class)</legend>
+  <legend><strong>Alert Percentage</strong> (ex. 14 = 14% of class)</legend>
   <label id="percent" for="percentField"></label>
   <input type="number" name="percentField" id="percentField" value=""  />
   </div>
 
   <fieldset data-role="controlgroup">
-  <legend>Survey On/Off</legend>
+  <legend><strong>On/Off</strong></legend>
       <input type="radio" name="OnOff" id="On" value="On" checked="checked" />
       <label for="On">Survey On</label>
 
@@ -93,7 +93,7 @@
   </fieldset>
 
   <div data-role="fieldcontain">
-    <label for="SurveyDescription">Survey Description:</label>
+    <label for="SurveyDescription"><strong>Description:</strong></label>
     <textarea name="SurveyDescription" id="SurveyDescription"></textarea>
   </div>
 
@@ -213,7 +213,7 @@ function showSimpleDialogue(alertHeader, alertMessage) {
           currentUserTagVar = $.cookie("userTagVar");
            }
 
-           $('#userTag').append(currentUserTagVar + '-');
+           $('#userTag').append('<strong>' + currentUserTagVar + '-</strong>');
 });
 
  $('#tempoCreatorPage').live('pageinit', function() {

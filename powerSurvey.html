@@ -80,7 +80,7 @@
   </div>
 
   <fieldset data-role="controlgroup">
-  <legend>Survey Tag</legend>
+  <legend><strong>Survey Tag</strong></legend>
       <input type="radio" name="surveyTagControl" id="Custom" value="Custom" checked="checked" />
       <label for="Custom">Custom</label>
       <input type="radio" name="surveyTagControl" id="Auto" value="Auto"  />
@@ -93,7 +93,7 @@
   </div>
 
   <fieldset data-role="controlgroup">
-  <legend>Survey On/Off</legend>
+  <legend><strong>On/Off</strong></legend>
       <input type="radio" name="OnOff" id="On" value="On" checked="checked" />
       <label for="On">Survey On</label>
 
@@ -102,7 +102,7 @@
   </fieldset>
 
   <div data-role="fieldcontain">
-    <label for="SurveyDescription">Survey Description:</label>
+    <label for="SurveyDescription"><strong>Description:</strong></label>
     <textarea name="SurveyDescription" id="SurveyDescription"></textarea>
   </div>
 
@@ -180,7 +180,7 @@ function showSimpleDialogue(alertHeader, alertMessage) {
       currentUserTagVar = $.cookie("userTagVar");
     }
 
-        $('#userTag').append(currentUserTagVar + '-');
+        $('#userTag').append('<strong>' + currentUserTagVar + '-</strong>');
 
 
         if (surveyType === 'Custom') {
