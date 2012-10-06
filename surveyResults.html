@@ -147,17 +147,11 @@ $('#surveyResultsPage').on('pageinit', function() {
             
 
           if (surveyType === 'Tempo') {
-
-            console.log("tempo results: ",json);
             
             var hits = json.Results[0].Hits;
             var classSize = json.Results[0].Class_size;
             var percent = (json.Results[0].Percent) / 100;
             var hitsDivided = hits/classSize;
-
-            console.log("hits: ",hits);
-            console.log("hits divided by classsize: ",hitsDivided);
-            console.log("percent: ",percent)
 
             if ((hits/classSize) >= percent) {
               // play sound
