@@ -92,6 +92,11 @@
   <input type="text" name="customTagField" id="customTagField" value=""  />
   </div>
 
+  <!-- allow user to choose what class this survey is for -->
+  <label for="classOptions" class="select"><strong>Choose Class</strong></label>
+  <select name="classOptions" id="classOptions">
+  </select>
+
   <fieldset data-role="controlgroup">
   <legend><strong>On/Off</strong></legend>
       <input type="radio" name="OnOff" id="On" value="On" checked="checked" />
@@ -163,6 +168,9 @@ function showSimpleDialogue(alertHeader, alertMessage) {
       customSurveyTag = $('#customTagField').val();
 
   
+      /* ********* Initialize some local/global variables ********* */
+      var classes;
+
     // Prepare to set up either a specific response Survey
     // or a custom options Survey  
     if (Modernizr.sessionstorage) {
@@ -171,6 +179,7 @@ function showSimpleDialogue(alertHeader, alertMessage) {
       surveyType = sessionStorage.surveyType;
       optionsNumber = parseInt(sessionStorage.customNumber);
       matching = parseInt(sessionStorage.matching);
+      classes = JSON.parse(sessionStorage.classesArray);
     }
     else {
       surveyType = $.cookie("surveyType");
@@ -178,10 +187,30 @@ function showSimpleDialogue(alertHeader, alertMessage) {
       matching = parseInt($.cookie("matching"));
       currentEmailVar = $.cookie("emailVar");
       currentUserTagVar = $.cookie("userTagVar");
+      classes = JSON.parse($.cookie("classesArray"));
     }
 
-        $('#userTag').append('<strong>' + currentUserTagVar + '-</strong>');
+        /* ********* Append User Tag ********* */
+          $('#userTag').append('<strong>' + currentUserTagVar + '-</strong>');
 
+
+        /* ********* Append class options ********* */
+      if (classes.length > 0) {
+
+        for (var i = 0; i < classes.length; i++) {
+            $('#classOptions').append('<option value="' + classes[i].Full_class_name + '">' + classes[i] .Full_class_name + ' (' + classes[i].School + ')</option>');
+        }
+
+        $('#classOptions').append('<option value="Independent Lecture">Independent Lecture</option>');
+        $('#classOptions').append('<option value="Other">Other</option>');
+      }
+      else {
+        $('#classOptions').append('<option value="Independent Lecture">Independent Lecture</option>');
+        $('#classOptions').append('<option value="Other">Other</option>');
+      }
+
+
+       /* ********* Set up for either Custom Surveys or Specific ********* */
 
         if (surveyType === 'Custom') {
 
@@ -236,7 +265,10 @@ function showSimpleDialogue(alertHeader, alertMessage) {
 
  $('#powerSurveyPage').live('pageinit', function() {
 
+    // refresh custom options list
     $('ul#customOptionsList').listview('refresh');
+    // refresh classes select menu
+    $('#classOptions').selectmenu("refresh");
 });
 
 // $(document).bind('pageinit', function(){

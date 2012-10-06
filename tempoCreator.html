@@ -83,6 +83,11 @@
   <input type="number" name="percentField" id="percentField" value=""  />
   </div>
 
+  <!-- allow user to choose what class this survey is for -->
+  <label for="classOptions" class="select"><strong>Choose Class</strong></label>
+  <select name="classOptions" id="classOptions">
+  </select>
+
   <fieldset data-role="controlgroup">
   <legend><strong>On/Off</strong></legend>
       <input type="radio" name="OnOff" id="On" value="On" checked="checked" />
@@ -201,25 +206,50 @@ function showSimpleDialogue(alertHeader, alertMessage) {
         }).trigger('orientationchange');
       }
 
+  
+      /* ********* Initialize some local/global variables ********* */
+      var classes;
+
         // Initiate surveyType
         if (Modernizr.sessionstorage) {
               currentEmailVar = sessionStorage.emailVar;
               currentUserTagVar = sessionStorage.userTagVar;
               surveyType = sessionStorage.surveyType;
+              classes = sessionStorage.classesArray;
         }
         else {
           surveyType = $.cookie("surveyType");
           currentEmailVar = $.cookie("emailVar");
           currentUserTagVar = $.cookie("userTagVar");
+          classes = $.cookie("classesArray");
            }
 
-           $('#userTag').append('<strong>' + currentUserTagVar + '-</strong>');
+                  /* ********* Append User Tag ********* */
+          $('#userTag').append('<strong>' + currentUserTagVar + '-</strong>');
+
+
+        /* ********* Append class options ********* */
+      if (classes.length > 0) {
+
+        for (var i = 0; i < classes.length; i++) {
+            $('#classOptions').append('<option value="' + classes[i].Full_class_name + '">' + classes[i] .Full_class_name + ' (' + classes[i].School + ')</option>');
+        }
+
+        $('#classOptions').append('<option value="Independent Lecture">Independent Lecture</option>');
+        $('#classOptions').append('<option value="Other">Other</option>');
+      }
+      else {
+        $('#classOptions').append('<option value="Independent Lecture">Independent Lecture</option>');
+        $('#classOptions').append('<option value="Other">Other</option>');
+      }
 });
 
  $('#tempoCreatorPage').live('pageinit', function() {
 
     $('#tempoCreatorPage').trigger("create");
     $("input[type='radio']").checkboxradio("refresh");
+        // refresh classes select menu
+    $('#classOptions').selectmenu("refresh");
   });
    
     
