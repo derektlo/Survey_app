@@ -164,11 +164,8 @@
             listOfSurveys[i].Class = "Other";
           }
           // Make a running list of all classes
-          if ($.inArray(listOfSurveys[i].Class, allClasses)) {
-            console.log("already exists");
-          }
-          else {
-            allClasses.push(listOfSurveys[i].Class);
+          if ($.inArray(listOfSurveys[i].Class, allClasses) == -1) {
+             allClasses.push(listOfSurveys[i].Class);
           }
        }
 
