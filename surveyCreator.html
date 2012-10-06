@@ -59,9 +59,6 @@
     <input type="range" name="optionSlider" id="optionSlider" value="2" min="2" max="25" data-highlight="true" />
   </div>
 
-  <fieldset data-role="controlgroup" id="surveyViewer">
-  </fieldset>
-
   <fieldset data-role="controlgroup">
   <legend>Survey Tag</legend>
       <input type="radio" name="surveyTagControl" id="Custom" value="Custom" checked="checked" />
@@ -75,6 +72,7 @@
   <input type="text" name="customTagField" id="customTagField" value=""  />
   </div>
 
+  <!-- Turn surveys on/off -->
   <fieldset data-role="controlgroup">
   <legend>Survey On/Off</legend>
       <input type="radio" name="OnOff" id="On" value="On" checked="checked" />
@@ -92,6 +90,11 @@
     <div id="createSurveyButtonDiv">    
     <a id="createSurveyButton" name="createSurveyButton" data-role="button" data-inline="true" data-ajax="false">Create Survey</a>
     </div>
+
+    <!-- Fieldset for previewing surveys -->
+    <fieldset data-role="controlgroup" id="surveyViewer">
+    </fieldset>
+
     </form>
   </div>
 </div>

@@ -175,12 +175,23 @@ function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output =
                $getUserTag = mysql_query("SELECT User_tag FROM Survey_Accounts WHERE Email = '$email'");
               // Add the rows to the array 
               while($obj = mysql_fetch_object($getUserTag)) {
-                $arr[] = $obj;
+                $usertag[] = $obj;
               }
+
+              $getUserClasses = mysql_query("SELECT Full_class_name, School FROM Classes WHERE Email = '$email'");
        
+              // Add the rows to the array 
+              while($obj = mysql_fetch_object($getUserClasses)) {
+                $userClasses[] = $obj;
+              }
+
+              $container = array();
+
+              array_push($container,$usertag,$userClasses);
+
 
        // return the json result.
-          echo '{"Results":'.json_encode($arr).'}';
+          echo '{"Results":'.json_encode($container).'}';
         }
         else {
           echo '{"Results":'.json_encode('Not Active').'}';
