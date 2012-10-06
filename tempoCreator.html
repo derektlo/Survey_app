@@ -174,7 +174,7 @@ function showSimpleDialogue(alertHeader, alertMessage) {
       tempoCreatorContentVar = $('#tempoCreatorContent');
       surveyDescriptionVar = $('#SurveyDescription')
       tempoCreatorFormVar = $('#tempoCreatorForm');
-      classSize = $('#percentField');
+      classSize = $('#classSizeField');
       percent = $('#percentField');
       customSurveyTag = $('#customTagField').val();
 
@@ -226,7 +226,7 @@ function showSimpleDialogue(alertHeader, alertMessage) {
 $('#createSurveyButton').click(function() { 
 
         var error = 'false';
-        var negativeValue = 'false';
+        var negativeError = 'false';
 
         $('input[name=OnOff]').each(function() { 
             onOffValue = $('input[name=OnOff]:checked').val();
@@ -249,23 +249,21 @@ $('#createSurveyButton').click(function() {
         }
 
         var checkClassSize = classSize.val()*1;
-                 if(checkClassSize >= 0){
-                      //...Do stuff for +ve num
-                      console.log("positive num");
-                 }else{
-                     ///...Do stuff -ve num
-                 }  
+                 if(checkClassSize <= 0){
+                      negativeError = 'true';
+                 }
 
         var checkPercent = percent.val()*1;
-                 if(checkPercent >= 0){
-                      //...Do stuff for +ve num
-                      console.log("positive percent");
-                 }else{
-                     ///...Do stuff -ve num
-                     console.log("neg percent");
-                 }  
+                 if(checkPercent <= 0){
+                   negativeError = 'true';
+                 } 
 
-        console.log("classsize: ",classSize.val());
+        if (negativeError === 'true') {
+
+          showSimpleDialogue("Whoops","Both class size and percent must be positive, non-zero numbers. Thank you!");
+
+          return false;
+        }         
 
         if (error !== 'true') {
 
