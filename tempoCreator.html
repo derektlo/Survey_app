@@ -215,13 +215,13 @@ function showSimpleDialogue(alertHeader, alertMessage) {
               currentEmailVar = sessionStorage.emailVar;
               currentUserTagVar = sessionStorage.userTagVar;
               surveyType = sessionStorage.surveyType;
-              classes = sessionStorage.classesArray;
+              classes = JSON.parse(sessionStorage.classesArray);
         }
         else {
           surveyType = $.cookie("surveyType");
           currentEmailVar = $.cookie("emailVar");
           currentUserTagVar = $.cookie("userTagVar");
-          classes = $.cookie("classesArray");
+          classes = JSON.parse($.cookie("classesArray"));
            }
 
                   /* ********* Append User Tag ********* */
