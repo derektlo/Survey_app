@@ -55,10 +55,8 @@
 <script type="text/javascript">
 
 //function goToSurveyResults(surveyID, onOrOff, surveyTag) {
-  window.goToSurveyResults = function(surveyID, onOrOff, surveyTag, surveyType, surveyDescription) {
+  window.goToSurveyResults = function(surveyID, onOrOff, surveyTag, surveyType, surveyDescription, surveyClass) {
     // change to a particular survey's results
-
-    console.log("surveyDescription: ",surveyDescription)
 
     // set the currently selected survey's ID and whether it's on or off
     surveyId = surveyID;
@@ -75,12 +73,14 @@
           sessionStorage.surveyTag = surveyTag;
           sessionStorage.surveyType = surveyType;
           sessionStorage.surveyDescription = surveyDescription;
+          sessionStorage.surveyClass = surveyClass;
           }
           else {
             $.cookie("onOffValue",onOffValue);
             $.cookie("surveyTag",surveyTag);
             $.cookie("surveyType",surveyType);
             $.cookie("surveyDescription",surveyDescription);
+            $.cookie("surveyClass",surveyClass);
           }
 
          $.mobile.changePage( "surveyResults.html", { transition: "slide"} );
@@ -152,7 +152,7 @@ var getSurveyListURL;
 
 // get the JSON data from server
     $.getJSON(getSurveyListURL, function(data) {
-
+      console.log("list of surveys: ",data);
        var listOfSurveys = data.Results;
 
     listOfSurveys.sort(function(a,b){

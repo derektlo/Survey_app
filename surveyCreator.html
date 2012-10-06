@@ -329,13 +329,13 @@ $('#createSurveyButton').click(function() {
 
             if (Modernizr.sessionstorage) {
               sessionStorage.surveyTag = data;
-              sessionStorage.classVar = classVar.val();
+              sessionStorage.surveyClass = classVar.val();
               sessionStorage.surveyDescription = surveyDescriptionVar.val();
               sessionStorage.onOffValue = onOffValue;
             }
             else {
               $.cookie("surveyTag",data);
-              $.cookie("classVar",classVar.val());
+              $.cookie("surveyClass",classVar.val());
               $.cookie("surveyDescription",surveyDescription.val());
               $.cookie("onOffValue",onOffValue);
             }
