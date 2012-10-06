@@ -11,7 +11,7 @@
 <!--   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" /> -->
   <link rel="stylesheet" type="text/css" href="simpleDialog2/jquery.mobile.simpledialog.min.css" /> 
 
-  <!-- Modernizer -->
+  <!-- Modernizr -->
   <script type="text/javascript" src="./modernizr.custom.56582.js"></script>
 
   <!-- jQuery/jQuery Mobile -->
@@ -147,8 +147,11 @@
 
           // refresh listview to re-style it
         $('ul#surveyList').listview('refresh');
-       // $("#surveyList").page();
-       // $("#surveyList").trigger("create");
+
+        if (Modernizr.sessionstorage) {
+          sessionStorage.currentSort = "date";
+        }
+        else{$.cookie("currentSort","date");}
   }
 
   window.sortByClass = function(data) {
@@ -224,8 +227,11 @@
 
           // refresh listview to re-style it
         $('ul#surveyList').listview('refresh');
-       // $("#surveyList").page();
-       // $("#surveyList").trigger("create");
+
+        if (Modernizr.sessionstorage) {
+          sessionStorage.currentSort = "class";
+        }
+        else{$.cookie("currentSort","class");}
   }
 
   window.goToSurveyResults = function(surveyID, onOrOff, surveyTag, surveyType, surveyDescription, surveyClass) {
@@ -326,7 +332,22 @@ var getSurveyListURL;
 // get the JSON data from server
     $.getJSON(getSurveyListURL, function(data) {
 
-       sortByDate(data);
+      var sortType;
+
+        if (Modernizr.sessionstorage) {
+          sortType = sessionStorage.currentSort;
+        }
+        else{
+          sortType = $.cookie("currentSort");
+        }
+
+      if ((sortType === '') || (sortType === 'date')) {
+            sortByDate(data);
+      }
+      else{
+            sortByClass(data);
+      }
+      
        surveysPulledFromServer = data;
     }); // End JSON callback function
 
