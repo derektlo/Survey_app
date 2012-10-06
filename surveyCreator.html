@@ -263,6 +263,7 @@ function showSimpleDialogue(alertHeader, alertMessage) {
 
  $('#surveyCreatorPage').live('pageinit', function() {
 
+    $('#classOptions').refresh();
     $('#surveyCreatorPage').trigger("create");
     $("input[type='radio']").checkboxradio("refresh");
   });
