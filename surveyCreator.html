@@ -68,7 +68,7 @@
   </fieldset>
 
   <div id="customTagEntryDiv" data-role="fieldcontain">
-  <label id="userTag" for="customTagField"><strong></strong></label>
+  <label id="userTag" for="customTagField"></label>
   <input type="text" name="customTagField" id="customTagField" value=""  />
   </div>
 
@@ -208,7 +208,7 @@ function showSimpleDialogue(alertHeader, alertMessage) {
           currentUserTagVar = $.cookie("userTagVar");
            }
 
-           $('#userTag').append(currentUserTagVar + '-');
+           $('#userTag').append('<strong>' + currentUserTagVar + '-</strong>');
 
       // Set up Survey Viewer
         if (sessionStorage.surveyType === 'Numbers'){
