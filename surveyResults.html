@@ -133,7 +133,7 @@ $('#surveyResultsPage').on('pageinit', function() {
       // Set Description for Survey
       console.log("sessionStorage.surveyDescription");
       if (sessionStorage.surveyDescription === '') {
-        $('surveyDescription').empty();
+        $('#surveyDescription').empty();
     }
     else {
         $('#descriptionParagraph').append(sessionStorage.surveyDescription);
