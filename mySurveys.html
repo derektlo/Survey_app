@@ -157,8 +157,8 @@
 
        listOfSurveys.sort(function(x, y){
         console.log("x: ",x);
-        var n1 = x.Class;
-        var n2 = y.Class;
+        var n1 = x.Full_class_name;
+        var n2 = y.Full_class_name;
         return n1 == n2 ? 0
           : n1 < n2 ? -1
           : 1;
