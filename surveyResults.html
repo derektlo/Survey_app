@@ -131,9 +131,9 @@ function returnTicks(results){
 $('#surveyResultsPage').on('pageinit', function() {
 
       // Set Description for Survey
-      console.log("sessionStorage.surveyDescription");
       if (sessionStorage.surveyDescription === '') {
-        $('#surveyDescription').empty();
+        //$('#surveyDescription').empty();
+        $('#descriptionParagraph').append('N/A');
     }
     else {
         $('#descriptionParagraph').append(sessionStorage.surveyDescription);
