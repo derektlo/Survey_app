@@ -131,6 +131,7 @@ function returnTicks(results){
 $('#surveyResultsPage').on('pageinit', function() {
 
       // Set Description for Survey
+      console.log("sessionStorage.surveyDescription");
       if (sessionStorage.surveyDescription === '') {
         $('surveyDescription').empty();
     }
@@ -273,7 +274,7 @@ $('#surveyResultsPage').on('pageinit', function() {
                   var onOffValue = $.cookie("onOffValue");
                 }
 
-                if (onOffValue == 'On')
+                if (onOffValue === 'On')
                   $('#surveyOnOff').val('on').slider("refresh");
                 else
                   $('#surveyOnOff').val('off').slider("refresh");
