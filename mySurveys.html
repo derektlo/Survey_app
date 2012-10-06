@@ -42,6 +42,12 @@
 <!-- <div data-role="page" data-theme="c" id="surveyList"> -->
 <div data-role="page" data-theme="a" id="mySurveysPage" data-add-back-btn="true">
 
+<style>
+  .notbold{
+    font-weight:normal
+}​
+</style>
+
     <header data-role="header">
     <a href="teacher.html" data-direction="reverse" rel="external" data-icon="" data-transition="slide" class="ui-btn-right">Logout</a>
     <a href="dashboard.html" data-direction="reverse" rel="external" data-icon="back" data-transition="slide" class="ui-btn-left">Back</a>
@@ -194,7 +200,7 @@ var getSurveyListURL;
 
           if (listOfSurveys[i].Date == currentDate) {
               // create row in same section
-                 $('ul#surveyList').append('<li class="ui-btn ui-btn-icon-right"' + dataTheme + '><a href="javascript:void(goToSurveyResults(' + listOfSurveys[i].Survey_id + ',' + listOfSurveys[i].On_off + ',\'' + listOfSurveys[i].Survey_authKey + '\',\'' + listOfSurveys[i].Survey_type + '\',\'' + listOfSurveys[i].Survey_description + '\',\'' + listOfSurveys[i].Class + '\'));"><h1>Tag: ' + listOfSurveys[i].Survey_authKey + ' Class: ' + surveyClass + '</h1><p>' + listOfSurveys[i].Number_of_options + ' Options, ' + listOfSurveys[i].Survey_type + ', ' + onOff + surveyDescription + '</p></a><a href="#" onclick="deleteSurvey(' + listOfSurveys[i].Survey_id + ',\'' + listOfSurveys[i].Survey_authKey + '\')" data-icon="delete" class="ui-li-link-alt ui-btn "' + dataTheme + ' ></a></li>');
+                 $('ul#surveyList').append('<li class="ui-btn ui-btn-icon-right"' + dataTheme + '><a href="javascript:void(goToSurveyResults(' + listOfSurveys[i].Survey_id + ',' + listOfSurveys[i].On_off + ',\'' + listOfSurveys[i].Survey_authKey + '\',\'' + listOfSurveys[i].Survey_type + '\',\'' + listOfSurveys[i].Survey_description + '\',\'' + listOfSurveys[i].Class + '\'));"><h1>Tag: <span class="notbold">' + listOfSurveys[i].Survey_authKey + '</span> Class: <span class="notbold">' + surveyClass + '</span></h1><p>' + listOfSurveys[i].Number_of_options + ' Options, ' + listOfSurveys[i].Survey_type + ', ' + onOff + surveyDescription + '</p></a><a href="#" onclick="deleteSurvey(' + listOfSurveys[i].Survey_id + ',\'' + listOfSurveys[i].Survey_authKey + '\')" data-icon="delete" class="ui-li-link-alt ui-btn "' + dataTheme + ' ></a></li>');
           }
           else {
               // otherwise create a new section
@@ -202,9 +208,7 @@ var getSurveyListURL;
 
                $('ul#surveyList').append('<li data-role="list-divider">Created ' + currentDate + '</li>');
 
-               //<th>Bold Part <span style="font-weight: normal;">Normal Part</span></th>
-
-                $('ul#surveyList').append('<li class="ui-btn ui-btn-icon-right"' + dataTheme + '><a href="javascript:void(goToSurveyResults(' + listOfSurveys[i].Survey_id + ',' + listOfSurveys[i].On_off + ',\'' + listOfSurveys[i].Survey_authKey + '\'' + ',\'' + listOfSurveys[i].Survey_type + '\',\'' + listOfSurveys[i].Survey_description + '\',\'' + listOfSurveys[i].Class + '\'));"><h1>Tag: ' + listOfSurveys[i].Survey_authKey + ' Class: ' + surveyClass + '</h1><p>' + listOfSurveys[i].Number_of_options + ' Options, ' + listOfSurveys[i].Survey_type + ', ' + onOff + surveyDescription + '</p></a><a href="#" onclick="deleteSurvey(' + listOfSurveys[i].Survey_id + ',\'' + listOfSurveys[i].Survey_authKey + '\')" data-icon="delete" class="ui-li-link-alt ui-btn "' + dataTheme + '></a></li>');
+                $('ul#surveyList').append('<li class="ui-btn ui-btn-icon-right"' + dataTheme + '><a href="javascript:void(goToSurveyResults(' + listOfSurveys[i].Survey_id + ',' + listOfSurveys[i].On_off + ',\'' + listOfSurveys[i].Survey_authKey + '\'' + ',\'' + listOfSurveys[i].Survey_type + '\',\'' + listOfSurveys[i].Survey_description + '\',\'' + listOfSurveys[i].Class + '\'));"><h1>Tag: <span class="notbold">' + listOfSurveys[i].Survey_authKey + '</span> Class: <span class="notbold">' + surveyClass + '</span></h1><p>' + listOfSurveys[i].Number_of_options + ' Options, ' + listOfSurveys[i].Survey_type + ', ' + onOff + surveyDescription + '</p></a><a href="#" onclick="deleteSurvey(' + listOfSurveys[i].Survey_id + ',\'' + listOfSurveys[i].Survey_authKey + '\')" data-icon="delete" class="ui-li-link-alt ui-btn "' + dataTheme + '></a></li>');
             }
           }
 
