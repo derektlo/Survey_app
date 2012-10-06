@@ -248,23 +248,22 @@ $('#createSurveyButton').click(function() {
             error = 'true';
         }
 
-        var checkClassSize=classSize.val()*1;
-         if (checkClassSize.match(new RegExp(^\d*\.{0,1}\d*$))) {
-           // +ve numbers (with decimal point like 2.3)
-           console.log("positive num");
-         } else if(checkClassSize.match(new RegExp(^-\d*\.{0,1}\d*$))){
-           // -ve numbers (with decimal point like -5.34)
-           console.log("neg num");
-        }
+        var checkClassSize = classSize.val()*1;
+                 if(checkClassSize >= 0){
+                      //...Do stuff for +ve num
+                      console.log("positive num");
+                 }else{
+                     ///...Do stuff -ve num
+                 }  
 
-        var checkPercent=percent.val()*1;
-         if (checkPercent.match(new RegExp(^\d*\.{0,1}\d*$))) {
-           // +ve numbers (with decimal point like 2.3)
-           console.log("positive percent");
-         } else if(checkPercent.match(new RegExp(^-\d*\.{0,1}\d*$))){
-           // -ve numbers (with decimal point like -5.34)
-           console.log("neg percent");
-        }
+        var checkPercent = percent.val()*1;
+                 if(checkPercent >= 0){
+                      //...Do stuff for +ve num
+                      console.log("positive percent");
+                 }else{
+                     ///...Do stuff -ve num
+                     console.log("neg percent");
+                 }  
 
         console.log("classsize: ",classSize.val());
 
