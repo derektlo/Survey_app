@@ -39,9 +39,10 @@
 
    $sql = "INSERT INTO $new_tbl_name (Email, Key) VALUES ('$email','$resetHash')";
 
+      echo mysql_error($sql)
+
    $result = mysql_query($sql);
 
-   echo mysql_error($result)
 
     if ($result) {
     $emailSubject = "Class Tempo - Password Reset";
