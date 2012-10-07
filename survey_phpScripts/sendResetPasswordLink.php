@@ -46,7 +46,7 @@
     $headers .= "MIME-Version: 1.0\r\n";
     $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
     $message = "<html><body>";
-    $message .= "Greetings from Class Tempo! \n To reset your password simply click the following link: http://www.classtempo.org/Survey_app/survey_phpScripts/resetPassword.php?key=" . $resetHash . " \n If the link\'s broken, please paste it into your browser!";
+    $message .= "Greetings from Class Tempo! \n To reset your password simply click the following link: http://www.classtempo.org/Survey_app/survey_phpScripts/resetPassword.php?email=". $email . "key=" . $resetHash . " \n If the link\'s broken, please paste it into your browser!";
 
     mail($to, $subject, $message, $headers);
    }
