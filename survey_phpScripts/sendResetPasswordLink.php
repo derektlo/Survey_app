@@ -21,11 +21,11 @@
    mysql_select_db($db) or die("Could not select database");
    
    echo $email;
-   
+
     $resetHash = md5(uniqid(mt_rand(),true));
 
      $query = mysql_query("INSERT INTO Password_Reset (Email, Key) 
-                              VALUES ('$email','$resetHash')");
+                              VALUES ('$email','$email')");
 
      if ($query) {
       echo 'Success';
