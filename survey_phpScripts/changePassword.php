@@ -11,14 +11,9 @@
    // MySQL password
    $pwd = 'jTJW7xTn8MrjDyRd';
  
-   // set account properties
+   // reset password
    $email   = isset($_GET['email']) ? $_GET['email']  : "";
-   $userTag   = isset($_GET['userTag']) ? $_GET['userTag']  : "";
-   $school = isset($_GET['school']) ? $_GET['school']  : "";
-   $content = isset($_GET['content']) ? $_GET['content']  : "";
    $password = isset($_GET['password']) ? $_GET['password']  : "";
-
-   if ($content == '') {
 
    // These constants may be changed without breaking existing hashes.
 define("PBKDF2_HASH_ALGORITHM", "sha256");
@@ -114,66 +109,49 @@ function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output =
    //select the Database
    mysql_select_db($db) or die("Could not select database");
    
- //Execute the query to create the account
+  //Execute the query to make sure this email exists
    // Insert data into mysql
    $checkEmail = mysql_query("SELECT Email FROM Survey_Accounts WHERE Email = '$email'");
-   $checkTag = mysql_query("SELECT User_tag FROM Survey_Accounts WHERE User_tag = '$userTag'");
-
+   
    if (!$checkEmail) {
       die('Query failed');
    }
 
    if (mysql_num_rows($checkEmail) > 0) {
-      echo "Email already exists.";
-   }
-   else if (mysql_num_rows($checkTag) > 0) {
+      
+     $securePassword = create_hash($password);
+    $salt = saltValue;
 
-      echo "User tag already exists.";
-   }
-   else {
-   
-   $securePassword = create_hash($password);
-   $salt = saltValue;
-
-   $activateHash = md5(uniqid(mt_rand(),true));
-
-   $sql = "INSERT INTO $tbl_name (Email, User_tag, School, Password, Salt, Activate_hash) 
-   VALUES ('$email', '$userTag', '$school', '$securePassword', '$salt', '$activateHash')";
+   $sql = "UPDATE $tbl_name SET Password = '$securePassword', Salt = '$salt' WHERE Email = '$email'";
 
    $result = mysql_query($sql);
 
-// if data is successfully inserted into database, displays message "Successful". 
+// if password is successfully reset, echo successful and send a confirmation email
    if($result){
 
-    $emailList = "derek.t.lo@gmail.com";
-    $emailSubject = "Welcome to Class Tempo!";
+    $emailSubject = "Class Tempo - Successful Password Reset";
 
     $to = $email;
     $subject .= "".$emailSubject."";
-    $headers .= "Bcc: ".$emailList."\r\n";
     $headers .= "From: no-reply@classtempo.org\r\n" .
      "X-Mailer: php";
     $headers .= "MIME-Version: 1.0\r\n";
     $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
     $message = "<html><body>";
-    $message .= "Welcome to Class Tempo! \n Activate your account by clicking the following link: http://www.classtempo.org/Survey_app/survey_phpScripts/activateAccount.php?email=" . $email . "&key=" . $activateHash . " If the link\'s broken, please paste it into your browser!";
+    $message .= "Your Class Tempo password has been successfully reset! \n If you did not reset your password, please contact support@classtempo.org. Thank you!";
 
     mail($to, $subject, $message, $headers);
 
-
-      echo "Successful";
+      echo 'Successful';
    }
    else {
+   
       echo "Error";
       }
-   }
 
 
       // close connection 
    mysql_close();
- }
- else {
-  echo "Error";
  }
 
 ?>
