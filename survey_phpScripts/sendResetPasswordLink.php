@@ -57,7 +57,7 @@
    }
    else {
     // email address does not exist...
-      echo 'Error';
+      echo 'Error address doe not exist';
    }
 
   // close connection 
