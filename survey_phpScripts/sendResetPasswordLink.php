@@ -33,43 +33,32 @@
 
     $resetHash = md5(uniqid(mt_rand(),true));
 
-    // database connection
+    echo $resetHash;
 
-$conn = new PDO("mysql:host=$host;dbname=$db",$uid,$pwd);
+    $new_tbl_name = 'Password_Reset';
 
- $statement = $db->prepare("INSERT INTO Password_rest (Email, Key) values (:Email, :Key)");
-  $statement->execute(array(':Email' => $email, ':Key' => $resetHash));
+   $sql = "INSERT INTO $new_tbl_name (Email, Key) VALUES ('$email','$resetHash')";
 
-
-   //  echo $resetHash;
-
-   //  $new_tbl_name = 'Password_Reset';
-
-   // $sql = "INSERT INTO $new_tbl_name (Email, Key) VALUES ('$email','$resetHash')";
-
-   // $result = mysql_query($sql);
+   $result = mysql_query($sql);
 
 
-   //  if ($result) {
+    if ($result) {
+    $emailSubject = "Class Tempo - Password Reset";
 
+    $to = $email;
+    $subject .= "".$emailSubject."";
+    $headers .= "From: no-reply@classtempo.org\r\n" .
+       "X-Mailer: php";
+    $headers .= "MIME-Version: 1.0\r\n";
+    $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+    $message = "<html><body>";
+    $message .= "Greetings from Class Tempo! \n To reset your password simply click the following link: http://www.classtempo.org/Survey_app/survey_phpScripts/resetPassword.php?email=". $email . "&key=" . $resetHash . " \n If the link's broken, please paste it into your browser!";
 
-
-   //  $emailSubject = "Class Tempo - Password Reset";
-
-   //  $to = $email;
-   //  $subject .= "".$emailSubject."";
-   //  $headers .= "From: no-reply@classtempo.org\r\n" .
-   //     "X-Mailer: php";
-   //  $headers .= "MIME-Version: 1.0\r\n";
-   //  $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
-   //  $message = "<html><body>";
-   //  $message .= "Greetings from Class Tempo! \n To reset your password simply click the following link: http://www.classtempo.org/Survey_app/survey_phpScripts/resetPassword.php?email=". $email . "&key=" . $resetHash . " \n If the link's broken, please paste it into your browser!";
-
-   //  mail($to, $subject, $message, $headers);
-   //  }
-   //  else{
-   //    echo 'Error';
-   //  }
+    mail($to, $subject, $message, $headers);
+    }
+    else{
+      echo 'Error';
+    }
 
 
 
@@ -81,12 +70,5 @@ $conn = new PDO("mysql:host=$host;dbname=$db",$uid,$pwd);
 
   // close connection 
    mysql_close();
-
-
-
-
-
-
-
 
 ?>
