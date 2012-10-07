@@ -156,7 +156,7 @@ function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output =
     $headers .= "MIME-Version: 1.0\r\n";
     $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
     $message = "<html><body>";
-    $message .= "Welcome to Class Tempo! \n Activate your account by clicking the following link: http://www.classtempo.org/Survey_app/survey_phpScripts/activateAccount.php?email=" . $email . "&key=" . $activateHash . " If the link\'s broken, please paste it into your browser!";
+    $message .= "Welcome to Class Tempo! \n Activate your account by clicking the following link: http://www.classtempo.org/Survey_app/survey_phpScripts/activateAccount.php?email=" . $email . "&key=" . $activateHash . " If the link's broken, please paste it into your browser!";
 
     mail($to, $subject, $message, $headers);
 
