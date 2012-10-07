@@ -19,20 +19,7 @@
    
    //select the Database
    mysql_select_db($db) or die("Could not select database");
-   
-   echo $email;
 
-    $resetHash = md5(uniqid(mt_rand(),true));
-
-     $query = mysql_query("INSERT INTO Password_Reset (Email, Key) 
-                              VALUES ('$resetHash','$resetHash')");
-
-     if ($query) {
-      echo 'Success';
-     }
-     else {
-      echo 'Error';
-     }
 
   $checkEmail = mysql_query("SELECT Email FROM Survey_Accounts WHERE Email = '$email'");
 
@@ -42,6 +29,14 @@
 
    if (mysql_num_rows($checkEmail) > 0) {
      // send reset email to this address
+
+
+     $resetHash = md5(uniqid(mt_rand(),true));
+
+     $query = mysql_query("INSERT INTO Password_Reset (Email, Reset_key) 
+                              VALUES ('$email','$resetHash')");
+
+     if ($query) {
 
     $emailSubject = "Class Tempo - Password Reset";
 
@@ -55,10 +50,10 @@
     $message .= "Greetings from Class Tempo! \n To reset your password simply click the following link: http://www.classtempo.org/Survey_app/survey_phpScripts/resetPassword.php?email=". $email . "&key=" . $resetHash . " \n If the link's broken, please paste it into your browser!";
 
     mail($to, $subject, $message, $headers);
-    
-
-
-
+    }
+    else {
+      Echo 'Error';
+    }
    }
    else {
     // email address does not exist...
