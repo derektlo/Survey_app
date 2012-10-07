@@ -43,17 +43,17 @@
 
   if (time() > (strtotime($resetRequestTimestamp) + 10800)){
     // reset has expired
-    header('Location: http://www.classtempo.org/passwordResetError.html?expired=true');
+    header('Location: http://www.classtempo.org/password/resetPasswordError.html?expired=true');
   }
   else {
     // otherwise, re-direct the user to the proper password reset page
-    header('Location: http://www.classtempo.org/resetPassword.html?email=' . $email);
+    header('Location: http://www.classtempo.org/password/resetPassword.html?email=' . $email);
     }
 
   }
   else {
 
-    header('Location: http://www.classtempo.org/passwordResetError.html');
+    header('Location: http://www.classtempo.org/password/resetPasswordError.html');
   }
 
   // close connection 
