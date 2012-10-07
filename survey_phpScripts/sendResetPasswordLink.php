@@ -33,10 +33,11 @@
 
     $resetHash = md5(uniqid(mt_rand(),true));
 
+    echo $resetHash;
+
     $new_tbl_name = 'Password_Reset';
 
-   $sql = "INSERT INTO $new_tbl_name (Email, Key) 
-   VALUES ('$email', '$resetHash')";
+   $sql = "INSERT INTO $new_tbl_name (Email, Key) VALUES ('$email', '$resetHash')";
 
    $result = mysql_query($sql);
 
@@ -57,6 +58,9 @@
     else{
       echo 'Error';
     }
+
+
+
    }
    else {
     // email address does not exist...
