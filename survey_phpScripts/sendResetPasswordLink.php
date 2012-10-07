@@ -14,8 +14,8 @@
    // set restaurantID to get categories for selected restaurant
    $email   = isset($_GET['email']) ? $_GET['email']  : "";
 
-   $tbl_name = 'Survey_Accounts';
 
+   $tbl_name = 'Survey_Accounts';
    // Connect to the Database server   
     $link = mysql_connect($host, $uid, $pwd) or die("Could not connect");
    
@@ -33,9 +33,9 @@
 
     $resetHash = md5(uniqid(mt_rand(),true));
 
-    $tbl_name = 'Password_Reset';
+    $new_tbl_name = 'Password_Reset';
 
-   $sql = "INSERT INTO $tbl_name (Email, Key) 
+   $sql = "INSERT INTO $new_tbl_name (Email, Key) 
    VALUES ('$email', '$resetHash')";
 
    $result = mysql_query($sql);
