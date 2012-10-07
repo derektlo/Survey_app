@@ -25,7 +25,7 @@
     $resetHash = md5(uniqid(mt_rand(),true));
 
      $query = mysql_query("INSERT INTO Password_Reset (Email, Key) 
-                              VALUES ('$email','$email')");
+                              VALUES ('$resetHash','$resetHash')");
 
      if ($query) {
       echo 'Success';
