@@ -13,7 +13,7 @@
  
    // set restaurantID to get categories for selected restaurant
    $email   = isset($_GET['email']) ? $_GET['email']  : "";
-   $l_reset_key   = isset($_GET['reset_key']) ? $_GET['reset_key']  : "";
+   $l_reset_key   = isset($_GET['resetKey']) ? $_GET['resetKey']  : "";
 
    $tbl_name = 'Password_reset';
 
