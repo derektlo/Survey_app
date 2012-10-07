@@ -50,31 +50,45 @@
       <div data-role="content" id="myClassesContent">
 
     <h2>Add a class</h2>
-    <p>Just take a quick second to add a course that you teach! You can always add more, even from different schools, under My Classes/Schools, at the Class Tempo Dashboard. Thanks! </p>
+    <p>Please take a quick second to add a course that you teach! You can always add more, even from different schools, under My Classes/Schools, at the Class Tempo Dashboard. Thanks from the Class Tempo Team! </p>
+
+    <form id="activateClassForm">
 
     <div id="classDiv" data-role="fieldcontain">
-    <label for="class">Primary Class* (Full Course Title)</label> 
-    <input id="class" name="class_r" type="text" />
+    <label for="class"><strong>Primary Class* (Full Course Title)</strong></label> 
+    <input id="class" name="class" type="text" />
+    </div>
+
+    <div id="schoolDiv" data-role="fieldcontain">
+    <label for="school"><strong>School*</strong></label> 
+    <input id="school" name="school" type="text" />
     </div>
 
     <div id="classSizeDiv" data-role="fieldcontain">
-    <label for="classSize">Class Size (Optional)</label> 
-    <input id="classSize" name="classSize_r" type="number" />
+    <label for="classSize"><strong>Class Size (Optional)</strong></label> 
+    <input id="classSize" name="classSize" type="number" />
+    </div>
+
+    <div id="signUpDiv" data-role="fieldcontain">    
+     <input type="submit" value="Submit" data-inline="true"/>
     </div>  
+  </form>
 
   </div>  
 
 <script>
+  
+  /* Global Variables */
+    var className = null;
+    var school = null;
+    var classSize = null;
+    var activateClassForm = null;
+    var email = null;
 
-    var classVar = null;
-    var classSizeVar = null;
 
   $('#myClassesPage').on('pageinit', function() {
-    //Your code for each page load here
-      classVar = $('#class');
-      classSizeVar = $('#classSize');
 
-     //check the navigator.userAgent string to detect if the user is using an iPhone
+      //check the navigator.userAgent string to detect if the user is using an iPhone
     if (navigator.userAgent.match(/iPhone/i)) {
 
         //cache the viewport tag if the user is using an iPhone
@@ -95,9 +109,83 @@
         //trigger an orientationchange event on the window object to initialize this code (basically in-case the user opens the page in landscape mode)
         }).trigger('orientationchange');
     }
+
+
+    //Your code for each page load here
+      className = $('#class');
+      school = $('#school');
+      classSize = $('#classSize');
+      activateClassForm = $('#activateClassForm');
+
+    if (Modernizr.sessionstorage) {
+                      // browser supports local storage
+      email = sessionStorage.emailVar;
+    }
+    else {
+      email = $.cookie("emailVar");
+    }
 });
 
+  $('#activateClassForm').submit(function() {
 
+      var error = 'false';
+
+      if ((className.val() === '') || (school.val() === '') || (classSize.val() === '')){
+            error = 'true';
+        }
+
+       var checkClassSize = classSize.val()*1;
+                 if(checkClassSize <= 0){
+                      negativeError = 'true';
+                 }
+
+          if (negativeError === 'true') {
+
+          showSimpleDialogue("Whoops","Class size must be positive and non-zero. Thank you!");
+
+          return false;
+        }  
+
+        if (error === 'false') {
+
+           // Submit the form
+        $.post("/Survey_app/survey_phpScripts/createClass.php?email=" + email + "&className=" + className.val() + "&school=" + school.val() + "&classSize=" + classSize.val(), activateClassForm.serialize(), function(data){
+          
+   
+            if (data === 'Successful'){
+                $.mobile.changePage("dashboard.html",{transition:"slide"});
+            }
+            else{
+              // something went wrong...
+              $.mobile.changePage("dashboard.html",{transition:"slide"});
+            }
+
+        }
+        else {
+          showSimpleDialogue("Whoops","Make sure all fields are filled in. Thank you!");
+        }
+
+        return false;
+
+    });
+
+
+
+function showSimpleDialogue(alertHeader, alertMessage) {
+    
+    $('<div>').simpledialog2({
+                    mode: 'button',
+                    headerText: alertHeader,
+                    buttonPrompt: alertMessage,
+                    headerClose: false,
+                    buttons : {
+                      'OK': {
+                        click: function () { 
+                        }
+                      }
+                    }
+             })
+ }
 
 
 </script>

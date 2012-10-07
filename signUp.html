@@ -44,23 +44,6 @@
     var signUpFormVar = null;
     var EMPTY = "";
 
-
-function showSimpleDialogue(alertHeader, alertMessage) {
-    
-    $('<div>').simpledialog2({
-                    mode: 'button',
-                    headerText: alertHeader,
-                    buttonPrompt: alertMessage,
-                    headerClose: false,
-                    buttons : {
-                      'OK': {
-                        click: function () { 
-                        }
-                      }
-                    }
-             })
- }
-
   </script>
 
 </head> 
@@ -211,6 +194,22 @@ function showSimpleDialogue(alertHeader, alertMessage) {
         });        
         return false;      
     });
+
+function showSimpleDialogue(alertHeader, alertMessage) {
+    
+    $('<div>').simpledialog2({
+                    mode: 'button',
+                    headerText: alertHeader,
+                    buttonPrompt: alertMessage,
+                    headerClose: false,
+                    buttons : {
+                      'OK': {
+                        click: function () { 
+                        }
+                      }
+                    }
+             })
+ }
 
     
   </script>
