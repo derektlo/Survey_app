@@ -50,7 +50,7 @@
       <div data-role="content" id="myClassesContent">
 
     <h2>Add a class</h2>
-    <p>Please take a quick second to add a course that you teach! You can always add more, even from different schools, under My Classes/Schools, at the Class Tempo Dashboard. Thanks from the Class Tempo Team! </p>
+    <p>Please take a quick second to add a course that you teach! You can always add more, even from different schools, under <strong>My Classes</strong>, at the Class Tempo <strong>Dashboard</strong>. Lastly, let us know how we're doing at <a href="mailto:suggestions@classtempo.org">suggestions@classtempo.org</a>. Thank you!</p>
 
     <form id="activateClassForm">
 
@@ -129,6 +129,7 @@
   $('#activateClassForm').submit(function() {
 
       var error = 'false';
+      var negativeError = 'false';
 
       if ((className.val() === '') || (school.val() === '') || (classSize.val() === '')){
             error = 'true';
