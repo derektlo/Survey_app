@@ -33,7 +33,7 @@
 
     $resetHash = md5(uniqid(mt_rand(),true));
 
-    mysql_query("INSERT INTO Password_Reset (Email, Key) VALUES ('$email','$resetHash')");
+    $insertKey = mysql_query("INSERT INTO Password_Reset (Email, Key) VALUES ('$email','$resetHash')");
 
     $emailSubject = "Class Tempo - Password Reset";
 
