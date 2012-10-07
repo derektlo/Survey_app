@@ -161,7 +161,7 @@ function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output =
 
 
       // if password matches
-      if($hash === $currentHash){
+      if($hash == $currentHash){
 
            $checkActiveAccount = mysql_query("SELECT Active FROM Survey_Accounts WHERE Email = '$email'");
 
