@@ -41,7 +41,7 @@
      $resetRequestTimestamp = $obj->Creation_date; // you are fetching an object, not an array
   }
 
-  if (time() > (strtotime($timeToCheck) + 10800)){
+  if (time() > (strtotime($resetRequestTimestamp) + 10800)){
     // reset has expired
     header('Location: http://www.classtempo.org/passwordResetError.html?expired=true');
   }
