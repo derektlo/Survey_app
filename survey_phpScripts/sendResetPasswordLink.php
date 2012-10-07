@@ -14,8 +14,6 @@
    // set restaurantID to get categories for selected restaurant
    $email   = isset($_GET['email']) ? $_GET['email']  : "";
 
-   echo $hash;
-
    $tbl_name = 'Survey_Accounts';
 
    // Connect to the Database server   
@@ -52,7 +50,7 @@
    }
    else {
     // email address does not exist...
- 
+      echo 'Error';
    }
 
   // close connection 
