@@ -47,7 +47,7 @@
   }
   else {
     // otherwise, re-direct the user to the proper password reset page
-    header('Location: http://www.classtempo.org/passwordReset.html?email=' . $email);
+    header('Location: http://www.classtempo.org/resetPassword.html?email=' . $email);
     }
 
   }
