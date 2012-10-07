@@ -25,11 +25,11 @@
    
     //Execute the query to create the account
    // Insert data into mysql
-   $getHash = mysql_query("SELECT Key FROM Password_reset WHERE Email = '$email'");
+   $getHash = mysql_query("SELECT Reset_key FROM Password_reset WHERE Email = '$email'");
 
   while($obj = mysql_fetch_object($getHash)) {
 
-     $key_l = $obj->Key; // you are fetching an object, not an array
+     $key_l = $obj->Reset_key; // you are fetching an object, not an array
   }
 
   if ($hash == $key_l) {
@@ -49,7 +49,7 @@
     // otherwise, re-direct the user to the proper password reset page
     header('Location: http://www.classtempo.org/passwordReset.html?email=' . $email);
     }
-    
+
   }
   else {
 
