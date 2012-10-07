@@ -33,32 +33,43 @@
 
     $resetHash = md5(uniqid(mt_rand(),true));
 
-    echo $resetHash;
+    // database connection
 
-    $new_tbl_name = 'Password_Reset';
+$conn = new PDO("mysql:host=$host;dbname=$db",$uid,$pwd);
 
-   $sql = "INSERT INTO $new_tbl_name (Email, Key) VALUES ('$email','$resetHash')";
+ $statement = $db->prepare("INSERT INTO Password_rest (Email, Key) values (:Email, :Key)");
+  $statement->execute(array(':Email' => $email, ':Key' => $resetHash));
 
-   $result = mysql_query($sql);
+
+   //  echo $resetHash;
+
+   //  $new_tbl_name = 'Password_Reset';
+
+   // $sql = "INSERT INTO $new_tbl_name (Email, Key) VALUES ('$email','$resetHash')";
+
+   // $result = mysql_query($sql);
 
 
-    if ($result) {
-    $emailSubject = "Class Tempo - Password Reset";
+   //  if ($result) {
 
-    $to = $email;
-    $subject .= "".$emailSubject."";
-    $headers .= "From: no-reply@classtempo.org\r\n" .
-       "X-Mailer: php";
-    $headers .= "MIME-Version: 1.0\r\n";
-    $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
-    $message = "<html><body>";
-    $message .= "Greetings from Class Tempo! \n To reset your password simply click the following link: http://www.classtempo.org/Survey_app/survey_phpScripts/resetPassword.php?email=". $email . "&key=" . $resetHash . " \n If the link's broken, please paste it into your browser!";
 
-    mail($to, $subject, $message, $headers);
-    }
-    else{
-      echo 'Error';
-    }
+
+   //  $emailSubject = "Class Tempo - Password Reset";
+
+   //  $to = $email;
+   //  $subject .= "".$emailSubject."";
+   //  $headers .= "From: no-reply@classtempo.org\r\n" .
+   //     "X-Mailer: php";
+   //  $headers .= "MIME-Version: 1.0\r\n";
+   //  $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+   //  $message = "<html><body>";
+   //  $message .= "Greetings from Class Tempo! \n To reset your password simply click the following link: http://www.classtempo.org/Survey_app/survey_phpScripts/resetPassword.php?email=". $email . "&key=" . $resetHash . " \n If the link's broken, please paste it into your browser!";
+
+   //  mail($to, $subject, $message, $headers);
+   //  }
+   //  else{
+   //    echo 'Error';
+   //  }
 
 
 
@@ -70,5 +81,12 @@
 
   // close connection 
    mysql_close();
+
+
+
+
+
+
+
 
 ?>
