@@ -13,7 +13,7 @@
  
    // set restaurantID to get categories for selected restaurant
    $email   = isset($_GET['email']) ? $_GET['email']  : "";
-   $hash   = isset($_GET['key']) ? $_GET['key']  : "";
+   $l_reset_key   = isset($_GET['reset_key']) ? $_GET['reset_key']  : "";
 
    $tbl_name = 'Password_reset';
 
@@ -25,16 +25,16 @@
    
     //Execute the query to create the account
    // Insert data into mysql
-   $getHash = mysql_query("SELECT Reset_key FROM Password_reset WHERE Email = '$email'");
+   $getHash = mysql_query("SELECT Reset_key FROM Password_Reset WHERE Email = '$email'");
 
   while($obj = mysql_fetch_object($getHash)) {
 
      $key_l = $obj->Reset_key; // you are fetching an object, not an array
   }
 
-  if ($hash == $key_l) {
+  if ($l_reset_key == $key_l) {
 
-    $getTimeStamp = mysql_query("SELECT Creation_date FROM Password_reset WHERE Email = '$email'");
+    $getTimeStamp = mysql_query("SELECT Creation_date FROM Password_Reset WHERE Email = '$email'");
 
     while($obj = mysql_fetch_object($getTimeStamp)) {
 
