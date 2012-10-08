@@ -134,10 +134,14 @@ else if ($surveyType == 'Tempo') {
        $tempoResultsArray[] = $obj;
    }
 
-  $fetchTempoLog = mysql_query("SELECT Log_time FROM Track_Results WHERE Survey_authkey = '$surveyAuthKey' ORDER BY Log_time DESC");
+  $fetchTempoLog = mysql_query("SELECT Log_time FROM Track_Results WHERE Survey_authkey = '$surveyAuthKey' ORDER BY Log_time ASC");
    
   while($obj = mysql_fetch_object($fetchTempoLog)) {
-       $logResultsArray[] = $obj;
+
+      $dt = new DateTime($obj->Log_time);
+      $dt->setTimezone(new DateTimeZone('EST'));
+
+       $logResultsArray[] = $dt;
    }
 
    $container = array();
