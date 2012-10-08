@@ -144,6 +144,8 @@ else if ($surveyType == 'Tempo') {
       $dt = new DateTime($someDate);
       $dt->setTimezone(new DateTimeZone('EST'));
 
+      echo $dt;
+
        $logResultsArray[] = $dt;
    }
 
