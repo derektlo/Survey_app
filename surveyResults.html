@@ -155,6 +155,7 @@
 
     $('#muteDiv').empty();
     $('#muteDiv').append('<a href="javascript:void(mute());" data-role="button" data-inline="true">' + mute + '</a>');
+    $('#muteDiv').trigger('create');
   }
 
 function returnTicks(results){
