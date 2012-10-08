@@ -75,6 +75,8 @@
   <div data-role="content" id="surveyCreatorContent" name="surveyCreatorContent"> 
       
       <div id="graphPickerDiv" data-role="controlgroup" data-type="horizontal" style="text-align: center;">
+        <a href="javascript:void(reloadWithGraph('Pie'));" data-role="button">Pie</a>
+        <a href="javascript:void(reloadWithGraph('Log'));" data-role="button">Log</a>
       </div>
 
       <div id="chart1" style="">
@@ -347,11 +349,6 @@ $('#surveyResultsPage').on('pageinit', function() {
                 $('#muteDiv').empty();
                 $('#muteDiv').append('<a href="javascript:void(mute(\'' + mute + '\'));" data-role="button" data-inline="true">' + humanReadableMute + '</a>');
                 $('#muteDiv').trigger('create');
-
-          $('#graphPickerDiv').append('<a href="javascript:void(reloadWithGraph(\'Pie\'));" data-role="button">Pie</a><a href="javascript:void(reloadWithGraph(\'Log\'));" data-role="button">Log</a>');
-
-          $('#graphPickerDiv').trigger('create');
-
           } /* ******** Numbers/Letters/Custom Survey ******** */
             else if (surveyType !== 'Specific') {
 
