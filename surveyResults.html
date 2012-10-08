@@ -346,8 +346,7 @@ $('#surveyResultsPage').on('pageinit', function() {
                 $('#muteDiv').append('<a href="javascript:void(mute(\'' + mute + '\'));" data-role="button" data-inline="true">' + humanReadableMute + '</a>');
                 $('#muteDiv').trigger('create');
 
-          $('#graphPickerDiv').append('<a href="javascript:void(reloadWithGraph(\'Pie\'));" data-role="button">Pie</a>
-            <a href="javascript:void(reloadWithGraph(\'Log\'));" data-role="button">Log</a>');
+          $('#graphPickerDiv').append('<a href="javascript:void(reloadWithGraph(\'Pie\'));" data-role="button">Pie</a><a href="javascript:void(reloadWithGraph(\'Log\'));" data-role="button">Log</a>');
 
           } /* ******** Numbers/Letters/Custom Survey ******** */
             else if (surveyType !== 'Specific') {
