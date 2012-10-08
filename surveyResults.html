@@ -180,8 +180,12 @@ $('#surveyResultsPage').on('pageinit', function() {
             
             var hits = json.Results[0].Hits;
             var classSize = json.Results[0].Class_size;
-            var tooFastPercent = (json.Results[0].Percent) / 100;
-            var restOfClassPercent = 100 - tooFastPercent
+            var hitsPercent = (hits/classSize) * 100;
+            var too tooFastPercentDecimal = (json.Results[0].Percent) / 100;
+            var tooFastPercentWholeNumber = json.Results[0].Percent;
+
+
+            var restOfClassPercent = 100 - hitsPercent;
 
             console.log("json.results: ",json.Results[0]);
             console.log("tooFastPercent ",tooFastPercent);
@@ -189,7 +193,7 @@ $('#surveyResultsPage').on('pageinit', function() {
 
 
             var data = [['', 80],['Too Fast', 20]];
-            var plot2 = jQuery.jqplot ('chart2', [data], 
+            var plot2 = jQuery.jqplot ('chart1', [data], 
               {
                 seriesDefaults: {
                   renderer: jQuery.jqplot.PieRenderer, 
@@ -209,7 +213,7 @@ $('#surveyResultsPage').on('pageinit', function() {
 
 
 
-            if ((hits/classSize) >= percent) {
+            if ((hits/classSize) >= tooFastPercentDecimal) {
               // play sound
               document.getElementById('alertNoise').play()
             }
