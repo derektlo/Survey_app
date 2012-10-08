@@ -134,7 +134,7 @@ else if ($surveyType == 'Tempo') {
        $tempoResultsArray[] = $obj;
    }
 
-  $fetchTempoLog = mysql_query("SELECT Log_time FROM Track_Results WHERE Survey_authkey = '$surveyAuthKey' ORDER BY Log_time ASC");
+  $fetchTempoLog = mysql_query("SELECT Log_time FROM Track_Results WHERE Survey_authkey = '$surveyAuthKey' ORDER BY Log_time DESC");
    
   while($obj = mysql_fetch_object($fetchTempoLog)) {
        $logResultsArray[] = $obj;
