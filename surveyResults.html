@@ -86,8 +86,11 @@
       <audio id="alertNoise" hidden="true" src="alarmsound.wav" controls preload="auto" autobuffer></audio>
 
       <div id="classDiv">
-        <label><strong>Class:</strong></label>
-        <p id="classParagraph"></p>
+        <label><strong>Class:</strong></label><p id="classParagraph"></p>
+      </div>
+
+      <div id="alertPercentDiv">
+        <label><strong>Alert Percentage:</strong></label><p id="alertParagraph"></p>
       </div>
 
       <div id="surveyDescription">
@@ -187,8 +190,10 @@ $('#surveyResultsPage').on('pageinit', function() {
 
             var restOfClassPercent = 100 - hitsPercent;
 
+            $('#alertParagraph').append(tooFastPercentWholeNumber + '%')
+
             console.log("json.results: ",json.Results[0]);
-            console.log("tooFastPercent ",tooFastPercentDecimal);
+            console.log("tooFastPercentDecimal ",tooFastPercentDecimal);
             console.log("restOfClassPercent: ",restOfClassPercent);
 
 
