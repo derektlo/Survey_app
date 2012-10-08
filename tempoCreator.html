@@ -22,6 +22,12 @@
 <!-- Page starts here -->
 <div data-role="page" data-theme="a" id="tempoCreatorPage" data-add-back-btn="true"> 
 
+  <style>
+    #volumewarning {
+      color:#E60000;
+    }
+  </style>
+
   <script>   
    // Global declarations - assignments made in $(document).ready() below
     var surveyCreatorContentVar = null;
@@ -102,6 +108,8 @@
     <label for="SurveyDescription"><strong>Description:</strong></label>
     <textarea name="SurveyDescription" id="SurveyDescription"></textarea>
   </div>
+
+    <p id="volumewarning">Volume must be on*</p>
 
     <div id="createSurveyButtonDiv">    
     <a id="createSurveyButton" name="createSurveyButton" data-role="button" data-inline="true" data-ajax="false">Create Survey</a>
