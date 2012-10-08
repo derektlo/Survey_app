@@ -425,7 +425,7 @@ $('#surveyResultsPage').on('pageinit', function() {
      });
     });
 
-    function showSimpleDialogue(alertHeader, alertMessage) {
+    window.showSimpleDialogue = function(alertHeader, alertMessage) {
     
     $('<div>').simpledialog2({
                     mode: 'button',
