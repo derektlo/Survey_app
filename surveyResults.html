@@ -261,11 +261,31 @@ $('#surveyResultsPage').on('pageinit', function() {
 
             if ((hits/classSize) >= tooFastPercentDecimal) {
               // play sound
-              document.getElementById('alertNoise').play()
+                  var mute;
+
+                    if (Modernizr.sessionstorage){
+                        mute = sessionStorage.muteVar;
+                    }
+                    else {
+                        mute = $.cookie("muteVar");
+                    }
+
+                    if ((mute === '') || (mute === null) || (mute === undefined)) {
+                       mute = 'Mute';
+                   }
+
+                  if (mute === 'Mute'){
+                    document.getElementById('alertNoise').play();
+                  }
+                  else if (mute === 'Unmute') {
+                    // do nothing because sound is muted
+                  }
             }
 
             // set up the mute button
-            mute();
+                $('#muteDiv').empty();
+                $('#muteDiv').append('<a href="javascript:void(mute());" data-role="button" data-inline="true">' + mute + '</a>');
+                $('#muteDiv').trigger('create');
           } /* ******** Numbers/Letters/Custom Survey ******** */
             else if (surveyType !== 'Specific') {
 
