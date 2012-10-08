@@ -130,26 +130,22 @@
     var humanReadableMute;
     if (mute === 'WillMute') {
       humanReadableMute = 'Unmute';
+      mute = 'WillUnmute';
     }
     else if (mute === 'WillUnmute') {
       humanReadableMute = 'Mute';
+      mute = 'WillMute';
     }
 
     $('#muteDiv').empty();
-    $('#muteDiv').append('<a href="javascript:void(mute(' + mute + '));" data-role="button" data-inline="true">' + humanReadableMute + '</a>');
+    $('#muteDiv').append('<a href="javascript:void(mute(\'' + mute + '\'));" data-role="button" data-inline="true">' + humanReadableMute + '</a>');
     $('#muteDiv').trigger('create');
 
     if (Modernizr.sessionstorage){
-      if (mute === 'Willmute')
-        sessionStorage.muteVar = 'WillUnmute';
-      else if (mute === 'WillUnmute')
-        sessionStorage.muteVar = 'WillMute';
+        sessionStorage.muteVar = mute;
     }
     else {
-      if (mute === 'Willmute')
-        $.cookie('muteVar','WillUnmute');
-      else if (mute === 'WillUnmute')
-        $.cookie('muteVar','WillMute');
+        $.cookie('muteVar',mute);
     }
   }
 
@@ -287,7 +283,7 @@ $('#surveyResultsPage').on('pageinit', function() {
 
             // set up the mute button
                 $('#muteDiv').empty();
-                $('#muteDiv').append('<a href="javascript:void(mute(' + mute + '));" data-role="button" data-inline="true">' + humanReadableMute + '</a>');
+                $('#muteDiv').append('<a href="javascript:void(mute(\'' + mute + '\'));" data-role="button" data-inline="true">' + humanReadableMute + '</a>');
                 $('#muteDiv').trigger('create');
           } /* ******** Numbers/Letters/Custom Survey ******** */
             else if (surveyType !== 'Specific') {
