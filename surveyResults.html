@@ -90,7 +90,7 @@
       </div>
 
       <div id="alertPercentDiv">
-        <label><strong>Alert Percentage: <img src="./images/bullhorn.png" alt="bullhorn"/></strong></label><p id="alertParagraph"></p>
+        <label><strong>Alert Percentage <img src="./images/bullhorn.png" alt="bullhorn"/></strong></label><p id="alertParagraph"></p>
       </div>
 
       <div id="surveyDescription">
@@ -190,12 +190,7 @@ $('#surveyResultsPage').on('pageinit', function() {
 
             var restOfClassPercent = 100 - hitsPercent;
 
-            $('#alertParagraph').append(tooFastPercentWholeNumber + '%')
-
-            console.log("json.results: ",json.Results[0]);
-            console.log("tooFastPercentDecimal ",tooFastPercentDecimal);
-            console.log("restOfClassPercent: ",restOfClassPercent);
-
+            $('#alertParagraph').append(tooFastPercentWholeNumber + '%');
 
             var data = [['', restOfClassPercent],['Too Fast', hitsPercent]];
             var plot2 = jQuery.jqplot ('chart1', [data], 
@@ -222,6 +217,7 @@ $('#surveyResultsPage').on('pageinit', function() {
             if ((hits/classSize) >= tooFastPercentDecimal) {
               // play sound
               document.getElementById('alertNoise').play()
+              document.getElementById('alertNoise').stop();
             }
           } /* ******** Numbers/Letters/Custom Survey ******** */
             else if (surveyType !== 'Specific') {
