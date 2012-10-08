@@ -127,22 +127,22 @@
         mute = $.cookie("muteVar");
     }
 
-    if (mute === 'Mute') {
-      mute = 'Unmute';
+    if (mute === 'WillMute') {
+      mute = 'WillUnmute';
     }
-    else if (mute === 'Unmute'){
-      mute = 'Mute';
+    else if (mute === 'WillUnmute'){
+      mute = 'WillMute';
     }
 
     if ((mute === '') || (mute === null) || (mute === undefined)) {
-      mute = 'Mute';
+      mute = 'WillMute';
     }
 
     // Actually mute/unmute the sound
-    if (mute === 'Mute') {
+    if (mute === 'WillMute') {
       document.getElementById('alertNoise').pause();
     }
-    else if (mute === 'Unmute') {
+    else if (mute === 'WillUnmute') {
       document.getElementById('alertNoise').play();
     }
 
@@ -271,20 +271,20 @@ $('#surveyResultsPage').on('pageinit', function() {
                     }
 
                     if ((mute === '') || (mute === null) || (mute === undefined)) {
-                       mute = 'Mute';
+                       mute = 'WillMute';
                    }
 
-                  if (mute === 'Mute'){
+                  if (mute === 'WillMute'){
                     document.getElementById('alertNoise').play();
                   }
-                  else if (mute === 'Unmute') {
+                  else if (mute === 'WillUnmute') {
                     // do nothing because sound is muted
                   }
             }
 
             // set up the mute button
                 $('#muteDiv').empty();
-                $('#muteDiv').append('<a href="javascript:void(mute(' + mute + '));" data-role="button" data-inline="true">' + mute + '</a>');
+                $('#muteDiv').append('<a href="javascript:void(mute());" data-role="button" data-inline="true">' + mute + '</a>');
                 $('#muteDiv').trigger('create');
           } /* ******** Numbers/Letters/Custom Survey ******** */
             else if (surveyType !== 'Specific') {
