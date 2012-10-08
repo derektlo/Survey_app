@@ -133,9 +133,19 @@ else if ($surveyType == 'Tempo') {
      while($obj = mysql_fetch_object($fetchTempoResults)) {
        $tempoResultsArray[] = $obj;
    }
+
+  $fetchTempoLog = mysql_query("SELECT Log_time FROM Track_Results ORDER BY Log_time ASC WHERE Survey_authkey = '$surveyAuthKey'");
    
+  while($obj = mysql_fetch_object($fetchTempoResults)) {
+       $logResultsArray[] = $obj;
+   }
+
+   $container = array();
+
+   array_push($container,$tempoResultsArray,$logResultsArray);
+
    // return the json result.
-   echo '{"Results":'.json_encode($tempoResultsArray).'}';
+   echo '{"Results":'.json_encode($container).'}';
 
 }
 

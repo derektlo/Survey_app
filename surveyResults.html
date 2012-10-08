@@ -221,6 +221,7 @@ $('#surveyResultsPage').on('pageinit', function() {
             /* ************************* Tempo Survey ******************* */
           if (surveyType === 'Tempo') {
             
+            console.log("tempo results: ",json);
             var hits = json.Results[0].Hits;
             var classSize = json.Results[0].Class_size;
             var hitsPercent = (hits/classSize) * 100;
