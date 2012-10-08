@@ -85,6 +85,9 @@
 
       <audio id="alertNoise" hidden="true" src="alarmsound.wav" controls preload="auto" autobuffer></audio>
 
+      <div id="muteDiv">
+      </div>
+
       <div id="classDiv">
         <label><strong>Class:</strong></label><p id="classParagraph"></p>
       </div>
@@ -112,6 +115,39 @@
   <div data-role="footer" id="ftrMain" name="ftrMain"></div>
 
   <script>
+
+  window.mute = function() {
+
+    var mute;
+
+    if (Modernizr.sessionstorage){
+        mute = sessionStorage.muteVar;
+    }
+    else {
+        mute = $.cookie("muteVar");
+    }
+
+    if (mute === 'Mute') {
+      mute = 'Unmute';
+    }
+    else if (mute === 'Unmute'){
+      mute = 'Mute';
+    }
+
+    if ((mute === '') || (mute === null) || (mute === undefined)) {
+      mute = 'Mute';
+    }
+
+    if (Modernizr.sessionstorage){
+        sessionStorage.muteVar = mute;
+    }
+    else {
+        $.cookie("muteVar",mute);
+    }
+
+    $('#muteDiv').empty();
+    $('#muteDiv').append('<a href="javascript:void(mute());" data-role="button" data-inline="true">' + mute + '</a>');
+  }
 
 function returnTicks(results){
         var ticks = [];
@@ -219,6 +255,9 @@ $('#surveyResultsPage').on('pageinit', function() {
               document.getElementById('alertNoise').play()
               document.getElementById('alertNoise').stop();
             }
+
+            // set up the mute button
+            mute();
           } /* ******** Numbers/Letters/Custom Survey ******** */
             else if (surveyType !== 'Specific') {
 
