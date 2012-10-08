@@ -116,27 +116,8 @@
 
   <script>
 
-  window.mute = function() {
+  window.mute = function(mute) {
 
-    var mute;
-
-    if (Modernizr.sessionstorage){
-        mute = sessionStorage.muteVar;
-    }
-    else {
-        mute = $.cookie("muteVar");
-    }
-
-    if (mute === 'WillMute') {
-      mute = 'WillUnmute';
-    }
-    else if (mute === 'WillUnmute'){
-      mute = 'WillMute';
-    }
-
-    if ((mute === '') || (mute === null) || (mute === undefined)) {
-      mute = 'WillMute';
-    }
 
     // Actually mute/unmute the sound
     if (mute === 'WillMute') {
@@ -146,23 +127,30 @@
       document.getElementById('alertNoise').play();
     }
 
-    if (Modernizr.sessionstorage){
-        sessionStorage.muteVar = mute;
-    }
-    else {
-        $.cookie("muteVar",mute);
-    }
     var humanReadableMute;
     if (mute === 'WillMute') {
-      humanReadableMute = 'Mute';
+      humanReadableMute = 'Unmute';
     }
     else if (mute === 'WillUnmute') {
-      humanReadableMute = 'Unmute';
+      humanReadableMute = 'Mute';
     }
 
     $('#muteDiv').empty();
-    $('#muteDiv').append('<a href="javascript:void(mute());" data-role="button" data-inline="true">' + humanReadableMute + '</a>');
+    $('#muteDiv').append('<a href="javascript:void(mute(' + mute + '));" data-role="button" data-inline="true">' + humanReadableMute + '</a>');
     $('#muteDiv').trigger('create');
+
+    if (Modernizr.sessionstorage){
+      if (mute === 'Willmute')
+        sessionStorage.muteVar = 'WillUnmute';
+      else if (mute === 'WillUnmute')
+        sessionStorage.muteVar = 'WillMute';
+    }
+    else {
+      if (mute === 'Willmute')
+        $.cookie('muteVar','WillUnmute');
+      else if (mute === 'WillUnmute')
+        $.cookie('muteVar','WillMute');
+    }
   }
 
 function returnTicks(results){
@@ -299,7 +287,7 @@ $('#surveyResultsPage').on('pageinit', function() {
 
             // set up the mute button
                 $('#muteDiv').empty();
-                $('#muteDiv').append('<a href="javascript:void(mute());" data-role="button" data-inline="true">' + humanReadableMute + '</a>');
+                $('#muteDiv').append('<a href="javascript:void(mute(' + mute + '));" data-role="button" data-inline="true">' + humanReadableMute + '</a>');
                 $('#muteDiv').trigger('create');
           } /* ******** Numbers/Letters/Custom Survey ******** */
             else if (surveyType !== 'Specific') {
