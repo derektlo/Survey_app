@@ -152,9 +152,16 @@
     else {
         $.cookie("muteVar",mute);
     }
+    var humanReadableMute;
+    if (mute === 'WillMute') {
+      humanReadableMute = 'Mute';
+    }
+    else if (mute === 'WillUnmute') {
+      humanReadableMute = 'Unmute';
+    }
 
     $('#muteDiv').empty();
-    $('#muteDiv').append('<a href="javascript:void(mute());" data-role="button" data-inline="true">' + mute + '</a>');
+    $('#muteDiv').append('<a href="javascript:void(mute());" data-role="button" data-inline="true">' + humanReadableMute + '</a>');
     $('#muteDiv').trigger('create');
   }
 
@@ -282,9 +289,17 @@ $('#surveyResultsPage').on('pageinit', function() {
                   }
             }
 
+            var humanReadableMute;
+            if (mute === 'WillMute') {
+              humanReadableMute = 'Mute';
+            }
+            else if (mute === 'WillUnmute') {
+              humanReadableMute = 'Unmute';
+            }
+
             // set up the mute button
                 $('#muteDiv').empty();
-                $('#muteDiv').append('<a href="javascript:void(mute());" data-role="button" data-inline="true">' + mute + '</a>');
+                $('#muteDiv').append('<a href="javascript:void(mute());" data-role="button" data-inline="true">' + humanReadableMute + '</a>');
                 $('#muteDiv').trigger('create');
           } /* ******** Numbers/Letters/Custom Survey ******** */
             else if (surveyType !== 'Specific') {
