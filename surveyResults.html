@@ -225,11 +225,11 @@ $('#surveyResultsPage').on('pageinit', function() {
             var alertResults = json.Results[0];
             var logResults = json.Results[1];
 
-            var hits = alertResults.Hits;
-            var classSize = alertResults.Class_size;
+            var hits = alertResults[0].Hits;
+            var classSize = alertResults[0].Class_size;
             var hitsPercent = (hits/classSize) * 100;
-            var tooFastPercentDecimal = (alertResults.Percent) / 100;
-            var tooFastPercentWholeNumber = alertResults.Percent;
+            var tooFastPercentDecimal = (alertResults[0].Percent) / 100;
+            var tooFastPercentWholeNumber = alertResults[0].Percent;
 
 
             var restOfClassPercent = 100 - hitsPercent;
