@@ -251,6 +251,8 @@ $('#surveyResultsPage').on('pageinit', function() {
               graphType = 'Pie';
             }
 
+            console.log("graphtype: ",graphType);
+
           if (graphType === 'Pie') {
 
             var data = [['Other Students ('+(classSize-hits)+')', restOfClassPercent],['Too Fast ('+hits+')', hitsPercent]];
