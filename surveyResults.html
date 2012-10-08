@@ -284,7 +284,7 @@ $('#surveyResultsPage').on('pageinit', function() {
 
             // set up the mute button
                 $('#muteDiv').empty();
-                $('#muteDiv').append('<a href="javascript:void(mute());" data-role="button" data-inline="true">' + mute + '</a>');
+                $('#muteDiv').append('<a href="javascript:void(mute(' + mute + '));" data-role="button" data-inline="true">' + mute + '</a>');
                 $('#muteDiv').trigger('create');
           } /* ******** Numbers/Letters/Custom Survey ******** */
             else if (surveyType !== 'Specific') {
