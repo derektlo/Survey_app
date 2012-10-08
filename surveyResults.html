@@ -138,6 +138,14 @@
       mute = 'Mute';
     }
 
+    // Actually mute/unmute the sound
+    if (mute === 'Mute') {
+      document.getElementById('alertNoise').pause();
+    }
+    else if (mute === 'Unmute') {
+      document.getElementById('alertNoise').play();
+    }
+
     if (Modernizr.sessionstorage){
         sessionStorage.muteVar = mute;
     }
@@ -253,7 +261,6 @@ $('#surveyResultsPage').on('pageinit', function() {
             if ((hits/classSize) >= tooFastPercentDecimal) {
               // play sound
               document.getElementById('alertNoise').play()
-              //document.getElementById('alertNoise').pause();
             }
 
             // set up the mute button
