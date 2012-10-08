@@ -29,6 +29,8 @@
   <script language="javascript" type="text/javascript" src="js/plugins/jqplot.categoryAxisRenderer.js"></script>
   <script language="javascript" type="text/javascript" src="js/plugins/jqplot.pointLabels.js"></script>
   <script language="javascript" type="text/javascript" src="js/plugins/jqplot.pointLabels.min.js"></script>
+  <script type="text/javascript" src="../js/plugins/jqplot.pieRenderer.min.js"></script>
+  <script type="text/javascript" src="../js/plugins/jqplot.donutRenderer.min.js"></script>
 
 </head> 
 
@@ -173,19 +175,45 @@ $('#surveyResultsPage').on('pageinit', function() {
            // Load Graph 
            $.getJSON("/Survey_app/survey_phpScripts/getSurveyAnalytics.php?surveyAuthKey=" + surveyTag + "&surveyType=" + surveyType, function(json) {
             
-
+            /* ************************* Tempo Survey ******************* */
           if (surveyType === 'Tempo') {
             
             var hits = json.Results[0].Hits;
             var classSize = json.Results[0].Class_size;
-            var percent = (json.Results[0].Percent) / 100;
-            var hitsDivided = hits/classSize;
+            var tooFastPercent = (json.Results[0].Percent) / 100;
+            var restOfClassPercent = 100 - tooFastPercent
+
+            console.log("json.results: ",json.Results[0]);
+            console.log("tooFastPercent ",tooFastPercent);
+            console.log("restOfClassPercent: ",restOfClassPercent);
+
+
+            var data = [['', 80],['Too Fast', 20]];
+            var plot2 = jQuery.jqplot ('chart2', [data], 
+              {
+                seriesDefaults: {
+                  renderer: jQuery.jqplot.PieRenderer, 
+                  rendererOptions: {
+                    // Turn off filling of slices.
+                    fill: false,
+                    showDataLabels: true, 
+                    // Add a margin to seperate the slices.
+                    sliceMargin: 4, 
+                    // stroke the slices with a little thicker line.
+                    lineWidth: 5
+                  }
+                }, 
+                legend: { show:true, location: 'e' }
+              }
+            );
+
+
 
             if ((hits/classSize) >= percent) {
               // play sound
               document.getElementById('alertNoise').play()
             }
-          }
+          } /* ******** Numbers/Letters/Custom Survey ******** */
             else if (surveyType !== 'Specific') {
 
               $.jqplot.config.enablePlugins = true;
@@ -239,7 +267,7 @@ $('#surveyResultsPage').on('pageinit', function() {
                   seriesColors: $.merge([ "#55A9D3", "#D4EDE2", "#EA2E49"], $.jqplot.config.defaultColors)
               });
           }
-          else {
+          else {  /* ************* Specific Response Survey ************* */
            
             var matching = json.Results[0];
 
