@@ -239,6 +239,20 @@ $('#surveyResultsPage').on('pageinit', function() {
 
             $('#alertParagraph').append(tooFastPercentWholeNumber + '%');
 
+            var graphType;
+
+            if (Modernizr.sessionstorage) {
+                graphType = sessionStorage.graphType;
+            }
+            else {
+                graphType = $.cookie("graphType");
+            }
+            if ((graphType === '') || (graphType === null) || (graphType === undefined)) {
+              graphType = 'Pie';
+            }
+
+          if (graphType === 'Pie') {
+
             var data = [['Other Students ('+(classSize-hits)+')', restOfClassPercent],['Too Fast ('+hits+')', hitsPercent]];
             var plot2 = jQuery.jqplot ('chart1', [data], 
               {
@@ -258,6 +272,39 @@ $('#surveyResultsPage').on('pageinit', function() {
                 legend: { show:true, location: 'e' }
               }
             );
+
+          }
+          else {
+                if ((logResults !== 'null') && (logResults !== null)) {
+
+                    var plot2 = $.jqplot ('chart1', [[3,7,9,1,4,6,8,2,5]], {
+                        // Give the plot a title.
+                        title: 'Plot With Options',
+                        // You can specify options for all axes on the plot at once with
+                        // the axesDefaults object.  Here, we're using a canvas renderer
+                        // to draw the axis label which allows rotated text.
+                        axesDefaults: {
+                          labelRenderer: $.jqplot.CanvasAxisLabelRenderer
+                        },
+                        // An axes object holds options for all axes.
+                        // Allowable axes are xaxis, x2axis, yaxis, y2axis, y3axis, ...
+                        // Up to 9 y axes are supported.
+                        axes: {
+                          // options for each axis are specified in seperate option objects.
+                          xaxis: {
+                            label: "X Axis",
+                            // Turn off "padding".  This will allow data point to lie on the
+                            // edges of the grid.  Default padding is 1.2 and will keep all
+                            // points inside the bounds of the grid.
+                            pad: 0
+                          },
+                          yaxis: {
+                            label: "Y Axis"
+                          }
+                        }
+                      });
+              }
+          }
 
             var mute;
 
@@ -299,45 +346,8 @@ $('#surveyResultsPage').on('pageinit', function() {
                 $('#muteDiv').append('<a href="javascript:void(mute(\'' + mute + '\'));" data-role="button" data-inline="true">' + humanReadableMute + '</a>');
                 $('#muteDiv').trigger('create');
 
-
-              if ((logResults !== 'null') && (logResults !== null)) {
-
-                $('#graphPickerDiv').append('<a href="teacher.html" data-transition="slideup" data-direction="reverse" data-role="button">Teacher</a>
-      <a href="student.html" data-transition="slideup" data-direction="reverse" data-role="button">Student</a>');
-
-                    var plot2 = $.jqplot ('chart2', [[3,7,9,1,4,6,8,2,5]], {
-                        // Give the plot a title.
-                        title: 'Plot With Options',
-                        // You can specify options for all axes on the plot at once with
-                        // the axesDefaults object.  Here, we're using a canvas renderer
-                        // to draw the axis label which allows rotated text.
-                        axesDefaults: {
-                          labelRenderer: $.jqplot.CanvasAxisLabelRenderer
-                        },
-                        // An axes object holds options for all axes.
-                        // Allowable axes are xaxis, x2axis, yaxis, y2axis, y3axis, ...
-                        // Up to 9 y axes are supported.
-                        axes: {
-                          // options for each axis are specified in seperate option objects.
-                          xaxis: {
-                            label: "X Axis",
-                            // Turn off "padding".  This will allow data point to lie on the
-                            // edges of the grid.  Default padding is 1.2 and will keep all
-                            // points inside the bounds of the grid.
-                            pad: 0
-                          },
-                          yaxis: {
-                            label: "Y Axis"
-                          }
-                        }
-                      });
-              }
-
-
-
-
-
-
+          $('#graphPickerDiv').append('<a href="javascript:void(reloadWithGraph(\'Pie\'));" data-role="button">Pie</a>
+            <a href="javascript:void(reloadWithGraph(\'Log\'));" data-role="button">Log</a>');
 
           } /* ******** Numbers/Letters/Custom Survey ******** */
             else if (surveyType !== 'Specific') {
@@ -491,6 +501,18 @@ $('#surveyResultsPage').on('pageinit', function() {
                       }
                     }
              })
+ }
+
+ window.reloadWithGraph = function(graphType) {
+
+    if (Modernizr.sessionstorage) {
+      sessionStorage.graphType = graphType;
+    }
+    else {
+      $.cookie("graphType",graphType);
+    }
+
+    $.mobile.changePage("surveyResults.html", { allowSamePageTransition : true, reloadPage: true } ); 
  }
 
   </script>
