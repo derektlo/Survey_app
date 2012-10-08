@@ -138,7 +138,10 @@ else if ($surveyType == 'Tempo') {
    
   while($obj = mysql_fetch_object($fetchTempoLog)) {
 
-      $dt = new DateTime($obj->Log_time);
+      $someDate = $obj->Log_time;
+      echo $someDate;
+
+      $dt = new DateTime($someDate);
       $dt->setTimezone(new DateTimeZone('EST'));
 
        $logResultsArray[] = $dt;
