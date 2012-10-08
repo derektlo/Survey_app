@@ -271,6 +271,7 @@ $('#surveyResultsPage').on('pageinit', function() {
                   }
                   else if (mute === 'WillUnmute') {
                     // do nothing because sound is muted
+                    showSimpleDialogue('Alert!','Your alert percentage has been reached, however you have muted your sound so the alert is not audible.');
                   }
             }
 
@@ -423,6 +424,22 @@ $('#surveyResultsPage').on('pageinit', function() {
 
      });
     });
+
+    function showSimpleDialogue(alertHeader, alertMessage) {
+    
+    $('<div>').simpledialog2({
+                    mode: 'button',
+                    headerText: alertHeader,
+                    buttonPrompt: alertMessage,
+                    headerClose: false,
+                    buttons : {
+                      'OK': {
+                        click: function () { 
+                        }
+                      }
+                    }
+             })
+ }
 
   </script>
 </div> <!-- page1 -->
