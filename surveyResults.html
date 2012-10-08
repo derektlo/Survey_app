@@ -232,14 +232,14 @@ $('#surveyResultsPage').on('pageinit', function() {
 
             $('#alertParagraph').append(tooFastPercentWholeNumber + '%');
 
-            var data = [['', restOfClassPercent],['Too Fast', hitsPercent]];
+            var data = [['Other Students', restOfClassPercent],['Too Fast', hitsPercent]];
             var plot2 = jQuery.jqplot ('chart1', [data], 
               {
                 seriesDefaults: {
                   renderer: jQuery.jqplot.PieRenderer, 
                   rendererOptions: {
                     // Turn off filling of slices.
-                    fill: false,
+                    fill: true,
                     showDataLabels: true, 
                     // Add a margin to seperate the slices.
                     sliceMargin: 4, 
