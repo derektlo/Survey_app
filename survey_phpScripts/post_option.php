@@ -25,8 +25,14 @@
    $query;
 
    if ($surveyType == 'Tempo') {
-      $query = mysql_query("UPDATE Survey_Tempo SET Hits = Hits+1 
+      $updateTempo = mysql_query("UPDATE Survey_Tempo SET Hits = Hits+1 
       WHERE Survey_authKey = '$surveyAuthKey'");
+      if ($updateTempo) {
+         $query = mysql_query("INSERT INTO Track_Results (Survey_authkey) VALUES ('$surveyAuthKey')");
+      }
+      else {
+         echo 'Error';
+      }
    }
    else if ($surveyType != 'Specific') {
    //Execute the query
