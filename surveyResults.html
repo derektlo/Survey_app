@@ -350,6 +350,8 @@ $('#surveyResultsPage').on('pageinit', function() {
 
           $('#graphPickerDiv').append('<a href="javascript:void(reloadWithGraph(\'Pie\'));" data-role="button">Pie</a><a href="javascript:void(reloadWithGraph(\'Log\'));" data-role="button">Log</a>');
 
+          $('#graphPickerDiv').trigger('create');
+
           } /* ******** Numbers/Letters/Custom Survey ******** */
             else if (surveyType !== 'Specific') {
 
