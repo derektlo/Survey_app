@@ -232,7 +232,7 @@ $('#surveyResultsPage').on('pageinit', function() {
 
             $('#alertParagraph').append(tooFastPercentWholeNumber + '%');
 
-            var data = [['Other Students', restOfClassPercent],['Too Fast', hitsPercent]];
+            var data = [['Other Students ('+(classSize-hits)+')', restOfClassPercent],['Too Fast ('+hits+')', hitsPercent]];
             var plot2 = jQuery.jqplot ('chart1', [data], 
               {
                 seriesDefaults: {
