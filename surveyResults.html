@@ -83,7 +83,7 @@
       </ul>
       </div>
 
-      <audio id="alertNoise" hidden="true" src="alarmsound.wav" controls preload="auto" autobuffer></audio>
+      <audio id="alertNoise" hidden="true" src="alarmsound.wav" preload="auto" autobuffer></audio>
 
       <div id="muteDiv">
       </div>
@@ -117,7 +117,7 @@
   <script>
 
   window.mute = function() {
-    console.log("mute function called");
+
     var mute;
 
     if (Modernizr.sessionstorage){
@@ -261,7 +261,20 @@ $('#surveyResultsPage').on('pageinit', function() {
 
             if ((hits/classSize) >= tooFastPercentDecimal) {
               // play sound
-              document.getElementById('alertNoise').play()
+                  var mute;
+
+                  if (Modernizr.sessionstorage){
+                      mute = sessionStorage.muteVar;
+                  }
+                  else {
+                      mute = $.cookie("muteVar");
+                  }
+              if (mute === 'mute') {
+                document.getElementById('alertNoise').play()
+              }
+              else if (mute === 'unmute') {
+                // sound is currently muted
+              }
             }
 
             // set up the mute button
