@@ -222,11 +222,14 @@ $('#surveyResultsPage').on('pageinit', function() {
           if (surveyType === 'Tempo') {
             
             console.log("tempo results: ",json);
-            var hits = json.Results[0].Hits;
-            var classSize = json.Results[0].Class_size;
+            var alertResults = json.Results[0];
+            var logResults = json.Results[1];
+
+            var hits = alertResults.Hits;
+            var classSize = alertResults.Class_size;
             var hitsPercent = (hits/classSize) * 100;
-            var tooFastPercentDecimal = (json.Results[0].Percent) / 100;
-            var tooFastPercentWholeNumber = json.Results[0].Percent;
+            var tooFastPercentDecimal = (alertResults.Percent) / 100;
+            var tooFastPercentWholeNumber = alertResults.Percent;
 
 
             var restOfClassPercent = 100 - hitsPercent;
