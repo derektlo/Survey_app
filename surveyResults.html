@@ -269,13 +269,15 @@ $('#surveyResultsPage').on('pageinit', function() {
                   else {
                       mute = $.cookie("muteVar");
                   }
+
               if (mute === 'mute') {
                 document.getElementById('alertNoise').play()
-                showSimpleDialogue('Warning!','Your alert percentage has been reached, and students would like you to slow down.');
+
+                //showSimpleDialogue('Warning!','Your alert percentage has been reached, and students would like you to slow down.');
               }
               else if (mute === 'unmute') {
                 // sound is currently muted
-                  showSimpleDialogue('Warning!','Your alert percentage has been reached, and students would like you to slow down.');
+                //  showSimpleDialogue('Warning!','Your alert percentage has been reached, and students would like you to slow down.');
               }
             }
 
