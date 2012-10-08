@@ -512,7 +512,7 @@ $('#surveyResultsPage').on('pageinit', function() {
       $.cookie("graphType",graphType);
     }
 
-    $.mobile.changePage("http://classtempo.org/surveyResults.html"); 
+    $.mobile.changePage("http://classtempo.org/surveyResults.html", { allowSamePageTransition : true, reloadPage: true } ); 
  }
 
   </script>
