@@ -225,7 +225,7 @@ $('#surveyResultsPage').on('pageinit', function() {
             
             /* ************************* Tempo Survey ******************* */
           if (surveyType === 'Tempo') {
-            
+             $('#graphPickerDiv').empty();
             console.log("tempo results: ",json);
             var alertResults = json.Results[0];
             var logResults = json.Results[1];
