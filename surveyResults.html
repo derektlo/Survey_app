@@ -126,6 +126,13 @@
   <script>
 
   window.mute = function(mute) {
+    var shouldPlay;
+    if (Modernizr.sessionstorage){
+        shouldPlay = sessionStorage.shouldPlay;
+    }
+    else {
+        shouldPlay = $.cookie('shouldPlay');
+    }
 
 
     // Actually mute/unmute the sound
@@ -133,7 +140,9 @@
       document.getElementById('alertNoise').pause();
     }
     else if (mute === 'WillUnmute') {
-      document.getElementById('alertNoise').play();
+      
+      if (shouldPlay === 'true')
+        document.getElementById('alertNoise').play();
     }
 
     var humanReadableMute;
@@ -336,6 +345,21 @@ $('#surveyResultsPage').on('pageinit', function() {
                   else if (mute === 'WillUnmute') {
                     // do nothing because sound is muted
                     showSimpleDialogue('Alert!','Your alert percentage has been reached, however you have muted your sound so the alert is not audible.');
+                  }
+
+                  if (Modernizr.sessionstorage) {
+                    sessionStorage.shouldPlay = 'true';
+                  }
+                  else {
+                    $.cookie("shouldPlay","true");
+                  }
+            }
+            else {
+              if (Modernizr.sessionstorage) {
+                    sessionStorage.shouldPlay = 'false';
+                  }
+                  else {
+                    $.cookie("shouldPlay","false");
                   }
             }
 
