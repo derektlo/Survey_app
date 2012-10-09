@@ -186,10 +186,11 @@
 
                 showSimpleDialogue("Whoops!","The email you entered already exists.");
             }
-            else if (data == 'User tag already exists.')
+            else if (data == 'User tag already exists.'){
                 showSimpleDialogue("Whoops!","The user tag you entered already exists.");
+              }
             else {
-                showSimpleDialogue("Whoops!","Our server is temporarily down. Please try again later.");
+                showSimpleDialogue("Whoops!","Our server is temporarily down. Please try again later. Sorry for the inconvenience!");
               }
         });        
         return false;      
