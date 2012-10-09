@@ -181,7 +181,7 @@ function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output =
       $m->addBCC('derek.lo@concordacademy.org');
       $m->setSubject('Welcome to Class Tempo!');
 
-      $m->setMessageFromString("Welcome to Class Tempo! \n \n It's Derek, here. To activate your account click the following link: http://www.classtempo.org/Survey_app/survey_phpScripts/activateAccount.php?email=" . $email . "&key=" . $activateHash . " \n If the link's broken, please paste it into your browser! \n If you need any additional support, contact me at derek@classtempo.org or support@classtempo.org");
+      $m->setMessageFromString("Welcome to Class Tempo! \n \n It's Derek, here. I would like to personally thank you for signing up for Class Tempo. I know you will find great use for the app in your teaching. \n \n To activate your account click the following link: http://www.classtempo.org/Survey_app/survey_phpScripts/activateAccount.php?email=" . $email . "&key=" . $activateHash . " \n If the link's broken, please paste it into your browser! \n \n If you need any additional support, contact me at derek@classtempo.org or support@classtempo.org");
       $ses->sendEmail($m);
 
 
