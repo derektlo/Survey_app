@@ -145,20 +145,20 @@ function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output =
 // if data is successfully inserted into database, displays message "Successful". 
    if($result){
 
-    $emailList = "derek.t.lo@gmail.com";
-    $emailSubject = "Welcome to Class Tempo!";
+    // $emailList = "derek.t.lo@gmail.com";
+    // $emailSubject = "Welcome to Class Tempo!";
 
-    $to = $email;
-    $subject .= "".$emailSubject."";
-    $headers .= "Bcc: ".$emailList."\r\n";
-    $headers .= "From: no-reply@classtempo.org\r\n" .
-     "X-Mailer: php";
-    $headers .= "MIME-Version: 1.0\r\n";
-    $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
-    $message = "<html><body>";
-    $message .= "Welcome to Class Tempo! \n Activate your account by clicking the following link: http://www.classtempo.org/Survey_app/survey_phpScripts/activateAccount.php?email=" . $email . "&key=" . $activateHash . " If the link's broken, please paste it into your browser!";
+    // $to = $email;
+    // $subject .= "".$emailSubject."";
+    // $headers .= "Bcc: ".$emailList."\r\n";
+    // $headers .= "From: no-reply@classtempo.org\r\n" .
+    //  "X-Mailer: php";
+    // $headers .= "MIME-Version: 1.0\r\n";
+    // $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+    // $message = "<html><body>";
+    // $message .= "Welcome to Class Tempo! \n Activate your account by clicking the following link: http://www.classtempo.org/Survey_app/survey_phpScripts/activateAccount.php?email=" . $email . "&key=" . $activateHash . " If the link's broken, please paste it into your browser!";
 
-    mail($to, $subject, $message, $headers);
+    // mail($to, $subject, $message, $headers);
 
     require_once('ses.php');
 
@@ -172,25 +172,15 @@ function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output =
     // $ses->setMessageFromString('This is the message body.');
 
     //    $ses->sendEmail($ses);
-function amazonSesEmail($to, $subject, $message)
-{
-    $amazonSes = new AmazonSES('AKIAJAN6BEV6IEK6YIPQ', 'qh8VTlQWM2dCJlim9RQAKYxKZzDYwgyze9SeMOhh');
- 
-    $response = $amazonSes->send_email('derek@classtempo.org',
-        array('ToAddresses' => array($to)),
-        array(
-            'Subject.Data' => $subject,
-            'Body.Text.Data' => $message,
-        )
-    );
-    if (!$response->isOK())
-    {
-        // handle error
-    }
-}
 
-amazonSesEmail('support@classtempo.org','Hello','Hello there!');
 
+      $ses = new SimpleEmailService('AKIAJAN6BEV6IEK6YIPQ', 'qh8VTlQWM2dCJlim9RQAKYxKZzDYwgyze9SeMOhh');
+      $m = new SimpleEmailServiceMessage();
+      $m->setFrom('derek@classtempo.org');
+      $m->addTo('derek.t.lo@gmail.com');
+      $m->setSubject('This is a Test');
+      $m->setMessageFromString('This is the message body.');
+      $ses->sendEmail($m);
 
 
       echo "Successful";
