@@ -161,9 +161,12 @@ function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output =
     mail($to, $subject, $message, $headers);
 
     require_once('ses.php');
-    $ses = new SimpleEmailService('AKIAJAN6BEV6IEK6YIPQ', 'qh8VTlQWM2dCJlim9RQAKYxKZzDYwgyze9SeMOhh');
 
-    $ses->addTo('derek.t.lo@gmail.com');
+
+    $ses = new SimpleEmailService('AKIAJAN6BEV6IEK6YIPQ', 'qh8VTlQWM2dCJlim9RQAKYxKZzDYwgyze9SeMOhh');
+      $ses->verify_email_address('derek@classtempo.org');
+
+    $ses->addTo('suport@classtempo.org');
     $ses->setFrom('derek@classtempo.org');
     $ses->setSubject('Hello, world!');
     $ses->setMessageFromString('This is the message body.');
