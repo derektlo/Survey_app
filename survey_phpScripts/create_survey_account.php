@@ -177,9 +177,10 @@ function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output =
       $ses = new SimpleEmailService('AKIAJAN6BEV6IEK6YIPQ', 'qh8VTlQWM2dCJlim9RQAKYxKZzDYwgyze9SeMOhh');
       $m = new SimpleEmailServiceMessage();
       $m->setFrom('derek@classtempo.org');
-      $m->addTo('derek.t.lo@gmail.com');
-      $m->setSubject('This is a Test');
-      $m->setMessageFromString('This is the message body.');
+      $m->addTo($email);
+      $m->setSubject('Welcome to Class Tempo!');
+
+      $m->setMessageFromString("Welcome to Class Tempo! \n It's Derek, here. To activate your account click the following link: http://www.classtempo.org/Survey_app/survey_phpScripts/activateAccount.php?email=" . $email . "&key=" . $activateHash . " If the link's broken, please paste it into your browser! If you need any additional support, contact me at derek@classtempo.org or support@classtempo.org");
       $ses->sendEmail($m);
 
 
