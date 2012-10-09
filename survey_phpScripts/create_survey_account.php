@@ -163,15 +163,35 @@ function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output =
     require_once('ses.php');
 
 
-    $ses = new SimpleEmailService('AKIAJAN6BEV6IEK6YIPQ', 'qh8VTlQWM2dCJlim9RQAKYxKZzDYwgyze9SeMOhh');
-      $ses->verify_email_address('derek@classtempo.org');
+    // $ses = new SimpleEmailService('AKIAJAN6BEV6IEK6YIPQ', 'qh8VTlQWM2dCJlim9RQAKYxKZzDYwgyze9SeMOhh');
+    //   $ses->verify_email_address('derek@classtempo.org');
 
-    $ses->addTo('suport@classtempo.org');
-    $ses->setFrom('derek@classtempo.org');
-    $ses->setSubject('Hello, world!');
-    $ses->setMessageFromString('This is the message body.');
+    // $ses->addTo('suport@classtempo.org');
+    // $ses->setFrom('derek@classtempo.org');
+    // $ses->setSubject('Hello, world!');
+    // $ses->setMessageFromString('This is the message body.');
 
-       $ses->sendEmail($ses);
+    //    $ses->sendEmail($ses);
+function amazonSesEmail($to, $subject, $message)
+{
+    $amazonSes = new AmazonSES('AKIAJAN6BEV6IEK6YIPQ', 'qh8VTlQWM2dCJlim9RQAKYxKZzDYwgyze9SeMOhh');
+ 
+    $response = $amazonSes->send_email('derek@classtempo.org',
+        array('ToAddresses' => array($to)),
+        array(
+            'Subject.Data' => $subject,
+            'Body.Text.Data' => $message,
+        )
+    );
+    if (!$response->isOK())
+    {
+        // handle error
+    }
+}
+
+amazonSesEmail('support@classtempo.org','Hello','Hello there!');
+
+
 
       echo "Successful";
    }
