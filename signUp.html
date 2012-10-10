@@ -166,7 +166,7 @@
         }      
 
         // Submit the form
-        $.post("/Survey_app/survey_phpScripts/create_survey_account.php?email=" + emailVar.val() + "&userTag=" + userTagVar.val() + "&school=" + schoolVar.val() + "&password=" + passwordVar.val() + "&content=" + contentVar.val(), signUpFormVar.serialize(), function(data){
+        $.post("/Survey_app/survey_phpScripts/create_survey_account.php?email=" + emailVar.val() + "&userTag=" + userTagVar.val() + "&school=" + schoolVar.val() + "&password=" + passwordVar.val(), signUpFormVar.serialize(), function(data){
           
    
             if (data === 'Successful'){
@@ -182,15 +182,15 @@
 
               $.mobile.changePage("verifyAccountMessage.html",{transition:"slide"});
             }
-            else if (data == 'Email already exists.') {
+            else if (data === 'Email already exists.') {
 
                 showSimpleDialogue("Whoops!","The email you entered already exists.");
             }
-            else if (data == 'User tag already exists.'){
+            else if (data === 'User tag already exists.'){
                 showSimpleDialogue("Whoops!","The user tag you entered already exists.");
               }
             else {
-                showSimpleDialogue("Whoops!","Our server is temporarily down. Please try again later. Sorry for the inconvenience!");
+                showSimpleDialogue("Whoops!","It appears that your internet service provider is blocking our server requests. Sorry for the inconvenience. We will have this fixed soon...");
               }
         });        
         return false;      
