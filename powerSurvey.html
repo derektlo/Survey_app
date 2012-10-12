@@ -195,7 +195,7 @@ function showSimpleDialogue(alertHeader, alertMessage) {
         /* ********* Append User Tag ********* */
           $('#userTag').append('<strong>' + currentUserTagVar + '-</strong>');
 
-
+    if (classes !== null) {
         /* ********* Append class options ********* */
       if (classes.length > 0) {
 
@@ -206,6 +206,7 @@ function showSimpleDialogue(alertHeader, alertMessage) {
         $('#classOptions').append('<option value="Independent Lecture">Independent Lecture</option>');
         $('#classOptions').append('<option value="Other">Other</option>');
       }
+    }
       else {
         $('#classOptions').append('<option value="Independent Lecture">Independent Lecture</option>');
         $('#classOptions').append('<option value="Other">Other</option>');
