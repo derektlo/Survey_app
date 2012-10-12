@@ -378,6 +378,7 @@ $('#surveyResultsPage').on('pageinit', function() {
           } /* ******** Numbers/Letters/Custom Survey ******** */
             else if (surveyType !== 'Specific') {
               $('#graphPickerDiv').empty();
+              $('#alertPercentDiv').empty();
               $.jqplot.config.enablePlugins = true;
 
               // Define local variables used to create graph
@@ -431,6 +432,7 @@ $('#surveyResultsPage').on('pageinit', function() {
           }
           else {  /* ************* Specific Response Survey ************* */
            $('#graphPickerDiv').empty();
+           $('#alertPercentDiv').empty();
             var matching = json.Results[0];
 
             if (matching === 0) { // If this specific survey is matching

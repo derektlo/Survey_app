@@ -174,9 +174,7 @@
           showSimpleDialogue('Whoops!', 'Please enter a valid email and password.');
 
           return false;
-        }        
-    //    $.support.cors = true;
-    //  $.mobile.allowCrossDomainPages = true;
+        }
         // Submit the form
         $.getJSON("/Survey_app/survey_phpScripts/survey_login.php?email=" + emailVar.val() + "&password=" + passwordVar.val(), teacherFormVar.serialize(), function(data){
           
