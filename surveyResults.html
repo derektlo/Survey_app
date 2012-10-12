@@ -102,7 +102,6 @@
       </div>
 
       <div id="alertPercentDiv">
-        <label><strong>Alert Percentage <img src="./images/bullhorn.png" alt="bullhorn"/></strong></label><p id="alertParagraph"></p>
       </div>
 
       <div id="surveyDescription">
@@ -235,6 +234,7 @@ $('#surveyResultsPage').on('pageinit', function() {
             /* ************************* Tempo Survey ******************* */
           if (surveyType === 'Tempo') {
              $('#graphPickerDiv').empty();
+             $('#alertPercentDiv').append('<label><strong>Alert Percentage <img src="./images/bullhorn.png" alt="bullhorn"/></strong></label><p id="alertParagraph"></p>');
             console.log("tempo results: ",json);
             var alertResults = json.Results[0];
             var logResults = json.Results[1];
