@@ -5,11 +5,11 @@
   <title>Class Tempo: Verify Account</title>
 
   <!-- CSS -->
-  <link rel="stylesheet" href="../signup.css">
   <link rel="stylesheet" href="../teacher-theme/themes/Class-Tempo-Teacher.min.css" />
   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile.structure-1.1.1.min.css" />
  <!--  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" /> -->
   <link rel="stylesheet" type="text/css" href="../simpleDialog2/jquery.mobile.simpledialog.min.css" /> 
+  <link rel="stylesheet" href="../custom-v2.css">
 
   <!-- Modernizer -->
   <script type="text/javascript" src="../modernizr.custom.56582.js"></script>
@@ -36,7 +36,7 @@
 </head>
 <body>
   <!-- Page starts here -->
-<div data-role="page" data-theme="a" id="confirmationEmailPage" data-add-back-btn="false">
+<div data-role="page" id="confirmationEmailPage" data-add-back-btn="false">
 
 <style>
     #h2 {
@@ -45,10 +45,11 @@
 </style>
 
   <div data-role="header" id="hdrMain">
-    <h1>Class Tempo</h1>
+      <a href="javascript:history.go(-1)" data-direction="reverse" data-icon="false" rel="external" data-transition="slide" class="ui-btn-left">Back</a>
+    <h1 class="logo">Class Tempo</h1>
   </div>
 
-  <div data-role="content" id="verifyAccountContent">
+  <div data-role="content" data-theme="d" id="verifyAccountContent" class="v2">
 
       <h2>Confirmation Email Sent</h2>
       <p id="confirm"></p>

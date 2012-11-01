@@ -5,11 +5,11 @@
   <title>Class Tempo: Verify Account</title>
 
   <!-- CSS -->
-  <link rel="stylesheet" href="./signup.css">
   <link rel="stylesheet" href="./teacher-theme/themes/Class-Tempo-Teacher.min.css" />
   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile.structure-1.1.1.min.css" />
  <!--  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" /> -->
   <link rel="stylesheet" type="text/css" href="simpleDialog2/jquery.mobile.simpledialog.min.css" /> 
+  <link rel="stylesheet" href="./custom-v2.css">
 
   <!-- Modernizer -->
   <script type="text/javascript" src="./modernizr.custom.56582.js"></script>
@@ -36,25 +36,25 @@
 </head>
 <body>
   <!-- Page starts here -->
-<div data-role="page" data-theme="a" id="settingsPage" data-add-back-btn="true">
+<div data-role="page" id="settingsPage" data-add-back-btn="true">
 
 <style>
     #h2 {
       position:center;
     }
 </style>
+    <div data-role="header" id="hdrMain">
+      <a href="javascript:history.go(-1)" data-direction="reverse" data-icon="false" rel="external" data-transition="slide" class="ui-btn-left">Back</a>
+    <h1>Settings</h1>
+    </div>
 
 <div id="settingsContainer">
 
-  <div data-role="header" id="hdrMain">
-    <h1>Settings</h1>
-  </div>
-
-  <div data-role="content" id="settingsContent">
+  <div data-role="content" data-theme="c" id="settingsContent">
 
     <ul id="dashboardList" data-role="listview">
-        <li data-role="list-divider">Account Management</li>
-        <li><a href="/password/confirmPassword.html">Password Reset</a></li>
+        <h3 class="seperaterHead">Account Management</h3>
+        <li data-icon="mini-arrow"><a href="/password/confirmPassword.html">Password Reset</a></li>
         <!--<li><a href="changeUsertag.html">Change Usertag</a></li>
          <li><a href="changeEmail.html">Change Email Address (Username)</a></li> -->
       </ul>

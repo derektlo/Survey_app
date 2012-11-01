@@ -5,11 +5,11 @@
   <title>Class Tempo: Verify Account</title>
 
   <!-- CSS -->
-  <link rel="stylesheet" href="./signup.css">
   <link rel="stylesheet" href="./teacher-theme/themes/Class-Tempo-Teacher.min.css" />
   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile.structure-1.1.1.min.css" />
  <!--  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" /> -->
   <link rel="stylesheet" type="text/css" href="simpleDialog2/jquery.mobile.simpledialog.min.css" /> 
+  <link rel="stylesheet" href="./custom-v2.css">
 
   <!-- Modernizer -->
   <script type="text/javascript" src="./modernizr.custom.56582.js"></script>
@@ -36,7 +36,7 @@
 </head>
 <body>
   <!-- Page starts here -->
-<div data-role="page" data-theme="a" id="successfulSchoolEdit" data-add-back-btn="false">
+<div data-role="page" id="successfulSchoolEdit" data-add-back-btn="false" class="v2">
 
 <style>
     #h2 {
@@ -44,17 +44,17 @@
     }
 </style>
 
-  <div data-role="header" id="hdrMain">
-    <h1>Class Tempo</h1>
-  </div>
+    <div data-role="header" id="hdrMain">
+    <h1 class="logo">Class Tempo</h1>
+    </div>
 
-  <div data-role="content" id="verifyAccountContent">
+  <div data-role="content" data-theme="d" id="verifyAccountContent">
 
       <h2>Success!</h2>
       <p id="successParagraph"></p>
 
       <div id="okDiv" data-role="fieldcontain">    
-      <a id="okButton" name="okButton" data-role="button" data-inline="true" href="education.html">Ok</a>
+      <a id="okButton" name="okButton" data-role="button" href="education.html">Ok</a>
       </div>
 
   </div>

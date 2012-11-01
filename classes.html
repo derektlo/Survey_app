@@ -5,11 +5,11 @@
   <title>Class Tempo: My Classes</title>
 
   <!-- CSS -->
-  <link rel="stylesheet" href="./signup.css">
     <link rel="stylesheet" href="./teacher-theme/themes/Class-Tempo-Teacher.min.css" />
   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile.structure-1.1.1.min.css" />
 <!--   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" /> -->
   <link rel="stylesheet" type="text/css" href="simpleDialog2/jquery.mobile.simpledialog.min.css" /> 
+  <link rel="stylesheet" href="./custom-v2.css">
 
   <!-- Modernizer -->
   <script type="text/javascript" src="./modernizr.custom.56582.js"></script>
@@ -40,16 +40,16 @@
 
   <!-- Page starts here -->
 <!-- <div data-role="page" data-theme="c" id="surveyList"> -->
-<div data-role="page" data-theme="a" id="classPage" data-add-back-btn="true">
+<div data-role="page" id="classPage" data-add-back-btn="true">
 
-    <header data-role="header">
-     <a href="education.html" data-direction="reverse" rel="external" data-icon="back" data-transition="slide" class="ui-btn-left">Back</a>
+    <div data-role="header" id="hdrMain">
+      <a href="javascript:history.go(-1)" data-direction="reverse" data-icon="false" rel="external" data-transition="slide" class="ui-btn-left">Back</a>
     <h1>My Classes</h1>
-    </header>
+    </div>
 
-      <div data-role="content" id="classContent">
+      <div data-role="content" data-theme="c" id="classContent" class="v2" >
 
-       <ul id="classList" data-role="listview">
+       <ul id="classList" data-role="listview" data-split-theme="z">
       </ul>
 
   </div>  
@@ -104,12 +104,12 @@
         console.log("classes: ",classes);
 
         $('#classList').empty();
-        $('#classList').append('<li data-role="list-divider">Manage your Classes</li>');
+        $('#classList').append('<li><h3>Manage your Classes</h3></li>');
 
 
         for(var i = 0; i < classes.length; i++) {
 
-          $('#classList').append('<li class="ui-btn ui-btn-icon-right"><a href="javascript:void(goToClass(\'' + classes[i].Full_class_name + '\', \'' + classes[i].School + '\', \'' + classes[i].Class_size + '\'));">' + classes[i].Full_class_name + ' (' + classes[i].School + ')</a><a href="#" onclick="deleteClass(\'' + classes[i].Full_class_name + '\')" data-icon="delete" class="ui-li-link-alt ui-btn "></a></li>');
+          $('#classList').append('<li><a href="javascript:void(goToClass(\'' + classes[i].Full_class_name + '\', \'' + classes[i].School + '\', \'' + classes[i].Class_size + '\'));">' + classes[i].Full_class_name + ' (' + classes[i].School + ')</a><a href="#" onclick="deleteClass(\'' + classes[i].Full_class_name + '\')" data-icon="delete" class="deleteLi"></a></li>');
         }
 
         $('ul#classList').listview('refresh');

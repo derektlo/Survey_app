@@ -5,11 +5,11 @@
   <title>Class Tempo: Verify Account</title>
 
   <!-- CSS -->
-  <link rel="stylesheet" href="./signup.css">
   <link rel="stylesheet" href="./teacher-theme/themes/Class-Tempo-Teacher.min.css" />
   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile.structure-1.1.1.min.css" />
  <!--  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" /> -->
   <link rel="stylesheet" type="text/css" href="simpleDialog2/jquery.mobile.simpledialog.min.css" /> 
+  <link rel="stylesheet" href="./custom-v2.css">
 
   <!-- Modernizer -->
   <script type="text/javascript" src="./modernizr.custom.56582.js"></script>
@@ -36,7 +36,7 @@
 </head>
 <body>
   <!-- Page starts here -->
-<div data-role="page" data-theme="a" id="verifyAccountPage" data-add-back-btn="false">
+<div data-role="page" id="verifyAccountPage" data-add-back-btn="false">
 
 <style>
     #h2 {
@@ -44,19 +44,18 @@
     }
 </style>
 
-  <div data-role="header" id="hdrMain">
-    <h1>Class Tempo</h1>
-  </div>
+    <div data-role="header" id="hdrMain">
+    <h1 class="logo">Class Tempo</h1>
+    </div>
 
-  <div data-role="content" id="verifyAccountContent">
+  <div data-role="content" data-theme="d" id="verifyAccountContent" class="v2">
 
       <h2>Verify Account</h2>
       <p>Welcome. Thanks for signing up with Class Tempo! Please check your email to verify your Class Tempo Account, and then begin creating surveys to better your classroom environment.</p>
 
       <div id="loginDiv" data-role="fieldcontain">    
-      <a id="createSurveyButton" name="createSurveyButton" data-role="button" data-inline="true" href="teacher.html">Login</a>
+      <a id="createSurveyButton" name="createSurveyButton" data-role="button" data-inline="false" href="teacher.html">Login</a>
       </div>
-
   </div>
 
 <script>

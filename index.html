@@ -24,11 +24,11 @@
       }
   </style>
   <!-- CSS -->
-  <link rel="stylesheet" href="./signup.css">
   <link rel="stylesheet" href="./teacher-theme/themes/Class-Tempo-Teacher.min.css" />
   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile.structure-1.1.1.min.css" />
  <!--  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" /> -->
   <link rel="stylesheet" type="text/css" href="simpleDialog2/jquery.mobile.simpledialog.min.css" /> 
+  <link rel="stylesheet" href="./custom-v2.css">
 
   <!-- Modernizer -->
   <script type="text/javascript" src="./modernizr.custom.56582.js"></script>
@@ -57,25 +57,30 @@
 <body> 
 
 <!-- Page starts here -->
-<div data-role="page" data-theme="a" id="surveyHome">
+<div data-role="page" id="surveyHome">
 
-  <div data-role="header" id="hdrMain" name="hdrMain" data-nobackbtn="true">
-    <h1>Class Tempo</h1>
+
+
+<div data-role="content" id="contentMain" name="contentMain">
+
+  <div id="appLogo"></div>
+    <div class="welcomeNotice">
+      <h1>Welcome!</h1>
+      <p>Are you a teacher or student?</p>
+    </div>
+
+<div data-role="content"  data-theme="d" style="margin: auto !important">
+ <div id="TeacherOrStudent" data-role="controlgroup" data-type="horizontal" style="text-align: center;">
+      <a href="teacher.html" class="leftBtn" data-transition="slideup" data-direction="reverse" data-role="button">Teacher</a>
+      <a class="orBtnBg" data-transition="slideup" data-direction="reverse" data-role="button">or</a>
+      <a class="orBtn" data-transition="slideup" data-direction="reverse" data-role="button">or</a>
+      <a href="student.html" class="rightBtn" data-transition="slideup" data-direction="reverse" data-role="button" style="border-left: 0">Student</a>
   </div>
+</div>
 
-  <div data-role="content" id="contentMain" name="contentMain">
 
-  <div id="Greeting">
-      <p>Welcome! Are you a teacher or student?</p>
-  </div>
-
-  <div id="TeacherOrStudent" data-role="controlgroup" data-type="horizontal" style="text-align: center;">
-      <a href="teacher.html" data-transition="slideup" data-direction="reverse" data-role="button">Teacher</a>
-      <a href="student.html" data-transition="slideup" data-direction="reverse" data-role="button">Student</a>
-  </div>
-
-  <div id="learnMore">
-    <p>Create quick, simple surveys and receive real-time feedback. It's free! <a href="http://classtempo.org/about/">Learn more...</a></p>
+  <div class="footer">
+    <p>Create quick, simple surveys and <br> receive real-time feedback. It's free! <br> <a href="http://classtempo.org/about/">Learn more...</a></p>
   </div> 
 </div>
   

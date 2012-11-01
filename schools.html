@@ -5,11 +5,11 @@
   <title>Class Tempo: My Classes</title>
 
   <!-- CSS -->
-  <link rel="stylesheet" href="./signup.css">
     <link rel="stylesheet" href="./teacher-theme/themes/Class-Tempo-Teacher.min.css" />
   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile.structure-1.1.1.min.css" />
 <!--   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" /> -->
   <link rel="stylesheet" type="text/css" href="simpleDialog2/jquery.mobile.simpledialog.min.css" /> 
+  <link rel="stylesheet" href="./custom-v2.css">
 
   <!-- Modernizer -->
   <script type="text/javascript" src="./modernizr.custom.56582.js"></script>
@@ -39,14 +39,15 @@
 <body>
 
   <!-- Page starts here -->
-<div data-role="page" data-theme="a" id="schoolsPage" data-add-back-btn="true">
+<div data-role="page" id="schoolsPage" data-add-back-btn="true">
 
-    <header data-role="header">
-     <a href="education.html" data-direction="reverse" rel="external" data-icon="back" data-transition="slide" class="ui-btn-left">Back</a>
+    <div data-role="header" id="hdrMain">
+      <a href="javascript:history.go(-1)" data-direction="reverse" data-icon="false" rel="external" data-transition="slide" class="ui-btn-left">Back</a>
     <h1>My Schools</h1>
-    </header>
+    </div>
 
-      <div data-role="content" id="schoolsContent">
+
+      <div data-role="content" data-theme="d" id="schoolsContent">
 
        <ul id="schoolsList" data-role="listview">
       </ul>

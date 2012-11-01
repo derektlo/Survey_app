@@ -5,11 +5,11 @@
   <title>Class Tempo: Matching?</title>
 
   <!-- CSS -->
-  <link rel="stylesheet" href="./signup.css">
   <link rel="stylesheet" href="./teacher-theme/themes/Class-Tempo-Teacher.min.css" />
   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile.structure-1.1.1.min.css" />
  <!--  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" /> -->
   <link rel="stylesheet" type="text/css" href="simpleDialog2/jquery.mobile.simpledialog.min.css" /> 
+  <link rel="stylesheet" href="./custom-v2.css">
 
   <!-- Modernizer -->
   <script type="text/javascript" src="./modernizr.custom.56582.js"></script>
@@ -36,7 +36,7 @@
 </head>
 <body>
   <!-- Page starts here -->
-<div data-role="page" data-theme="a" id="specificAnswerPage" data-add-back-btn="true">
+<div data-role="page" id="specificAnswerPage" data-add-back-btn="true">
 
 <style>
     #surveyTypeList li p {
@@ -110,13 +110,15 @@ $(document).ready(function() {
 
 <div id="specificAnswerContainer">
 
-  <div data-role="header" id="hdrMain">
-    <h1>Class Tempo</h1>
-  </div>
+    <div data-role="header" id="hdrMain">
+      <a href="javascript:history.go(-1)" data-direction="reverse" data-icon="false" rel="external" data-transition="slide" class="ui-btn-left">Back</a>
+    <h1 class="logo">Class Tempo</h1>
+    </div>
 
-  <div data-role="content" id="specificAnswerContent">
 
-      <h2>Are you expecting a specific answer?</h2>
+  <div data-role="content" data-theme="d" id="specificAnswerContent" class="v2">
+
+      <h2 class="mainHeading">Are you expecting a specific answer?</h2>
       <p>If you would like Class Tempo to match user answers against a desired response, press matching (Example: You might want matching if you are expecting a specific answer to a math problem). Otherwise, you can use this same type of survey to collect general feedback from users (Example: Allow them to ask questions privately).</p>
 
   <div id="yesOrNo" data-role="controlgroup" data-type="horizontal" style="text-align: center;">

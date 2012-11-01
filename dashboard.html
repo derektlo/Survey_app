@@ -5,11 +5,11 @@
   <title>Class Tempo</title>
 
   <!-- CSS -->
-  <link rel="stylesheet" href="./signup.css">
     <link rel="stylesheet" href="./teacher-theme/themes/Class-Tempo-Teacher.min.css" />
   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile.structure-1.1.1.min.css" />
 <!--   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" /> -->
   <link rel="stylesheet" type="text/css" href="simpleDialog2/jquery.mobile.simpledialog.min.css" /> 
+  <link rel="stylesheet" href="./custom-v2.css">
 
   <!-- Modernizer -->
   <script type="text/javascript" src="./modernizr.custom.56582.js"></script>
@@ -41,26 +41,26 @@
 <body>
 
   <!-- Page starts here -->
-<!-- <div data-role="page" data-theme="c" id="surveyList"> -->
-<div data-role="page" data-theme="a" id="dashboardPage">
+<div data-role="page" id="dashboardPage">
 
 
-    <header data-role="header">
+    <div data-role="header" id="hdrMain">
     <a href="teacher.html" data-direction="reverse" rel="external" data-icon="" data-transition="slide" class="ui-btn-right">Logout</a>
     <h1>Dashboard</h1>
+    </div>
 
-  </header>
+ <div data-role="content"  data-theme="c">
 
       <ul id="dashboardList" data-role="listview">
-        <li data-role="list-divider">Tools</li>
-        <li><a href="surveyType.html">Create Survey</a></li>
-        <li><a href="mySurveys.html">Survey Results</a></li>
-        <li><a href="education.html">Classes &#38; School</a></li>
-        <li><a href="settings.html">Settings</a></li>
-        <li><a href="help.html">Help</a></li>
+        <h3 class="seperaterHead">Tools</h3>
+        <li data-icon="mini-arrow"><a href="surveyType.html">Create Survey</a></li>
+        <li data-icon="mini-arrow"><a href="mySurveys.html">Survey Results</a></li>
+        <li data-icon="mini-arrow"><a href="education.html">Classes &#38; School</a></li>
+        <li data-icon="mini-arrow"><a href="settings.html">Settings</a></li>
+        <li data-icon="mini-arrow"><a href="help.html">Help</a></li>
       </ul>
-
-<footer data-role="footer" id="footer"></footer>
+</div>
+<footer data-role="footer"id="footer"></footer>
 
 
 <script>
@@ -102,7 +102,7 @@
   var year = currentTime.getFullYear()
   var fullDate = month + "-" + day + "-" + year;
 
-  $('#footer').append('<p>  Today: ' + fullDate + '</p>');
+  //$('#footer').append('<p>  Today: ' + fullDate + '</p>');
 });
 
 function logMeOut(){

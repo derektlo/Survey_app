@@ -1,0 +1,189 @@
+<html>
+<body>
+<div id="wrapper">
+
+<head>
+	<title>Class Tempo: About</title>
+</head>
+<link rel="stylesheet" href="styleAll.css" type="text/css" />
+<header>
+
+<style>
+#appTag {
+	text-decoration: none;
+	color:#363942;
+	font-weight: bold;
+}
+#appTag a:hover {
+	color:#80CCE9;
+}
+#classtempoPic {
+	padding:10px;
+}
+
+p {
+	padding:10px;
+}
+/* --- Container configuration ---------------------------------------------------------- */
+.viewport {
+    position: relative;
+    padding:10px;
+}
+
+.no-margin {
+    margin-right: 0;
+}
+
+/* --- Link configuration that contains the image and label ----------------------------- */
+.viewport a {
+    display: block;
+    position: relative;
+}
+
+.viewport a img {
+    position: relative;
+
+    -webkit-border-radius:15px;
+    -moz-border-radius:15px;
+     border-radius:15px;
+}
+
+/* --- Label configuration -------------------------------------------------------------- */
+.viewport a span {
+    display: none;
+    font-size: 20px;
+    font-weight: bold;
+    height: 100%;
+    position: absolute;
+    text-align: center;
+    text-decoration: none;
+    width: 100%;
+    z-index: 100;
+
+    -webkit-border-radius:15px;
+    -moz-border-radius:15px;
+     border-radius:15px;
+}
+    .viewport a span em {
+        display: block;
+        font-size: 12px;
+        font-weight: normal;
+    }
+
+/* --- Dark hover background ------------------------------------------------------------ */
+.dark-background {
+    background-color: rgba(15, 15, 15, 0.6);
+    color: #fff;
+    text-shadow: #000 0px 0px 20px;
+}
+.dark-background em {
+        color: #ccc;
+}
+
+ #clearfooter {
+    margin-top:400px;
+    height:20px;
+ }
+ #MITSloan {
+    margin-left:10px;
+ }
+ #ConcordAcademy{
+    margin-left: 10px;
+ }
+
+</style>
+
+
+<div id="band">
+</div>
+
+<div id="navigation">
+<a href="http://classtempo.org/about">About</a>
+<a href="Blog.html">Blog</a>
+<a href="Contact.html">Contact</a>
+</div>
+</header>
+
+<br style="clear:both" />
+<div id="clearHeader">
+</div>
+
+<div id="container">
+<div id="content">
+
+<h1><span id="curly">{</span> About <span id="curly">}</span></h1>
+
+ <div class="wrap">
+<!-- <a href="http://www.classtempo.org" target="_blank"><img id="classtempoPic" src="./images/classtempoteacher.png" alt="Class Tempo Logos" align="left" style="border:none"/></a> --> 
+
+<div class="viewport" style="float:left;">
+    <a href="http://classtempo.org" target="_blank">
+        <span class="dark-background">Class Tempo</span>
+        <img src="./images/classtempoteacher.png" alt="Class Tempo" style="border:none"/>
+    </a>
+</div>
+
+
+<h2>What is Class Tempo?</h2>
+<p>
+<a href="http://classtempo.org" id="appTag" style="color: #363942" onmouseover="this.style.color='#80CCE9'" onmouseout="this.style.color='#363942'">Class Tempo</a> is a web-based mobile app designed to innovate the classroom. Teachers have been teaching in a similar way for generations, even though techonology has progressed immensly. We need to bring technology into the classroom, and not just fancy projectors or smart-lights. Technology needs to better the education of students. Class Tempo does just that.</p> <br><br>
+
+<h3>Who's using Class Tempo?</h3>
+<p>Class Tempo is being used by professors at the MIT Sloan School of Management, and has had great success.</p>
+
+<p>The head computer studies teacher at the Concord Academy High School is also using Class Tempo for his lectures.</p>
+
+
+</div>
+</div>
+
+<div id="clearfooter">
+</div>
+
+<div id="footer">
+
+	<div id="blogFooter">
+		<ul id="facebookTwitter">
+			<li><a href="https://www.facebook.com/ClassTempo">[ Facebook ]</a></li>
+			<li><a href="https://www.facebook.com/ClassTempo">[ Twitter ]</a></li>
+		</ul>
+	</div>
+
+	<div id="footerNav">
+        <a href="http://classtempo.org/about">About</a>
+		<a href="Blog.html">Blog</a>
+		<a href="Contact.html">Contact</a>
+
+	<div id="copyright">Copyright 2012 Class Tempo</div>
+	</div>
+</div>
+
+
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+
+<script>
+$(document).ready(function() {
+	var height;
+    $('.viewport').mouseenter(function(e) {
+
+    	height = $(this).height();
+    	width = $(this).width();
+
+    	console.log("height after: ",height);
+
+        $(this).children('a').children('img').animate({ height: height, left: '0', top: '0', width: width}, 100);
+        $(this).children('a').children('span').fadeIn(200);
+    }).mouseleave(function(e) {
+        $(this).children('a').children('img').animate({ height: height, left: '0', top: '0', width: width}, 100);
+        $(this).children('a').children('span').fadeOut(200);
+    });
+});
+</script>
+</div>
+
+
+
+
+
+</body>
+</html>

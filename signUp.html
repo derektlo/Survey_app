@@ -5,8 +5,8 @@
   <title>Class Tempo: Sign Up</title> 
 
   <!-- CSS -->
-  <link rel="stylesheet" href="./signup.css">
   <link rel="stylesheet" href="./teacher-theme/themes/Class-Tempo-Teacher.min.css" />
+  <link rel="stylesheet" href="./custom-v2.css">
   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile.structure-1.1.1.min.css" />
  <!--  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" /> -->
   <link rel="stylesheet" type="text/css" href="simpleDialog2/jquery.mobile.simpledialog.min.css" /> 
@@ -50,29 +50,31 @@
 <body> 
 
 <!-- Page starts here -->
-<div data-role="page" data-theme="a" id="signUp" data-add-back-btn="true">
+<div data-role="page" id="signUp" data-add-back-btn="true">
 
 <style>
   #contentDiv{visibility:hidden;}
 </style>
 
   <div data-role="header" id="hdrMain" name="hdrMain">
-    <h1>Class Tempo</h1>
+      <a href="index.html" data-direction="reverse" data-icon="false" rel="external" data-transition="slide" class="ui-btn-left">home</a>
+    <h1 class="logo">Class Tempo</h1>
   </div>
 
-    <div data-role="navbar" id="navbar">
+
+    <div data-role="navbar" id="navar">
       <ul>
-        <li><a href="teacher.html" rel="external" data-icon="" data-transition="fade">Sign-In</a></li>
-        <li><a href="" data-icon="" data-transition="fade" class="ui-btn-active ui-state-persist">Sign-Up</a></li>
+        <li><a href="teacher.html" rel="external" data-icon="" data-transition="fade"><div style="font-size: 16px;margin-top:-17px">Sign-In</div></a></li>
+        <li><a href="" data-icon="" data-transition="fade" class="active"><div style="font-size: 16px;margin-top:-17px">Sign-Up</div></a></li>
       </ul>
     </div>
 
 
-  <div data-role="content" id="contentMain" name="contentMain"> 
+  <div data-role="content" data-theme="d" id="contentMain" name="contentMain"> 
 
-  <form id="signUpForm">
+  <form id="signUpForm" class="v2">
   
-  <h2>Join for Free! It's quick and simple...</h2>
+  <h2>Join for Free! <span>It's quick and simple.</span></h2>
 
   <div id="emailDiv" data-role="fieldcontain">
     <label for="email">Email*</label>   
@@ -80,7 +82,7 @@
   </div>
 
   <div id="surveyTagDiv" data-role="fieldcontain">
-    <label for="userTag">Survey Tag* (Visible to Users, should ID you in some way...)</label> 
+    <label for="userTag">Survey Tag* <span>(Visible to Users, should ID you in some way...)</span></label> 
     <input id="userTag" name="userTag_r" type="text" />
   </div>
 
@@ -105,7 +107,7 @@
   </div>
 
     <div id="signUpDiv" data-role="fieldcontain">    
-     <input type="submit" value="Sign Up" data-inline="true"/>
+     <input type="submit" value="Sign Up"/>
     </div>
     </form>
   </div><!-- contentMain -->
@@ -182,15 +184,14 @@
 
               $.mobile.changePage("verifyAccountMessage.html",{transition:"slide"});
             }
-            else if (data === 'Email already exists.') {
+            else if (data == 'Email already exists.') {
 
                 showSimpleDialogue("Whoops!","The email you entered already exists.");
             }
-            else if (data === 'User tag already exists.'){
+            else if (data == 'User tag already exists.')
                 showSimpleDialogue("Whoops!","The user tag you entered already exists.");
-              }
             else {
-                showSimpleDialogue("Whoops!","Our server is temporarily down. Please try again later. Sorry for the inconvenience!");
+                showSimpleDialogue("Whoops!","Our server is temporarily down. Please try again later.");
               }
         });        
         return false;      

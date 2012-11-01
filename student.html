@@ -5,11 +5,11 @@
   <title>Class Tempo: Student</title> 
 
   <!-- CSS -->
-  <link rel="stylesheet" href="./signup.css">
   <link rel="stylesheet" href="./teacher-theme/themes/Class-Tempo-Teacher.min.css" />
   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile.structure-1.1.1.min.css" />
  <!--  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" /> -->
   <link rel="stylesheet" type="text/css" href="simpleDialog2/jquery.mobile.simpledialog.min.css" /> 
+  <link rel="stylesheet" href="./custom-v2.css">
 
   <!-- Modernizer -->
   <script type="text/javascript" src="./modernizr.custom.56582.js"></script>
@@ -33,7 +33,7 @@
   <script language="javascript" type="text/javascript" src="js/plugins/jqplot.pointLabels.min.js"></script>
   
 <!-- Page starts here -->
-<div data-role="page" data-theme="b" id="studentPage">
+<div data-role="page" id="studentPage">
   
   <script>   
 
@@ -70,13 +70,14 @@
 </head> 
 <body> 
 
-  <div data-role="header" id="hdrMain" name="hdrMain" data-nobackbtn="true">
-    <h1>Class Tempo</h1>
-  </div>
+    <div data-role="header" id="hdrMain" data-nobackbtn="true">
+      <a href="index.html" data-direction="reverse" data-icon="false" rel="external" data-transition="slide" class="ui-btn-left">home</a>
+    <h1 class="logo">Class Tempo</h1>
+    </div>
 
-  <div data-role="content" id="contentMain" name="contentMain"> 
+  <div data-role="content" data-theme="d" id="contentMain" name="contentMain"> 
 
-  <form id="studentSubmitForm">
+  <form id="studentSubmitForm" class="v2">
   
   <div id="surveyTokenDiv" data-role="fieldcontain">
     <label for="surveyToken">Survey Token</label>   
@@ -84,7 +85,7 @@
   </div>
 
     <div id="submitTokenDiv" data-role="fieldcontain">    
-     <input type="submit" value="Submit" data-inline="true"/>
+     <input type="submit" value="Submit"/>
     </div>
     </form>
   </div> <!-- contentMain -->

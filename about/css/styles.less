@@ -1,0 +1,307 @@
+/* LESS Helper */
+@import "elements.less";
+
+/* Variables */
+@lightBlue: #30486d;
+@darkBlue: #192e4d;
+@lightGrey: #737373;
+@darkGrey: #3d3d3d;
+@lightRed: #dd4b3e;
+@darkRed: #b5382d;
+
+/* Fonts */
+@font-face {
+    font-family: 'helveticaneuelt_std_ultltRg';
+    src: url('fonts/helveticaneueltstd-ultlt-webfont.eot');
+    src: url('fonts/helveticaneueltstd-ultlt-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/helveticaneueltstd-ultlt-webfont.woff') format('woff'),
+         url('fonts/helveticaneueltstd-ultlt-webfont.ttf') format('truetype'),
+         url('fonts/helveticaneueltstd-ultlt-webfont.svg#helveticaneuelt_std_ultltRg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'helveticaneuelt_std_ltregular';
+    src: url('fonts/helveticaneueltstd-lt-webfont.eot');
+    src: url('fonts/helveticaneueltstd-lt-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/helveticaneueltstd-lt-webfont.woff') format('woff'),
+         url('fonts/helveticaneueltstd-lt-webfont.ttf') format('truetype'),
+         url('fonts/helveticaneueltstd-lt-webfont.svg#helveticaneuelt_std_ltregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'helveticaneuelt_std_medRg';
+    src: url('fonts/helveticaneueltstd-md-webfont.eot');
+    src: url('fonts/helveticaneueltstd-md-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/helveticaneueltstd-md-webfont.woff') format('woff'),
+         url('fonts/helveticaneueltstd-md-webfont.ttf') format('truetype'),
+         url('fonts/helveticaneueltstd-md-webfont.svg#helveticaneuelt_std_medRg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'helveticaneuelt_std_meditalic';
+    src: url('fonts/helveticaneueltstd-mdit-webfont.eot');
+    src: url('fonts/helveticaneueltstd-mdit-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/helveticaneueltstd-mdit-webfont.woff') format('woff'),
+         url('fonts/helveticaneueltstd-mdit-webfont.ttf') format('truetype'),
+         url('fonts/helveticaneueltstd-mdit-webfont.svg#helveticaneuelt_std_meditalic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Base Grid */
+.left { text-align: left; }
+.right { text-align: right; }
+.center { text-align: center; }
+.justify { text-align: justify; }
+
+/* Global */
+body { font-family: 'helveticaneuelt_std_ltregular', "Helvetica Neue", "Helvetica", "Arial"; font-size: 16px; color: @lightGrey; }
+a { color: @lightBlue; .transition(0.3s, linear);
+	&:visited { color: @lightBlue; }
+	&:hover { color: @darkBlue; text-decoration: none; }
+}
+
+h1, h2, h3, h4 { font-weight: normal; display: block; letter-spacing: -1px; font-family: 'helveticaneuelt_std_ltregular', "Helvetica Neue", "Helvetica", "Arial"; }
+
+h1 { font-size: 36px; }
+h2 { font-size: 26px; }
+h3 { font-size: 24px; }
+h4 { font-size: 20px; }
+
+/* Header */
+header { display: block; height: 16px; background: url('../images/site/fallback_header.jpg') top left repeat-x; }
+
+/* Content */
+.blue { color: @lightBlue; }
+.black { color: @darkGrey; }
+.bold { font-weight: bold; }
+
+.content { margin: 40px auto;
+	
+	.back { font-size: 13px; margin: 0; padding: 0; text-align: right; 
+		a:hover { color: #8CBB16; }	
+	}
+	
+	.front{ margin-top: 20px;
+		
+		.contact { display: block; margin: 30px 0 50px;
+			h1 { }
+		}
+		
+		ul.feedback { margin: 0 auto 140px; padding:0; display: block; width: 415px; 
+			
+			li { list-style-type: none; padding: 16px 0; border-top: 1px solid #cbcbcb;
+				
+				&:last-child { border-bottom: 1px solid #cbcbcb;  }
+				
+				a { color: @lightRed; font-weight: bold; font-size: 22px; font-family: 'helveticaneuelt_std_medRg', "Helvetica Neue", "Helvetica", "Arial"; letter-spacing: -1px;
+					&:hover { color: @darkRed; }
+				}
+			}
+		}
+	}
+	
+	.inner { width: 908px; margin: 0 auto;
+		
+		.span4 {
+			.container-fluid { padding: 0;  margin: 0 0 15px 10px; position: relative; top: -60px; }
+			
+			.users {
+				h2 { min-width: 300px; width: 300px; }
+				.globe { padding-top: 30px; }
+			}
+			
+			.note { font-size: 13px; color: @darkGrey; padding-right: 10px;
+				quote { display: block; background-color: #e1e1e1; padding: 15px 10px; .rounded(3px); margin-bottom: 10px; text-shadow: 1px 1px 0 #fff; line-height: 18px; 
+					span { display: none; 
+						&:first-child { display: block; }
+					}
+				}
+				.quote-user { padding-right: 15px; 
+					span { display: none; 
+						&:first-child { display: block; }
+					}
+				}
+			}
+		}
+		
+		.span8 { padding: 20px 0 0 20px;
+			
+			.list-wrapper { padding: 15px 0 0 20px; 
+
+				h1 { margin-bottom: 25px; }
+
+				.list { margin: 0; padding: 0; width: 90%;
+
+					li { list-style-type: none; background: url('../images/site/star.jpg') 0 16px no-repeat; padding-left: 15px; margin-bottom: 30px;
+						
+						h3 { color: @darkGrey; margin: 0 0 10px; line-height: 30px; }	
+						
+						img { margin-right: 5px; }
+						
+						.span3 { position: relative; top: -10px; }
+					}
+				}
+			}
+			
+		}
+		
+		p { line-height: 24px; }
+		
+	}
+	
+	.call { width: 700px; margin: 0 auto; display: block; 
+		
+		.span12 { padding: 0; font-size: 18px; font-weight: 200;
+			
+			h3 { margin-bottom: 20px; letter-spacing: 0; }
+			
+			.newusers { margin-bottom: 45px; font-family: 'helveticaneuelt_std_medRg', "Helvetica Neue", "Helvetica", "Arial"; letter-spacing: -1px; }
+			
+			.btn { border: 0; color: #fff;  text-shadow: -2px -2px 0px #7ea221; font-weight: bold; font-size: 24px; padding: 17px 70px 18px; border-bottom: 1px solid #6b9011; border-radius: 3px; .box-shadow(0 2px 9px rgba(0,0,0,0.33)); .transition(0.3s, linear);
+				&:hover { background: #ccc; }
+				&:active { .box-shadow(inset 0 0 40px rgba(0,0,0,0.33)); }
+				
+			}
+		}
+	}
+}
+
+
+/* Footer */
+footer { display: block; background: #30486d; height: 75px; min-height: 75px; 
+	.container-fluid { width: 900px; margin: 0 auto; display: block; padding-top: 25px; font-size: 12px; color: #fff; font-weight: 200;
+		a { color: #fff; padding: 0 7px; display: inline-block; vertical-align: middle;
+			&:first-child { padding-left: 0; }
+			&:hover { color:#8CBB16; }
+			&.facebook { width: 25px; height: 37px; background: url('../images/site/facebook.png') no-repeat; margin-right: 5px;
+				&:hover { background: url('../images/site/facebook_green.png') no-repeat;  }
+			}
+			&.twitter { width: 29px; height: 37px; background: url('../images/site/twitter.png') no-repeat; 
+				&:hover { background: url('../images/site/twitter_green.png') no-repeat;  }
+			}
+		}
+	}
+}
+
+/* Media Queries */
+@media only screen and (max-width: 980px) {
+	
+	.content {
+		.inner { width: 100%; padding: 0; }
+	}
+}
+
+@media only screen and (max-width: 979px) {
+	
+	.content {
+		.inner { 
+			.span4 {
+				h2 { font-size: 20px; }
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 940px) {
+	
+	body { padding: 0; margin: 0; }
+	
+	footer { width: 100%; margin: 0;
+		.container-fluid { width: 95%; padding-top: 15px; }
+	}
+}
+
+@media only screen and (max-width: 767px) {
+	
+	.content {
+		.inner { 
+			.span8 {
+				.list-wrapper { 
+					.span9 { display: inline-block; width: 70%; }
+					.span3 { display: inline-block; width: 20%; vertical-align:top; }
+				}
+			}
+		}
+	}
+	
+	footer { 
+		.span4, .span8 { text-align: center; 
+			img { height: 25px; }
+		}
+	}
+}
+
+
+@media only screen and (max-width: 680px) {
+	
+	.content {
+		.call { width: 90%; }
+		.inner { width: 90%; padding: 0 20px; 
+			.span8 { padding: 0; }
+		}
+	}
+}
+
+@media only screen and (max-width: 480px) {
+	
+	.content {
+		.front { padding: 0 20px;
+			ul.feedback { width: 100%; }
+		}
+		
+		.call { 
+			.span12 {
+				.btn { font-size: 16px; padding: 20px; }
+				h3, .newusers { line-height: 28px; }
+			}
+		}
+		
+	}
+}
+
+@media only screen and (max-width: 320px) {
+	
+	.content {
+		.front { 
+			.contact { 
+				h1 { font-size: 30px; }
+			}
+			ul.feedback { margin-bottom: 40px;
+				li {
+					a { font-size: 18px; }
+				}
+			}
+		}
+		
+		.call { 
+			.span12 {
+				.btn { font-size: 16px; padding: 20px; }
+			}
+		}
+		
+		.inner { width: 85%; padding: 0 20px; 
+			.span8 { padding: 0; 
+				.list-wrapper { padding: 0;
+					h1 { font-size: 26px; text-align: center; }
+					.list {
+						li {
+							h3 { font-size: 20px; }
+							.span9 { display: block; width: 100%; }
+							.span3 { display: none; }
+							p { font-size: 14px; }
+							img { margin-bottom: 10px; }
+						}
+					}
+				}
+			}
+		}
+		
+	}
+}

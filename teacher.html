@@ -7,11 +7,11 @@
   <title>Class Tempo: Login</title> 
 
   <!-- CSS -->
-  <link rel="stylesheet" href="./signup.css">
   <link rel="stylesheet" href="./teacher-theme/themes/Class-Tempo-Teacher.min.css" />
   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile.structure-1.1.1.min.css" />
  <!--  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" /> -->
   <link rel="stylesheet" type="text/css" href="simpleDialog2/jquery.mobile.simpledialog.min.css" /> 
+  <link rel="stylesheet" href="./custom-v2.css">
 
   <!-- Modernizer -->
   <script type="text/javascript" src="./modernizr.custom.56582.js"></script>
@@ -37,8 +37,9 @@
   <script type="text/javascript" src="../js/plugins/jqplot.donutRenderer.min.js"></script>
 
 <!-- Page starts here -->
-<div data-role="page" data-theme="a" id="teacherPage" data-add-back-btn="true">
-  
+
+<div data-role="page" id="teacherPage" data-add-back-btn="true" >
+
   <script>   
 
    // Global declarations - assignments made in $(document).ready() below
@@ -98,25 +99,24 @@
   })();
 
 </script>
-
 </head> 
 <body> 
 
   <div data-role="header" id="hdrMain" name="hdrMain">
-    <h1>Class Tempo</h1>
+      <a href="index.html" data-direction="reverse" data-icon="false" rel="external" data-transition="slide" class="ui-btn-left">home</a>
+    <h1 class="logo">Class Tempo</h1>
   </div>
 
       <div data-role="navbar" id="navar">
       <ul>
-        <li><a href="" data-icon="" data-transition="fade" class="ui-btn-active ui-state-persist">Sign-In</a></li>
-        <li><a href="signUp.html" rel="external" data-icon="" data-transition="fade">Sign-Up</a></li>
+        <li><a href="" data-icon="" data-transition="fade" class="active"><div style="font-size: 16px;margin-top:-17px">Sign-In</div></a></li>
+        <li><a href="signUp.html" rel="external" data-icon="" data-transition="fade"><div style="font-size: 16px;margin-top:-17px">Sign-Up</div></a></li>
       </ul>
     </div>
 
+  <div data-role="content" data-theme="d" id="contentMain" name="contentMain"> 
 
-  <div data-role="content" id="contentMain" name="contentMain"> 
-
-  <form id="teacherForm">
+  <form id="teacherForm" class="v2">
   
   <div id="emailDiv" data-role="fieldcontain">
     <label for="email">Email</label>   
@@ -129,10 +129,10 @@
   </div>
 
     <div id="signInDiv" data-role="fieldcontain">    
-     <input type="submit" value="Sign In" data-inline="true"/>
+     <input type="submit" class="greenSubmit" value="Sign In"/>
     </div>
 
-    <p><a href="/password/forgotPassword.html">Forgot your password?</a></p>
+    <p class="centerMe"><a style="color:#2f476c !important; text-shadow: none !important" href="/password/forgotPassword.html">Forgot your password?</a></p>
     </form>
   </div><!-- contentMain -->
   
@@ -174,7 +174,9 @@
           showSimpleDialogue('Whoops!', 'Please enter a valid email and password.');
 
           return false;
-        }
+        }        
+    //    $.support.cors = true;
+    //  $.mobile.allowCrossDomainPages = true;
         // Submit the form
         $.getJSON("/Survey_app/survey_phpScripts/survey_login.php?email=" + emailVar.val() + "&password=" + passwordVar.val(), teacherFormVar.serialize(), function(data){
           

@@ -4,10 +4,11 @@
   <title>Class Tempo</title> 
   <meta name="viewport" content="height=100%,width=device-width,initial-scale=1.0,maximum-scale=1.0, user-scalable=0" >
     <!-- CSS -->
-  <link rel="stylesheet" href="./signup.css">
-  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" />
+  <link rel="stylesheet" href="./teacher-theme/themes/Class-Tempo-Teacher.min.css" />
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile.structure-1.1.1.min.css" />
+ <!--  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" /> -->
   <link rel="stylesheet" type="text/css" href="simpleDialog2/jquery.mobile.simpledialog.min.css" /> 
-
+  <link rel="stylesheet" href="./custom-v2.css">
   <!-- Modernizer -->
   <script type="text/javascript" src="./modernizr.custom.56582.js"></script>
   <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
@@ -20,7 +21,7 @@
 <body> 
 
 <!-- Page starts here -->
-<div data-role="page" data-theme="a" id="surveyCreatorPage" data-add-back-btn="true"> 
+<div data-role="page"  id="surveyCreatorPage" data-add-back-btn="true"> 
 
   <script>   
    // Global declarations - assignments made in $(document).ready() below
@@ -48,20 +49,21 @@
 
   <div data-role="header" id="hdrMain">
     <a href="" onclick="logMeOut()" data-direction="reverse" rel="external" data-icon="" data-transition="slide" class="ui-btn-right">Logout</a>
-    <h1>Class Tempo</h1>
+      <a href="javascript:history.go(-1)" data-direction="reverse" data-icon="false" rel="external" data-transition="slide" class="ui-btn-left">Back</a>
+    <h1 class="logo">Class Tempo</h1>
   </div>
 
-<div data-role="content" id="surveyCreatorContent">
+<div data-role="content" data-theme="g" id="surveyCreatorContent" class="v2">
 
   <form id="surveyCreatorForm">
 
-  <div id="optionSliderDiv" data-role="fieldcontain">
-    <label for="optionSlider"><strong>How Many Options?</strong></label>
-    <input type="range" name="optionSlider" id="optionSlider" value="2" min="2" max="25" data-highlight="true" />
+  <div id="optionSliderDiv"  data-theme="h" data-role="fieldcontain">
+    <label for="optionSlider"><h3>How Many Options?</h3></label>
+    <input type="range" name="optionSlider" data-theme="h" class="sliderV2"  id="optionSlider" value="2" min="2" max="25" data-highlight="true" />
   </div>
-
+  <hr>
   <fieldset data-role="controlgroup">
-  <legend><strong>Survey Tag</strong></legend>
+  <legend><h3>Survey Tag</h3></legend>
       <input type="radio" name="surveyTagControl" id="Custom" value="Custom" checked="checked" />
       <label for="Custom">Custom</label>
       <input type="radio" name="surveyTagControl" id="Auto" value="Auto"  />
@@ -72,30 +74,34 @@
   <label id="userTag" for="customTagField"></label>
   <input type="text" name="customTagField" id="customTagField" value=""  />
   </div>
+  <hr>
 
   <!-- allow user to choose what class this survey is for -->
-  <label for="classOptions" class="select"><strong>Choose Class</strong></label>
+  <label for="classOptions" class="select"><h3>Choose Class</h3></label>
   <select name="classOptions" id="classOptions">
   </select>
+  <hr>
 
   <!-- Turn surveys on/off -->
   <fieldset data-role="controlgroup">
-  <legend><strong>On/Off</strong></legend>
+  <legend><h3>On/Off</h3></legend>
       <input type="radio" name="OnOff" id="On" value="On" checked="checked" />
       <label for="On">Survey On</label>
 
       <input type="radio" name="OnOff" id="Off" value="Off"  />
       <label for="Off">Survey Off</label>
   </fieldset>
+  <hr>
 
   <div data-role="fieldcontain">
-    <label for="SurveyDescription"><strong>Description:</strong></label>
-    <textarea name="SurveyDescription" id="SurveyDescription"></textarea>
+    <label for="SurveyDescription"><h3>Description</h3></label>
+    <textarea name="SurveyDescription" data-theme="d" style="border:1px solid #cdcdcd;" id="SurveyDescription"></textarea>
   </div>
 
     <div id="createSurveyButtonDiv">    
-    <a id="createSurveyButton" name="createSurveyButton" data-role="button" data-inline="true" data-ajax="false">Create Survey</a>
+    <a id="createSurveyButton" name="createSurveyButton" data-theme="d" data-role="button" data-inline="false" data-ajax="false">Create Survey</a>
     </div>
+  <hr>
 
     <!-- Fieldset for previewing surveys -->
     <fieldset data-role="controlgroup" id="surveyViewer">
@@ -141,7 +147,7 @@ function showSimpleDialogue(alertHeader, alertMessage) {
 
         $('#customTagEntryDiv').empty();
 
-         $('#customTagEntryDiv').append('<label id="userTag" for="customTagField">' + currentUserTagVar + '-</label><input type="text" name="customTagField" id="customTagField" value=""  />');
+         $('#customTagEntryDiv').append('<label id="userTag" for="customTagField">' + currentUserTagVar + '-</label><input data-class="d" type="text" name="customTagField" id="customTagField" value=""  />');
 
           $('#customTagEntryDiv').trigger('create');
           $("input[name='customTagField']").textinput();
@@ -242,12 +248,15 @@ function showSimpleDialogue(alertHeader, alertMessage) {
         $('#classOptions').append('<option value="Other">Other</option>');
       }
 
+if ((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i)) || (navigator.userAgent.match(/iPad/i))) {
+/* PLACE NEW CODE HERE */
+}else{
       /* ********* Set up Survey Viewer ********* */
         if (sessionStorage.surveyType === 'Numbers'){
-            $('#surveyViewer').append('<legend><strong>Survey Preview:</strong></legend><input type="radio" name="options" id="1" value="1" /><label for="1">1</label><input type="radio" name="options" id="2" value="2" /><label for="2">2</label>');
+            $('#surveyViewer').append('<legend><h3>Survey Preview</h3></legend><input type="radio" name="options" id="1" value="1" /><label for="1">1</label><input type="radio" name="options" id="2" value="2" /><label for="2">2</label>');
         }
         else if (sessionStorage.surveyType === 'Letters') {
-            $('#surveyViewer').append('<legend><strong>Survey Preview:</strong></legend><input type="radio" name="options" id="a" value="a" /><label for="a">a</label><input type="radio" name="options" id="b" value="b" /><label for="b" >b</label>');
+            $('#surveyViewer').append('<legend><h3>Survey Preview</h3></legend><input type="radio" name="options" id="a" value="a" /><label for="a">a</label><input type="radio" name="options" id="b" value="b" /><label for="b" >b</label>');
           }
         else if (sessionStorage.surveyType === 'Custom') {
 
@@ -262,6 +271,9 @@ function showSimpleDialogue(alertHeader, alertMessage) {
             $('ul#customOptionsList').append('<li><label for="custom' + (i+1) + '" class="ui-input-text">Option ' + (i+1) + ':</label><input type="text" name="custom' + (i+1) + '" id="custom' + (i+1) + '" value="" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset"></li>');
           }
         }
+
+} /* mobile device condition */
+
 });
 
  $('#surveyCreatorPage').live('pageinit', function() {
@@ -271,11 +283,16 @@ function showSimpleDialogue(alertHeader, alertMessage) {
     $("input[type='radio']").checkboxradio("refresh");
   });
 
- $('#optionSlider').live('change', function() {
+
+
+if ((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i)) || (navigator.userAgent.match(/iPad/i))) {
+/* PLACE NEW CODE HERE */
+}else{
+   $('#optionSlider').live('change', function() {
         sliderValue = $(this).slider();
 
         $('#surveyViewer').empty();
-        $('#surveyViewer').append('<legend><strong>Survey Preview:</strong></legend>');
+        $('#surveyViewer').append('<legend><h3>Survey Preview:</h3></legend>');
 
         if (sessionStorage.surveyType === 'Numbers')
         {
@@ -299,7 +316,7 @@ function showSimpleDialogue(alertHeader, alertMessage) {
     $('#surveyCreatorPage').trigger("create");
     $("input[type='radio']").checkboxradio("refresh");
 });
-   
+}
     
 $('#createSurveyButton').click(function() { 
 

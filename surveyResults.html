@@ -6,11 +6,11 @@
   <title>Class Tempo: Survey Results</title> 
   
     <!-- CSS -->
-  <link rel="stylesheet" href="./signup.css">
     <link rel="stylesheet" href="./teacher-theme/themes/Class-Tempo-Teacher.min.css" />
   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile.structure-1.1.1.min.css" />
 <!--   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" /> -->
   <link rel="stylesheet" type="text/css" href="simpleDialog2/jquery.mobile.simpledialog.min.css" /> 
+  <link rel="stylesheet" href="./custom-v2.css">
 
   <!-- Modernizr -->
   <script type="text/javascript" src="./modernizr.custom.56582.js"></script>
@@ -42,7 +42,7 @@
 <body> 
 
 <!-- Page starts here -->
-<div data-role="page" data-theme="a" id="surveyResultsPage" data-add-back-btn="true">
+<div data-role="page" id="surveyResultsPage" data-add-back-btn="true">
 
 <script>
 
@@ -65,14 +65,14 @@
 
 </style>
 
-  <div data-role="header" id="hdrMain" name="hdrMain">
-     <a href="mySurveys.html" data-direction="reverse" rel="external" data-icon="back" data-transition="slide" class="ui-btn-left">Back</a>
+  <div data-role="header" id="hdrMain" name="hdrMain" class="v2">
+     <a href="mySurveys.html" data-direction="reverse" rel="external" data-transition="slide" class="ui-btn-left">Back</a>
 
-    <h1>Class Tempo</h1>
-    <a href="surveyResults.html" rel="external" data-icon="refresh" class="ui-btn-right">refresh</a>
+    <h1 class="logo">Class Tempo</h1>
+    <a href="surveyResults.html" rel="external" class="ui-btn-right">refresh</a>
   </div>
 
-  <div data-role="content" id="surveyCreatorContent" name="surveyCreatorContent"> 
+  <div data-role="content" data-theme="d" id="surveyCreatorContent" class="v2" name="surveyCreatorContent"> 
       
       <div id="graphPickerDiv" data-role="controlgroup" data-type="horizontal" style="text-align: center;">
 <!--         <a href="javascript:void(reloadWithGraph('Pie'));" data-role="button">Pie</a>
@@ -98,24 +98,30 @@
       </div>
 
       <div id="classDiv">
-        <label><strong>Class:</strong></label><p id="classParagraph"></p>
+        <label><h3>Class</h3></label><p id="classParagraph"></p>
       </div>
+
+      <hr>
 
       <div id="alertPercentDiv">
+        <label><strong>Alert Percentage <img src="./images/bullhorn.png" alt="bullhorn"/></strong></label><p id="alertParagraph"></p>
       </div>
 
+      <hr>
       <div id="surveyDescription">
-        <label><strong>Description:</strong></label>
+        <label><h3>Description</h3></label>
         <p id="descriptionParagraph"></p>
       </div>
+      <hr>
 
-      <div id="onOffSection">
-      <label for="surveyOnOff" ><strong>On/off:</strong></label>
-      <select name="surveyOnOff" id="surveyOnOff" data-role="slider" data-theme="c" data-track-theme="a">
+      <label><h3>On/off</h3></label>
+      <div id="onOffSection" class="spaceUp">
+      <select name="surveyOnOff" id="surveyOnOff" data-role="slider" class="sliderV2"  data-theme="f">
         <option value="off">Off</option>
         <option value="on">On</option>
       </select>
     </div>
+      <hr>
 
   
   </div><!-- contentMain -->
@@ -195,7 +201,6 @@ function returnTicks(results){
 
 $('#surveyResultsPage').on('pageinit', function() {
 
-
   /* *************** Set Local Variable *************** */
            if (Modernizr.sessionstorage) {
                   surveyTag = sessionStorage.surveyTag;
@@ -234,7 +239,6 @@ $('#surveyResultsPage').on('pageinit', function() {
             /* ************************* Tempo Survey ******************* */
           if (surveyType === 'Tempo') {
              $('#graphPickerDiv').empty();
-             $('#alertPercentDiv').append('<label><strong>Alert Percentage <img src="./images/bullhorn.png" alt="bullhorn"/></strong></label><p id="alertParagraph"></p>');
             console.log("tempo results: ",json);
             var alertResults = json.Results[0];
             var logResults = json.Results[1];
@@ -279,7 +283,7 @@ $('#surveyResultsPage').on('pageinit', function() {
                     sliceMargin: 4, 
                     // stroke the slices with a little thicker line.
                     lineWidth: 5,
-                    seriesColors: $.merge([ "#55A9D3", "#EA2E49", "#EA2E49"], $.jqplot.config.defaultColors)
+                    seriesColors: $.merge([ "#dd4b3e", "#f1cf22", "#95c71a", "#30486d"], $.jqplot.config.defaultColors)
                   }
                 }, 
                 legend: { show:true, location: 'e' }
@@ -378,7 +382,6 @@ $('#surveyResultsPage').on('pageinit', function() {
           } /* ******** Numbers/Letters/Custom Survey ******** */
             else if (surveyType !== 'Specific') {
               $('#graphPickerDiv').empty();
-              $('#alertPercentDiv').empty();
               $.jqplot.config.enablePlugins = true;
 
               // Define local variables used to create graph
@@ -414,12 +417,17 @@ $('#surveyResultsPage').on('pageinit', function() {
                       animation: {speed: 1000} },
                       pointLabels: {show: true}
                   },
+                grid: {
+                    drawGridLines: true,        
+                    background: '#ffffff',  
+                }, 
                   series:[
                     {pointLabels:{
                                   show: true,
                                   labels:arrayOfPointLabels,
                                   ypadding: 12,
                                 }}],
+
                   axes: {
                       xaxis: {
                           renderer: $.jqplot.CategoryAxisRenderer,
@@ -427,12 +435,11 @@ $('#surveyResultsPage').on('pageinit', function() {
                       }
                   },
                   highlighter: { show: false },
-                  seriesColors: $.merge([ "#55A9D3", "#D4EDE2", "#EA2E49"], $.jqplot.config.defaultColors)
+                  seriesColors: $.merge([ "#dd4b3e", "#f1cf22", "#95c71a", "#30486d"], $.jqplot.config.defaultColors)
               });
           }
           else {  /* ************* Specific Response Survey ************* */
            $('#graphPickerDiv').empty();
-           $('#alertPercentDiv').empty();
             var matching = json.Results[0];
 
             if (matching === 0) { // If this specific survey is matching

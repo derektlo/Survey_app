@@ -5,11 +5,11 @@
   <title>Class Tempo: My Classes</title>
 
   <!-- CSS -->
-  <link rel="stylesheet" href="./signup.css">
     <link rel="stylesheet" href="./teacher-theme/themes/Class-Tempo-Teacher.min.css" />
   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile.structure-1.1.1.min.css" />
 <!--   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" /> -->
   <link rel="stylesheet" type="text/css" href="simpleDialog2/jquery.mobile.simpledialog.min.css" /> 
+  <link rel="stylesheet" href="./custom-v2.css">
 
   <!-- Modernizer -->
   <script type="text/javascript" src="./modernizr.custom.56582.js"></script>
@@ -40,25 +40,25 @@
 
   <!-- Page starts here -->
 <!-- <div data-role="page" data-theme="c" id="surveyList"> -->
-<div data-role="page" data-theme="a" id="myClassesPage" data-add-back-btn="true">
+<div data-role="page" id="myClassesPage" data-add-back-btn="true">
 
   <script>
       var email;
   </script>
 
 
-    <header data-role="header">
-      <a href="dashboard.html" data-direction="reverse" rel="external" data-icon="back" data-transition="slide" class="ui-btn-left">Back</a>
+    <div data-role="header" id="hdrMain">
+      <a href="javascript:history.go(-1)" data-direction="reverse" data-icon="false" rel="external" data-transition="slide" class="ui-btn-left">Back</a>
     <h1>Education</h1>
-    </header>
+    </div>
 
-      <div data-role="content" id="myClassesContent">
+      <div data-role="content" data-theme="c" id="myClassesContent">
 
        <ul id="classSchoolList" data-role="listview">
-        <li data-role="list-divider">Manage your Classes &#38; Schools</li>
-        <li><a href="classes.html">My Classes</a></li>
-        <li><a href="addClass.html">Add Class</a></li>
-        <li><a href="javascript:void(goToSchool());">Edit My School</a></li>
+        <h3 class="seperaterHead">Manage Classes &#38; Schools</h3>
+        <li data-icon="mini-arrow"><a href="classes.html">My Classes</a></li>
+        <li data-icon="mini-arrow"><a href="addClass.html">Add Class</a></li>
+        <li data-icon="mini-arrow"><a href="javascript:void(goToSchool());">Edit My School</a></li>
       </ul>
   </div>  
 

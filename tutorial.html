@@ -5,11 +5,11 @@
   <title>Class Tempo: Verify Account</title>
 
   <!-- CSS -->
-  <link rel="stylesheet" href="./signup.css">
   <link rel="stylesheet" href="./teacher-theme/themes/Class-Tempo-Teacher.min.css" />
   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile.structure-1.1.1.min.css" />
  <!--  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" /> -->
   <link rel="stylesheet" type="text/css" href="simpleDialog2/jquery.mobile.simpledialog.min.css" /> 
+  <link rel="stylesheet" href="./custom-v2.css">
 
   <!-- Modernizer -->
   <script type="text/javascript" src="./modernizr.custom.56582.js"></script>
@@ -36,7 +36,7 @@
 </head>
 <body>
   <!-- Page starts here -->
-<div data-role="page" data-theme="a" id="tutorialPage" data-add-back-btn="true">
+<div data-role="page" id="tutorialPage" data-add-back-btn="true">
 
 <style>
     h2 {
@@ -44,13 +44,17 @@
     }
 </style>
 
-  <div data-role="header" id="hdrMain">
+    <div data-role="header" id="hdrMain">
+      <a href="javascript:history.go(-1)" data-direction="reverse" data-icon="false" rel="external" data-transition="slide" class="ui-btn-left">Back</a>
     <h1>Tutorial</h1>
-  </div>
+    </div>
 
   <div data-role="content" id="tutorialContent">
 
-      <h2>How to use Class Tempo</h2><br>
+      <h2>how to use</h2>  
+        <div id="appLogo"></div>
+
+<br>
 
       <span id="tutorialHeader">1. How do I create a survey?</span>
       <p> Go to "Create Survey", choose a survey type, fill in some options, and your survey will be created instantaneously!</p>

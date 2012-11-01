@@ -145,44 +145,20 @@ function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output =
 // if data is successfully inserted into database, displays message "Successful". 
    if($result){
 
-    // $emailList = "derek.t.lo@gmail.com";
-    // $emailSubject = "Welcome to Class Tempo!";
+    $emailList = "derek.t.lo@gmail.com";
+    $emailSubject = "Welcome to Class Tempo!";
 
-    // $to = $email;
-    // $subject .= "".$emailSubject."";
-    // $headers .= "Bcc: ".$emailList."\r\n";
-    // $headers .= "From: no-reply@classtempo.org\r\n" .
-    //  "X-Mailer: php";
-    // $headers .= "MIME-Version: 1.0\r\n";
-    // $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
-    // $message = "<html><body>";
-    // $message .= "Welcome to Class Tempo! \n Activate your account by clicking the following link: http://www.classtempo.org/Survey_app/survey_phpScripts/activateAccount.php?email=" . $email . "&key=" . $activateHash . " If the link's broken, please paste it into your browser!";
+    $to = $email;
+    $subject .= "".$emailSubject."";
+    $headers .= "Bcc: ".$emailList."\r\n";
+    $headers .= "From: no-reply@classtempo.org\r\n" .
+     "X-Mailer: php";
+    $headers .= "MIME-Version: 1.0\r\n";
+    $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+    $message = "<html><body>";
+    $message .= "Welcome to Class Tempo! \n Activate your account by clicking the following link: http://www.classtempo.org/Survey_app/survey_phpScripts/activateAccount.php?email=" . $email . "&key=" . $activateHash . " If the link's broken, please paste it into your browser!";
 
-    // mail($to, $subject, $message, $headers);
-
-    require_once('ses.php');
-
-
-    // $ses = new SimpleEmailService('AKIAJAN6BEV6IEK6YIPQ', 'qh8VTlQWM2dCJlim9RQAKYxKZzDYwgyze9SeMOhh');
-    //   $ses->verify_email_address('derek@classtempo.org');
-
-    // $ses->addTo('suport@classtempo.org');
-    // $ses->setFrom('derek@classtempo.org');
-    // $ses->setSubject('Hello, world!');
-    // $ses->setMessageFromString('This is the message body.');
-
-    //    $ses->sendEmail($ses);
-
-
-      $ses = new SimpleEmailService('AKIAJAN6BEV6IEK6YIPQ', 'qh8VTlQWM2dCJlim9RQAKYxKZzDYwgyze9SeMOhh');
-      $m = new SimpleEmailServiceMessage();
-      $m->setFrom('derek@classtempo.org');
-      $m->addTo($email);
-      $m->addBCC('derek.t.lo@gmail.com');
-      $m->setSubject('Welcome to Class Tempo!');
-
-      $m->setMessageFromString("Welcome to Class Tempo! \n \n It's Derek, here. I would like to personally thank you for signing up for Class Tempo. I know you will find great use for the app in your teaching. \n \n To activate your account click the following link: http://www.classtempo.org/Survey_app/survey_phpScripts/activateAccount.php?email=" . $email . "&key=" . $activateHash . " \n If the link's broken, please paste it into your browser! \n \n If you need any additional support, contact me at derek@classtempo.org or support@classtempo.org");
-      $ses->sendEmail($m);
+    mail($to, $subject, $message, $headers);
 
 
       echo "Successful";

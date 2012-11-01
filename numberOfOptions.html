@@ -5,11 +5,11 @@
   <title>Class Tempo: How Many Options?</title>
 
   <!-- CSS -->
-  <link rel="stylesheet" href="./signup.css">
   <link rel="stylesheet" href="./teacher-theme/themes/Class-Tempo-Teacher.min.css" />
   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile.structure-1.1.1.min.css" />
  <!--  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" /> -->
   <link rel="stylesheet" type="text/css" href="simpleDialog2/jquery.mobile.simpledialog.min.css" /> 
+  <link rel="stylesheet" href="./custom-v2.css">
 
   <!-- Modernizer -->
   <script type="text/javascript" src="./modernizr.custom.56582.js"></script>
@@ -36,7 +36,7 @@
 </head>
 
   <!-- Page starts here -->
-<div data-role="page" data-theme="a" id="numberOfOptions" data-add-back-btn="true">
+<div data-role="page" id="numberOfOptions" data-add-back-btn="true">
 
 <body>
 
@@ -66,20 +66,21 @@ function showSimpleDialogue(alertHeader, alertMessage) {
 <div id="numberOfOptionsContainer">
 
   <div data-role="header" id="hdrMain">
+      <a href="javascript:history.go(-1)" data-direction="reverse" data-icon="false" rel="external" data-transition="slide" class="ui-btn-left">Back</a>
     <h1>Number of Options</h1>
   </div>
 
-  <div data-role="content" id="numberOfOptionsContent">
+  <div data-role="content" data-theme="d" id="numberOfOptionsContent">
 
-   <form id="numberOfOptionsForm">
+   <form id="numberOfOptionsForm" class="v2">
 
      <div id="optionSliderDiv" data-role="fieldcontain">
     <label for="optionSlider"><strong>How Many Options?</strong></label>
-    <input type="range" name="optionSlider" id="optionSlider" value="2" min="2" max="25" data-highlight="true" />
+    <input type="range" name="optionSlider" data-theme="h" class="sliderV2"  id="optionSlider" value="2" min="2" max="25" data-highlight="true" />
     </div>
 
     <div id="confirmNumOptions">    
-    <a id="confirmNumOptionsButton" name="confirmNumOptionsButton" data-role="button" data-inline="true" data-ajax="false">Confirm</a>
+    <a id="confirmNumOptionsButton" name="confirmNumOptionsButton" data-role="button" data-ajax="false">Confirm</a>
     </div>
 
   </form>
