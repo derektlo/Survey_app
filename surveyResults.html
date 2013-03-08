@@ -107,7 +107,7 @@
         <label><strong>Alert Percentage <img src="./images/bullhorn.png" alt="bullhorn"/></strong></label><p id="alertParagraph"></p>
       </div>
 
-      <hr>
+
       <div id="surveyDescription">
         <label><h3>Description</h3></label>
         <p id="descriptionParagraph"></p>
@@ -234,7 +234,7 @@ $('#surveyResultsPage').on('pageinit', function() {
       }
 
       if (surveyType !== 'Tempo') {
-        $('#alertPercentDiv').remove();
+        $('#alertPercentDiv').hide();
       }
 
            // Load Graph 
