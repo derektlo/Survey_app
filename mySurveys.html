@@ -344,7 +344,7 @@ var getSurveyListURL;
 
         console.log("sortType: ",sortType);
 
-      if ((sortType === '') || (sortType === 'null') || (sortType === 'date')) {
+      if ((sortType === '') || (sortType === 'undefined') || (sortType === 'date')) {
             sortByDate(data);
       }
       else{
