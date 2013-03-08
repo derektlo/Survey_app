@@ -342,14 +342,11 @@ var getSurveyListURL;
           sortType = $.cookie("currentSort");
         }
 
-        console.log("sortType: ",sortType);
-
       if ((sortType === '') || (sortType === 'date')) {
             sortByDate(data);
       }
       else if (typeof sortType === 'undefined') {
             sortByDate(data);
-            console.log("sorted first by date");
       }
       else{
             sortByClass(data);
