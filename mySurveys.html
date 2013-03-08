@@ -342,7 +342,9 @@ var getSurveyListURL;
           sortType = $.cookie("currentSort");
         }
 
-      if ((sortType === '') || (sortType === 'date')) {
+        console.log("sortType: ",sortType);
+
+      if ((sortType === '') || (sortType === 'null') || (sortType === 'date')) {
             sortByDate(data);
       }
       else{
