@@ -122,7 +122,17 @@
         <option value="on">On</option>
       </select>
     </div>
+
       <hr>
+
+      <label><h4>Reset Survey<h4></label>
+
+        <div id="resetSurvey" data-role="controlgroup">
+        <a href="index.html" data-role="button">Reset Survey</a>
+        <a href="index.html" data-role="button">03/02/2013</a>
+        <a href="index.html" data-role="button">02/12/2013</a>
+        </div>
+      </div>
 
   
   </div><!-- contentMain -->
@@ -234,6 +244,7 @@ $('#surveyResultsPage').on('pageinit', function() {
         $('#descriptionParagraph').append(surveyDescription);
       }
 
+      // remove alert percentage if not a tempo survey
       if (surveyType !== 'Tempo') {
         $('#alertPercentDiv').hide();
       }
