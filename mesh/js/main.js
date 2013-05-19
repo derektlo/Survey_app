@@ -1,8 +1,5 @@
 /**
  *
- * WebCam Mesh by Felix Turner
- * @felixturner / www.airtight.cc
- * (c) Airtight Interactive Inc. 2012
  *
  * Connects HTML5 WebCam input to a WebGL 3D Mesh. It creates a 3D depth map by mapping pixel brightness to Z-depth.
  * Perlin noise is used for the ripple effect and CSS3 filters are used for color effects.
