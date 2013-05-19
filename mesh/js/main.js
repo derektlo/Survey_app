@@ -161,7 +161,7 @@ function init() {
 
 	// add Stats
 	stats = new Stats();
-	document.querySelector('.fps').appendChild(stats.domElement);
+	//document.querySelector('.fps').appendChild(stats.domElement);
 
 	//init vidCanvas - used to analyze the video pixels
 	vidCanvas = document.createElement('canvas');
