@@ -1,7 +1,7 @@
 <!DOCTYPE html> 
 <html> 
   <head> 
-  <title>Class Tempo</title> 
+  <title>ClassTempo</title> 
   <meta name="viewport" content="height=100%,width=device-width,initial-scale=1.0,maximum-scale=1.0, user-scalable=0" >
   <!-- CSS -->
   <link rel="stylesheet" href="./teacher-theme/themes/Class-Tempo-Teacher.min.css" />
@@ -74,6 +74,12 @@
 
   <div id="specificResponseBox">
   </div>
+
+   <div id="optionSliderDiv"  data-theme="h" data-role="fieldcontain">
+    <label for="optionSlider"><h3>How Many Options?</h3></label>
+    <input type="range" name="optionSlider" data-theme="h" class="sliderV2"  id="optionSlider" value="2" min="2" max="25" data-highlight="true" />
+  </div>
+  <hr>
 
   <div id="customOptionsContainer" data-role="collapsible" data-collapsed="false">
     <h2>Custom Options</h2>
@@ -167,9 +173,10 @@ function showSimpleDialogue(alertHeader, alertMessage) {
 
     if (sessionActive === false){
       $('#customSurveyCreatorPage').remove();
-      showSimpleDialogue("Whoops!","Looks like you're logged out.");
+      showSimpleDialogue("Whoops!","You are logged out.");
     }
 
+      sliderValue = $('#optionSlider');
       surveyDescriptionVar = $('#SurveyDescription');
       surveyCreatorFormVar = $('#surveyCreatorForm');
       customSurveyTag = $('#customTagField').val();
@@ -233,6 +240,9 @@ function showSimpleDialogue(alertHeader, alertMessage) {
               }
           }
         else if (surveyType === 'Specific') {
+
+          $("#optionSliderDiv").remove();
+
           $("#customOptionsContainer").remove();
 
           if (matching === 0) {
@@ -242,12 +252,43 @@ function showSimpleDialogue(alertHeader, alertMessage) {
           $('#specificText').textinput(); 
           }
           else {
-
+              $("#optionSliderDiv").remove();
             $('#specificResponseBox').remove();
           }
         }
 
 });
+
+
+   $('#optionSlider').live('change', function() {
+        sliderValue = $(this).slider();
+
+
+
+        $('#customOptionsList').empty();
+
+         for (var i = 0; i < sliderValue; i++) {
+
+              var iPlusOne = i + 1;  
+
+              $('ul#customOptionsList').append('<li><label for="basic">Option ' + iPlusOne + ' :</label><input type="text" name="optionInput' + iPlusOne + '" id="optionInput' + iPlusOne + '" value=""  /></li>');
+
+              $('#optionInput' + iPlusOne).textinput();
+              }
+        }
+
+       
+
+    
+        
+          // $('#surveyViewer').append('<input type="radio" name="options" id="' +alphabet[i] + '" value="' + alphabet[i] + '" />');
+          //  $('#surveyViewer').append('<label for="' + alphabet[i] + '" >' + alphabet[i] + '</label>');
+      
+
+
+    $('#customOptionsList').listview("refresh");
+});
+
 
  $("input[type='radio']").bind( "change", function(event, ui) {
 
