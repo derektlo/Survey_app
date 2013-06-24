@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta name="viewport" content="height=device-height,width=device-width,initial-scale=1.0,maximum-scale=1.0" >
-  <title>Class Tempo Select Survey Type</title>
+  <title>ClassTempo Select Survey Type</title>
 
   <!-- CSS -->
   <link rel="stylesheet" href="./teacher-theme/themes/Class-Tempo-Teacher.min.css" />
@@ -77,7 +77,7 @@ function createNewSurveyWithType(surveyType) {
 
           if (surveyType === 'Custom') {
             // showSimpleDialogue("Sorry!","Development for this survey type is still underway but will be completed shortly. Sorry for any inconvenience!");
-              $.mobile.changePage( "powerSurvey.html", { transition: "slide"} );
+              $.mobile.changePage( "numberOfOptions.html", { transition: "slide"} );
           }
           else if (surveyType === 'Specific') {
             // showSimpleDialogue("Sorry!","Development for this survey type is still underway but will be completed shortly. Sorry for any inconvenience!");
@@ -86,7 +86,7 @@ function createNewSurveyWithType(surveyType) {
           else if (surveyType === 'Tempo') {
             $.mobile.changePage("tempoCreator.html", {transition: "slide"});
           }
-          else { // Survey type is not custom
+          else { // Survey type is not Custom
             $.mobile.changePage( "surveyCreator.html", { transition: "slide"} );
           }
       }
@@ -164,11 +164,11 @@ function createNewSurveyWithType(surveyType) {
 
       <ul id="surveyTypeList" data-role="listview">
         <h3 class="seperaterHead">Select Survey...</h3>
-        <li data-icon="mini-arrow"><a href="" onclick="createNewSurveyWithType('Numbers')"><h1>Numbers</h1><p>Creates a survey using numbers as options (Example Survey: If a student understands, have them press 1. If a student is confused, have them press 2)</p></a></li>
-        <li data-icon="mini-arrow"><a href="" onclick="createNewSurveyWithType('Letters')"><h1>Letters</h1><p>Creates a survey using letters as options (Example Survey: Assign options to letters a,b,c. Then receive quick results on how many people have selected a,b, or c)</p></a></li>
-        <li data-icon="mini-arrow"><a href="" onclick="createNewSurveyWithType('Custom')"><h1>Custom Options</h1><p>Want more flexibility in your survey options? Create your own categories outlined explicitely in the survey, instead of assigning meaning to each option on the fly. (Example Survey: Option 1 could be "I love red", while the second options is "I hate red". Poll the class in real time to receive quick results.)</p></a></li>
-        <li data-icon="mini-arrow"><a href="" onclick="createNewSurveyWithType('Specific')"><h1>Specfic Response</h1><p>If you are expecting a specific answer, either numberical or textual, you may want to use this survey. (Example Survey: You can use this survey to poll a class for questions that they might be embarrased or afraid to ask in front of everyone.)</p></a></li>
-        <li data-icon="mini-arrow"><a href="" onclick="createNewSurveyWithType('Tempo')"><h1>Tempo</h1><p>This survey will allow you to regulate the speed of your class. You keep the survey running for the duration of your class, and students can respond to it if they feel you are going too fast. After a certain percentage of students tell you to slow down, the app will beep at you.</p></a></li>
+        <!-- <li data-icon="mini-arrow"><a href="" onclick="createNewSurveyWithType('Numbers')"><h1>Numbers</h1><p>Creates a survey using numbers as options (Example Survey: If a student understands, have them press 1. If a student is confused, have them press 2)</p></a></li>
+        <li data-icon="mini-arrow"><a href="" onclick="createNewSurveyWithType('Letters')"><h1>Letters</h1><p>Creates a survey using letters as options (Example Survey: Assign options to letters a,b,c. Then receive quick results on how many people have selected a,b, or c)</p></a></li> -->
+        <li data-icon="mini-arrow"><a href="" onclick="createNewSurveyWithType('Custom')"><h1>Classic</h1><p>Create a classic survey with custom options.</p></a></li>
+        <li data-icon="mini-arrow"><a href="" onclick="createNewSurveyWithType('Specific')"><h1>Student Response</h1><p>Use this survey to receive text responses from your class. (Example Survey: Ask students if they have any questions. They might be afraid to ask a question in front of their peers but comfortable asking it through ClassTempo!)</p></a></li>
+        <li data-icon="mini-arrow"><a href="" onclick="createNewSurveyWithType('Tempo')"><h1>Tempo</h1><p>This survey allows you to regulate the speed of your class. The survey will run for the duration of your class and students can respond to it if they feel you are teaching too fast. After a certain percentage (customized by you) of students tell you to slow down, the app will beep.</p></a></li>
       </ul>
 
   </div>  
