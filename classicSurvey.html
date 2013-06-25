@@ -35,7 +35,7 @@
   <link rel="stylesheet" type="text/css" href="http://media1.juggledesign.com/qtip2/css/master.css" />
   <link rel="stylesheet" type="text/css" href="http://craigsworks.com/projects/qtip2/packages/latest/jquery.qtip.min.css" />
   <link rel="stylesheet" type="text/css" href="http://media1.juggledesign.com/qtip2/css/demos.css" />
-
+  
 <script type="text/javascript" src="http://craigsworks.com/projects/qtip2/packages/latest/jquery.qtip.min.js"></script>
 
 
@@ -95,7 +95,7 @@
 
   <fieldset data-role="controlgroup">
   <legend><strong>Survey Tag</strong></legend>
-      <div class="select-here" style="background-color: #f0f0f0; width: 100%; margin: 4em">(?)</div>
+      <a href="" title="information on survey tag...">(?)</a>
       <input type="radio" name="surveyTagControl" id="Custom" value="Custom" checked="checked" />
       <label for="Custom">Custom</label>
       <input type="radio" name="surveyTagControl" id="Auto" value="Auto"  />
@@ -246,35 +246,7 @@ function showSimpleDialogue(alertHeader, alertMessage) {
           
       // SET UP qtip2
           
-         $(".select-here").qtip({
-        content: {
-            text: "HULK Me HULK HULK",
-            title: {
-                text: "Title",
-                button: true
-            }
-        },
-        show: {
-            event: 'click',
-            solo: true
-        },
-        hide: {
-            fixed: true,
-            event: 'unfocus'
-        },
-        position: {
-            target: 'mouse',
-            viewport: $(window),
-            adjust: {
-                method: 'flip shift',
-                mouse: false
-            }
-        },
-        style: {
-            tip: false,
-            widget: false
-        }
-         });
+      $('a[title]').qtip();
 
 });
 
