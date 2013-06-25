@@ -1,0 +1,400 @@
+<!DOCTYPE html> 
+<html> 
+  <head> 
+  <title>ClassTempo</title> 
+  <meta name="viewport" content="height=100%,width=device-width,initial-scale=1.0,maximum-scale=1.0, user-scalable=0" >
+  <!-- CSS -->
+  <link rel="stylesheet" href="./teacher-theme/themes/Class-Tempo-Teacher.min.css" />
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile.structure-1.1.1.min.css" />
+ <!--  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" /> -->
+  <link rel="stylesheet" type="text/css" href="simpleDialog2/jquery.mobile.simpledialog.min.css" /> 
+  <link rel="stylesheet" href="./custom-v2.css">
+
+  <!-- Modernizer -->
+  <script type="text/javascript" src="./modernizr.custom.56582.js"></script>
+
+  <!-- jQuery/jQuery Mobile -->
+  <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script>
+
+   <!-- simpleDiaglo2 -->
+  <script src="simpleDialog2/jquery.mobile.simpledialog2.min.js"></script>
+
+    <!-- jqPlot -->
+  <!--[if lt IE 9]><script language="javascript" type="text/javascript" src="js/excanvas.js"></script><![endif]-->
+  <script language="javascript" type="text/javascript" src="js/jquery.jqplot.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="js/jquery.jqplot.css" />
+
+  <script language="javascript" type="text/javascript" src="js/plugins/jqplot.barRenderer.js"></script>
+  <script language="javascript" type="text/javascript" src="js/plugins/jqplot.barRenderer.min.js"></script>
+  <script language="javascript" type="text/javascript" src="js/plugins/jqplot.categoryAxisRenderer.js"></script>
+  <script language="javascript" type="text/javascript" src="js/plugins/jqplot.pointLabels.js"></script>
+  <script language="javascript" type="text/javascript" src="js/plugins/jqplot.pointLabels.min.js"></script>
+
+
+</head>
+
+<body> 
+
+<!-- Page starts here -->
+<div data-role="page" id="classicSurveyPage" data-add-back-btn="true"> 
+
+  <script>   
+   // Global declarations - assignments made in $(document).ready() below
+    var optionsNumber = null;
+    var surveyType = null;
+    var customSurveyTag_bool = 'true';
+    var customSurveyTag = null;
+    var classVar = null;
+    var onOffValue = null;
+    var surveyDescriptionVar = null;
+    var surveyCreatorFormVar = null;
+
+    var MISSING = "missing";
+    var EMPTY = "";
+
+    var currentEmailVar = null;
+    var currentUserTagVar = null;
+
+  </script>
+
+<div id="surveyCreatorContainer">
+
+  <div data-role="header" id="hdrMain">
+      <a href="javascript:history.go(-1)" data-direction="reverse" data-icon="false" rel="external" data-transition="slide" class="ui-btn-left">Back</a>
+    <h1 class="logo">Class Tempo</h1>
+  </div>
+
+<div data-role="content" data-theme="g" id="surveyCreatorContent" class="v2">
+
+  <form id="surveyCreatorForm">
+
+  <div id="specificResponseBox">
+  </div>
+
+   <div id="optionSliderDiv"  data-theme="h" data-role="fieldcontain">
+    <label for="optionSlider"><h3>How Many Options?</h3></label>
+    <input type="range" name="optionSlider" data-theme="h" class="sliderV2"  id="optionSlider" value="2" min="2" max="25" data-highlight="true" />
+  </div>
+  <hr>
+
+  <div id="customOptionsContainer" data-role="collapsible" data-collapsed="false">
+    <h2>Custom Options</h2>
+      <ul id="customOptionsList" data-role="listview" data-inset="true">
+      </ul>
+  <hr>
+  </div>
+
+
+  <fieldset data-role="controlgroup">
+  <legend><strong>Survey Tag</strong></legend>
+      <input type="radio" name="surveyTagControl" id="Custom" value="Custom" checked="checked" />
+      <label for="Custom">Custom</label>
+      <input type="radio" name="surveyTagControl" id="Auto" value="Auto"  />
+      <label for="Auto">Auto (Usertag-random #)</label>
+  </fieldset>
+
+  <div id="customTagEntryDiv" data-role="fieldcontain">
+  <label id="userTag" for="customTagField"></label>
+  <input type="text" name="customTagField" id="customTagField" value=""  />
+  </div>
+  <hr>
+
+  <!-- allow user to choose what class this survey is for -->
+  <label for="classOptions" class="select"><strong>Choose Class</strong></label>
+  <select name="classOptions" id="classOptions">
+  </select>
+  <hr>
+
+  <fieldset data-role="controlgroup">
+  <legend><strong>On/Off</strong></legend>
+      <input type="radio" name="OnOff" id="On" value="On" checked="checked" />
+      <label for="On">Survey On</label>
+
+      <input type="radio" name="OnOff" id="Off" value="Off"  />
+      <label for="Off">Survey Off</label>
+  </fieldset>
+  <hr>
+
+  <div data-role="fieldcontain">
+    <label for="SurveyDescription"><strong>Description</strong></label>
+    <textarea name="SurveyDescription" style="border:1px solid #cdcdcd;" data-theme="d" ata-role="button"   id="SurveyDescription"></textarea>
+  </div>
+
+    <div id="createClassicSurveyDiv" data-role="fieldcontain">    
+     <input type="submit" data-theme="d" value="Create Survey" />
+    </div>
+
+    </form>
+  </div>
+</div>
+
+  <div id="footer" data-role="footer">
+  </div>
+
+<script>
+
+/* Convenience Methods and page set-up */
+
+function showSimpleDialogue(alertHeader, alertMessage) {
+    
+    $(document).simpledialog2({
+                    mode: 'button',
+                    headerText: alertHeader,
+                    buttonPrompt: alertMessage,
+                    headerClose: false,
+                    buttons : {
+                      'OK': {
+                        click: function () { 
+                        }
+                      }
+                    }
+             })
+ }
+ 
+/* DOCUMENT READY */
+ $('#classicSurveyPage').on('pageinit', function() {
+
+        $('#customSurveyCreatorPage').css('height', $(document).height());
+    
+    var sessionActive;
+
+    if (Modernizr.sessionstorage){
+        if (sessionStorage.loggedIn === 'true'){sessionActive = true;}
+        else {sessionActive = false;}
+    }
+    else {
+        if ($.cookie("loggedIn") === 'true'){sessionActive = true;}
+        else {sessionActive = false;}
+    }
+
+    if (sessionActive === false){
+      $('#customSurveyCreatorPage').remove();
+      showSimpleDialogue("Whoops!","You are logged out.");
+    }
+
+      sliderValue = $('#optionSlider');
+      surveyDescriptionVar = $('#SurveyDescription');
+      surveyCreatorFormVar = $('#surveyCreatorForm');
+      customSurveyTag = $('#customTagField').val();
+      classVar = $('#classOptions');
+
+  
+      /* ********* Initialize some local/global variables ********* */
+      var classes;
+
+    // Prepare to set up either a specific response Survey
+    // or a custom options Survey  
+    if (Modernizr.sessionstorage) {
+      currentEmailVar = sessionStorage.emailVar;
+      currentUserTagVar = sessionStorage.userTagVar;
+      surveyType = sessionStorage.surveyType;
+      optionsNumber = parseInt(sessionStorage.customNumber);
+      matching = parseInt(sessionStorage.matching);
+      classes = JSON.parse(sessionStorage.classesArray);
+    }
+    else {
+      surveyType = $.cookie("surveyType");
+      optionsNumber = parseInt($.cookie("customNumber"));
+      matching = parseInt($.cookie("matching"));
+      currentEmailVar = $.cookie("emailVar");
+      currentUserTagVar = $.cookie("userTagVar");
+      classes = JSON.parse($.cookie("classesArray"));
+    }
+
+        /* ********* Append User Tag ********* */
+          $('#userTag').append('<strong>' + currentUserTagVar + '-</strong>');
+
+    if (classes !== null) {
+        /* ********* Append class options ********* */
+      if (classes.length > 0) {
+
+        for (var i = 0; i < classes.length; i++) {
+            $('#classOptions').append('<option value="' + classes[i].Full_class_name + '">' + classes[i] .Full_class_name + ' (' + classes[i].School + ')</option>');
+        }
+
+        $('#classOptions').append('<option value="Independent Lecture">Independent Lecture</option>');
+        $('#classOptions').append('<option value="Other">Other</option>');
+      }
+    }
+      else {
+        $('#classOptions').append('<option value="Independent Lecture">Independent Lecture</option>');
+        $('#classOptions').append('<option value="Other">Other</option>');
+      }
+
+
+       /* ********* Set up for either Custom Surveys or Specific ********* */
+
+       
+
+              for (var i = 0; i < optionsNumber; i++) {
+
+              var iPlusOne = i + 1;  
+
+              $('ul#customOptionsList').append('<li><label for="basic">Option ' + iPlusOne + ' :</label><input type="text" name="optionInput' + iPlusOne + '" id="optionInput' + iPlusOne + '" value=""  /></li>');
+
+              $('#optionInput' + iPlusOne).textinput();
+              }
+          
+      
+
+});
+
+
+   $('#optionSlider').live('change', function() {
+        sliderValue = $(this).slider();
+
+
+
+        $('#customOptionsList').empty();
+
+         for (var i = 0; i < optionsNumber; i++) {
+
+              var iPlusOne = i + 1;  
+
+              $('ul#customOptionsList').append('<li><label for="basic">Option ' + iPlusOne + ' :</label><input type="text" name="optionInput' + iPlusOne + '" id="optionInput' + iPlusOne + '" value=""  /></li>');
+
+              $('#optionInput' + iPlusOne).textinput();
+              }
+        }
+
+       
+
+    
+        
+          // $('#surveyViewer').append('<input type="radio" name="options" id="' +alphabet[i] + '" value="' + alphabet[i] + '" />');
+          //  $('#surveyViewer').append('<label for="' + alphabet[i] + '" >' + alphabet[i] + '</label>');
+      
+
+
+    $('#customOptionsList').listview("refresh");
+});
+
+
+ $("input[type='radio']").bind( "change", function(event, ui) {
+
+  var $radio = $('input[name=surveyTagControl]:checked');
+  var id = $radio.attr('id');
+
+      if (id === 'Custom') {
+         
+          $('#customTagEntryDiv').empty();
+
+          $('#customTagEntryDiv').append('<label id="userTag" for="customTagField">' + currentUserTagVar + '-</label><input type="text" name="customTagField" id="customTagField" value=""  />');
+
+          $('#customTagEntryDiv').trigger('create');
+          $("input[name='customTagField']").textinput();
+
+          customSurveyTag_bool = 'true';
+      }
+      else{
+          $('#customTagEntryDiv').empty();
+          customSurveyTag_bool = 'false';
+      }
+});
+
+
+ $('#powerSurveyPage').live('pageinit', function() {
+
+    // refresh custom options list
+    $('ul#customOptionsList').listview('refresh');
+    // refresh classes select menu
+    $('#classOptions').selectmenu("refresh");
+});
+
+// $(document).bind('pageinit', function(){
+
+//       $('ul#customOptionsList').listview('refresh');
+// });
+   
+$('#surveyCreatorForm').submit(function() {
+
+        var error = 'false';
+
+    // Get whether survey is on or off
+        $('input[name=OnOff]').each(function() { 
+            onOffValue = $('input[name=OnOff]:checked').val();
+        })
+
+        if (customSurveyTag_bool === 'true') {
+
+          customSurveyTag = $('#customTagField').val();
+
+          if ((customSurveyTag !== null) && (customSurveyTag !== '')){
+                customSurveyTag = currentUserTagVar + "-" + customSurveyTag;
+          }
+          else{
+            error = 'true';
+          }
+        }
+
+        if (error !== 'true') {
+
+
+          var customOptionsArray = [];
+
+           // Get the User's custom options from the textboxes
+           for (var i = 0; i < optionsNumber; i++) {
+              if ($(optionInputAccessor).val() === '') {
+                    showSimpleDialogue("Whoops!","Please make sure all option values are filled in!");
+                    return false;
+                    break;
+              }
+
+                var optionInputAccessor = '#optionInput' + (i + 1);
+                customOptionsArray.push($(optionInputAccessor).val());
+           }
+
+          // Submit the form
+              generateAjaxPost("/Survey_app/survey_phpScripts/createSurvey.php?userAuthKey=" + currentUserTagVar + "&numberOfOptions=" + optionsNumber + "&surveyType=" + surveyType + "&onOff=" + onOffValue + "&surveyDescription=" + surveyDescriptionVar.val() + "&email=" + currentEmailVar + "&customSurveyTag_bool=" + customSurveyTag_bool + "&customSurveyTag=" + customSurveyTag + "&class=" + classVar.val(), customOptionsArray);
+        }
+      else{
+          showSimpleDialogue("Whoops","You must enter a survey tag! Thank you!");
+      }
+       
+        return false;   
+        
+});
+
+function generateAjaxPost(postURL, customOptionsArray) {
+
+              $.ajax({        
+                 type: "POST",
+                 url: postURL,
+                 data: { 'customOptionsArray': customOptionsArray },
+                 success: function(data) {
+                      
+                      if (data !== 'Error') {
+
+                        if (Modernizr.sessionstorage) {
+                          sessionStorage.surveyTag = data;
+                          sessionStorage.surveyType = surveyType;
+                          sessionStorage.surveyClass = classVar.val();
+                          sessionStorage.surveyDescription = surveyDescriptionVar.val();
+                          }
+                        else {
+                          $.cookie("surveyTag",data);
+                          $.cookie("surveyType",surveyType);
+                          $.cookie("surveyClass",classVar.val());
+                          $.cookie("surveyDescription",surveyDescription.val());
+                        }
+
+                        // If we have created a survey successfully go to it's analytics page
+                        $.mobile.changePage( "surveyResults.html", { transition : "slide"});
+                      }
+                      else {
+                        // show some kind of error message to inform user that there was a problem
+                        // in creating survey
+                        showSimpleDialogue("Whoops!","It appears that you already have a survey with this custom tag. Please either delete your current survey with this tag or use a different tag. If this persists or something is wrong, please email support@classtempo.org. Thank you!");    
+                      }     
+                 }
+              });  
+}  
+    
+  </script>
+
+</div> <!-- powerSurveyPage -->
+
+<!-- Page ends here -->
+</body>
+</html>
