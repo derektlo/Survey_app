@@ -223,9 +223,9 @@ function showSimpleDialogue(alertHeader, alertMessage) {
       }
 
 
-       /* ********* Set up for either Custom Surveys or Specific ********* */
+       /* ********* Set up Classic Survey ********* */
 
-       
+        optionsNumber = 1;       
 
               for (var i = 0; i < optionsNumber; i++) {
 
@@ -294,7 +294,7 @@ function showSimpleDialogue(alertHeader, alertMessage) {
 });
 
 
- $('#powerSurveyPage').live('pageinit', function() {
+ $('#classicSurveyPage').live('pageinit', function() {
 
     // refresh custom options list
     $('ul#customOptionsList').listview('refresh');
