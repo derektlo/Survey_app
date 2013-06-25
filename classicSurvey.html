@@ -241,34 +241,34 @@ function showSimpleDialogue(alertHeader, alertMessage) {
 });
 
 
-   $('#optionSlider').live('change', function() {
-        sliderValue = $(this).slider();
+//    $('#optionSlider').live('change', function() {
+//         sliderValue = $(this).slider();
 
 
 
-        $('#customOptionsList').empty();
+//         $('#customOptionsList').empty();
 
-         for (var i = 0; i < optionsNumber; i++) {
+//          for (var i = 0; i < optionsNumber; i++) {
 
-              var iPlusOne = i + 1;  
+//               var iPlusOne = i + 1;  
 
-              $('ul#customOptionsList').append('<li><label for="basic">Option ' + iPlusOne + ' :</label><input type="text" name="optionInput' + iPlusOne + '" id="optionInput' + iPlusOne + '" value=""  /></li>');
+//               $('ul#customOptionsList').append('<li><label for="basic">Option ' + iPlusOne + ' :</label><input type="text" name="optionInput' + iPlusOne + '" id="optionInput' + iPlusOne + '" value=""  /></li>');
 
-              $('#optionInput' + iPlusOne).textinput();
-              }
-        }
+//               $('#optionInput' + iPlusOne).textinput();
+//               }
+//         }
 
        
 
     
         
-          // $('#surveyViewer').append('<input type="radio" name="options" id="' +alphabet[i] + '" value="' + alphabet[i] + '" />');
-          //  $('#surveyViewer').append('<label for="' + alphabet[i] + '" >' + alphabet[i] + '</label>');
+//           // $('#surveyViewer').append('<input type="radio" name="options" id="' +alphabet[i] + '" value="' + alphabet[i] + '" />');
+//           //  $('#surveyViewer').append('<label for="' + alphabet[i] + '" >' + alphabet[i] + '</label>');
       
 
 
-    $('#customOptionsList').listview("refresh");
-});
+//     $('#customOptionsList').listview("refresh");
+// });
 
 
  $("input[type='radio']").bind( "change", function(event, ui) {
@@ -302,10 +302,7 @@ function showSimpleDialogue(alertHeader, alertMessage) {
     $('#classOptions').selectmenu("refresh");
 });
 
-// $(document).bind('pageinit', function(){
 
-//       $('ul#customOptionsList').listview('refresh');
-// });
    
 $('#surveyCreatorForm').submit(function() {
 
