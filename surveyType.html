@@ -77,11 +77,11 @@ function createNewSurveyWithType(surveyType) {
 
           if (surveyType === 'Custom') {
             // showSimpleDialogue("Sorry!","Development for this survey type is still underway but will be completed shortly. Sorry for any inconvenience!");
-              $.mobile.changePage( "powerSurvey.html", { transition: "slide"} );
+              $.mobile.changePage( "classicSurvey.html", { transition: "slide"} );
           }
           else if (surveyType === 'Specific') {
             // showSimpleDialogue("Sorry!","Development for this survey type is still underway but will be completed shortly. Sorry for any inconvenience!");
-            $.mobile.changePage( "specificAnswer.html", { transition: "slide"} );
+            $.mobile.changePage( "checkSpecificAnswer.html", { transition: "slide"} );
           }
           else if (surveyType === 'Tempo') {
             $.mobile.changePage("tempoCreator.html", {transition: "slide"});

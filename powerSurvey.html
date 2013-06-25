@@ -242,6 +242,7 @@ function showSimpleDialogue(alertHeader, alertMessage) {
         else if (surveyType === 'Specific') {
 
           $("#optionSliderDiv").remove();
+
           $("#customOptionsContainer").remove();
 
           if (matching === 0) {
@@ -249,10 +250,8 @@ function showSimpleDialogue(alertHeader, alertMessage) {
             $('#specificResponseBox').append('<label for="specificText">Specific Response:</label><input type="text" name="specificText" id="specificText" value=""  />');
 
           $('#specificText').textinput(); 
-
           }
           else {
-
               $("#optionSliderDiv").remove();
             $('#specificResponseBox').remove();
           }
@@ -268,7 +267,7 @@ function showSimpleDialogue(alertHeader, alertMessage) {
 
         $('#customOptionsList').empty();
 
-         for (var i = 0; i < sliderValue; i++) {
+         for (var i = 0; i < optionsNumber; i++) {
 
               var iPlusOne = i + 1;  
 
