@@ -94,7 +94,7 @@
 
 
   <fieldset data-role="controlgroup">
-  <legend><strong>Survey Tag <a href="" title="information on survey tagasfsf ad sfasdfas asdfasd adfasdfa  ...">(?)</a></strong></legend>
+  <legend><strong>Survey Tag <a href="" title="Give your students this tag and have them enter it from www.classtempo.org as a student. A custom tag can be more descriptive than a random one, but they both work the same way!">(?)</a></strong></legend>
       
       <input type="radio" name="surveyTagControl" id="Custom" value="Custom" checked="checked" />
       <label for="Custom">Custom</label>
@@ -246,12 +246,7 @@ function showSimpleDialogue(alertHeader, alertMessage) {
           
       // SET UP qtip2
 
-      $('a[title]').qtip({
-   content: 'Dark themes are all the rage!',
-   style: { 
-      name: 'dark' // Inherit from preset style
-   }
-  });
+      $('a[title]').qtip();
 
 });
 
