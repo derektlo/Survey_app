@@ -31,6 +31,13 @@
   <script language="javascript" type="text/javascript" src="js/plugins/jqplot.pointLabels.js"></script>
   <script language="javascript" type="text/javascript" src="js/plugins/jqplot.pointLabels.min.js"></script>
 
+  <!-- qtip2 -->
+  <link rel="stylesheet" type="text/css" href="http://media1.juggledesign.com/qtip2/css/master.css" />
+  <link rel="stylesheet" type="text/css" href="http://craigsworks.com/projects/qtip2/packages/latest/jquery.qtip.min.css" />
+  <link rel="stylesheet" type="text/css" href="http://media1.juggledesign.com/qtip2/css/demos.css" />
+
+  <script type="text/javascript" src="http://craigsworks.com/projects/qtip2/packages/latest/jquery.qtip.min.js"></script>
+
 
 </head>
 
@@ -87,7 +94,8 @@
 
 
   <fieldset data-role="controlgroup">
-  <legend><strong>Survey Tag (?)</strong></legend>
+  <legend><strong>Survey Tag</strong></legend>
+      <a href="" title="information on survey tag...">(?)</a>
       <input type="radio" name="surveyTagControl" id="Custom" value="Custom" checked="checked" />
       <label for="Custom">Custom</label>
       <input type="radio" name="surveyTagControl" id="Auto" value="Auto"  />
@@ -236,7 +244,9 @@ function showSimpleDialogue(alertHeader, alertMessage) {
               $('#optionInput' + iPlusOne).textinput();
               }
           
-      
+      // SET UP qtip2
+          
+      $('a[title]').qtip();
 
 });
 
