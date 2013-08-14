@@ -134,8 +134,12 @@ function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output =
    }
    else {
    
+    echo 'to here';
+
    $securePassword = create_hash($password);
-   $salt = saltValue;
+   $salt = $saltValue;
+
+   echo $saltValue;
 
    $activateHash = md5(uniqid(mt_rand(),true));
 
