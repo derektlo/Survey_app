@@ -19,6 +19,7 @@
    $password = isset($_GET['password']) ? $_GET['password']  : "";
 
    echo $email;
+   echo $password;
 
    if ($content == '') {
 
@@ -137,7 +138,10 @@ function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output =
     echo 'to here';
 
    $securePassword = create_hash($password);
-   $salt = $saltValue;
+   echo $securePassword;
+   echo 'and now to here';
+   $salt = saltValue;
+   echo 'and still here';
 
    echo $saltValue;
 
