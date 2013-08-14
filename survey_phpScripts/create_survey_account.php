@@ -18,9 +18,6 @@
    $content = isset($_GET['content']) ? $_GET['content']  : "";
    $password = isset($_GET['password']) ? $_GET['password']  : "";
 
-   echo $email;
-   echo $password;
-
    if ($content == '') {
 
 /*
@@ -153,7 +150,7 @@ function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output =
     $activateHash = md5(uniqid(mt_rand(),true));
     echo $activateHash;
    $sql = "INSERT INTO $tbl_name (Email, User_tag, School, Password,Activate_hash) 
-   VALUES ('$email', '$userTag', '$school', '$securePassword', '$activateHash')";
+   VALUES ('$email', '$userTag', '$school', '$password','$activateHash')";
 
    $result = mysql_query($sql);
 
