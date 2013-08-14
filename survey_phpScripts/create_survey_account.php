@@ -23,6 +23,11 @@
 
    if ($content == '') {
 
+/*
+
+
+
+
    // These constants may be changed without breaking existing hashes.
 define("PBKDF2_HASH_ALGORITHM", "sha256");
 define("PBKDF2_ITERATIONS", 1000);
@@ -62,7 +67,7 @@ function slow_equals($a, $b)
     return $diff === 0; 
 }
 
-/*
+//// /*
  * PBKDF2 key derivation function as defined by RSA's PKCS #5: https://www.ietf.org/rfc/rfc2898.txt
  * $algorithm - The hash algorithm to use. Recommended: SHA256
  * $password - The password.
@@ -77,6 +82,9 @@ function slow_equals($a, $b)
  * This implementation of PBKDF2 was originally created by https://defuse.ca
  * With improvements by http://www.variations-of-shadow.com
  */
+
+
+/*
 function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output = false)
 {
     $algorithm = strtolower($algorithm);
@@ -107,6 +115,10 @@ function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output =
         return bin2hex(substr($output, 0, $key_length));
 }
 
+*/
+
+
+
 
 
    $tbl_name = 'Survey_Accounts';
@@ -134,23 +146,14 @@ function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output =
       echo "User tag already exists.";
    }
    else {
-   
-    echo 'to here';
+  
 
-   $securePassword = create_hash($password);
-   echo $securePassword;
-   echo 'and now to here';
-   $salt = saltValue;
-   echo 'and still here';
-
-   echo $saltValue;
-
-   $activateHash = md5(uniqid(mt_rand(),true));
-
-   echo $activateHash;
-
-   $sql = "INSERT INTO $tbl_name (Email, User_tag, School, Password, Salt, Activate_hash) 
-   VALUES ('$email', '$userTag', '$school', '$securePassword', '$salt', '$activateHash')";
+   // $securePassword = create_hash($password);
+   // $salt = saltValue;
+    $activateHash = md5(uniqid(mt_rand(),true));
+    echo $activateHash;
+   $sql = "INSERT INTO $tbl_name (Email, User_tag, School, Password,Activate_hash) 
+   VALUES ('$email', '$userTag', '$school', '$securePassword', '$activateHash')";
 
    $result = mysql_query($sql);
 
