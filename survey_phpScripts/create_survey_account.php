@@ -18,6 +18,8 @@
    $content = isset($_GET['content']) ? $_GET['content']  : "";
    $password = isset($_GET['password']) ? $_GET['password']  : "";
 
+   echo $email;
+
    if ($content == '') {
 
    // These constants may be changed without breaking existing hashes.
