@@ -15,6 +15,7 @@
    $email   = isset($_GET['email']) ? $_GET['email']  : "";
    $password = isset($_GET['password']) ? $_GET['password']  : "";
 
+/*
    // These constants may be changed without breaking existing hashes.
 define("PBKDF2_HASH_ALGORITHM", "sha256");
 define("PBKDF2_ITERATIONS", 1000);
@@ -69,6 +70,8 @@ function slow_equals($a, $b)
  * This implementation of PBKDF2 was originally created by https://defuse.ca
  * With improvements by http://www.variations-of-shadow.com
  */
+
+/*
 function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output = false)
 {
     $algorithm = strtolower($algorithm);
@@ -98,6 +101,7 @@ function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output =
     else
         return bin2hex(substr($output, 0, $key_length));
 }
+*/
 
 
 
@@ -119,10 +123,12 @@ function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output =
 
    if (mysql_num_rows($checkEmail) > 0) {
       
-     $securePassword = create_hash($password);
-    $salt = saltValue;
+    // $securePassword = create_hash($password);
+   // $salt = saltValue;
 
-   $sql = "UPDATE $tbl_name SET Password = '$securePassword', Salt = '$salt' WHERE Email = '$email'";
+    //good...
+   //$sql = "UPDATE $tbl_name SET Password = '$securePassword', Salt = '$salt' WHERE Email = '$email'";
+    $sql = "UPDATE $tbl_name SET Password = '$password' WHERE Email = '$email'";
 
    $result = mysql_query($sql);
 

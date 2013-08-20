@@ -1,6 +1,6 @@
 <?php
 
-
+/*
   // These constants may be changed without breaking existing hashes.
 define("PBKDF2_HASH_ALGORITHM", "sha256");
 define("PBKDF2_ITERATIONS", 1000);
@@ -70,6 +70,8 @@ function slow_equals($a, $b)
  * This implementation of PBKDF2 was originally created by https://defuse.ca
  * With improvements by http://www.variations-of-shadow.com
  */
+
+/*
 function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output = false)
 {
     $algorithm = strtolower($algorithm);
@@ -100,7 +102,7 @@ function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output =
         return bin2hex(substr($output, 0, $key_length));
 }
 
-
+*/
 
 
 
@@ -151,17 +153,19 @@ function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output =
 
    if (mysql_num_rows($checkEmail) > 0) { // if email exists
 
-    $hashQuery = mysql_query("SELECT Password FROM Survey_Accounts WHERE Email = '$email'");
-    $saltQuery = mysql_query("SELECT Salt FROM Survey_Accounts WHERE Email = '$email'");
+//good...
+ //   $hashQuery = mysql_query("SELECT Password FROM Survey_Accounts WHERE Email = '$email'");
+  //  $saltQuery = mysql_query("SELECT Salt FROM Survey_Accounts WHERE Email = '$email'");
     
-    $hash = mysql_result($hashQuery, 0);
-    $salt = mysql_result($saltQuery, 0);
+  //  $hash = mysql_result($hashQuery, 0);
+  //  $salt = mysql_result($saltQuery, 0);
+$oldPassword = mysql_query("SELECT Password FROM Survey_Accounts WHERE Email = '$email'");
 
-      $currentHash = create_hash_with_salt($password,$salt);
+     // $currentHash = create_hash_with_salt($password,$salt);
 
 
       // if password matches
-      if($hash === $currentHash){
+      if($oldPassword === $password){
 
            $checkActiveAccount = mysql_query("SELECT Active FROM Survey_Accounts WHERE Email = '$email'");
 
