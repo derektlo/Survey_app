@@ -3,7 +3,7 @@
   <head> 
     <meta http-equiv="refresh" content="20">
       <meta name="viewport" content="height=device-height,width=device-width,initial-scale=1.0,maximum-scale=1.0" >
-  <title>ClassTempo: Survey Results</title> 
+  <title>Class Tempo: Survey Results</title> 
   
     <!-- CSS -->
     <link rel="stylesheet" href="./teacher-theme/themes/Class-Tempo-Teacher.min.css" />
@@ -115,7 +115,7 @@
       </div>
       <hr>
 
-      <label><h3>On/Off</h3></label>
+      <label><h3>On/off</h3></label>
       <div id="onOffSection" class="spaceUp">
       <select name="surveyOnOff" id="surveyOnOff" data-role="slider" class="sliderV2"  data-theme="f">
         <option value="off">Off</option>
@@ -125,7 +125,7 @@
 
       <hr>
 
-      <label><h3>Survey History &amp; Reset</h3></label>
+      <label><h3>Reset Survey</h3></label>
 
         <div id="resetSurvey" data-role="controlgroup" class="spaceUp">
         <a href="" data-role="button">Reset Survey</a>
@@ -535,7 +535,7 @@ $('#surveyResultsPage').on('pageinit', function() {
       else
         currentOnOffValue = 1;
 
-     $.post("/Survey_app/survey_phpScripts/set_survey_onOff.php?surveyID=" + surveyID + "&onOff=" + currentOnOffValue,function(response){
+     $.post("/Survey_app/survey_phpScripts/set_survey_onOff.php?surveyID=" + surveyId + "&onOff=" + currentOnOffValue,function(response){
 
      });
     });
