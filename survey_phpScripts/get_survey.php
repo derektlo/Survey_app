@@ -30,6 +30,7 @@ echo $surveyAuthKey;
    while($obj = mysql_fetch_object($rs)) {
        $surveyInformation = $obj; // save the row
        $surveyType = $obj->Survey_type; // you are fetching an object, not an array
+       echo $obj;
    }
 
   $container = array();
