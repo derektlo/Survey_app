@@ -13,8 +13,6 @@
  
 	// set restaurantID to get categories for selected restaurant
  	$surveyAuthKey   = isset($_GET['surveyAuthKey']) ? $_GET['surveyAuthKey']  : "";
-	
-echo $surveyAuthKey;
 
 	// Connect to the Database server   
     $link = mysql_connect($host, $uid, $pwd) or die("Could not connect");
@@ -31,8 +29,6 @@ echo $surveyAuthKey;
        $surveyInformation = $obj; // save the row
        $surveyType = $obj->Survey_type; // you are fetching an object, not an array
    }
-
-   echo $surveyType;
 
   $container = array();
 
