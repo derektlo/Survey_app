@@ -14,6 +14,8 @@
 	// set restaurantID to get categories for selected restaurant
  	$surveyAuthKey   = isset($_GET['surveyAuthKey']) ? $_GET['surveyAuthKey']  : "";
 	
+echo $surveyAuthKey;
+
 	// Connect to the Database server   
     $link = mysql_connect($host, $uid, $pwd) or die("Could not connect");
    
