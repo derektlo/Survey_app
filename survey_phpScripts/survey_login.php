@@ -165,14 +165,6 @@ function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output =
     $passwordQuery = mysql_query("SELECT Password FROM Survey_Accounts WHERE Email = '$email'");
     $oldPassword = mysql_result($passwordQuery,0);
 
-    echo $oldPassword;
-
-    echo 'here';
-
-    echo $password;
-
-    echo 'blabhbab';
-
       // if password matches
       if($oldPassword === $password){
 
