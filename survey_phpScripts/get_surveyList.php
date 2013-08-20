@@ -13,7 +13,7 @@
    
 	// set restaurantID to get categories for selected restaurant
  	$email   = isset($_GET['email']) ? $_GET['email']  : "";
-	echo $email;
+
 	// Connect to the Database server   
     $link = mysql_connect($host, $uid, $pwd) or die("Could not connect");
    
@@ -24,7 +24,7 @@
    $arr = array();
    //Execute the query
   // $rs = mysql_query("SELECT email FROM customer_information");
-   $rs = mysql_query("SELECT Survey_id,Survey_authKey,Number_of_options,Survey_type,On_off,Survey_description,Class, DATE_FORMAT(Date,\"%b %e %Y\") AS Date FROM Surveys WHERE Email = '$email' AND Deleted = '0'");
+   $rs = mysql_query("SELECT Survey_id,Survey_authKey,Number_of_options,Survey_type,On_off,Survey_description,Class FROM Surveys WHERE Email = '$email' AND Deleted = '0'");
    
    // Add the rows to the array 
    while($obj = mysql_fetch_object($rs)) {
