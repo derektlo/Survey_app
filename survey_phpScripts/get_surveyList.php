@@ -13,7 +13,7 @@
    
 	// set restaurantID to get categories for selected restaurant
  	$email   = isset($_GET['email']) ? $_GET['email']  : "";
-	
+	echo $email;
 	// Connect to the Database server   
     $link = mysql_connect($host, $uid, $pwd) or die("Could not connect");
    
