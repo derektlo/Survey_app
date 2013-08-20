@@ -162,6 +162,9 @@ function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output =
 
     //  $currentHash = create_hash_with_salt($password,$salt);
 
+    $oldPassword = mysql_query("SELECT Password FROM Survey_Accounts WHERE Email = '$email'");
+
+
     echo $oldPassword;
 
     echo 'here';
@@ -169,9 +172,7 @@ function pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output =
     echo $password;
 
     echo 'blabhbab';
-
-    $oldPassword = mysql_query("SELECT Password FROM Survey_Accounts WHERE Email = '$email'");
-
+    
       // if password matches
       if($oldPassword === $password){
 
